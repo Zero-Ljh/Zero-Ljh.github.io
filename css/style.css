@@ -148,9 +148,12 @@ body.menu-open .sidebar,body.menu-open .email-side{opacity:0;pointer-events:none
 .hero .cta span{position:relative;z-index:1}
 
 /* ---- Dividers ---- */
-.section-divider{width:100%;height:1px;background:linear-gradient(90deg,transparent,var(--light-navy),transparent);margin:0}
+.section-divider{width:100%;height:1px;background:linear-gradient(90deg,transparent,var(--light-navy),transparent);margin:0;position:relative}
+.section-divider::after{content:'◆';position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-size:8px;color:var(--light-navy);background:var(--navy);padding:0 8px}
 .section-divider.accent{background:linear-gradient(90deg,transparent,rgba(212,162,89,0.12),transparent)}
+.section-divider.accent::after{color:rgba(212,162,89,0.3)}
 .section-divider.thin{background:linear-gradient(90deg,transparent,rgba(73,86,112,0.4),transparent);opacity:0.5}
+.section-divider.thin::after{display:none}
 
 /* ---- Section Common ---- */
 .section{padding:120px 0}
@@ -252,7 +255,8 @@ body.menu-open .sidebar,body.menu-open .email-side{opacity:0;pointer-events:none
 
 /* ---- Mini Projects ---- */
 .other-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
-.other-card{padding:32px 28px;background:var(--light-navy);border-radius:var(--radius);transition:var(--transition);position:relative;
+.other-card{padding:32px 28px;background:var(--light-navy);border-radius:var(--radius);transition:all 0.3s ease;position:relative;border:1px solid transparent}
+.other-card:hover{transform:translateY(-3px);border-color:rgba(212,162,89,0.15);box-shadow:0 8px 30px -10px rgba(0,0,0,0.3)}
   border:1px solid transparent}
 .other-card:hover{transform:translateY(-5px);box-shadow:0 12px 30px -15px var(--dark-navy);border-color:rgba(212,162,89,0.1)}
 .other-card .icon{font-family:var(--font-display);font-size:24px;color:var(--gold);margin-bottom:16px;font-weight:600}
@@ -274,8 +278,8 @@ body.menu-open .sidebar,body.menu-open .email-side{opacity:0;pointer-events:none
 
 /* ---- Notebook ---- */
 .notebook-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.note-card{padding:24px;background:var(--light-navy);border-radius:var(--radius);transition:var(--transition);position:relative}
-.note-card:hover{transform:translateY(-2px)}
+.note-card{padding:24px;background:var(--light-navy);border-radius:var(--radius);transition:all 0.3s ease;position:relative;border:1px solid transparent}
+.note-card:hover{transform:translateY(-3px);border-color:rgba(212,162,89,0.1);box-shadow:0 8px 24px -8px rgba(0,0,0,0.3)}
 .note-card .date{font-family:var(--font-mono);font-size:10px;color:var(--dark-slate);margin-bottom:8px}
 .note-card h3{font-size:var(--fz-md);font-weight:500;color:var(--warm-white);margin-bottom:6px}
 .note-card p{font-size:var(--fz-sm);line-height:1.6;color:var(--slate);margin-bottom:10px}
@@ -283,9 +287,10 @@ body.menu-open .sidebar,body.menu-open .email-side{opacity:0;pointer-events:none
 
 /* ---- Creative ---- */
 .creative-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-.creative-card{padding:36px 32px;background:var(--light-navy);border-radius:var(--radius);transition:var(--transition);position:relative;overflow:hidden}
-.creative-card::before{content:'"';position:absolute;top:-12px;right:20px;font-size:100px;color:rgba(212,162,89,0.05);font-family:var(--font-serif);line-height:1}
-.creative-card:hover{transform:translateY(-3px)}
+.creative-card{padding:36px 32px;background:var(--light-navy);border-radius:var(--radius);transition:all 0.3s ease;position:relative;overflow:hidden;border:1px solid transparent}
+.creative-card::before{content:'"';position:absolute;top:-12px;right:20px;font-size:100px;color:rgba(212,162,89,0.05);font-family:var(--font-serif);line-height:1;transition:color 0.3s ease}
+.creative-card:hover{transform:translateY(-3px);border-color:rgba(212,162,89,0.15);box-shadow:0 8px 30px -10px rgba(0,0,0,0.3)}
+.creative-card:hover::before{color:rgba(212,162,89,0.08)}
 .creative-card .genre{font-family:var(--font-mono);font-size:10px;color:var(--gold);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px}
 .creative-card h3{font-family:var(--font-serif);font-size:19px;font-weight:600;color:var(--warm-white);margin-bottom:8px}
 .creative-card .excerpt{font-family:var(--font-serif);font-size:15px;line-height:1.8;color:var(--slate);margin-bottom:14px;font-style:italic}
@@ -297,7 +302,8 @@ body.menu-open .sidebar,body.menu-open .email-side{opacity:0;pointer-events:none
 .life-item{position:relative;border-radius:var(--radius);overflow:hidden;aspect-ratio:1;
   background:linear-gradient(135deg,var(--light-navy) 0%,var(--navy) 100%);
   display:flex;align-items:center;justify-content:center;cursor:pointer;
-  transition:var(--transition);border:1px solid rgba(212,162,89,0.04)}
+  transition:all 0.3s ease;border:1px solid rgba(212,162,89,0.04)}
+.life-item:hover{transform:translateY(-3px);border-color:rgba(212,162,89,0.2);box-shadow:0 8px 20px -8px rgba(0,0,0,0.3)}
 .life-item:hover{transform:scale(1.03);border-color:rgba(212,162,89,0.15)}
 .life-item .icon-emblem{font-size:32px;opacity:0.15;color:var(--gold);transition:var(--transition)}
 .life-item:hover .icon-emblem{opacity:0.3;transform:scale(1.1)}
