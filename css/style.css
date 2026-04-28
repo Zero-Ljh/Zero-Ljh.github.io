@@ -535,3 +535,12 @@ footer p{font-family:var(--font-mono);font-size:10px;color:var(--dark-slate);let
   .project-links-section{flex-direction:column}
   .project-links-section a{justify-content:center}
 }
+
+/* ---- Accessibility: Reduced Motion ---- */
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:0.01ms!important;animation-iteration-count:1!important;transition-duration:0.01ms!important;scroll-behavior:auto!important}
+  .hero-overline,.hero h1,.hero .sub,.hero p,.hero .cta{opacity:1!important;transform:none!important}
+  .reveal,.reveal-left,.reveal-right,.reveal-scale{opacity:1!important;transform:none!important}
+  .project-image .img-placeholder::after{display:none}
+  .contact-wrap .cta{animation:none}
+}

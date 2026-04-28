@@ -182,10 +182,10 @@ function renderProjects() {
 
   // 筛选条
   if (allTags.length > 1) {
-    html += `<div class="filter-bar">
-      <button class="filter-btn active" onclick="filterProjects('all', this)">${lang === 'zh' ? '全部' : 'All'}</button>`;
+    html += `<div class="filter-bar" role="group" aria-label="${lang === 'zh' ? '项目筛选' : 'Filter projects'}">
+      <button class="filter-btn active" onclick="filterProjects('all', this)" aria-pressed="true">${lang === 'zh' ? '全部' : 'All'}</button>`;
     allTags.forEach(tag => {
-      html += `<button class="filter-btn" onclick="filterProjects('${tag}', this)">${tag}</button>`;
+      html += `<button class="filter-btn" onclick="filterProjects('${tag}', this)" aria-pressed="false">${tag}</button>`;
     });
     html += `</div>`;
   }
@@ -216,8 +216,9 @@ function renderProjects() {
 }
 
 function filterProjects(tag, btn) {
-  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.filter-btn').forEach(b => { b.classList.remove('active'); b.setAttribute('aria-pressed', 'false'); });
   btn.classList.add('active');
+  btn.setAttribute('aria-pressed', 'true');
 
   document.querySelectorAll('.project-card').forEach(card => {
     if (tag === 'all' || card.getAttribute('data-tags').split(',').includes(tag)) {
