@@ -28,7 +28,9 @@ const DATA = {
       zh: '目前：百炼机器人团队干员、心理健康协会干事、院系杯足球赛获奖。一直在阅读，一直在学习。',
       en: 'Currently: member of Bailian Robotics Team &amp; Psychological Health Association. Campus football cup winner. Always reading, always learning.'
     },
-    skills: ['Python (自学)', 'Large Language Models', 'Robotics (学习中)', 'PyTorch (即将开始)']
+    skills: ['Python (自学)', 'Large Language Models', 'Robotics (学习中)', 'PyTorch (即将开始)'],
+    resumeUrl: 'assets/resume.pdf',
+    githubUsername: 'Zero-Ljh'
   },
 
   /* ===== 阅读记录 ===== */
@@ -267,6 +269,7 @@ const DATA = {
         { href: '#projects', zh: '项目', en: 'Projects' },
         { href: '#now', zh: '此刻', en: 'Now' }
       ],
+      resumeBtn: { zh: '简历', en: 'Resume' },
       moreBtn: { zh: '更多 ▼', en: 'More ▼' },
       dropdown: [
         { href: '#notebook', zh: '📓 笔记', en: 'Notebook' },
@@ -276,32 +279,6 @@ const DATA = {
         { href: '#contact', zh: '💬 联系', en: 'Contact' }
       ]
     },
-    hero: {
-      overline: { zh: '你好，我是', en: "Hi, I'm" },
-      cta: { zh: '了解更多 →', en: 'Learn more →' }
-    },
-    sections: {
-      about: { num: '01.', zh: '关于我', en: 'About', tag: { zh: '大一 · 人工智能', en: 'Freshman · AI' } },
-      reading: { num: '02.', zh: '阅读记录', en: 'Reading Log', tag: { zh: '大模型动态 · 思考', en: 'LLM News · Thoughts' } },
-      experience: { num: '03.', zh: '经历', en: 'Experience' },
-      honors: { zh: '荣誉', en: 'Honors' },
-      projects: { num: '04.', zh: '项目', en: 'Projects' },
-      miniProjects: { zh: '小项目', en: 'Mini Projects', tag: { zh: '持续积累中', en: 'Growing collection' } },
-      now: { zh: '/now', en: '/now', tag: { zh: '2026年4月更新', en: 'Updated Apr 2026' } },
-      notebook: { zh: '课程笔记', en: 'Course Notes', tag: { zh: '学习记录', en: 'Learning in progress' } },
-      creative: { zh: '创作', en: 'Creative Writing', tag: { zh: '诗歌 · 文章', en: 'Poetry · Prose' } },
-      life: { zh: '课余生活', en: 'Life', tag: { zh: '足球 · 学习 · 成长', en: 'Football · Learning · Growth' } },
-      contact: { zh: '联系我', en: 'Get in touch' }
-    },
-    contact: {
-      heading: { zh: '一起聊聊？', en: "Let's connect!" },
-      text: {
-        zh: '我始终乐于结识对 AI、机器人感兴趣的人，或者只是想聊技术。无论你是同学还是老师——很期待交流。',
-        en: "I am always open to meeting people who share an interest in AI, robotics, or just want to chat about technology. Whether you are a fellow student or a professor — let's talk."
-      },
-      btn: { zh: '发邮件 →', en: 'Say Hello →' }
-    },
-    footer: 'Built by Junhui Li · © 2026',
     photoPlaceholder: { zh: '照片待加', en: 'photo soon' }
   }
 };

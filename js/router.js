@@ -1,87 +1,75 @@
 /**
  * Hash 路由系统
  * ============
- * 子页面导航，支持项目详情、阅读笔记全文、创作全文、笔记全文。
+ * 子页面导航 — 与主页面不同的文章阅读风格。
  *
  * 路由规则：
  *   #about          → 滚动到 About 板块
- *   #reading        → 滚动到 Reading 板块
- *   #reading/0      → 显示第 0 条阅读详情
- *   #project/python-learning → 显示项目详情
- *   #creative/1     → 显示创作全文
- *   #notebook/2     → 显示笔记全文
+ *   #reading/0      → 显示阅读详情
+ *   #project/xxx    → 项目详情
+ *   #creative/1     → 创作全文
+ *   #notebook/2     → 笔记全文
  *   #home 或 无hash → 主页面
  */
 
-/* ===== 路由处理 ===== */
 function handleRoute() {
-  const hash = window.location.hash.slice(1); // 去掉 '#'
+  const hash = window.location.hash.slice(1);
+  if (!hash || hash === 'home') { showMainView(); return; }
 
-  // 无 hash 或 #home → 主页面
-  if (!hash || hash === 'home') {
-    showMainView();
-    return;
-  }
-
-  // Section 锚点 → 滚动到相应板块
-  const sections = ['about', 'reading', 'experience', 'projects', 'other-projects',
-    'now', 'notebook', 'creative', 'life', 'contact'];
+  // Section 锚点
+  const sections = ['about','reading','experience','projects','other-projects',
+    'now','notebook','creative','life','contact'];
   if (sections.includes(hash)) {
     showMainView();
-    setTimeout(() => {
-      document.getElementById(hash)?.scrollIntoView({ behavior: 'smooth' });
-    }, 100);
+    setTimeout(() => document.getElementById(hash)?.scrollIntoView({ behavior: 'smooth' }), 100);
     return;
   }
 
-  // #reading/数字 → 阅读详情
-  const readingMatch = hash.match(/^reading\/(\d+)$/);
-  if (readingMatch) {
-    const idx = parseInt(readingMatch[1]);
-    showReadingDetail(idx);
-    return;
-  }
+  const m1 = hash.match(/^reading\/(\d+)$/);
+  if (m1) { showReadingDetail(parseInt(m1[1])); return; }
 
-  // #project/xxx → 项目详情
-  const projectMatch = hash.match(/^project\/(.+)$/);
-  if (projectMatch) {
-    showProjectDetail(projectMatch[1]);
-    return;
-  }
+  const m2 = hash.match(/^project\/(.+)$/);
+  if (m2) { showProjectDetail(m2[1]); return; }
 
-  // #creative/数字 → 创作全文
-  const creativeMatch = hash.match(/^creative\/(\d+)$/);
-  if (creativeMatch) {
-    showCreativeDetail(parseInt(creativeMatch[1]));
-    return;
-  }
+  const m3 = hash.match(/^creative\/(\d+)$/);
+  if (m3) { showCreativeDetail(parseInt(m3[1])); return; }
 
-  // #notebook/数字 → 笔记全文
-  const notebookMatch = hash.match(/^notebook\/(\d+)$/);
-  if (notebookMatch) {
-    showNoteDetail(parseInt(notebookMatch[1]));
-    return;
-  }
+  const m4 = hash.match(/^notebook\/(\d+)$/);
+  if (m4) { showNoteDetail(parseInt(m4[1])); return; }
 
-  // 未匹配 → 回退主页面
   showMainView();
 }
 
 /* ===== 视图切换 ===== */
 function showMainView() {
-  const main = document.getElementById('main-content');
-  const sub = document.getElementById('sub-view');
-  if (main) main.classList.remove('hidden');
-  if (sub) sub.classList.add('hidden');
+  document.getElementById('main-content')?.classList.remove('hidden');
+  document.getElementById('sub-view')?.classList.add('hidden');
+  document.body.style.backgroundColor = '';
   window.scrollTo(0, 0);
+  if (typeof restoreSEO === 'function') restoreSEO();
 }
 
 function showSubView() {
-  const main = document.getElementById('main-content');
-  const sub = document.getElementById('sub-view');
-  if (main) main.classList.add('hidden');
-  if (sub) sub.classList.remove('hidden');
+  document.getElementById('main-content')?.classList.add('hidden');
+  document.getElementById('sub-view')?.classList.remove('hidden');
+  document.body.style.backgroundColor = '#f6f3ef';
   window.scrollTo(0, 0);
+}
+
+/* ===== 子页面骨架 ===== */
+function subPageShell(contentHTML, backLabel) {
+  const lang = currentLang;
+  const logo = DATA.i18n.nav.logo[lang];
+  return `
+    <div class="sub-page">
+      <div class="sub-header">
+        <a href="#" class="site-name">${logo}</a>
+        <a href="#" onclick="window.location.hash='';return false;" class="sub-back">← ${backLabel}</a>
+      </div>
+      <div class="sub-body-wrap">
+        ${contentHTML}
+      </div>
+    </div>`;
 }
 
 /* ===== 阅读详情 ===== */
@@ -92,15 +80,15 @@ function showReadingDetail(index) {
   const container = document.getElementById('sub-view');
   if (!container) return;
 
-  container.innerHTML = `
-    <div class="sub-page" style="padding:120px 44px;max-width:720px;margin:0 auto;">
-      <a href="#" onclick="window.location.hash='';return false;" class="back-link">← ${lang === 'zh' ? '返回阅读' : 'Back to Reading'}</a>
-      <p class="sub-label">${item.meta[lang]}</p>
-      <h1>${item.title[lang]}</h1>
-      <div class="sub-body">${item.note[lang]}</div>
-      <div class="sub-meta">${item.tags.map(t => `<span>${t}</span>`).join('')}</div>
-    </div>`;
+  container.innerHTML = subPageShell(`
+    <p class="sub-label">${item.meta[lang]}</p>
+    <h1 class="sub-title">${item.title[lang]}</h1>
+    <p class="sub-meta-line">${item.meta[lang]}</p>
+    <div class="sub-content"><p>${item.note[lang]}</p></div>
+    <div class="sub-tags">${item.tags.map(t => `<span>${t}</span>`).join('')}</div>
+  `, lang === 'zh' ? '返回阅读' : 'Back to Reading');
   showSubView();
+  if (typeof updateSEO === 'function') updateSEO(item.title[lang], item.meta[lang]);
 }
 
 /* ===== 项目详情 ===== */
@@ -111,15 +99,15 @@ function showProjectDetail(id) {
   const container = document.getElementById('sub-view');
   if (!container) return;
 
-  container.innerHTML = `
-    <div class="sub-page" style="padding:120px 44px;max-width:720px;margin:0 auto;">
-      <a href="#" onclick="window.location.hash='';return false;" class="back-link">← ${lang === 'zh' ? '返回' : 'Back'}</a>
-      <p class="sub-label">${project.overline[lang]}</p>
-      <h1>${project.title[lang]}</h1>
-      <div class="sub-body">${project.desc[lang]}</div>
-      <div class="sub-meta">${project.tech.map(t => `<span>${t}</span>`).join('')}</div>
-    </div>`;
+  container.innerHTML = subPageShell(`
+    <p class="sub-label">${project.overline[lang]}</p>
+    <h1 class="sub-title">${project.title[lang]}</h1>
+    <p class="sub-meta-line">${project.title[lang]}</p>
+    <div class="sub-content"><p>${project.desc[lang]}</p></div>
+    <div class="sub-tags">${project.tech.map(t => `<span>${t}</span>`).join('')}</div>
+  `, lang === 'zh' ? '返回' : 'Back');
   showSubView();
+  if (typeof updateSEO === 'function') updateSEO(project.title[lang], project.desc[lang]);
 }
 
 /* ===== 创作全文 ===== */
@@ -130,14 +118,14 @@ function showCreativeDetail(index) {
   const container = document.getElementById('sub-view');
   if (!container) return;
 
-  container.innerHTML = `
-    <div class="sub-page" style="padding:120px 44px;max-width:680px;margin:0 auto;">
-      <a href="#" onclick="window.location.hash='';return false;" class="back-link">← ${lang === 'zh' ? '返回创作' : 'Back to Creative'}</a>
-      <p class="sub-label">${item.genre[lang]}</p>
-      <h1 style="font-family:var(--font-serif)">${item.title[lang]}</h1>
-      <div class="creative-body">${item.excerpt[lang]}</div>
-    </div>`;
+  container.innerHTML = subPageShell(`
+    <p class="sub-label">${item.genre[lang]}</p>
+    <h1 class="sub-title" style="font-family:var(--font-serif)">${item.title[lang]}</h1>
+    <p class="sub-meta-line">${item.genre[lang]}</p>
+    <div class="creative-body">${item.excerpt[lang]}</div>
+  `, lang === 'zh' ? '返回创作' : 'Back to Creative');
   showSubView();
+  if (typeof updateSEO === 'function') updateSEO(item.title[lang], item.excerpt[lang].replace(/<[^>]*>/g, ''));
 }
 
 /* ===== 笔记全文 ===== */
@@ -150,15 +138,15 @@ function showNoteDetail(index) {
 
   const dateStr = typeof note.date === 'object' ? note.date[lang] : note.date;
 
-  container.innerHTML = `
-    <div class="sub-page" style="padding:120px 44px;max-width:680px;margin:0 auto;">
-      <a href="#" onclick="window.location.hash='';return false;" class="back-link">← ${lang === 'zh' ? '返回笔记' : 'Back to Notes'}</a>
-      <p class="sub-label" style="font-size:10px;color:var(--dark-slate)">${dateStr}</p>
-      <h1>${note.title[lang]}</h1>
-      <div class="sub-body">${note.desc[lang]}</div>
-      <div class="sub-meta"><span>${note.tag}</span></div>
-    </div>`;
+  container.innerHTML = subPageShell(`
+    <p class="sub-label">${note.tag}</p>
+    <h1 class="sub-title">${note.title[lang]}</h1>
+    <p class="sub-meta-line">${dateStr}</p>
+    <div class="sub-content"><p>${note.desc[lang]}</p></div>
+    <div class="sub-tags"><span>${note.tag}</span></div>
+  `, lang === 'zh' ? '返回笔记' : 'Back to Notes');
   showSubView();
+  if (typeof updateSEO === 'function') updateSEO(note.title[lang], note.desc[lang]);
 }
 
 /* ===== 初始化 ===== */
@@ -166,5 +154,4 @@ function initRouter() {
   window.addEventListener('hashchange', handleRoute);
   handleRoute();
 }
-
 document.addEventListener('DOMContentLoaded', initRouter);

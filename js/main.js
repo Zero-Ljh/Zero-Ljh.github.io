@@ -5,32 +5,56 @@
  * 用户只需编辑 data.js 即可更新所有内容。
  */
 
+/* ===== 工具函数 ===== */
+function debounce(fn, delay) {
+  let timer; return function(...args) {
+    clearTimeout(timer); timer = setTimeout(() => fn.apply(this, args), delay);
+  };
+}
+function throttle(fn, limit) {
+  let inThrottle; return function(...args) {
+    if (!inThrottle) { fn.apply(this, args); inThrottle = true; setTimeout(() => { inThrottle = false; }, limit); }
+  };
+}
+
 /* ===== 导航栏 ===== */
 function renderNav() {
   const container = document.getElementById('nav-links');
+  const mobileContainer = document.getElementById('mobile-links');
   const lang = typeof currentLang !== 'undefined' ? currentLang : 'zh';
   const t = DATA.i18n.nav;
 
-  let html = '';
+  let desktopHtml = '';
   t.items.forEach(item => {
-    html += `<a href="${item.href}" data-en="${item.en}" data-zh="${item.zh}">${item[lang].toUpperCase()}</a>`;
+    desktopHtml += `<a href="${item.href}" data-en="${item.en}" data-zh="${item.zh}">${item[lang].toUpperCase()}</a>`;
   });
 
-  html += `<div class="dropdown" id="more-dropdown">
+  desktopHtml += `<a href="#" id="resume-btn" class="resume-btn" data-en="${t.resumeBtn.en}" data-zh="${t.resumeBtn.zh}" onclick="event.preventDefault();window.open('${DATA.profile.resumeUrl}','_blank')">${t.resumeBtn[lang]}</a>
+    <div class="dropdown" id="more-dropdown">
     <button class="dropdown-toggle" id="moreBtn" onclick="toggleDropdown()" data-en="${t.moreBtn.en}" data-zh="${t.moreBtn.zh}">${t.moreBtn[lang]}</button>
     <div class="dropdown-menu" id="dropdown-menu">`;
 
   t.dropdown.forEach(item => {
-    html += `<a href="${item.href}" data-en="${item.en}" data-zh="${item.zh}">${item[lang]}</a>`;
+    desktopHtml += `<a href="${item.href}" data-en="${item.en}" data-zh="${item.zh}">${item[lang]}</a>`;
   });
 
-  html += `</div></div>
+  desktopHtml += `</div></div>
     <div class="lang-toggle">
       <button class="lang-btn active" onclick="setLang('zh')" id="lang-zh">中</button>
       <button class="lang-btn" onclick="setLang('en')" id="lang-en">EN</button>
     </div>`;
 
-  container.innerHTML = html;
+  container.innerHTML = desktopHtml;
+
+  // Mobile menu: all items + resume
+  if (mobileContainer) {
+    let mobileHtml = '';
+    [...t.items, ...t.dropdown].forEach(item => {
+      mobileHtml += `<a href="${item.href}" data-en="${item.en}" data-zh="${item.zh}">${item[lang]}</a>`;
+    });
+    mobileHtml += `<a href="#" class="mobile-resume" onclick="event.preventDefault();window.open('${DATA.profile.resumeUrl}','_blank')">${t.resumeBtn[lang]}</a>`;
+    mobileContainer.innerHTML = mobileHtml;
+  }
 }
 
 /* ===== About ===== */
@@ -236,6 +260,7 @@ function renderAll() {
   renderNotebook();
   renderCreative();
   renderLife();
+  fetchGitHubRepos();
 }
 
 /* ===== Scroll Reveal ===== */
@@ -246,19 +271,34 @@ const revealObserver = new IntersectionObserver(entries => {
 }, { threshold: 0.08 });
 
 /* ===== Navigation Scroll ===== */
-window.addEventListener('scroll', () => {
-  const nav = document.getElementById('nav');
-  if (nav) nav.classList.toggle('scrolled', window.scrollY > 40);
+(function() {
+  let lastScrollY = 0;
+  window.addEventListener('scroll', throttle(() => {
+    const nav = document.getElementById('nav');
+    if (!nav) return;
+    const scrollY = window.scrollY;
 
-  // Section 高亮
-  let current = '';
-  document.querySelectorAll('section[id]').forEach(s => {
-    if (window.scrollY >= s.offsetTop - 180) current = s.id;
-  });
-  document.querySelectorAll('#nav-links > a[href^="#"]').forEach(a => {
-    a.style.color = a.getAttribute('href') === '#' + current ? 'var(--gold)' : '';
-  });
-});
+    // 滚动缩放
+    nav.classList.toggle('scrolled', scrollY > 40);
+
+    // 滚动方向：下滚隐藏，上滚显示
+    if (scrollY > 80) {
+      nav.classList.toggle('nav-hidden', scrollY > lastScrollY);
+    } else {
+      nav.classList.remove('nav-hidden');
+    }
+    lastScrollY = scrollY;
+
+    // Section 高亮
+    let current = '';
+    document.querySelectorAll('section[id]').forEach(s => {
+      if (scrollY >= s.offsetTop - 180) current = s.id;
+    });
+    document.querySelectorAll('#nav-links > a[href^="#"]').forEach(a => {
+      a.style.color = a.getAttribute('href') === '#' + current ? 'var(--gold)' : '';
+    });
+  }, 100));
+})();
 
 /* ===== Experience Tab ===== */
 function switchExp(index) {
@@ -293,6 +333,60 @@ document.addEventListener('click', (e) => {
   }
 });
 
+/* ===== Mobile Menu ===== */
+function initMobileMenu() {
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobile-menu');
+  if (!hamburger || !mobileMenu) return;
+
+  function openMenu() {
+    hamburger.classList.add('active');
+    mobileMenu.classList.add('open');
+    document.body.classList.add('menu-open');
+    hamburger.setAttribute('aria-expanded', 'true');
+    const firstLink = mobileMenu.querySelector('a');
+    if (firstLink) setTimeout(() => firstLink.focus(), 100);
+  }
+
+  function closeMenu() {
+    hamburger.classList.remove('active');
+    mobileMenu.classList.remove('open');
+    document.body.classList.remove('menu-open');
+    hamburger.setAttribute('aria-expanded', 'false');
+    hamburger.focus();
+  }
+
+  hamburger.addEventListener('click', () => {
+    mobileMenu.classList.contains('open') ? closeMenu() : openMenu();
+  });
+
+  // 点击链接关闭
+  mobileMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      closeMenu();
+    });
+  });
+
+  // Escape 关闭
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && mobileMenu.classList.contains('open')) closeMenu();
+  });
+
+  // 焦点陷阱
+  mobileMenu.addEventListener('keydown', e => {
+    if (e.key !== 'Tab') return;
+    const focusable = mobileMenu.querySelectorAll('a, button, [tabindex]:not([tabindex="-1"])');
+    if (!focusable.length) return;
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    if (e.shiftKey && document.activeElement === first) {
+      e.preventDefault(); last.focus();
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault(); first.focus();
+    }
+  });
+}
+
 /* ===== Hero Staggered Entry ===== */
 function heroEntry() {
   const els = document.querySelectorAll('.hero-overline, .hero h1, .hero .sub, .hero p, .hero .cta');
@@ -307,11 +401,191 @@ function heroEntry() {
   });
 }
 
+/* ===== 回到顶部按钮 ===== */
+function createBackToTop() {
+  const btn = document.createElement('button');
+  btn.id = 'back-to-top';
+  btn.innerHTML = '↑';
+  btn.setAttribute('aria-label', 'Back to top');
+  btn.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+  document.body.appendChild(btn);
+
+  window.addEventListener('scroll', () => {
+    btn.classList.toggle('visible', window.scrollY > 400);
+  });
+}
+
+/* ===== 阅读进度条 ===== */
+function createProgressBar() {
+  const bar = document.createElement('div');
+  bar.id = 'reading-progress';
+  document.body.appendChild(bar);
+
+  window.addEventListener('scroll', () => {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    bar.style.width = progress + '%';
+  });
+}
+
+/* ===== GitHub 仓库展示（含缓存） ===== */
+const GITHUB_CACHE_KEY = 'github-repos';
+const GITHUB_CACHE_TTL = 3600000; // 1 小时
+
+function getCachedRepos(ignoreTTL) {
+  try {
+    const raw = localStorage.getItem(GITHUB_CACHE_KEY);
+    if (!raw) return null;
+    const cached = JSON.parse(raw);
+    if (!ignoreTTL && Date.now() - cached.ts > GITHUB_CACHE_TTL) return null;
+    return cached.data;
+  } catch { return null; }
+}
+
+function setCachedRepos(data) {
+  try { localStorage.setItem(GITHUB_CACHE_KEY, JSON.stringify({ ts: Date.now(), data })); }
+  catch { /* 存储满时静默失败 */ }
+}
+
+function renderRepoCards(repos, container) {
+  const lang = currentLang;
+  if (!Array.isArray(repos) || repos.length === 0) {
+    container.innerHTML = '';
+    return;
+  }
+  container.innerHTML = repos.map(repo => `
+    <a href="${repo.html_url}" target="_blank" rel="noreferrer" class="repo-card">
+      <div class="repo-name">${repo.name}</div>
+      <div class="repo-desc">${repo.description || (lang === 'zh' ? '暂无描述' : 'No description')}</div>
+      <div class="repo-meta">
+        ${repo.language ? `<span>${repo.language}</span>` : ''}
+        <span>★ ${repo.stargazers_count}</span>
+      </div>
+    </a>
+  `).join('');
+}
+
+let _githubFetching = false;
+
+function fetchGitHubRepos() {
+  if (_githubFetching) return;
+  const username = DATA.profile.githubUsername;
+  const container = document.getElementById('github-repos');
+  if (!container || !username) return;
+
+  // 尝试缓存（即使过期也先用着）
+  const cached = getCachedRepos();
+  if (cached) { renderRepoCards(cached, container); return; }
+
+  const lang = currentLang;
+  container.innerHTML = `<p class="repo-loading">${lang === 'zh' ? '加载中...' : 'Loading...'}</p>`;
+
+  _githubFetching = true;
+  fetch(`https://api.github.com/users/${username}/repos?sort=updated&per_page=6`)
+    .then(res => {
+      if (!res.ok) throw new Error(`GitHub API ${res.status}`);
+      return res.json();
+    })
+    .then(repos => {
+      _githubFetching = false;
+      setCachedRepos(repos);
+      renderRepoCards(repos, container);
+    })
+    .catch(() => {
+      _githubFetching = false;
+      // API 失败时尝试过期缓存
+      const stale = getCachedRepos(true);
+      if (stale) {
+        renderRepoCards(stale, container);
+      } else {
+        container.innerHTML = `<p class="repo-loading">${lang === 'zh' ? '加载失败' : 'Failed to load'}</p>`;
+      }
+    });
+}
+
+/* ===== SEO 动态更新 ===== */
+const SEO_DEFAULTS = {
+  title: document.title,
+  desc: document.querySelector('meta[name="description"]')?.getAttribute('content') || '',
+  ogTitle: document.querySelector('meta[property="og:title"]')?.getAttribute('content') || '',
+  ogDesc: document.querySelector('meta[property="og:description"]')?.getAttribute('content') || '',
+  twTitle: document.querySelector('meta[name="twitter:title"]')?.getAttribute('content') || '',
+  twDesc: document.querySelector('meta[name="twitter:description"]')?.getAttribute('content') || '',
+};
+
+function updateSEO(title, description) {
+  const siteName = ' · Junhui Li';
+  const fullTitle = title ? title + siteName : SEO_DEFAULTS.title;
+  const fullDesc = description || SEO_DEFAULTS.desc;
+
+  document.title = fullTitle;
+  setMeta('description', fullDesc);
+  setMeta('og:title', fullTitle, 'property');
+  setMeta('og:description', fullDesc, 'property');
+  setMeta('twitter:title', fullTitle);
+  setMeta('twitter:description', fullDesc);
+}
+
+function setMeta(name, content, attr) {
+  const a = attr || 'name';
+  let el = document.querySelector(`meta[${a}="${name}"]`);
+  if (el) el.setAttribute('content', content);
+}
+
+function restoreSEO() {
+  document.title = SEO_DEFAULTS.title;
+  setMeta('description', SEO_DEFAULTS.desc);
+  setMeta('og:title', SEO_DEFAULTS.ogTitle, 'property');
+  setMeta('og:description', SEO_DEFAULTS.ogDesc, 'property');
+  setMeta('twitter:title', SEO_DEFAULTS.twTitle);
+  setMeta('twitter:description', SEO_DEFAULTS.twDesc);
+}
+
+/* ===== Loader ===== */
+function initLoader() {
+  const loader = document.getElementById('loader');
+  if (!loader) return;
+
+  if (sessionStorage.getItem('loader-shown')) {
+    loader.remove();
+    return;
+  }
+
+  const hideLoader = () => {
+    if (loader.dataset.hidden) return;
+    loader.dataset.hidden = '1';
+    loader.classList.add('loaded');
+    setTimeout(() => { loader.remove(); }, 600);
+    sessionStorage.setItem('loader-shown', '1');
+  };
+
+  const startTime = Date.now();
+  window.addEventListener('load', () => {
+    const elapsed = Date.now() - startTime;
+    const minShow = 1500;
+    if (elapsed >= minShow) {
+      hideLoader();
+    } else {
+      setTimeout(hideLoader, minShow - elapsed);
+    }
+  });
+
+  // Safety: hide after 5s even if load never fires
+  setTimeout(hideLoader, 5000);
+}
+
 /* ===== Init ===== */
 document.addEventListener('DOMContentLoaded', () => {
-  renderAll();
+  initLoader();
+  // setLang 内部调用 renderAll，只需一次
+  if (typeof setLang === 'function') setLang(currentLang);
+  initMobileMenu();
+  createBackToTop();
+  createProgressBar();
+  fetchGitHubRepos();
   heroEntry();
-  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+  document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale').forEach(el => revealObserver.observe(el));
   // 响应式 Tab 指示器
   window.addEventListener('resize', () => {
     const active = Array.from(document.querySelectorAll('.exp-tab')).findIndex(t => t.classList.contains('active'));

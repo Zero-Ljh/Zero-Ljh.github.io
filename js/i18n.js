@@ -12,18 +12,28 @@ function setLang(lang) {
   localStorage.setItem('lang', lang);
   document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
 
-  // 按钮高亮
+  // 按钮高亮（桌面 + 移动端）
   document.querySelectorAll('.lang-btn').forEach(b =>
-    b.classList.toggle('active', b.id === 'lang-' + lang)
+    b.classList.toggle('active', b.id === 'lang-' + lang || b.id === 'mobile-lang-' + lang)
   );
 
   // 重新渲染全部动态内容
   if (typeof renderAll === 'function') renderAll();
 
+  // 如果在子页面，重新渲染子页面内容
+  const hash = window.location.hash.slice(1);
+  const sectionAnchors = ['about','reading','experience','projects','other-projects',
+    'now','notebook','creative','life','contact'];
+  if (hash && hash !== 'home' && !sectionAnchors.includes(hash)) {
+    if (typeof handleRoute === 'function') setTimeout(handleRoute, 0);
+  }
+
   // 更新带 data-zh/data-en 的静态元素（Hero、Contact、Nav logo、footer）
   document.querySelectorAll('[data-' + lang + ']').forEach(el => {
     const text = el.getAttribute('data-' + lang);
-    if (el.tagName === 'P' || el.tagName === 'H1' || el.tagName === 'H2' ||
+    if (el.tagName === 'TITLE') {
+      document.title = text + ' · Junhui Li';
+    } else if (el.tagName === 'P' || el.tagName === 'H1' || el.tagName === 'H2' ||
         el.tagName === 'SPAN' || el.tagName === 'A' || el.tagName === 'BUTTON') {
       el.innerHTML = text;
     } else if (el.classList.contains('excerpt') || el.classList.contains('project-desc') ||
@@ -35,5 +45,3 @@ function setLang(lang) {
     }
   });
 }
-
-document.addEventListener('DOMContentLoaded', () => setLang(currentLang));

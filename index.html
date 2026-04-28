@@ -3,13 +3,44 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title data-en="Junhui Li · Personal Page" data-zh="李军辉 · 个人主页">李军辉 · 个人主页</title>
+<title data-en="Junhui Li · Personal Homepage" data-zh="李军辉 · 个人主页">李军辉 · 个人主页</title>
+<meta name="description" content="李军辉 (Junhui Li) 的 AI 学习主页。武汉科技大学人工智能科创大一学生，探索大模型、机器人与开源。">
+<meta name="keywords" content="李军辉, Junhui Li, 武汉科技大学, AI, 人工智能, 机器人, DeepSeek">
+<meta name="author" content="Junhui Li (李军辉)">
+<link rel="canonical" href="https://zero-ljh.github.io/">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://zero-ljh.github.io/">
+<meta property="og:title" content="李军辉 · Junhui Li — Personal Homepage">
+<meta property="og:description" content="李军辉 (Junhui Li) 的 AI 学习主页。武汉科技大学人工智能科创大一学生。">
+<meta property="og:image" content="https://zero-ljh.github.io/assets/images/og-image.png">
+
+<!-- Twitter Card -->
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:title" content="李军辉 · Junhui Li — Personal Homepage">
+<meta property="twitter:description" content="李军辉 (Junhui Li) 的 AI 学习主页。武汉科技大学人工智能科创大一学生。">
+
+<!-- Favicon -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>◆</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400;500&family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+<noscript>
+  <style>#loader{display:none!important}</style>
+  <div style="position:fixed;inset:0;z-index:99999;background:#0a192f;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;padding:40px;text-align:center">
+    <p style="font-family:'Playfair Display',Georgia,serif;font-size:48px;color:#d4a259">◇</p>
+    <p style="font-family:'Outfit','Noto Sans SC',sans-serif;font-size:14px;color:#8892b0">请启用 JavaScript 获得完整体验</p>
+    <p style="font-family:'Outfit','Noto Sans SC',sans-serif;font-size:12px;color:#495670">Please enable JavaScript for the full experience</p>
+  </div>
+</noscript>
+<div id="loader" role="status" aria-label="Loading">
+  <div class="loader-diamond">◇</div>
+</div>
+<a href="#main-content" class="skip-to-content">Skip to content</a>
 
 <!-- Sidebar -->
 <div class="sidebar">
@@ -29,10 +60,24 @@
 </div>
 
 <!-- Nav -->
-<nav id="nav">
+<nav id="nav" aria-label="Main navigation">
   <a href="#" class="nav-logo" data-en="◆ Junhui Li" data-zh="◆ 李军辉">◆ 李军辉</a>
   <div class="nav-links" id="nav-links"></div>
+  <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+    <span class="hamburger-bar"></span>
+    <span class="hamburger-bar"></span>
+    <span class="hamburger-bar"></span>
+  </button>
 </nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobile-menu" role="dialog" aria-modal="true" aria-label="Navigation menu">
+  <div class="mobile-links" id="mobile-links"></div>
+  <div class="mobile-lang">
+    <button onclick="setLang('zh')" class="lang-btn active" id="mobile-lang-zh">中</button>
+    <button onclick="setLang('en')" class="lang-btn" id="mobile-lang-en">EN</button>
+  </div>
+</div>
 
 <!-- Main Content -->
 <div id="main-content">
@@ -119,7 +164,17 @@
 
 <div class="section-divider thin"></div>
 
-<!-- Now -->
+<!-- GitHub Repos -->
+<section class="section secondary container reveal">
+  <div class="section-heading">
+    <span class="number">★</span>
+    <h2 data-en="GitHub Projects" data-zh="开源项目">GITHUB</h2>
+    <span class="tag" data-en="Latest repos" data-zh="最新仓库">最新仓库</span>
+  </div>
+  <div class="repo-grid" id="github-repos"></div>
+</section>
+
+<div class="section-divider thin"></div>
 <section id="now" class="section secondary container reveal">
   <div class="section-heading">
     <span class="number">—</span>
