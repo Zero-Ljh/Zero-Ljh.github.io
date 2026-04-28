@@ -19,7 +19,7 @@
   --transition-fast:all 0.25s var(--easing)
 }
 html{scroll-behavior:smooth;scroll-padding-top:100px}
-body{font-family:var(--font-sans);background:var(--navy);color:var(--slate);-webkit-font-smoothing:antialiased;overflow-x:hidden;line-height:1.6}
+body{font-family:var(--font-sans);background:var(--navy);color:var(--slate);-webkit-font-smoothing:antialiased;overflow-x:hidden;line-height:1.6;transition:background-color 0.5s ease}
 ::selection{background:rgba(212,162,89,0.2);color:var(--warm-white)}
 
 /* ---- Focus Styles ---- */
@@ -337,6 +337,12 @@ footer p{font-family:var(--font-mono);font-size:10px;color:var(--dark-slate);let
 
 /* ---- Utility ---- */
 .hidden{display:none!important}
+
+/* ---- View Transitions ---- */
+#main-content,#sub-view{transition:opacity 0.4s ease,transform 0.4s cubic-bezier(0.22,1,0.36,1)}
+#main-content.view-hidden,#sub-view.view-hidden{opacity:0;pointer-events:none;visibility:hidden;position:absolute;inset:0}
+#sub-view.view-hidden{transform:translateY(12px)}
+#main-content.view-hidden{transform:translateY(-12px)}
 
 /* ---- Reading Progress Bar ---- */
 #reading-progress{position:fixed;top:0;left:0;z-index:99999;height:2px;background:linear-gradient(90deg,var(--gold),#e8c06a);width:0;transition:width 0.1s linear}

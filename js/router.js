@@ -44,16 +44,29 @@ function handleRoute() {
 
 /* ===== 视图切换 ===== */
 function showMainView() {
-  document.getElementById('main-content')?.classList.remove('hidden');
-  document.getElementById('sub-view')?.classList.add('hidden');
+  const main = document.getElementById('main-content');
+  const sub = document.getElementById('sub-view');
+  if (!main || !sub) return;
+
+  sub.classList.add('view-hidden');
+  main.classList.remove('view-hidden');
   document.body.style.backgroundColor = '';
   window.scrollTo(0, 0);
+
+  // 过渡完成后清理 sub 内容
+  setTimeout(() => {
+    if (sub.classList.contains('view-hidden')) sub.innerHTML = '';
+  }, 500);
   if (typeof restoreSEO === 'function') restoreSEO();
 }
 
 function showSubView() {
-  document.getElementById('main-content')?.classList.add('hidden');
-  document.getElementById('sub-view')?.classList.remove('hidden');
+  const main = document.getElementById('main-content');
+  const sub = document.getElementById('sub-view');
+  if (!main || !sub) return;
+
+  main.classList.add('view-hidden');
+  sub.classList.remove('view-hidden');
   document.body.style.backgroundColor = '#f6f3ef';
   window.scrollTo(0, 0);
 }
