@@ -66,12 +66,53 @@ function subPageShell(contentHTML, backLabel) {
     <div class="sub-page">
       <div class="sub-header">
         <a href="#" class="site-name">${logo}</a>
-        <a href="#" onclick="window.location.hash='';return false;" class="sub-back">← ${backLabel}</a>
+        <div class="sub-header-actions">
+          <button class="sub-share" onclick="copyPageLink(this)" title="${lang === 'zh' ? '复制链接' : 'Copy Link'}">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+            <span>${lang === 'zh' ? '复制链接' : 'Copy'}</span>
+          </button>
+          <a href="#" onclick="window.location.hash='';return false;" class="sub-back">← ${backLabel}</a>
+        </div>
       </div>
       <div class="sub-body-wrap">
         ${contentHTML}
       </div>
     </div>`;
+}
+
+/* ===== 导航辅助 ===== */
+function subNavHTML(prev, next, lang) {
+  let html = '<div class="sub-nav">';
+  if (prev) {
+    html += `<a href="${prev.href}" class="prev">
+      <small>${lang === 'zh' ? '← 上一篇' : '← Previous'}</small>
+      ${prev.title[lang]}
+    </a>`;
+  } else {
+    html += '<span></span>';
+  }
+  if (next) {
+    html += `<a href="${next.href}" class="next">
+      <small>${lang === 'zh' ? '下一篇 →' : 'Next →'}</small>
+      ${next.title[lang]}
+    </a>`;
+  }
+  html += '</div>';
+  return html;
+}
+
+/* ===== 复制链接 ===== */
+function copyPageLink(btn) {
+  navigator.clipboard.writeText(window.location.href).then(() => {
+    btn.classList.add('copied');
+    const span = btn.querySelector('span');
+    const lang = currentLang;
+    span.textContent = lang === 'zh' ? '已复制!' : 'Copied!';
+    setTimeout(() => {
+      btn.classList.remove('copied');
+      span.textContent = lang === 'zh' ? '复制链接' : 'Copy';
+    }, 2000);
+  }).catch(() => {});
 }
 
 /* ===== 阅读详情 ===== */
@@ -124,11 +165,15 @@ function showReadingDetail(index) {
     }
   }
 
+  const prev = index > 0 ? { href: `#reading/${index - 1}`, title: DATA.reading[index - 1].title } : null;
+  const next = index < DATA.reading.length - 1 ? { href: `#reading/${index + 1}`, title: DATA.reading[index + 1].title } : null;
+
   container.innerHTML = subPageShell(`
     <p class="sub-label">${item.meta[lang]}</p>
     <h1 class="sub-title">${item.title[lang]}</h1>
     <p class="sub-meta-line">${metaLine}</p>
     ${extras}
+    ${subNavHTML(prev, next, lang)}
   `, lang === 'zh' ? '返回阅读' : 'Back to Reading');
   showSubView();
   if (typeof updateSEO === 'function') updateSEO(item.title[lang], item.meta[lang]);
@@ -171,11 +216,16 @@ function showProjectDetail(id) {
   // 技术栈
   extras += `<div class="sub-tags tech-badges">${project.tech.map(t => `<span>${t}</span>`).join('')}</div>`;
 
+  const idx = DATA.projects.findIndex(p => p.id === id);
+  const prevProj = idx > 0 ? { href: `#project/${DATA.projects[idx - 1].id}`, title: DATA.projects[idx - 1].title } : null;
+  const nextProj = idx < DATA.projects.length - 1 ? { href: `#project/${DATA.projects[idx + 1].id}`, title: DATA.projects[idx + 1].title } : null;
+
   container.innerHTML = subPageShell(`
     <p class="sub-label">${project.overline[lang]}</p>
     <h1 class="sub-title">${project.title[lang]}</h1>
     <p class="sub-meta-line">${project.title[lang]}</p>
     ${extras}
+    ${subNavHTML(prevProj, nextProj, lang)}
   `, lang === 'zh' ? '返回' : 'Back');
   showSubView();
   if (typeof updateSEO === 'function') updateSEO(project.title[lang], project.desc[lang]);
@@ -195,6 +245,9 @@ function showCreativeDetail(index) {
   if (item.readingTime) metaParts.push(item.readingTime);
   const metaLine = metaParts.join(' · ');
 
+  const prev = index > 0 ? { href: `#creative/${index - 1}`, title: DATA.creative[index - 1].title } : null;
+  const next = index < DATA.creative.length - 1 ? { href: `#creative/${index + 1}`, title: DATA.creative[index + 1].title } : null;
+
   container.innerHTML = subPageShell(`
     <p class="sub-label">${item.genre[lang]}</p>
     <h1 class="sub-title" style="font-family:var(--font-serif)">${item.title[lang]}</h1>
@@ -202,6 +255,7 @@ function showCreativeDetail(index) {
     <div class="artistic-separator">~ ~ ~</div>
     <div class="poetic-body drop-cap">${item.excerpt[lang]}</div>
     <div class="artistic-separator">~ ~ ~</div>
+    ${subNavHTML(prev, next, lang)}
   `, lang === 'zh' ? '返回创作' : 'Back to Creative');
   showSubView();
   if (typeof updateSEO === 'function') updateSEO(item.title[lang], item.excerpt[lang].replace(/<[^>]*>/g, ''));
@@ -234,11 +288,15 @@ function showNoteDetail(index) {
   // 标签
   extras += `<div class="sub-tags"><span>${note.tag}</span></div>`;
 
+  const prev = index > 0 ? { href: `#notebook/${index - 1}`, title: DATA.notebook[index - 1].title } : null;
+  const next = index < DATA.notebook.length - 1 ? { href: `#notebook/${index + 1}`, title: DATA.notebook[index + 1].title } : null;
+
   container.innerHTML = subPageShell(`
     <span class="sub-tag-badge">${note.tag}</span>
     <h1 class="sub-title">${note.title[lang]}</h1>
     <p class="sub-meta-line">${metaLine}</p>
     ${extras}
+    ${subNavHTML(prev, next, lang)}
   `, lang === 'zh' ? '返回笔记' : 'Back to Notes');
   showSubView();
   if (typeof updateSEO === 'function') updateSEO(note.title[lang], note.desc[lang]);

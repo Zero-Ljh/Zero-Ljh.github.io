@@ -407,6 +407,17 @@ footer p{font-family:var(--font-mono);font-size:10px;color:var(--dark-slate);let
 .concept-list li::before{content:'▹';position:absolute;left:0;color:#b8953e}
 .sub-tag-badge{display:inline-block;font-family:var(--font-mono);font-size:10px;padding:4px 14px;border-radius:20px;background:rgba(212,162,89,0.1);color:#b8953e;border:1px solid rgba(212,162,89,0.25);letter-spacing:0.5px}
 
+/* ---- Sub Page Navigation ---- */
+.sub-nav{margin-top:64px;padding-top:24px;border-top:1px solid #e5e0d8;display:flex;justify-content:space-between;gap:24px}
+.sub-nav a{font-family:var(--font-mono);font-size:11px;color:#6b7280;text-decoration:none;transition:color 0.2s;max-width:50%}
+.sub-nav a:hover{color:#b8953e}
+.sub-nav a.next{margin-left:auto;text-align:right}
+.sub-nav small{display:block;font-size:10px;color:#9ca3af;margin-bottom:2px}
+.sub-share{display:inline-flex;align-items:center;gap:6px;font-family:var(--font-mono);font-size:11px;color:#6b7280;cursor:pointer;background:none;border:1px solid #e5e0d8;border-radius:4px;padding:6px 14px;transition:all 0.2s;margin-left:auto}
+.sub-share:hover{color:#b8953e;border-color:#b8953e}
+.sub-share.copied{color:#b8953e;border-color:#b8953e}
+.sub-header-actions{display:flex;align-items:center;gap:16px}
+
 /* ---- Animations ---- */
 @keyframes fadeIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
 @keyframes fadeInUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
