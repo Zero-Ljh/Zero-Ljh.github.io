@@ -61,7 +61,7 @@ a:hover{color:var(--warm-white)}
 
 /* ---- Sidebar (Left) ---- */
 .sidebar{position:fixed;bottom:0;left:44px;z-index:10;display:flex;flex-direction:column;align-items:center;gap:20px}
-.sidebar::after{content:'';display:block;width:1px;height:80px;background:linear-gradient(180deg,var(--gold),transparent)}
+.sidebar::after{content:'';display:block;width:1px;height:80px;background:linear-gradient(180deg,var(--dark-slate),transparent)}
 .sidebar a{font-size:15px;color:var(--dark-slate);transition:all 0.3s ease;padding:6px;line-height:1}
 .sidebar a:hover{color:var(--gold);transform:translateY(-3px);filter:drop-shadow(0 0 4px rgba(212,162,89,0.3))}
 
@@ -216,10 +216,12 @@ body.menu-open .sidebar,body.menu-open .email-side{opacity:0;pointer-events:none
 
 /* ---- Honors ---- */
 .honors-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
-.honor-card{padding:24px 20px;background:var(--light-navy);border-radius:var(--radius);text-align:center;transition:var(--transition);border:1px solid transparent}
-.honor-card:hover{border-color:rgba(212,162,89,0.15);transform:translateY(-2px)}
-.honor-card .num{font-family:var(--font-display);font-size:28px;font-weight:600;color:var(--gold);margin-bottom:4px;line-height:1.2}
-.honor-card .label{font-size:var(--fz-sm);color:var(--slate)}
+.honor-card{padding:28px 20px 24px;background:var(--light-navy);border-radius:var(--radius);text-align:center;transition:all 0.3s ease;border:1px solid transparent;position:relative;overflow:hidden}
+.honor-card::before{content:'◆';position:absolute;top:-8px;right:-8px;font-size:28px;color:rgba(212,162,89,0.03);pointer-events:none;transition:color 0.3s ease}
+.honor-card:hover{border-color:rgba(212,162,89,0.15);transform:translateY(-3px);box-shadow:0 8px 24px -8px rgba(0,0,0,0.2)}
+.honor-card:hover::before{color:rgba(212,162,89,0.08)}
+.honor-card .num{font-family:var(--font-display);font-size:30px;font-weight:700;color:var(--gold);margin-bottom:4px;line-height:1.2;position:relative;z-index:1}
+.honor-card .label{font-size:var(--fz-sm);color:var(--slate);position:relative;z-index:1}
 
 /* ---- Project Filter ---- */
 .filter-bar{display:flex;gap:8px;margin-bottom:40px;flex-wrap:wrap}
@@ -260,7 +262,8 @@ body.menu-open .sidebar,body.menu-open .email-side{opacity:0;pointer-events:none
 .other-card:hover{transform:translateY(-3px);border-color:rgba(212,162,89,0.15);box-shadow:0 8px 30px -10px rgba(0,0,0,0.3)}
   border:1px solid transparent}
 .other-card:hover{transform:translateY(-5px);box-shadow:0 12px 30px -15px var(--dark-navy);border-color:rgba(212,162,89,0.1)}
-.other-card .icon{font-family:var(--font-display);font-size:24px;color:var(--gold);margin-bottom:16px;font-weight:600}
+.other-card .icon{font-family:var(--font-display);font-size:24px;color:var(--gold);margin-bottom:16px;font-weight:600;transition:transform 0.3s ease}
+.other-card:hover .icon{transform:scale(1.15)}
 .other-card h3{font-size:var(--fz-lg);font-weight:500;color:var(--warm-white);margin-bottom:8px;letter-spacing:-0.01em}
 .other-card p{font-size:var(--fz-md);line-height:1.6;margin-bottom:16px}
 .other-card .tech{font-family:var(--font-mono);font-size:10px;color:var(--dark-slate);display:flex;gap:12px;flex-wrap:wrap}
@@ -316,6 +319,7 @@ body.menu-open .sidebar,body.menu-open .email-side{opacity:0;pointer-events:none
 /* ---- Contact ---- */
 .contact-wrap{display:flex;flex-direction:column;align-items:center;text-align:center;padding:80px 0;position:relative}
 .contact-wrap::before{content:'';position:absolute;top:0;left:10%;right:10%;height:1px;background:linear-gradient(90deg,transparent,rgba(212,162,89,0.12),transparent)}
+.contact-wrap::after{content:'◆';position:absolute;bottom:-12px;left:50%;transform:translateX(-50%);font-size:10px;color:rgba(212,162,89,0.2);pointer-events:none}
 .contact-wrap .overline{font-family:var(--font-mono);font-size:var(--fz-sm);color:var(--gold);margin-bottom:16px;letter-spacing:2px}
 .contact-wrap h2{font-size:clamp(30px,5vw,44px);font-weight:700;color:var(--warm-white);margin-bottom:16px;letter-spacing:-0.03em;font-family:var(--font-display)}
 .contact-wrap p{font-size:var(--fz-lg);max-width:480px;line-height:1.7;margin-bottom:40px}
@@ -344,8 +348,8 @@ footer p{font-family:var(--font-mono);font-size:10px;color:var(--dark-slate);let
 
 /* ---- GitHub Repos ---- */
 .repo-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
-.repo-card{display:block;padding:24px;background:var(--light-navy);border-radius:var(--radius);text-decoration:none;transition:var(--transition);border:1px solid transparent}
-.repo-card:hover{transform:translateY(-4px);border-color:rgba(212,162,89,0.15);box-shadow:0 12px 30px -15px var(--dark-navy)}
+.repo-card{display:block;padding:24px;background:var(--light-navy);border-radius:var(--radius);text-decoration:none;transition:all 0.3s ease;border:1px solid transparent;border-left:2px solid transparent}
+.repo-card:hover{transform:translateY(-4px);border-color:rgba(212,162,89,0.15);border-left-color:var(--gold);box-shadow:0 12px 30px -15px var(--dark-navy)}
 .repo-name{font-family:var(--font-mono);font-size:14px;font-weight:500;color:var(--warm-white);margin-bottom:8px}
 .repo-desc{font-size:var(--fz-sm);color:var(--slate);line-height:1.6;margin-bottom:12px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .repo-meta{display:flex;gap:14px;font-family:var(--font-mono);font-size:10px;color:var(--dark-slate)}
