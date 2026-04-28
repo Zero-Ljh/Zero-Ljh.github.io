@@ -39,7 +39,7 @@ jobs:
       - name: Build site
         run: |
           mkdir -p _site
-          cp -r index.html 404.html sitemap.xml robots.txt css js _site/
+          cp -r index.html 404.html sitemap.xml robots.txt manifest.json sw.js icon.svg css js _site/
           [ -d assets ] && cp -r assets _site/ || true
           touch _site/.nojekyll
 
@@ -66,7 +66,7 @@ jobs:
       - name: Build site
         run: |
           mkdir -p _site
-          cp -r index.html 404.html sitemap.xml robots.txt css js _site/
+          cp -r index.html 404.html sitemap.xml robots.txt manifest.json sw.js icon.svg css js _site/
           [ -d assets ] && cp -r assets _site/ || true
           touch _site/.nojekyll
 

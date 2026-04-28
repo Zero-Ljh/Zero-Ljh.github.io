@@ -634,12 +634,11 @@ function initLoader() {
 /* ===== Init ===== */
 document.addEventListener('DOMContentLoaded', () => {
   initLoader();
-  // setLang 内部调用 renderAll，只需一次
+  // setLang 内部调用 renderAll（含 fetchGitHubRepos），只需一次
   if (typeof setLang === 'function') setLang(currentLang);
   initMobileMenu();
   createBackToTop();
   createProgressBar();
-  fetchGitHubRepos();
   heroEntry();
   document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale').forEach(el => revealObserver.observe(el));
   // 响应式 Tab 指示器

@@ -5,7 +5,7 @@
  * data-zh/data-en 属性仅用于 Hero、Contact、Nav logo 等静态 HTML。
  */
 
-let currentLang = localStorage.getItem('lang') || 'zh';
+let currentLang = localStorage.getItem('lang') || (navigator.language.startsWith('zh') ? 'zh' : 'en');
 
 function setLang(lang) {
   currentLang = lang;

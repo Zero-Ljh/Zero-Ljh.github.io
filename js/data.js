@@ -9,11 +9,6 @@ const DATA = {
   /* ===== 个人信息 ===== */
   profile: {
     name: { zh: '李军辉', en: 'Junhui Li' },
-    tagline: { zh: '大一学生 · 探索 AI · 动手实践', en: 'First-year · Exploring AI · Building things' },
-    intro: {
-      zh: '武汉科技大学大一学生，正在探索 AI 的世界——从大语言模型到机器人实践。保持好奇，每天都在学新东西。',
-      en: 'A first-year student at Wuhan University of Science and Technology, exploring the world of artificial intelligence — from large language models to hands-on robotics. Curious, learning, and building every day.'
-    },
     about: [
       {
         zh: '我是<strong>武汉科技大学</strong>人工智能科创专业的<strong>大一学生</strong>。我正站在探索的起点——自学了 Python 基础，带着好奇心和决心一头扎进 AI 的世界。',
