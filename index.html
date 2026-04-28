@@ -11,7 +11,7 @@
 </head>
 <body>
 
-<!-- Sidebar (Left) -->
+<!-- Sidebar -->
 <div class="sidebar">
   <a href="https://github.com/Zero-Ljh" target="_blank" rel="noreferrer" title="GitHub">
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
@@ -24,40 +24,17 @@
   </a>
 </div>
 
-<!-- Email Side (Right) -->
 <div class="email-side">
   <a href="mailto:2430132207@qq.com">2430132207@qq.com</a>
 </div>
 
-<!-- Navigation -->
+<!-- Nav -->
 <nav id="nav">
   <a href="#" class="nav-logo" data-en="◆ Junhui Li" data-zh="◆ 李军辉">◆ 李军辉</a>
-  <div class="nav-links">
-    <a href="#about" data-en="About" data-zh="关于">ABOUT</a>
-    <a href="#reading" data-en="Reading" data-zh="阅读">READING</a>
-    <a href="#experience" data-en="Experience" data-zh="经历">EXPERIENCE</a>
-    <a href="#projects" data-en="Projects" data-zh="项目">PROJECTS</a>
-    <a href="#now" data-en="Now" data-zh="此刻">NOW</a>
-    <div class="dropdown" id="more-dropdown">
-      <button class="dropdown-toggle" id="moreBtn" onclick="toggleDropdown()" data-en="More ▼" data-zh="更多 ▼">更多 ▼</button>
-      <div class="dropdown-menu" id="dropdown-menu">
-        <a href="#notebook" data-en="Notebook" data-zh="📓 笔记">📓 笔记</a>
-        <a href="#other-projects" data-en="Side Builds" data-zh="📦 小项目">📦 小项目</a>
-        <div class="divider"></div>
-        <a href="#creative" data-en="Creative" data-zh="✏️ 创作">✏️ 创作</a>
-        <a href="#life" data-en="Life" data-zh="📸 生活">📸 生活</a>
-        <div class="divider"></div>
-        <a href="#contact" data-en="Contact" data-zh="💬 联系">💬 联系</a>
-      </div>
-    </div>
-    <div class="lang-toggle">
-      <button class="lang-btn active" onclick="setLang('zh')" id="lang-zh">中</button>
-      <button class="lang-btn" onclick="setLang('en')" id="lang-en">EN</button>
-    </div>
-  </div>
+  <div class="nav-links" id="nav-links"></div>
 </nav>
 
-<!-- ===== MAIN CONTENT ===== -->
+<!-- Main Content -->
 <div id="main-content">
 
 <!-- Hero -->
@@ -80,27 +57,7 @@
     <h2 data-en="About" data-zh="关于我">ABOUT</h2>
     <span class="tag" data-en="Freshman · AI" data-zh="大一 · 人工智能">大一 · 人工智能</span>
   </div>
-  <div class="about-grid">
-    <div class="about-text">
-      <p data-en="I'm a <strong>first-year student</strong> at <strong>Wuhan University of Science and Technology</strong>, majoring in Artificial Intelligence Innovation. I'm at the very beginning of my journey — I've taught myself Python basics and I'm diving into the world of AI with curiosity and determination." data-zh="我是<strong>武汉科技大学</strong>人工智能科创专业的<strong>大一学生</strong>。我正站在探索的起点——自学了 Python 基础，带着好奇心和决心一头扎进 AI 的世界。">我是<strong>武汉科技大学</strong>人工智能科创专业的<strong>大一学生</strong>。我正站在探索的起点——自学了 Python 基础，带着好奇心和决心一头扎进 AI 的世界。</p>
-      <p data-en="What excites me most is how fast the AI field is evolving — from DeepSeek V4 to the latest multimodal models, I follow every breakthrough with genuine excitement. I believe the best way to learn is by building, and I am starting to do exactly that." data-zh="最让我兴奋的是 AI 领域的发展速度——从 DeepSeek V4 到最新的多模态模型，我怀着真正的热情关注每一次突破。我相信最好的学习方式是动手做，而我已经开始了。">最让我兴奋的是 AI 领域的发展速度——从 DeepSeek V4 到最新的多模态模型，我怀着真正的热情关注每一次突破。我相信最好的学习方式是动手做，而我已经开始了。</p>
-      <p style="font-size:var(--fz-md);color:var(--dark-slate);border-left:2px solid var(--gold);padding-left:16px;margin-top:24px" data-en="Currently: member of Bailian Robotics Team &amp; Psychological Health Association. Campus football cup winner. Always reading, always learning." data-zh="目前：百炼机器人团队干员、心理健康协会干事、院系杯足球赛获奖。一直在阅读，一直在学习。">目前：百炼机器人团队干员、心理健康协会干事、院系杯足球赛获奖。一直在阅读，一直在学习。</p>
-      <ul class="tech-grid">
-        <li>Python (自学)</li>
-        <li>Large Language Models</li>
-        <li>Robotics (学习中)</li>
-        <li>PyTorch (即将开始)</li>
-      </ul>
-    </div>
-    <div class="about-image">
-      <div class="frame">
-        <div class="photo">
-          <div class="initials">LH</div>
-          <div class="caption" data-en="photo soon" data-zh="照片待加">照片待加</div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <div class="about-grid" id="about-content"></div>
 </section>
 
 <div class="section-divider"></div>
@@ -112,44 +69,7 @@
     <h2 data-en="Reading Log" data-zh="阅读记录">READING</h2>
     <span class="tag" data-en="LLM News · Thoughts" data-zh="大模型动态 · 思考">大模型动态 · 思考</span>
   </div>
-  <div class="reading-list">
-    <div class="reading-item">
-      <div class="reading-num">·</div>
-      <div class="reading-content">
-        <h3 data-en="DeepSeek V4: What It Means for Open-Source AI" data-zh="DeepSeek V4 发布：对开源 AI 意味着什么">DeepSeek V4 发布：对开源 AI 意味着什么</h3>
-        <div class="meta" data-en="Apr 2026 · My take" data-zh="2026年4月 · 我的思考">Apr 2026 · 我的思考</div>
-        <div class="note" data-en="DeepSeek V4 shows that open-source models can rival proprietary ones. The efficiency gains in MoE architecture are particularly impressive — this could democratize access to frontier AI capabilities." data-zh="DeepSeek V4 证明了开源模型可以媲美闭源。MoE 架构的效率提升尤其令人印象深刻——这可能让前沿 AI 能力更加普及。">DeepSeek V4 证明了开源模型可以媲美闭源。MoE 架构的效率提升尤其令人印象深刻——这可能让前沿 AI 能力更加普及。</div>
-      </div>
-      <div class="reading-tags">
-        <span>DeepSeek</span>
-        <span>LLM</span>
-      </div>
-    </div>
-    <div class="reading-item">
-      <div class="reading-num">·</div>
-      <div class="reading-content">
-        <h3 data-en="GPT-5 Rumors: What to Expect" data-zh="GPT-5 传闻：值得期待什么">GPT-5 传闻：值得期待什么</h3>
-        <div class="meta" data-en="Mar 2026 · My take" data-zh="2026年3月 · 我的思考">Mar 2026 · 我的思考</div>
-        <div class="note" data-en="The race between OpenAI, DeepSeek, and others is pushing the entire field forward faster than ever. As a freshman, it is exciting to enter this field at such a pivotal moment." data-zh="OpenAI、DeepSeek 等之间的竞争正以前所未有的速度推动整个领域前进。作为一个大一新生，能在这样一个关键节点进入这个领域令人兴奋。">OpenAI、DeepSeek 等之间的竞争正以前所未有的速度推动整个领域前进。作为一个大一新生，能在这样一个关键节点进入这个领域令人兴奋。</div>
-      </div>
-      <div class="reading-tags">
-        <span>OpenAI</span>
-        <span>Industry</span>
-      </div>
-    </div>
-    <div class="reading-item">
-      <div class="reading-num">·</div>
-      <div class="reading-content">
-        <h3 data-en="Reading: 'Artificial Intelligence: A Modern Approach'" data-zh="在读《人工智能：一种现代方法》">在读《人工智能：一种现代方法》</h3>
-        <div class="meta" data-en="Ongoing · Textbook" data-zh="在读 · 教材">Ongoing · 教材</div>
-        <div class="note" data-en="Working through the classic AI textbook chapter by chapter. Currently on search algorithms and logic." data-zh="逐章学习经典 AI 教材，目前在搜索算法和逻辑部分。">逐章学习经典 AI 教材，目前在搜索算法和逻辑部分。</div>
-      </div>
-      <div class="reading-tags">
-        <span>学习</span>
-        <span>基础</span>
-      </div>
-    </div>
-  </div>
+  <div class="reading-list" id="reading-list"></div>
 </section>
 
 <div class="section-divider"></div>
@@ -160,51 +80,7 @@
     <span class="number">03.</span>
     <h2 data-en="Experience" data-zh="经历">EXPERIENCE</h2>
   </div>
-  <div class="exp-container">
-    <div class="exp-tabs" style="position:relative;">
-      <div class="exp-indicator" id="exp-indicator" style="top:0;"></div>
-      <button class="exp-tab active" onclick="switchExp(0)" data-en="Teams" data-zh="团队">团队</button>
-      <button class="exp-tab" onclick="switchExp(1)" data-en="Sports" data-zh="运动">运动</button>
-      <button class="exp-tab" onclick="switchExp(2)" data-en="Learning" data-zh="学习">学习</button>
-    </div>
-    <div class="exp-panels">
-      <div class="exp-panel active" id="exp-0">
-        <h3 data-en="Member <span class=\"location\">@ Bailian Robotics Team</span>" data-zh="干员 <span class=\"location\">@ 百炼机器人团队</span>">干员 <span class="location">@ 百炼机器人团队</span></h3>
-        <p class="date" data-en="2025 — Present" data-zh="2025年 — 至今">2025 — 至今</p>
-        <ul>
-          <li data-en="Participating in robotics system development and maintenance" data-zh="参与机器人系统开发与维护工作">参与机器人系统开发与维护工作</li>
-          <li data-en="Learning embedded systems and robot control basics" data-zh="学习嵌入式系统与机器人控制基础">学习嵌入式系统与机器人控制基础</li>
-          <li data-en="Collaborating with team members on competition preparations" data-zh="与团队成员协作准备竞赛">与团队成员协作准备竞赛</li>
-        </ul>
-        <br>
-        <h3 data-en="Officer <span class=\"location\">@ Psychological Health Association</span>" data-zh="干事 <span class=\"location\">@ 心理健康协会</span>">干事 <span class="location">@ 心理健康协会</span></h3>
-        <p class="date" data-en="2025 — Present" data-zh="2025年 — 至今">2025 — 至今</p>
-        <ul>
-          <li data-en="Organizing mental health awareness activities on campus" data-zh="组织校园心理健康宣传活动">组织校园心理健康宣传活动</li>
-          <li data-en="Supporting peer counseling and community building" data-zh="参与同伴咨询与社群建设">参与同伴咨询与社群建设</li>
-        </ul>
-      </div>
-      <div class="exp-panel" id="exp-1">
-        <h3 data-en="Football Team Member <span class=\"location\">@ University Cup</span>" data-zh="足球队员 <span class=\"location\">@ 院系杯</span>">足球队员 <span class="location">@ 院系杯</span></h3>
-        <p class="date" data-en="2025 — Present" data-zh="2025年 — 至今">2025 — 至今</p>
-        <ul>
-          <li data-en="Represented the college in the university football cup" data-zh="代表学院参加校院系杯足球赛">代表学院参加校院系杯足球赛</li>
-          <li data-en="Won awards in the campus tournament" data-zh="在比赛中获得奖项">在比赛中获得奖项</li>
-          <li data-en="Team player with discipline and perseverance" data-zh="具备团队协作精神与坚韧品质">具备团队协作精神与坚韧品质</li>
-        </ul>
-      </div>
-      <div class="exp-panel" id="exp-2">
-        <h3 data-en="Self-Directed Learning <span class=\"location\">@ Personal</span>" data-zh="自主学习 <span class=\"location\">@ 个人</span>">自主学习 <span class="location">@ 个人</span></h3>
-        <p class="date" data-en="2025 — Present" data-zh="2025年 — 至今">2025 — 至今</p>
-        <ul>
-          <li data-en="Python programming basics (self-taught)" data-zh="自学 Python 编程基础">自学 Python 编程基础</li>
-          <li data-en="Following cutting-edge LLM developments (DeepSeek, GPT, open-source models)" data-zh="关注大模型前沿动态（DeepSeek、GPT、开源模型）">关注大模型前沿动态（DeepSeek、GPT、开源模型）</li>
-          <li data-en="Watching Bilibili courses on politics, economics, philosophy, and history" data-zh="在 B 站学习政经哲史类课程">在 B 站学习政经哲史类课程</li>
-          <li data-en="Watching 'Lecture Room' (Bai Jia Jiang Tan) for Chinese culture" data-zh="观看《百家讲坛》了解中国传统文化">观看《百家讲坛》了解中国传统文化</li>
-        </ul>
-      </div>
-    </div>
-  </div>
+  <div class="exp-container" id="exp-container"></div>
 </section>
 
 <div class="section-divider"></div>
@@ -215,20 +91,7 @@
     <span class="number">+</span>
     <h2 data-en="Honors" data-zh="荣誉">HONORS</h2>
   </div>
-  <div class="honors-grid">
-    <div class="honor-card">
-      <div class="num">获奖</div>
-      <div class="label" data-en="Football Cup · University Level" data-zh="院系杯足球赛 · 校级">院系杯足球赛 · 校级</div>
-    </div>
-    <div class="honor-card">
-      <div class="num">干事</div>
-      <div class="label" data-en="Psychological Health Association" data-zh="心理健康协会">心理健康协会</div>
-    </div>
-    <div class="honor-card">
-      <div class="num">干员</div>
-      <div class="label" data-en="Bailian Robotics Team" data-zh="百炼机器人团队">百炼机器人团队</div>
-    </div>
-  </div>
+  <div class="honors-grid" id="honors-grid"></div>
 </section>
 
 <div class="section-divider"></div>
@@ -239,59 +102,19 @@
     <span class="number">04.</span>
     <h2 data-en="Projects" data-zh="项目">PROJECTS</h2>
   </div>
-  <div class="project-card">
-    <div class="project-content">
-      <p class="project-overline" data-en="Ongoing" data-zh="进行中">Ongoing</p>
-      <h3 class="project-title" data-en="Bailian Robotics Project" data-zh="百炼机器人项目">百炼机器人项目</h3>
-      <div class="project-desc" data-en="Working with the team on robotics development. Currently learning the fundamentals of embedded systems, sensor integration, and robot control. This is where I'm getting my hands dirty with real hardware." data-zh="与团队一起进行机器人开发。目前正在学习嵌入式系统基础、传感器集成和机器人控制。这是我在真实硬件上动手实践的地方。">与团队一起进行机器人开发。目前正在学习嵌入式系统基础、传感器集成和机器人控制。这是我在真实硬件上动手实践的地方。</div>
-      <div class="project-tech"><span>Robotics</span><span>Embedded</span><span>Team</span></div>
-    </div>
-    <div class="project-image">
-      <div class="img-placeholder" data-en="Robotics" data-zh="机器人">机器人<div class="overlay"></div></div>
-    </div>
-  </div>
-  <div class="project-card right">
-    <div class="project-content">
-      <p class="project-overline" data-en="Self-Study" data-zh="自学">Self-Study</p>
-      <h3 class="project-title" data-en="Python Learning Journey" data-zh="Python 学习之旅">Python 学习之旅</h3>
-      <div class="project-desc" data-en="Self-taught Python basics including data structures, control flow, functions, and introductory projects. Building a foundation for AI/ML work. Next step: PyTorch." data-zh="自学 Python 基础，包括数据结构、控制流、函数和入门项目。为 AI/ML 打基础。下一步：PyTorch。">自学 Python 基础，包括数据结构、控制流、函数和入门项目。为 AI/ML 打基础。下一步：PyTorch。</div>
-      <div class="project-tech"><span>Python</span></div>
-    </div>
-    <div class="project-image">
-      <div class="img-placeholder" data-en="Python" data-zh="Python">Python<div class="overlay"></div></div>
-    </div>
-  </div>
+  <div id="projects-list"></div>
 </section>
 
 <div class="section-divider accent"></div>
 
-<!-- Other Projects -->
+<!-- Mini Projects -->
 <section id="other-projects" class="section secondary container reveal">
   <div class="section-heading">
     <span class="number">—</span>
     <h2 data-en="Mini Projects" data-zh="小项目">MINI PROJECTS</h2>
     <span class="tag" data-en="Growing collection" data-zh="持续积累中">持续积累中</span>
   </div>
-  <div class="other-grid">
-    <div class="other-card">
-      <div class="icon">01</div>
-      <h3 data-en="This Portfolio Website" data-zh="本个人主页">本个人主页</h3>
-      <p data-en="Built from scratch with HTML/CSS/JS. Bilingual, responsive, zero dependencies. Deployed via GitHub Pages." data-zh="纯手工搭建的 HTML/CSS/JS 个人主页。双语、响应式、零依赖。通过 GitHub Pages 部署。">纯手工搭建的 HTML/CSS/JS 个人主页。双语、响应式、零依赖。通过 GitHub Pages 部署。</p>
-      <div class="tech">HTML · CSS · JS</div>
-    </div>
-    <div class="other-card">
-      <div class="icon">02</div>
-      <h3 data-en="Python Practice Projects" data-zh="Python 练习项目">Python 练习项目</h3>
-      <p data-en="Small Python programs built while learning: data analysis exercises, simple games, automation scripts." data-zh="学习过程中写的小型 Python 程序：数据分析练习、小游戏、自动脚本。">学习过程中写的小型 Python 程序：数据分析练习、小游戏、自动脚本。</p>
-      <div class="tech">Python</div>
-    </div>
-    <div class="other-card">
-      <div class="icon">03</div>
-      <h3 data-en="Robotics Team Tasks" data-zh="机器人团队任务">机器人团队任务</h3>
-      <p data-en="Contributing to robotics system development at Bailian team. More details coming as I learn more." data-zh="在百炼机器人团队参与系统开发。随学习深入会持续更新。">在百炼机器人团队参与系统开发。随学习深入会持续更新。</p>
-      <div class="tech">Robotics · C</div>
-    </div>
-  </div>
+  <div class="other-grid" id="mini-grid"></div>
 </section>
 
 <div class="section-divider thin"></div>
@@ -303,33 +126,8 @@
     <h2>/NOW</h2>
     <span class="tag" data-en="Updated Apr 2026" data-zh="2026年4月更新">2026年4月更新</span>
   </div>
-  <p style="font-size:var(--fz-md);color:var(--dark-slate);margin-bottom:32px;max-width:600px" data-en="What I'm focused on right now." data-zh="最近在做什么。">最近在做什么。</p>
-  <div class="now-grid">
-    <div class="now-card">
-      <div class="label" data-en="📖 Reading" data-zh="📖 在读">📖 在读</div>
-      <ul>
-        <li data-en="AI: A Modern Approach (textbook)" data-zh="《人工智能：一种现代方法》">《人工智能：一种现代方法》</li>
-        <li data-en="DeepSeek V4 technical report" data-zh="DeepSeek V4 技术报告">DeepSeek V4 技术报告</li>
-        <li data-en="Baijia Lecture Room (history series)" data-zh="百家讲坛（历史系列）">百家讲坛（历史系列）</li>
-      </ul>
-    </div>
-    <div class="now-card">
-      <div class="label" data-en="🔨 Doing" data-zh="🔨 在做">🔨 在做</div>
-      <ul>
-        <li data-en="Python deep dive" data-zh="深入学 Python">深入学 Python</li>
-        <li data-en="Robotics team tasks" data-zh="百炼机器人团队任务">百炼机器人团队任务</li>
-        <li data-en="Building this homepage" data-zh="搭建个人主页">搭建个人主页</li>
-      </ul>
-    </div>
-    <div class="now-card">
-      <div class="label" data-en="🎯 Next Up" data-zh="🎯 下一步">🎯 下一步</div>
-      <ul>
-        <li data-en="Start PyTorch" data-zh="开始学 PyTorch">开始学 PyTorch</li>
-        <li data-en="Contribute to open source" data-zh="尝试开源贡献">尝试开源贡献</li>
-        <li data-en="Write first tech blog" data-zh="写第一篇技术博客">写第一篇技术博客</li>
-      </ul>
-    </div>
-  </div>
+  <p id="now-intro" style="font-size:var(--fz-md);color:var(--dark-slate);margin-bottom:32px;max-width:600px"></p>
+  <div class="now-grid" id="now-grid"></div>
 </section>
 
 <div class="section-divider thin"></div>
@@ -341,32 +139,7 @@
     <h2 data-en="Course Notes" data-zh="课程笔记">NOTES</h2>
     <span class="tag" data-en="Learning in progress" data-zh="学习记录">学习记录</span>
   </div>
-  <div class="notebook-grid">
-    <div class="note-card">
-      <div class="date">Apr 2026 · 5 min</div>
-      <h3 data-en="Python Basics: What I Learned This Month" data-zh="Python 基础：本月学习总结">Python 基础：本月学习总结</h3>
-      <p data-en="Lists, dictionaries, loops, functions — the building blocks. Writing small programs every day to build muscle memory." data-zh="列表、字典、循环、函数——基础构建块。每天写小代码培养手感。">列表、字典、循环、函数——基础构建块。每天写小代码培养手感。</p>
-      <span class="tag">Python</span>
-    </div>
-    <div class="note-card">
-      <div class="date">Apr 2026 · 3 min</div>
-      <h3 data-en="My Understanding of LLMs" data-zh="我对大语言模型的理解">我对大语言模型的理解</h3>
-      <p data-en="How transformers work (in simple terms), what training data does, and why DeepSeek's MoE architecture is a big deal." data-zh="Transformer 工作原理（通俗版）、训练数据的作用、以及为什么 DeepSeek 的 MoE 架构很重要。">Transformer 工作原理（通俗版）、训练数据的作用、以及为什么 DeepSeek 的 MoE 架构很重要。</p>
-      <span class="tag">LLM</span>
-    </div>
-    <div class="note-card">
-      <div class="date" data-en="Coming soon..." data-zh="即将更新...">即将更新...</div>
-      <h3 data-en="University Course Reflections" data-zh="大学课程反思">大学课程反思</h3>
-      <p data-en="Notes from my AI courses and self-study sessions. Will be updated regularly throughout the semester." data-zh="人工智能专业课程的学习笔记和自我学习记录。本学期会持续更新。">人工智能专业课程的学习笔记和自我学习记录。本学期会持续更新。</p>
-      <span class="tag">Soon</span>
-    </div>
-    <div class="note-card">
-      <div class="date" data-en="Coming soon..." data-zh="即将更新...">即将更新...</div>
-      <h3 data-en="Bilibili Course Takeaways" data-zh="B 站课程笔记">B 站课程笔记</h3>
-      <p data-en="Notes from politics, economics, philosophy, and history courses I watch on Bilibili in my free time." data-zh="课余在 B 站学习政经哲史课程的笔记整理。">课余在 B 站学习政经哲史课程的笔记整理。</p>
-      <span class="tag">Soon</span>
-    </div>
-  </div>
+  <div class="notebook-grid" id="notebook-grid"></div>
 </section>
 
 <div class="section-divider thin"></div>
@@ -378,32 +151,7 @@
     <h2 data-en="Creative Writing" data-zh="创作">CREATIVE</h2>
     <span class="tag" data-en="Poetry · Prose" data-zh="诗歌 · 文章">诗歌 · 文章</span>
   </div>
-  <div class="creative-grid">
-    <div class="creative-card">
-      <div class="genre" data-en="Classical Poem" data-zh="古诗">古诗</div>
-      <h3 data-en="Untitled" data-zh="无题">无题</h3>
-      <div class="excerpt" data-en="(Send me your poem and I will put it here)" data-zh="（请将你的古诗发给我，我会放入）">（请将你的古诗发给我，我会放入）</div>
-      <a href="#creative/0" class="read-more" data-en="Read →" data-zh="阅读 →">阅读 →</a>
-    </div>
-    <div class="creative-card">
-      <div class="genre" data-en="Essay" data-zh="文章">文章</div>
-      <h3 data-en="(Title)" data-zh="（文章标题）">（文章标题）</h3>
-      <div class="excerpt" data-en="(Send me your article)" data-zh="（请将你的文章发给我）">（请将你的文章发给我）</div>
-      <a href="#creative/1" class="read-more" data-en="Read →" data-zh="阅读 →">阅读 →</a>
-    </div>
-    <div class="creative-card">
-      <div class="genre" data-en="Modern Poem" data-zh="现代诗">现代诗</div>
-      <h3 data-en="(Title)" data-zh="（诗歌标题）">（诗歌标题）</h3>
-      <div class="excerpt" data-en="(Send me your poem)" data-zh="（请将你的诗歌发给我）">（请将你的诗歌发给我）</div>
-      <a href="#creative/2" class="read-more" data-en="Read →" data-zh="阅读 →">阅读 →</a>
-    </div>
-    <div class="creative-card">
-      <div class="genre" data-en="Prose" data-zh="随笔">随笔</div>
-      <h3 data-en="My First Year of College" data-zh="我的大一">我的大一</h3>
-      <div class="excerpt" data-en="Starting university is like opening a door to a world you have only read about..." data-zh="进入大学，就像打开一扇通往只存在于书本中的世界的大门……">进入大学，就像打开一扇通往只存在于书本中的世界的大门……</div>
-      <a href="#creative/3" class="read-more" data-en="Read →" data-zh="阅读 →">阅读 →</a>
-    </div>
-  </div>
+  <div class="creative-grid" id="creative-grid"></div>
 </section>
 
 <div class="section-divider thin"></div>
@@ -415,14 +163,7 @@
     <h2 data-en="Life" data-zh="课余生活">LIFE</h2>
     <span class="tag" data-en="Football · Learning · Growth" data-zh="足球 · 学习 · 成长">足球 · 学习 · 成长</span>
   </div>
-  <div class="life-grid">
-    <div class="life-item"><span class="icon-emblem">⚽</span><div class="label" data-en="Football · University Cup" data-zh="足球 · 院系杯">足球 · 院系杯</div></div>
-    <div class="life-item"><span class="icon-emblem">📺</span><div class="label" data-en="Bilibili Learning" data-zh="B 站学习">B 站学习</div></div>
-    <div class="life-item"><span class="icon-emblem">📚</span><div class="label" data-en="Bai Jia Jiang Tan" data-zh="百家讲坛">百家讲坛</div></div>
-    <div class="life-item"><span class="icon-emblem">🤖</span><div class="label" data-en="Robotics Team" data-zh="机器人团队">机器人团队</div></div>
-    <div class="life-item"><span class="icon-emblem">🧠</span><div class="label" data-en="Psych Association" data-zh="心理协会">心理协会</div></div>
-    <div class="life-item"><span class="icon-emblem">🌐</span><div class="label" data-en="AI News" data-zh="AI 动态">AI 动态</div></div>
-  </div>
+  <div class="life-grid" id="life-grid"></div>
 </section>
 
 <div class="section-divider accent"></div>
@@ -446,19 +187,18 @@
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
     </a>
   </div>
-  <p data-en="Built by Junhui Li · © 2026" data-zh="李军辉 · © 2026">李军辉 · © 2026</p>
+  <p id="footer-text" data-en="Built by Junhui Li · © 2026" data-zh="李军辉 · © 2026">李军辉 · © 2026</p>
 </footer>
 
 </div><!-- /main-content -->
 
-<!-- ===== SUB-VIEW (Hash Router) ===== -->
-<div id="sub-view" class="hidden" style="display:none;"></div>
+<!-- Sub View -->
+<div id="sub-view" class="hidden"></div>
 
 <!-- Scripts -->
 <script src="js/data.js"></script>
 <script src="js/i18n.js"></script>
 <script src="js/main.js"></script>
 <script src="js/router.js"></script>
-
 </body>
 </html>

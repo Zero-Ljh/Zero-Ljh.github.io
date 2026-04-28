@@ -252,6 +252,20 @@ footer{padding:24px 0 80px;display:flex;flex-direction:column;align-items:center
 footer .social{display:none;gap:16px}
 footer p{font-family:var(--font-mono);font-size:10px;color:var(--dark-slate);letter-spacing:0.5px}
 
+/* ---- Utility ---- */
+.hidden{display:none!important}
+
+/* ---- Sub View ---- */
+.sub-page{min-height:100vh;background:var(--navy)}
+.sub-page .back-link{font-family:var(--font-mono);font-size:12px;color:var(--gold);display:inline-flex;align-items:center;gap:6px;margin-bottom:32px;transition:var(--transition)}
+.sub-page .back-link:hover{color:var(--warm-white)}
+.sub-page .sub-label{font-family:var(--font-mono);font-size:11px;color:var(--gold);margin-bottom:8px}
+.sub-page h1{font-family:var(--font-display);font-size:clamp(28px,4vw,40px);color:var(--warm-white);margin-bottom:20px}
+.sub-page .sub-body{font-size:var(--fz-lg);line-height:1.8;color:var(--slate)}
+.sub-page .sub-meta{display:flex;gap:14px;margin-top:24px;font-family:var(--font-mono);font-size:12px;color:var(--slate);flex-wrap:wrap}
+.sub-page .sub-meta span{background:var(--light-navy);padding:4px 12px;border-radius:4px}
+.sub-page .creative-body{font-family:var(--font-serif);font-size:17px;line-height:2;color:var(--slate);font-style:italic;padding:32px;background:var(--light-navy);border-radius:var(--radius)}
+
 /* ---- Animations ---- */
 @keyframes fadeIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
 @keyframes fadeInUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
