@@ -39,7 +39,8 @@ jobs:
       - name: Build site
         run: |
           mkdir -p _site
-          cp -r index.html css js assets _site/
+          cp -r index.html css js _site/
+          [ -d assets ] && cp -r assets _site/ || true
           touch _site/.nojekyll
 
       - name: Validate HTML with W3C Nu HTML Checker
