@@ -11,51 +11,61 @@ const DATA = {
     name: { zh: '李军辉', en: 'Junhui Li' },
     about: [
       {
-        zh: '我是<strong>武汉科技大学</strong>人工智能科创专业的<strong>大一学生</strong>。我正站在探索的起点——自学了 Python 基础，带着好奇心和决心一头扎进 AI 的世界。',
-        en: "I'm a <strong>first-year student</strong> at <strong>Wuhan University of Science and Technology</strong>, majoring in Artificial Intelligence Innovation. I'm at the very beginning of my journey — I've taught myself Python basics and I'm diving into the world of AI with curiosity and determination."
+        zh: '我对 <strong>AI</strong> 有着真正的热情——每天关注 AI 新闻，自学深度学习，用 AI 生成图片，尝试 Vibe Coding，还报了课学大模型部署与微调。这个领域的变化速度让我着迷。',
+        en: 'I have a genuine passion for <strong>AI</strong> — I follow AI news daily, study deep learning on my own, generate images with AI, experiment with Vibe Coding, and have enrolled in courses on LLM deployment and fine-tuning. The pace of change in this field fascinates me.'
       },
       {
-        zh: '最让我兴奋的是 AI 领域的发展速度——从 DeepSeek V4 到最新的多模态模型，我怀着真正的热情关注每一次突破。我相信最好的学习方式是动手做，而我已经开始了。',
-        en: 'What excites me most is how fast the AI field is evolving — from DeepSeek V4 to the latest multimodal models, I follow every breakthrough with genuine excitement. I believe the best way to learn is by building, and I am starting to do exactly that.'
+        zh: '我相信<strong>持续学习</strong>的力量。自学了 Python，现在在学 C++，还搭建了一套自动化复习工作流来巩固知识。没有考试驱动，纯粹是好奇心在推着我往前走。',
+        en: 'I believe in the power of <strong>continuous learning</strong>. I taught myself Python, am now learning C++, and have built an automated review workflow to reinforce what I study. No exams driving me — just pure curiosity.'
+      },
+      {
+        zh: '我也在努力做一个<strong>全面发展</strong>的人。足球场上我是扫荡型中场，拿过新生杯二等奖；在心理协会做干事帮助同学；在百炼机器人团队学嵌入式开发。技术很重要，但人更重要。',
+        en: "I also strive to be a <strong>well-rounded</strong> person. On the football field, I'm a box-to-box midfielder and won 2nd place in the freshman cup; as an officer in the Psychological Health Association, I support fellow students; at Bailian Robotics Team, I'm learning embedded development. Tech matters, but people matter more."
       }
     ],
     highlight: {
-      zh: '目前：百炼机器人团队干员、心理健康协会干事、院系杯足球赛获奖。一直在阅读，一直在学习。',
-      en: 'Currently: member of Bailian Robotics Team &amp; Psychological Health Association. Campus football cup winner. Always reading, always learning.'
+      zh: '目前在学深度学习、大模型部署微调，用 Vibe Coding 提高效率。足球扫荡型中场，新生杯二等奖。',
+      en: 'Currently studying deep learning &amp; LLM deployment/fine-tuning. Box-to-box midfielder — campus freshman cup 2nd place.'
     },
-    skills: ['Python (自学)', 'Large Language Models', 'Robotics (学习中)', 'PyTorch (即将开始)'],
+    skills: ['Python', 'C++', 'LLM / Deep Learning', 'Vibe Coding', 'AI 工具链', 'Robotics (学习中)'],
     resumeUrl: 'assets/resume.pdf',
     githubUsername: 'Zero-Ljh'
+  },
+
+  /* ===== 教育背景 ===== */
+  education: {
+    school: { zh: '武汉科技大学', en: 'Wuhan University of Science and Technology' },
+    degree: { zh: '人工智能科创专业 · 本科在读', en: 'AI Innovation · Bachelor (In Progress)' },
+    period: { zh: '2025年 — 2029年（预计）', en: '2025 — 2029 (Expected)' },
+    courses: {
+      zh: ['Python 程序设计', '数据结构与算法', '机器学习导论', '高等数学', '线性代数'],
+      en: ['Python Programming', 'Data Structures & Algorithms', 'Intro to ML', 'Advanced Math', 'Linear Algebra']
+    },
+    description: {
+      zh: '大一在读，保持好奇心和学习热情。正在自学 AI/ML 基础知识，参与机器人团队实践。',
+      en: 'First-year student with curiosity and enthusiasm. Self-studying AI/ML fundamentals and participating in robotics team practice.'
+    }
   },
 
   /* ===== 阅读记录 ===== */
   reading: [
     {
-      title: { zh: 'DeepSeek V4 发布：对开源 AI 意味着什么', en: 'DeepSeek V4: What It Means for Open-Source AI' },
-      meta: { zh: '2026年4月 · 我的思考', en: 'Apr 2026 · My take' },
+      title: { zh: '大模型部署与微调 — 学习笔记', en: 'LLM Deployment & Fine-Tuning — Study Notes' },
+      meta: { zh: '2026年4月 · 课程学习', en: 'Apr 2026 · Course Study' },
       note: {
-        zh: 'DeepSeek V4 证明了开源模型可以媲美闭源。MoE 架构的效率提升尤其令人印象深刻——这可能让前沿 AI 能力更加普及。',
-        en: 'DeepSeek V4 shows that open-source models can rival proprietary ones. The efficiency gains in MoE architecture are particularly impressive — this could democratize access to frontier AI capabilities.'
+        zh: '正在学习如何本地部署开源模型（如 DeepSeek）、用 LoRA 微调、以及推理优化。这对理解大模型的实际应用很重要。',
+        en: 'Learning how to deploy open-source models locally (like DeepSeek), fine-tune with LoRA, and optimize inference. Essential for understanding real-world LLM applications.'
       },
-      tags: ['DeepSeek', 'LLM'],
-      source: 'https://deepseek.com',
-      sourceLabel: { zh: '查看 DeepSeek 官方页面', en: 'Visit DeepSeek Official' },
-      readingTime: '4 min',
-      keyPoints: [
-        { zh: 'DeepSeek V4 的 MoE 架构在效率上有显著提升', en: 'MoE architecture brings significant efficiency gains' },
-        { zh: '开源模型已达到接近闭源模型的水平', en: 'Open-source models now rival proprietary ones' },
-        { zh: '成本降低意味着 AI 能力更加普及', en: 'Lower costs mean wider access to AI capabilities' }
-      ],
-      relatedReading: [1]
+      tags: ['LLM', 'DeepSeek', '微调']
     },
     {
-      title: { zh: 'GPT-5 传闻：值得期待什么', en: 'GPT-5 Rumors: What to Expect' },
-      meta: { zh: '2026年3月 · 我的思考', en: 'Mar 2026 · My take' },
+      title: { zh: '关注 AI 前沿动态', en: 'Following AI Frontier Developments' },
+      meta: { zh: '2026年3月 · 行业观察', en: 'Mar 2026 · Industry Watch' },
       note: {
-        zh: 'OpenAI、DeepSeek 等之间的竞争正以前所未有的速度推动整个领域前进。作为一个大一新生，能在这样一个关键节点进入这个领域令人兴奋。',
-        en: 'The race between OpenAI, DeepSeek, and others is pushing the entire field forward faster than ever. As a freshman, it is exciting to enter this field at such a pivotal moment.'
+        zh: '持续关注 DeepSeek、OpenAI 等最新进展。开源模型的快速迭代让我对 AI 的未来充满期待，也促使我动手尝试。',
+        en: "Keeping up with the latest from DeepSeek, OpenAI, and others. The rapid iteration of open-source models excites me about the future and motivates me to build things myself."
       },
-      tags: ['OpenAI', 'Industry']
+      tags: ['AI News', 'OpenAI']
     },
     {
       title: { zh: '在读《人工智能：一种现代方法》', en: "Reading: 'Artificial Intelligence: A Modern Approach'" },
@@ -95,8 +105,8 @@ const DATA = {
         title: { zh: '足球队员 <span class="location">@ 院系杯</span>', en: 'Football Team Member <span class="location">@ University Cup</span>' },
         date: { zh: '2025年 — 至今', en: '2025 — Present' },
         items: {
-          zh: ['代表学院参加校院系杯足球赛', '在比赛中获得奖项', '具备团队协作精神与坚韧品质'],
-          en: ['Represented the college in the university football cup', 'Won awards in the campus tournament', 'Team player with discipline and perseverance']
+          zh: ['新生杯足球赛二等奖 · 扫荡型中场', '代表学院参加校院系杯足球赛', '在比赛中获得奖项', '具备团队协作精神与坚韧品质'],
+          en: ['Freshman Cup 2nd place · Box-to-box midfielder', 'Represented the college in the university football cup', 'Won awards in the campus tournament', 'Team player with discipline and perseverance']
         }
       },
       {
@@ -155,12 +165,12 @@ const DATA = {
     },
     {
       icon: '02',
-      title: { zh: 'Python 练习项目', en: 'Python Practice Projects' },
+      title: { zh: 'C++ 复习工作流', en: 'C++ Review Workflow' },
       desc: {
-        zh: '学习过程中写的小型 Python 程序：数据分析练习、小游戏、自动脚本。',
-        en: 'Small Python programs built while learning: data analysis exercises, simple games, automation scripts.'
+        zh: '搭建了一套自动化复习流程，结合 AI 辅助理解和练习，提高学习效率。',
+        en: 'Built an automated review workflow combining AI-assisted understanding and practice to boost learning efficiency.'
       },
-      tech: 'Python'
+      tech: 'C++ · AI 工具链'
     },
     {
       icon: '03',
@@ -287,6 +297,7 @@ const DATA = {
       dropdown: [
         { href: '#notebook', zh: '📓 笔记', en: 'Notebook' },
         { href: '#other-projects', zh: '📦 小项目', en: 'Side Builds' },
+        { href: '#resume', zh: '📄 简历', en: 'Resume' },
         { href: '#archive', zh: '🗂️ 归档', en: 'Archive' },
         { href: '#creative', zh: '✏️ 创作', en: 'Creative' },
         { href: '#life', zh: '📸 生活', en: 'Life' },

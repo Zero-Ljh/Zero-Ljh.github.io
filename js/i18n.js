@@ -28,6 +28,12 @@ function setLang(lang) {
     if (typeof handleRoute === 'function') setTimeout(handleRoute, 0);
   }
 
+  // 更新 placeholder 属性（表单输入框）
+  document.querySelectorAll('[data-' + lang + '-placeholder]').forEach(el => {
+    const ph = el.getAttribute('data-' + lang + '-placeholder');
+    if (ph) el.setAttribute('placeholder', ph);
+  });
+
   // 更新带 data-zh/data-en 的静态元素（Hero、Contact、Nav logo、footer）
   document.querySelectorAll('[data-' + lang + ']').forEach(el => {
     const text = el.getAttribute('data-' + lang);

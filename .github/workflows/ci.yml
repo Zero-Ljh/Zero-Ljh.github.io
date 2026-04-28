@@ -24,17 +24,15 @@ permissions:
 
 jobs:
   # ===========================================================================
-  # Job 1：HTML 验证
+  # Job 1：构建 _site 并上传 artifact
   # ===========================================================================
-  validate-html:
-    name: Validate HTML
+  build:
+    name: Build
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Setup GitHub Pages
-        uses: actions/configure-pages@v5
+      - uses: actions/configure-pages@v5
 
       - name: Build site
         run: |
@@ -42,6 +40,26 @@ jobs:
           cp -r index.html 404.html sitemap.xml robots.txt manifest.json sw.js icon.svg css js _site/
           [ -d assets ] && cp -r assets _site/ || true
           touch _site/.nojekyll
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: site-build
+          path: _site
+          if-no-files-found: error
+
+  # ===========================================================================
+  # Job 2：HTML 验证
+  # ===========================================================================
+  validate-html:
+    name: Validate HTML
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download built site
+        uses: actions/download-artifact@v4
+        with:
+          name: site-build
+          path: _site
 
       - name: Validate HTML with W3C Nu HTML Checker
         uses: Cyb3r-Jak3/html5validator-action@v7.2.0
@@ -51,24 +69,18 @@ jobs:
           # skip_warnings: true
 
   # ===========================================================================
-  # Job 2：链接检查
+  # Job 3：链接检查
   # ===========================================================================
   check-links:
     name: Check Links
+    needs: build
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Setup GitHub Pages
-        uses: actions/configure-pages@v5
-
-      - name: Build site
-        run: |
-          mkdir -p _site
-          cp -r index.html 404.html sitemap.xml robots.txt manifest.json sw.js icon.svg css js _site/
-          [ -d assets ] && cp -r assets _site/ || true
-          touch _site/.nojekyll
+      - name: Download built site
+        uses: actions/download-artifact@v4
+        with:
+          name: site-build
+          path: _site
 
       - name: Check broken links
         uses: anishathalye/proof-html@v2
@@ -85,14 +97,21 @@ jobs:
           #   ^https://example.com/
 
   # ===========================================================================
-  # Job 3：代码质量检查
+  # Job 4：代码质量检查
   # ===========================================================================
   lint:
     name: Lint Check
+    needs: build
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+
+      - name: Download built site
+        uses: actions/download-artifact@v4
+        with:
+          name: site-build
+          path: _site
 
       # 这里项目是纯前端、零依赖，没有 package.json
       # 如果在未来添加了 JavaScript 测试，可以在此处扩展
@@ -140,3 +159,9 @@ jobs:
               exit 1
             fi
           done
+
+      - name: Check CSS syntax
+        run: npx --yes stylelint "css/**/*.css" --config '{"rules":{"no-duplicate-selectors":true,"no-empty-blocks":true}}' || echo "CSS lint done (warnings non-blocking)"
+
+      - name: Check HTML structure
+        run: npx --yes htmlhint index.html 404.html || echo "HTML lint done (warnings non-blocking)"

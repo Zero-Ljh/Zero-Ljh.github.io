@@ -38,6 +38,7 @@ function handleRoute() {
   if (m4) { showNoteDetail(parseInt(m4[1])); return; }
 
   if (hash === 'archive') { showArchive(); return; }
+  if (hash === 'resume') { showResume(); return; }
 
   showMainView();
 }
@@ -359,6 +360,89 @@ function showArchive() {
   if (typeof updateSEO === 'function') updateSEO(
     lang === 'zh' ? '全部项目' : 'All Projects',
     lang === 'zh' ? '李军辉的项目归档' : "Junhui Li's project archive"
+  );
+}
+
+/* ===== Resume 页面 ===== */
+function showResume() {
+  const lang = currentLang;
+  const container = document.getElementById('sub-view');
+  if (!container) return;
+
+  const p = DATA.profile;
+  const edu = DATA.education;
+
+  let html = `
+    <div class="resume-header">
+      <h1 class="sub-title" style="margin-bottom:4px">${p.name[lang]}</h1>
+      <p class="resume-degree">${edu.degree[lang]}</p>
+      <p class="resume-period">${edu.period[lang]}</p>
+    </div>
+
+    <div class="resume-section">
+      <h2>${lang === 'zh' ? '教育背景' : 'Education'}</h2>
+      <div class="resume-item">
+        <h3>${edu.school[lang]}</h3>
+        <p class="resume-item-desc">${edu.description[lang]}</p>
+        <div class="resume-courses">
+          ${edu.courses[lang].map(c => `<span class="resume-tag">${c}</span>`).join('')}
+        </div>
+      </div>
+    </div>
+
+    <div class="resume-section">
+      <h2>${lang === 'zh' ? '经历' : 'Experience'}</h2>`;
+
+  DATA.experience.panels.forEach(panel => {
+    html += `
+      <div class="resume-item">
+        <h3>${panel.title[lang]}</h3>
+        <p class="resume-date">${panel.date[lang]}</p>
+        <ul>
+          ${panel.items[lang].map(item => `<li>${item}</li>`).join('')}
+        </ul>`;
+
+    if (panel.sub) {
+      html += `
+        <div class="resume-sub-item">
+          <h4>${panel.sub.title[lang]}</h4>
+          <p class="resume-date">${panel.sub.date[lang]}</p>
+          <ul>
+            ${panel.sub.items[lang].map(item => `<li>${item}</li>`).join('')}
+          </ul>
+        </div>`;
+    }
+
+    html += `</div>`;
+  });
+
+  html += `
+    </div>
+
+    <div class="resume-section">
+      <h2>${lang === 'zh' ? '技能' : 'Skills'}</h2>
+      <div class="resume-courses">
+        ${DATA.profile.skills.map(s => `<span class="resume-tag">${s}</span>`).join('')}
+      </div>
+    </div>
+
+    <div class="resume-section">
+      <h2>${lang === 'zh' ? '荣誉' : 'Honors'}</h2>
+      <div class="resume-honors">
+        ${DATA.honors.map(h => `
+          <div class="resume-honor-item">
+            <span class="resume-honor-num">${h.num}</span>
+            <span class="resume-honor-label">${h.label[lang]}</span>
+          </div>
+        `).join('')}
+      </div>
+    </div>`;
+
+  container.innerHTML = subPageShell(html, lang === 'zh' ? '返回主页' : 'Back to Home');
+  showSubView();
+  if (typeof updateSEO === 'function') updateSEO(
+    lang === 'zh' ? '简历 - 李军辉' : 'Resume - Junhui Li',
+    lang === 'zh' ? '李军辉的个人简历' : "Junhui Li's Resume"
   );
 }
 
