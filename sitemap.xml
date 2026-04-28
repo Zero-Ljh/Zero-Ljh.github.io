@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <!-- 主页 -->
+  <url>
+    <loc>https://zero-ljh.github.io/</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://zero-ljh.github.io/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://zero-ljh.github.io/?lang=en"/>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <!-- 阅读详情 -->
+  <url><loc>https://zero-ljh.github.io/#reading/0</loc><priority>0.7</priority></url>
+  <url><loc>https://zero-ljh.github.io/#reading/1</loc><priority>0.7</priority></url>
+  <url><loc>https://zero-ljh.github.io/#reading/2</loc><priority>0.7</priority></url>
+  <!-- 项目详情 -->
+  <url><loc>https://zero-ljh.github.io/#project/bailian-robot</loc><priority>0.7</priority></url>
+  <url><loc>https://zero-ljh.github.io/#project/python-learning</loc><priority>0.7</priority></url>
+  <!-- 归档 -->
+  <url><loc>https://zero-ljh.github.io/#archive</loc><priority>0.6</priority></url>
+</urlset>

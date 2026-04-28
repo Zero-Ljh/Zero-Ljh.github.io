@@ -54,7 +54,7 @@ jobs:
           mkdir -p _site
 
           echo ">>> Copying files..."
-          cp -r index.html css js _site/
+          cp -r index.html 404.html sitemap.xml robots.txt css js _site/
           [ -d assets ] && cp -r assets _site/ || true
 
           echo ">>> Creating .nojekyll (disable Jekyll processing)..."
