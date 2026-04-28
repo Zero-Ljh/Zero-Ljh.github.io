@@ -42,7 +42,16 @@ const DATA = {
         zh: 'DeepSeek V4 证明了开源模型可以媲美闭源。MoE 架构的效率提升尤其令人印象深刻——这可能让前沿 AI 能力更加普及。',
         en: 'DeepSeek V4 shows that open-source models can rival proprietary ones. The efficiency gains in MoE architecture are particularly impressive — this could democratize access to frontier AI capabilities.'
       },
-      tags: ['DeepSeek', 'LLM']
+      tags: ['DeepSeek', 'LLM'],
+      source: 'https://deepseek.com',
+      sourceLabel: { zh: '查看 DeepSeek 官方页面', en: 'Visit DeepSeek Official' },
+      readingTime: '4 min',
+      keyPoints: [
+        { zh: 'DeepSeek V4 的 MoE 架构在效率上有显著提升', en: 'MoE architecture brings significant efficiency gains' },
+        { zh: '开源模型已达到接近闭源模型的水平', en: 'Open-source models now rival proprietary ones' },
+        { zh: '成本降低意味着 AI 能力更加普及', en: 'Lower costs mean wider access to AI capabilities' }
+      ],
+      relatedReading: [1]
     },
     {
       title: { zh: 'GPT-5 传闻：值得期待什么', en: 'GPT-5 Rumors: What to Expect' },
@@ -123,7 +132,8 @@ const DATA = {
         zh: '与团队一起进行机器人开发。目前正在学习嵌入式系统基础、传感器集成和机器人控制。这是我在真实硬件上动手实践的地方。',
         en: 'Working with the team on robotics development. Currently learning the fundamentals of embedded systems, sensor integration, and robot control. This is where I am getting my hands dirty with real hardware.'
       },
-      tech: ['Robotics', 'Embedded', 'Team']
+      tech: ['Robotics', 'Embedded', 'Team'],
+      status: { zh: '进行中', en: 'Ongoing' }
     },
     {
       id: 'python-learning',
@@ -202,7 +212,13 @@ const DATA = {
       date: 'Apr 2026 · 5 min',
       title: { zh: 'Python 基础：本月学习总结', en: 'Python Basics: What I Learned This Month' },
       desc: { zh: '列表、字典、循环、函数——基础构建块。每天写小代码培养手感。', en: 'Lists, dictionaries, loops, functions — the building blocks. Writing small programs every day to build muscle memory.' },
-      tag: 'Python'
+      tag: 'Python',
+      readingTime: '5 min',
+      concepts: [
+        { zh: '列表推导式比循环更简洁高效', en: 'List comprehensions are more concise than loops' },
+        { zh: '字典用于键值映射，查询速度快', en: 'Dictionaries are fast for key-value lookups' },
+        { zh: '函数是代码复用的基本单元', en: 'Functions are the basic unit of code reuse' }
+      ]
     },
     {
       date: 'Apr 2026 · 3 min',
@@ -244,6 +260,8 @@ const DATA = {
     {
       genre: { zh: '随笔', en: 'Prose' },
       title: { zh: '我的大一', en: 'My First Year of College' },
+      date: 'Apr 2026',
+      readingTime: '3 min',
       excerpt: { zh: '进入大学，就像打开一扇通往只存在于书本中的世界的大门……', en: "Starting university is like opening a door to a world you have only read about..." }
     }
   ],

@@ -82,12 +82,53 @@ function showReadingDetail(index) {
   const container = document.getElementById('sub-view');
   if (!container) return;
 
+  const metaLine = item.meta[lang] + (item.readingTime ? ' · ' + item.readingTime : '');
+
+  let extras = '';
+
+  // 引用块
+  extras += `<div class="sub-blockquote">${item.note[lang]}</div>`;
+
+  // 关键要点
+  if (item.keyPoints && item.keyPoints.length) {
+    extras += `<div class="sub-takeaways">
+      <h2>${lang === 'zh' ? '关键要点' : 'Key Takeaways'}</h2>
+      <ul>${item.keyPoints.map(kp => `<li>${kp[lang]}</li>`).join('')}</ul>
+    </div>`;
+  }
+
+  // 来源链接
+  if (item.source) {
+    const url = typeof item.source === 'object' ? item.source[lang] : item.source;
+    const label = item.sourceLabel ? item.sourceLabel[lang] : (lang === 'zh' ? '查看原文' : 'View Source');
+    extras += `<a href="${url}" target="_blank" rel="noreferrer" class="sub-source-link">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      ${label}
+    </a>`;
+  }
+
+  // 标签
+  extras += `<div class="sub-tags">${item.tags.map(t => `<span>${t}</span>`).join('')}</div>`;
+
+  // 相关阅读
+  if (item.relatedReading && item.relatedReading.length) {
+    const related = item.relatedReading
+      .filter(i => i >= 0 && i < DATA.reading.length)
+      .map(i => `<a href="#reading/${i}" class="sub-related-item">${DATA.reading[i].title[lang]}</a>`)
+      .join('');
+    if (related) {
+      extras += `<div class="sub-related">
+        <h2>${lang === 'zh' ? '相关阅读' : 'Related'}</h2>
+        <div class="sub-related-list">${related}</div>
+      </div>`;
+    }
+  }
+
   container.innerHTML = subPageShell(`
     <p class="sub-label">${item.meta[lang]}</p>
     <h1 class="sub-title">${item.title[lang]}</h1>
-    <p class="sub-meta-line">${item.meta[lang]}</p>
-    <div class="sub-content"><p>${item.note[lang]}</p></div>
-    <div class="sub-tags">${item.tags.map(t => `<span>${t}</span>`).join('')}</div>
+    <p class="sub-meta-line">${metaLine}</p>
+    ${extras}
   `, lang === 'zh' ? '返回阅读' : 'Back to Reading');
   showSubView();
   if (typeof updateSEO === 'function') updateSEO(item.title[lang], item.meta[lang]);
@@ -101,12 +142,40 @@ function showProjectDetail(id) {
   const container = document.getElementById('sub-view');
   if (!container) return;
 
+  let extras = '';
+
+  // 状态标签
+  if (project.status) {
+    extras += `<div class="status-badge">${project.status[lang]}</div>`;
+  }
+
+  // 截图占位
+  if (project.image) {
+    extras += `<div class="project-screenshot"><img src="${project.image}" alt="${project.title[lang]}"></div>`;
+  } else {
+    extras += `<div class="project-screenshot"><div class="img-placeholder">${project.title[lang]} — ${lang === 'zh' ? '截图待加' : 'screenshot placeholder'}</div></div>`;
+  }
+
+  // 描述
+  extras += `<div class="sub-content"><p>${project.desc[lang]}</p></div>`;
+
+  // 链接
+  if (project.links && project.links.length) {
+    extras += `<div class="project-links-section">`;
+    project.links.forEach(link => {
+      extras += `<a href="${link.url}" target="_blank" rel="noreferrer">${link.label[lang]}</a>`;
+    });
+    extras += `</div>`;
+  }
+
+  // 技术栈
+  extras += `<div class="sub-tags tech-badges">${project.tech.map(t => `<span>${t}</span>`).join('')}</div>`;
+
   container.innerHTML = subPageShell(`
     <p class="sub-label">${project.overline[lang]}</p>
     <h1 class="sub-title">${project.title[lang]}</h1>
     <p class="sub-meta-line">${project.title[lang]}</p>
-    <div class="sub-content"><p>${project.desc[lang]}</p></div>
-    <div class="sub-tags">${project.tech.map(t => `<span>${t}</span>`).join('')}</div>
+    ${extras}
   `, lang === 'zh' ? '返回' : 'Back');
   showSubView();
   if (typeof updateSEO === 'function') updateSEO(project.title[lang], project.desc[lang]);
@@ -120,11 +189,19 @@ function showCreativeDetail(index) {
   const container = document.getElementById('sub-view');
   if (!container) return;
 
+  const dateStr = item.date ? (typeof item.date === 'object' ? item.date[lang] : item.date) : '';
+  const metaParts = [item.genre[lang]];
+  if (dateStr) metaParts.push(dateStr);
+  if (item.readingTime) metaParts.push(item.readingTime);
+  const metaLine = metaParts.join(' · ');
+
   container.innerHTML = subPageShell(`
     <p class="sub-label">${item.genre[lang]}</p>
     <h1 class="sub-title" style="font-family:var(--font-serif)">${item.title[lang]}</h1>
-    <p class="sub-meta-line">${item.genre[lang]}</p>
-    <div class="creative-body">${item.excerpt[lang]}</div>
+    <p class="sub-meta-line">${metaLine}</p>
+    <div class="artistic-separator">~ ~ ~</div>
+    <div class="poetic-body drop-cap">${item.excerpt[lang]}</div>
+    <div class="artistic-separator">~ ~ ~</div>
   `, lang === 'zh' ? '返回创作' : 'Back to Creative');
   showSubView();
   if (typeof updateSEO === 'function') updateSEO(item.title[lang], item.excerpt[lang].replace(/<[^>]*>/g, ''));
@@ -139,13 +216,29 @@ function showNoteDetail(index) {
   if (!container) return;
 
   const dateStr = typeof note.date === 'object' ? note.date[lang] : note.date;
+  const metaLine = dateStr + (note.readingTime ? ' · ' + note.readingTime : '');
+
+  let extras = '';
+
+  // 内容
+  extras += `<div class="sub-content"><p>${note.desc[lang]}</p></div>`;
+
+  // 关键概念
+  if (note.concepts && note.concepts.length) {
+    extras += `<div class="concept-list">
+      <h2>${lang === 'zh' ? '关键概念' : 'Key Concepts'}</h2>
+      <ul>${note.concepts.map(c => `<li>${c[lang]}</li>`).join('')}</ul>
+    </div>`;
+  }
+
+  // 标签
+  extras += `<div class="sub-tags"><span>${note.tag}</span></div>`;
 
   container.innerHTML = subPageShell(`
-    <p class="sub-label">${note.tag}</p>
+    <span class="sub-tag-badge">${note.tag}</span>
     <h1 class="sub-title">${note.title[lang]}</h1>
-    <p class="sub-meta-line">${dateStr}</p>
-    <div class="sub-content"><p>${note.desc[lang]}</p></div>
-    <div class="sub-tags"><span>${note.tag}</span></div>
+    <p class="sub-meta-line">${metaLine}</p>
+    ${extras}
   `, lang === 'zh' ? '返回笔记' : 'Back to Notes');
   showSubView();
   if (typeof updateSEO === 'function') updateSEO(note.title[lang], note.desc[lang]);
