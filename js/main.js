@@ -89,11 +89,11 @@ function renderReading() {
   const items = DATA.reading;
 
   container.innerHTML = items.map((item, i) => `
-    <a class="reading-item" href="#reading/${i}" style="text-decoration:none;display:grid;grid-template-columns:36px 1fr auto;gap:16px;padding:24px 28px;background:var(--light-navy);border-radius:var(--radius);align-items:flex-start;transition:var(--transition);border-left:1px solid transparent;cursor:pointer">
+    <a class="reading-item" href="#reading/${i}">
       <div class="reading-num">·</div>
       <div class="reading-content">
         <h3>${item.title[lang]}</h3>
-        <div class="meta">${item.meta[lang]}</div>
+        <div class="meta">${item.meta[lang]}${item.readingTime ? ' · ' + item.readingTime : ''}</div>
         <div class="note">${item.note[lang]}</div>
       </div>
       <div class="reading-tags">${item.tags.map(t => `<span>${t}</span>`).join('')}</div>

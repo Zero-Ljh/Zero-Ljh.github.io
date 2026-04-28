@@ -202,7 +202,7 @@ body.menu-open .sidebar,body.menu-open .email-side{opacity:0;pointer-events:none
 .exp-tab{padding:12px 20px;font-family:var(--font-mono);font-size:12px;color:var(--slate);cursor:pointer;transition:var(--transition);white-space:nowrap;border:none;background:none;text-align:left;width:100%;position:relative}
 .exp-tab:hover{color:var(--gold);background:rgba(212,162,89,0.04)}
 .exp-tab.active{color:var(--gold)}
-.exp-indicator{position:absolute;top:0;left:-2px;width:2px;height:40px;background:var(--gold);transition:var(--transition);box-shadow:0 0 8px rgba(212,162,89,0.3)}
+.exp-indicator{position:absolute;top:0;left:-2px;width:2px;height:40px;background:var(--gold);transition:top 0.3s cubic-bezier(0.22,1,0.36,1);box-shadow:0 0 10px rgba(212,162,89,0.4)}
 .exp-panels{flex:1;padding:0 32px}
 .exp-panel{display:none}
 .exp-panel.active{display:block;animation:fadeIn .5s ease}
@@ -322,9 +322,12 @@ body.menu-open .sidebar,body.menu-open .email-side{opacity:0;pointer-events:none
 .contact-wrap .cta:hover::before{transform:scaleX(1);transform-origin:left}
 
 /* ---- Footer ---- */
-footer{padding:24px 0 80px;display:flex;flex-direction:column;align-items:center;gap:16px}
-footer .social{display:none;gap:16px}
-footer p{font-family:var(--font-mono);font-size:10px;color:var(--dark-slate);letter-spacing:0.5px}
+footer{padding:48px 0 32px;display:flex;flex-direction:column;align-items:center;gap:12px;border-top:1px solid var(--light-navy);margin-top:80px}
+footer .social{display:flex;gap:20px;align-items:center}
+footer .social a{color:var(--dark-slate);transition:color 0.2s;line-height:1}
+footer .social a:hover{color:var(--gold)}
+footer .footer-tagline{font-family:var(--font-serif);font-size:13px;color:var(--slate);opacity:0.6;font-style:italic;text-align:center;max-width:400px;line-height:1.6}
+footer p{font-family:var(--font-mono);font-size:10px;color:var(--dark-slate);letter-spacing:0.5px;margin:0}
 
 /* ---- Utility ---- */
 .hidden{display:none!important}
