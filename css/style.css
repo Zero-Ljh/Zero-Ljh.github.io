@@ -130,6 +130,8 @@ body.menu-open .sidebar,body.menu-open .email-side{opacity:0;pointer-events:none
 
 /* ---- Hero ---- */
 .hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;top:-120px;right:-80px;width:360px;height:360px;border:1px solid rgba(212,162,89,0.06);border-radius:50%;pointer-events:none}
+.hero::before{content:'◆';position:absolute;bottom:60px;right:8vw;font-size:clamp(120px,20vw,200px);color:rgba(212,162,89,0.025);font-family:var(--font-display);pointer-events:none;line-height:1;transform:rotate(15deg)}
 .hero::before{content:'';position:absolute;top:-30%;right:-20%;width:600px;height:600px;
   background:radial-gradient(circle,rgba(212,162,89,0.05) 0%,transparent 70%);pointer-events:none}
 .hero-overline{font-family:var(--font-mono);font-size:var(--fz-sm);color:var(--gold);margin-bottom:24px;letter-spacing:2px}
@@ -242,9 +244,11 @@ body.menu-open .sidebar,body.menu-open .email-side{opacity:0;pointer-events:none
 .project-links a:hover{color:var(--gold)}
 .project-image{position:relative;border-radius:var(--radius);overflow:hidden}
 .project-card.right .project-image{grid-column:1/2;grid-row:1/2}
-.project-image .img-placeholder{width:100%;aspect-ratio:16/10;display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--dark-slate);font-family:var(--font-mono);position:relative;background:linear-gradient(135deg,var(--light-navy) 0%,var(--navy) 100%);letter-spacing:.5px;border:1px solid rgba(212,162,89,0.06)}
+.project-image .img-placeholder{width:100%;aspect-ratio:16/10;display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--gold);font-family:var(--font-mono);position:relative;background:linear-gradient(135deg,var(--light-navy) 0%,var(--navy) 100%);letter-spacing:.5px;border:1px solid rgba(212,162,89,0.1);transition:all 0.4s ease}
+.project-image .img-placeholder::before{content:'◆';position:absolute;font-size:60px;color:rgba(212,162,89,0.06);font-family:var(--font-display);pointer-events:none}
 .project-image .overlay{position:absolute;inset:0;background:rgba(10,25,47,0.7);transition:var(--transition);z-index:1}
 .project-image:hover .overlay{background:transparent}
+.project-image:hover .img-placeholder{border-color:rgba(212,162,89,0.25);color:var(--warm-white)}
 
 /* ---- Mini Projects ---- */
 .other-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
