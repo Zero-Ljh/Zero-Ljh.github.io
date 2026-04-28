@@ -62,8 +62,8 @@ a:hover{color:var(--warm-white)}
 /* ---- Sidebar (Left) ---- */
 .sidebar{position:fixed;bottom:0;left:44px;z-index:10;display:flex;flex-direction:column;align-items:center;gap:20px}
 .sidebar::after{content:'';display:block;width:1px;height:80px;background:linear-gradient(180deg,var(--gold),transparent)}
-.sidebar a{font-size:15px;color:var(--dark-slate);transition:var(--transition);padding:6px;line-height:1}
-.sidebar a:hover{color:var(--gold);transform:translateY(-3px)}
+.sidebar a{font-size:15px;color:var(--dark-slate);transition:all 0.3s ease;padding:6px;line-height:1}
+.sidebar a:hover{color:var(--gold);transform:translateY(-3px);filter:drop-shadow(0 0 4px rgba(212,162,89,0.3))}
 
 /* ---- Email Side (Right) ---- */
 .email-side{position:fixed;bottom:0;right:44px;z-index:10;display:flex;flex-direction:column;align-items:center;gap:20px}
@@ -176,11 +176,12 @@ body.menu-open .sidebar,body.menu-open .email-side{opacity:0;pointer-events:none
 .about-image .frame{position:relative;width:100%;max-width:280px;margin:0 auto}
 .about-image .frame .photo{position:relative;width:100%;aspect-ratio:3/4;border-radius:var(--radius);overflow:hidden;
   display:flex;align-items:flex-end;justify-content:center;
-  background:linear-gradient(135deg,var(--light-navy) 0%,var(--navy) 100%);
-  border:1px solid rgba(212,162,89,0.1)}
-.about-image .frame .photo .initials{font-family:var(--font-display);font-size:48px;color:rgba(212,162,89,0.12);margin-bottom:20px;font-weight:700;letter-spacing:4px}
-.about-image .frame .photo .caption{position:absolute;bottom:16px;font-family:var(--font-mono);font-size:10px;color:var(--dark-slate);letter-spacing:1px}
-.about-image .frame::before{content:'';position:absolute;inset:0;border:1px solid var(--gold);border-radius:var(--radius);z-index:-1;transform:translate(12px,12px);transition:var(--transition);opacity:0.4}
+  background:linear-gradient(160deg,#1a2d50 0%,var(--navy) 40%,var(--light-navy) 100%);
+  border:1px solid rgba(212,162,89,0.15)}
+.about-image .frame .photo::before{content:'◆';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:100px;color:rgba(212,162,89,0.04);font-family:var(--font-display);pointer-events:none}
+.about-image .frame .photo .initials{font-family:var(--font-display);font-size:52px;color:rgba(212,162,89,0.18);margin-bottom:20px;font-weight:700;letter-spacing:6px;position:relative;z-index:1}
+.about-image .frame .photo .caption{position:absolute;bottom:16px;font-family:var(--font-mono);font-size:10px;color:var(--dark-slate);letter-spacing:1px;z-index:1}
+.about-image .frame::before{content:'';position:absolute;inset:0;border:1px solid var(--gold);border-radius:var(--radius);z-index:-1;transform:translate(12px,12px);transition:all 0.4s cubic-bezier(0.22,1,0.36,1);opacity:0.4}
 .about-image .frame:hover::before{transform:translate(8px,8px);opacity:1}
 
 /* ---- Reading ---- */
@@ -266,8 +267,9 @@ body.menu-open .sidebar,body.menu-open .email-side{opacity:0;pointer-events:none
 
 /* ---- Now ---- */
 .now-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px}
-.now-card{padding:28px 24px;background:var(--light-navy);border-radius:var(--radius);transition:var(--transition);position:relative}
-.now-card::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--gold),transparent);border-radius:var(--radius) var(--radius) 0 0;opacity:0.5;transition:var(--transition)}
+.now-card{padding:28px 24px;background:var(--light-navy);border-radius:var(--radius);transition:all 0.3s ease;position:relative;border:1px solid transparent}
+.now-card:hover{transform:translateY(-2px);border-color:rgba(212,162,89,0.08);box-shadow:0 8px 24px -8px rgba(0,0,0,0.2)}
+.now-card::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--gold),transparent);border-radius:var(--radius) var(--radius) 0 0;opacity:0.5;transition:opacity 0.3s ease}
 .now-card:hover::after{opacity:1}
 .now-card .label{font-family:var(--font-mono);font-size:10px;color:var(--gold);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px}
 .now-card ul{list-style:none;padding:0}
