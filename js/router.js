@@ -37,6 +37,8 @@ function handleRoute() {
   const m4 = hash.match(/^notebook\/(\d+)$/);
   if (m4) { showNoteDetail(parseInt(m4[1])); return; }
 
+  if (hash === 'archive') { showArchive(); return; }
+
   showMainView();
 }
 
@@ -147,6 +149,53 @@ function showNoteDetail(index) {
   `, lang === 'zh' ? '返回笔记' : 'Back to Notes');
   showSubView();
   if (typeof updateSEO === 'function') updateSEO(note.title[lang], note.desc[lang]);
+}
+
+/* ===== 归档页 ===== */
+function showArchive() {
+  const lang = currentLang;
+  const container = document.getElementById('sub-view');
+  if (!container) return;
+
+  const total = DATA.projects.length + DATA.miniProjects.length;
+  const countLabel = lang === 'zh' ? total + ' 个项目' : total + ' projects';
+
+  const projectItems = DATA.projects.map(p => `
+    <div class="archive-item">
+      <div class="archive-year">${p.overline[lang]}</div>
+      <div class="archive-info">
+        <h3><a href="#project/${p.id}">${p.title[lang]}</a></h3>
+        <p>${p.desc[lang]}</p>
+        <div class="archive-tech">${p.tech.map(t => `<span>${t}</span>`).join('')}</div>
+      </div>
+    </div>
+  `).join('');
+
+  const miniItems = DATA.miniProjects.map(m => `
+    <div class="archive-item mini">
+      <div class="archive-year">${m.icon}</div>
+      <div class="archive-info">
+        <h3>${m.title[lang]}</h3>
+        <p>${m.desc[lang]}</p>
+        <div class="archive-tech">${m.tech}</div>
+      </div>
+    </div>
+  `).join('');
+
+  container.innerHTML = subPageShell(`
+    <p class="sub-label" style="margin-bottom:4px">${lang === 'zh' ? '归档' : 'Archive'}</p>
+    <h1 class="sub-title" style="margin-bottom:4px">${lang === 'zh' ? '全部项目' : 'All Projects'}</h1>
+    <p class="sub-meta-line" style="margin-bottom:48px">${countLabel}</p>
+    <div class="archive-list">
+      ${projectItems}
+      ${DATA.miniProjects.length ? '<h2 class="archive-section-title">' + (lang === 'zh' ? '小项目' : 'Mini Projects') + '</h2>' + miniItems : ''}
+    </div>
+  `, lang === 'zh' ? '返回' : 'Back');
+  showSubView();
+  if (typeof updateSEO === 'function') updateSEO(
+    lang === 'zh' ? '全部项目' : 'All Projects',
+    lang === 'zh' ? '李军辉的项目归档' : "Junhui Li's project archive"
+  );
 }
 
 /* ===== 初始化 ===== */

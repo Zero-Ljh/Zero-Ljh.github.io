@@ -274,6 +274,7 @@ const DATA = {
       dropdown: [
         { href: '#notebook', zh: '📓 笔记', en: 'Notebook' },
         { href: '#other-projects', zh: '📦 小项目', en: 'Side Builds' },
+        { href: '#archive', zh: '🗂️ 归档', en: 'Archive' },
         { href: '#creative', zh: '✏️ 创作', en: 'Creative' },
         { href: '#life', zh: '📸 生活', en: 'Life' },
         { href: '#contact', zh: '💬 联系', en: 'Contact' }
