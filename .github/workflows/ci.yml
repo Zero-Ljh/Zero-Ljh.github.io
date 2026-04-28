@@ -1,0 +1,140 @@
+# =============================================================================
+# 持续集成（Continuous Integration）
+# =============================================================================
+# 这个工作流会在以下情况自动运行：
+#   - 向 main 分支推送代码时
+#   - 创建 Pull Request 时
+#   - 每天凌晨 2:00 UTC（北京时间 10:00）定时检查
+#
+# 它负责检查代码质量，确保没有死链、HTML 语法错误等。
+# =============================================================================
+
+name: CI
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+  schedule:
+    - cron: "0 2 * * *"  # 每天 UTC 02:00（北京时间 10:00）
+
+permissions:
+  contents: read
+
+jobs:
+  # ===========================================================================
+  # Job 1：HTML 验证
+  # ===========================================================================
+  validate-html:
+    name: Validate HTML
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Build site
+        run: |
+          mkdir -p _site
+          cp -r index.html css js assets _site/
+          touch _site/.nojekyll
+
+      - name: Validate HTML with W3C Nu HTML Checker
+        uses: Cyb3r-Jak3/html5validator-action@v7.2.0
+        with:
+          root: _site
+          # 忽略的警告（如果需要）
+          # skip_warnings: true
+
+  # ===========================================================================
+  # Job 2：链接检查
+  # ===========================================================================
+  check-links:
+    name: Check Links
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Build site
+        run: |
+          mkdir -p _site
+          cp -r index.html css js assets _site/
+          touch _site/.nojekyll
+
+      - name: Check broken links
+        uses: anishathalye/proof-html@v2
+        with:
+          directory: ./_site
+          # 不检查外部链接（避免因网络问题误报）
+          disable_external: true
+          # 检查 HTML 结构
+          check_html: false
+          # 检查图片
+          check_favicon: false
+          # 忽略特定 URL 模式（按需添加）
+          # ignore_url_re: |
+          #   ^https://example.com/
+
+  # ===========================================================================
+  # Job 3：代码质量检查
+  # ===========================================================================
+  lint:
+    name: Lint Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 这里项目是纯前端、零依赖，没有 package.json
+      # 如果在未来添加了 JavaScript 测试，可以在此处扩展
+
+      - name: Check file existence
+        run: |
+          echo ">>> Verifying required files..."
+          required_files=("index.html" "css/style.css" "js/data.js" "js/i18n.js" "js/main.js" "js/router.js")
+          for file in "${required_files[@]}"; do
+            if [ -f "$file" ]; then
+              echo "  [OK] $file"
+            else
+              echo "  [MISSING] $file"
+              exit 1
+            fi
+          done
+          echo ">>> All required files present."
+
+      - name: Check HTML structure (basic)
+        run: |
+          echo ">>> Checking index.html has required elements..."
+          if grep -q '<!DOCTYPE html>' index.html; then
+            echo "  [OK] DOCTYPE found"
+          else
+            echo "  [FAIL] Missing DOCTYPE"
+            exit 1
+          fi
+          if grep -q '</html>' index.html; then
+            echo "  [OK] Closing html tag found"
+          else
+            echo "  [FAIL] Missing closing html tag"
+            exit 1
+          fi
+
+      - name: Check JavaScript files for syntax errors
+        run: |
+          echo ">>> Checking JavaScript syntax..."
+          # 使用 Node.js 的语法检查（不需要安装依赖）
+          for js_file in js/data.js js/i18n.js js/main.js js/router.js; do
+            if node -c "$js_file" 2>/dev/null; then
+              echo "  [OK] $js_file syntax valid"
+            else
+              echo "  [FAIL] $js_file has syntax errors"
+              node -c "$js_file"
+              exit 1
+            fi
+          done

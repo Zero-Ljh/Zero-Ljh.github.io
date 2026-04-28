@@ -1,0 +1,81 @@
+name: Bug Report
+description: 报告一个 bug / Report a bug
+title: "[Bug] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        感谢你花时间报告这个问题！请尽量详细描述，方便我快速定位和修复。
+        Thanks for taking the time to report this issue!
+
+  - type: checkboxes
+    attributes:
+      label: 前置检查 / Checklist
+      options:
+        - label: 我已经搜索了已有的 issue，没有找到类似的问题
+          I have searched existing issues and found no similar one
+          required: true
+        - label: 我在最新版本上遇到了这个问题
+          I am running the latest version of the site
+          required: true
+
+  - type: textarea
+    attributes:
+      label: 问题描述 / Describe the bug
+      description: 清晰简洁地说明这个 bug 是什么
+      placeholder: |
+        例如：点击「了解更多」按钮后页面没有滚动到对应位置...
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: 复现步骤 / To Reproduce
+      description: 一步一步描述如何复现这个 bug
+      placeholder: |
+        1. 打开首页
+        2. 点击「项目」导航链接
+        3. 页面跳转到了错误的位置
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: 预期行为 / Expected behavior
+      description: 你觉得应该发生什么？
+      placeholder: 点击导航链接后应该平滑滚动到对应板块...
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: 截图 / Screenshots
+      description: 如果有截图，请粘贴在这里
+      placeholder: 拖拽图片到此处或粘贴截图...
+
+  - type: dropdown
+    attributes:
+      label: 浏览器 / Browser
+      description: 你使用哪个浏览器？
+      multiple: true
+      options:
+        - Chrome
+        - Firefox
+        - Safari
+        - Edge
+        - 其他 (Other)
+    validations:
+      required: true
+
+  - type: input
+    attributes:
+      label: 设备 / Device
+      description: 电脑型号或手机型号
+      placeholder: 例如：MacBook Pro M3 / iPhone 15 Pro
+
+  - type: textarea
+    attributes:
+      label: 额外信息 / Additional context
+      description: 其他你觉得可能有帮助的信息
+      placeholder: 例如：浏览器控制台是否有报错？网络请求是否正常？

@@ -1,0 +1,48 @@
+name: Feature Request
+description: 建议一个新功能 / Suggest an idea
+title: "[Feature] "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        感谢你的建议！请描述一下你希望看到的新功能。
+        Thanks for suggesting an idea for this project!
+
+  - type: checkboxes
+    attributes:
+      label: 前置检查 / Checklist
+      options:
+        - label: 我已经搜索了已有的 issue，没有找到类似的功能请求
+          I have searched existing issues and found no similar request
+          required: true
+
+  - type: textarea
+    attributes:
+      label: 这个功能解决了什么问题？ / Problem
+      description: 清晰简洁地描述你想解决的问题
+      placeholder: |
+        例如：现在页面上没有博客功能，我想记录学习笔记...
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: 你希望的解决方案 / Proposed solution
+      description: 清晰简洁地描述你希望看到的效果
+      placeholder: |
+        例如：在导航栏添加一个「博客」链接，点击后显示文章列表...
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: 替代方案 / Alternatives considered
+      description: 你考虑过的其他方案
+      placeholder: 也可以在页面底部展示最近的笔记...
+
+  - type: textarea
+    attributes:
+      label: 额外信息 / Additional context
+      description: 其他信息、截图、或参考网站链接
+      placeholder: 例如：参考了某个人主页的博客功能...

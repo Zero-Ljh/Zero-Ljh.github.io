@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>404 — 页面未找到</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:'Outfit','Noto Sans SC',-apple-system,sans-serif;
+  background:#0a192f;color:#8892b0;
+  min-height:100vh;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;text-align:center;
+  padding:40px;-webkit-font-smoothing:antialiased;
+}
+.code{
+  font-family:'Playfair Display',Georgia,serif;
+  font-size:clamp(100px,20vw,180px);
+  color:#d4a259;line-height:1;margin-bottom:8px;
+}
+.msg{
+  font-family:'JetBrains Mono',monospace;
+  font-size:clamp(16px,2vw,20px);
+  color:#ccd6f6;margin-bottom:40px;
+}
+.msg span{display:block;font-size:14px;color:#495670;margin-top:8px}
+a.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:14px 28px;
+  border:1px solid #d4a259;border-radius:4px;
+  font-family:'JetBrains Mono',monospace;
+  font-size:14px;color:#d4a259;
+  text-decoration:none;
+  transition:all 0.4s cubic-bezier(0.22,1,0.36,1);
+}
+a.btn:hover{background:rgba(212,162,89,0.1);color:#e6f1ff}
+.sub{font-size:13px;color:#495670;margin-top:24px}
+.sub a{color:#d4a259;text-decoration:none}
+.sub a:hover{color:#e6f1ff}
+</style>
+</head>
+<body>
+  <div class="code">404</div>
+  <p class="msg">
+    页面未找到
+    <span>Page Not Found</span>
+  </p>
+  <a href="/" class="btn">← 回到首页 / Back to Home</a>
+  <p class="sub"><a href="mailto:2430132207@qq.com">联系我 / Contact Me</a></p>
+</body>
+</html>
