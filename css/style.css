@@ -215,11 +215,21 @@ body.menu-open .sidebar,body.menu-open .email-side{opacity:0;pointer-events:none
 .honor-card .num{font-family:var(--font-display);font-size:28px;font-weight:600;color:var(--gold);margin-bottom:4px;line-height:1.2}
 .honor-card .label{font-size:var(--fz-sm);color:var(--slate)}
 
+/* ---- Project Filter ---- */
+.filter-bar{display:flex;gap:8px;margin-bottom:40px;flex-wrap:wrap}
+.filter-btn{font-family:var(--font-mono);font-size:11px;padding:6px 16px;border-radius:20px;border:1px solid var(--gold);background:transparent;color:var(--gold);cursor:pointer;transition:var(--transition-fast);letter-spacing:0.3px}
+.filter-btn:hover{border-color:var(--warm-white);color:var(--warm-white)}
+.filter-btn.active{background:var(--gold);color:var(--dark-navy);border-color:var(--gold);font-weight:600}
+.filter-btn .count{opacity:0.6;margin-left:4px;font-size:10px}
+
 /* ---- Projects ---- */
-.project-card{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:100px;align-items:center}
+.project-card{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:100px;align-items:center;transition:opacity 0.4s ease,transform 0.4s cubic-bezier(0.22,1,0.36,1)}
 .project-card:last-child{margin-bottom:0}
-.project-content{z-index:2}
-.project-card.right .project-content{grid-column:2/3;grid-row:1/2;text-align:right}
+.project-card.filtered-out{opacity:0.2;transform:scale(0.96);pointer-events:none;filter:grayscale(0.6)}
+.project-content{z-index:2;padding:12px 0;border-left:2px solid transparent;padding-left:16px;margin-left:-18px;transition:border-color 0.3s ease,transform 0.3s ease}
+.project-card:hover .project-content{border-left-color:var(--gold);transform:translateX(4px)}
+.project-card.right .project-content{grid-column:2/3;grid-row:1/2;text-align:right;border-left:none;border-right:2px solid transparent;padding-left:0;padding-right:16px;margin-left:0;margin-right:-18px}
+.project-card.right:hover .project-content{border-right-color:var(--gold);transform:translateX(-4px)}
 .project-overline{font-family:var(--font-mono);font-size:11px;color:var(--gold);margin-bottom:6px;letter-spacing:1px;text-transform:uppercase}
 .project-title{font-size:clamp(20px,2.5vw,24px);font-weight:600;color:var(--warm-white);margin-bottom:16px;transition:var(--transition);letter-spacing:-0.02em;font-family:var(--font-display)}
 .project-title:hover{color:var(--gold)}

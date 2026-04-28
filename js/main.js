@@ -142,10 +142,32 @@ function renderHonors() {
 
   container.innerHTML = DATA.honors.map(h => `
     <div class="honor-card">
-      <div class="num">${h.num}</div>
+      <div class="num" data-count="${h.num}">${h.num}</div>
       <div class="label">${h.label[lang]}</div>
     </div>
   `).join('');
+
+  // 数字动画
+  const nums = container.querySelectorAll('.num[data-count]');
+  const countObserver = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      const el = e.target;
+      const target = parseInt(el.getAttribute('data-count'));
+      if (isNaN(target)) return;
+      let current = 0;
+      const duration = 800;
+      const step = () => {
+        current += Math.ceil(target / (duration / 16));
+        if (current >= target) { el.textContent = target; return; }
+        el.textContent = current;
+        requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+      countObserver.unobserve(el);
+    });
+  }, { threshold: 0.5 });
+  nums.forEach(n => countObserver.observe(n));
 }
 
 /* ===== Projects ===== */
@@ -153,8 +175,25 @@ function renderProjects() {
   const container = document.getElementById('projects-list');
   const lang = currentLang;
 
-  container.innerHTML = DATA.projects.map((p, i) => `
-    <div class="project-card${i % 2 === 1 ? ' right' : ''}">
+  // 收集所有标签
+  const allTags = [...new Set(DATA.projects.flatMap(p => p.tech))];
+
+  let html = '';
+
+  // 筛选条
+  if (allTags.length > 1) {
+    html += `<div class="filter-bar">
+      <button class="filter-btn active" onclick="filterProjects('all', this)">${lang === 'zh' ? '全部' : 'All'}</button>`;
+    allTags.forEach(tag => {
+      html += `<button class="filter-btn" onclick="filterProjects('${tag}', this)">${tag}</button>`;
+    });
+    html += `</div>`;
+  }
+
+  html += `<div id="project-cards">`;
+
+  html += DATA.projects.map((p, i) => `
+    <div class="project-card${i % 2 === 1 ? ' right' : ''}" data-tags="${p.tech.join(',')}">
       <div class="project-content">
         <p class="project-overline">${p.overline[lang]}</p>
         <h3 class="project-title">${p.title[lang]}</h3>
@@ -171,6 +210,22 @@ function renderProjects() {
       </div>
     </div>
   `).join('');
+
+  html += `</div>`;
+  container.innerHTML = html;
+}
+
+function filterProjects(tag, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+
+  document.querySelectorAll('.project-card').forEach(card => {
+    if (tag === 'all' || card.getAttribute('data-tags').split(',').includes(tag)) {
+      card.classList.remove('filtered-out');
+    } else {
+      card.classList.add('filtered-out');
+    }
+  });
 }
 
 /* ===== Mini Projects ===== */
