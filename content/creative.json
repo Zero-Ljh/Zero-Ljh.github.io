@@ -61,7 +61,7 @@
   ],
   "life": [
     {
-      "icon": "◆",
+      "icon": "shield",
       "label": {
         "zh": "足球 · 院系杯",
         "en": "Football · University Cup"
@@ -72,7 +72,7 @@
       }
     },
     {
-      "icon": "◆",
+      "icon": "book-open",
       "label": {
         "zh": "阅读 · 终身学习",
         "en": "Reading · Lifelong Learning"
@@ -83,7 +83,7 @@
       }
     },
     {
-      "icon": "◆",
+      "icon": "cpu",
       "label": {
         "zh": "机器人 · 动手实践",
         "en": "Robotics · Hands-on"
@@ -94,7 +94,7 @@
       }
     },
     {
-      "icon": "◆",
+      "icon": "heart",
       "label": {
         "zh": "心理 · 同伴支持",
         "en": "Mental Health · Peer Support"
