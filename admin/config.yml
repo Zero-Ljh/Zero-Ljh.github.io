@@ -7,7 +7,6 @@ backend:
   repo: Zero-Ljh/Zero-Ljh.github.io
   branch: main
 
-publish_mode: editorial_workflow
 media_folder: assets
 public_folder: /assets
 
@@ -23,226 +22,206 @@ collections:
   # ==========================================================================
   - name: "site"
     label: "站点信息"
-    label_singular: "站点信息"
-    description: "个人资料、统计数据、教育背景"
-    format: "json"
-    file: "content/site.json"
-    fields:
-      - label: "个人资料"
-        name: "profile"
-        widget: "object"
-        collapsed: false
+    files:
+      - name: "site"
+        label: "站点信息"
+        file: "content/site.json"
+        format: "json"
         fields:
-          - label: "姓名"
-            name: "name"
+          - label: "个人资料"
+            name: "profile"
             widget: "object"
+            collapsed: false
             fields:
-              - {label: "中文", name: "zh", widget: "string"}
-              - {label: "English", name: "en", widget: "string"}
-          - label: "关于我"
-            name: "about"
+              - label: "姓名"
+                name: "name"
+                widget: "object"
+                fields:
+                  - {label: "中文", name: "zh", widget: "string"}
+                  - {label: "English", name: "en", widget: "string"}
+              - label: "关于我"
+                name: "about"
+                widget: "list"
+                hint: "每个段落是一个对象，含中英文"
+                summary: "{{zh}}"
+                fields:
+                  - {label: "中文", name: "zh", widget: "text"}
+                  - {label: "English", name: "en", widget: "text"}
+              - label: "一句话简介"
+                name: "highlight"
+                widget: "object"
+                fields:
+                  - {label: "中文", name: "zh", widget: "text"}
+                  - {label: "English", name: "en", widget: "text"}
+              - label: "寻找目标"
+                name: "seeking"
+                widget: "object"
+                fields:
+                  - {label: "中文", name: "zh", widget: "text"}
+                  - {label: "English", name: "en", widget: "text"}
+              - label: "技术技能"
+                name: "skills"
+                widget: "list"
+                summary: "{{name}} — {{fields.level}}%"
+                fields:
+                  - {label: "技能名称", name: "name", widget: "string"}
+                  - {label: "熟练度 (%)", name: "level", widget: "number", value_type: "int", min: 0, max: 100}
+                  - label: "标签（可选）"
+                    name: "label"
+                    widget: "object"
+                    required: false
+                    fields:
+                      - {label: "中文", name: "zh", widget: "string"}
+                      - {label: "English", name: "en", widget: "string"}
+              - label: "人生哲学"
+                name: "philosophy"
+                widget: "object"
+                fields:
+                  - {label: "中文", name: "zh", widget: "text"}
+                  - {label: "English", name: "en", widget: "text"}
+              - label: "导师备注"
+                name: "mentorNote"
+                widget: "object"
+                fields:
+                  - {label: "中文", name: "zh", widget: "text"}
+                  - {label: "English", name: "en", widget: "text"}
+              - {label: "简历链接", name: "resumeUrl", widget: "string"}
+              - {label: "GitHub 用户名", name: "githubUsername", widget: "string"}
+          - label: "统计数据"
+            name: "stats"
             widget: "list"
-            hint: "每个段落是一个对象，含中英文"
-            summary: "{{zh}}"
+            summary: "{{fields.number}} — {{fields.label.zh}}"
             fields:
-              - {label: "中文", name: "zh", widget: "text"}
-              - {label: "English", name: "en", widget: "text"}
-          - label: "一句话简介"
-            name: "highlight"
-            widget: "object"
-            fields:
-              - {label: "中文", name: "zh", widget: "text"}
-              - {label: "English", name: "en", widget: "text"}
-          - label: "寻找目标"
-            name: "seeking"
-            widget: "object"
-            fields:
-              - {label: "中文", name: "zh", widget: "text"}
-              - {label: "English", name: "en", widget: "text"}
-          - label: "技术技能"
-            name: "skills"
-            widget: "list"
-            summary: "{{name}} — {{fields.level}}%"
-            fields:
-              - {label: "技能名称", name: "name", widget: "string"}
-              - {label: "熟练度 (%)", name: "level", widget: "number", value_type: "int", min: 0, max: 100}
-              - label: "标签（可选）"
+              - {label: "数字", name: "number", widget: "number", value_type: "int"}
+              - label: "标签"
                 name: "label"
                 widget: "object"
-                required: false
                 fields:
                   - {label: "中文", name: "zh", widget: "string"}
                   - {label: "English", name: "en", widget: "string"}
-          - label: "人生哲学"
-            name: "philosophy"
-            widget: "object"
-            fields:
-              - {label: "中文", name: "zh", widget: "text"}
-              - {label: "English", name: "en", widget: "text"}
-          - label: "导师备注"
-            name: "mentorNote"
-            widget: "object"
-            fields:
-              - {label: "中文", name: "zh", widget: "text"}
-              - {label: "English", name: "en", widget: "text"}
-          - {label: "简历链接", name: "resumeUrl", widget: "string"}
-          - {label: "GitHub 用户名", name: "githubUsername", widget: "string"}
-      - label: "统计数据"
-        name: "stats"
-        widget: "list"
-        summary: "{{fields.number}} — {{fields.label.zh}}"
-        fields:
-          - {label: "数字", name: "number", widget: "number", value_type: "int"}
-          - label: "标签"
-            name: "label"
+          - label: "当前关注"
+            name: "currentFocus"
             widget: "object"
             fields:
               - {label: "中文", name: "zh", widget: "string"}
               - {label: "English", name: "en", widget: "string"}
-      - label: "当前关注"
-        name: "currentFocus"
-        widget: "object"
-        fields:
-          - {label: "中文", name: "zh", widget: "string"}
-          - {label: "English", name: "en", widget: "string"}
-      - label: "教育背景"
-        name: "education"
-        widget: "object"
-        collapsed: false
-        fields:
-          - label: "学校"
-            name: "school"
+          - label: "教育背景"
+            name: "education"
             widget: "object"
+            collapsed: false
             fields:
-              - {label: "中文", name: "zh", widget: "string"}
-              - {label: "English", name: "en", widget: "string"}
-          - label: "学位"
-            name: "degree"
-            widget: "object"
-            fields:
-              - {label: "中文", name: "zh", widget: "string"}
-              - {label: "English", name: "en", widget: "string"}
-          - label: "时间段"
-            name: "period"
-            widget: "object"
-            fields:
-              - {label: "中文", name: "zh", widget: "string"}
-              - {label: "English", name: "en", widget: "string"}
-          - label: "课程"
-            name: "courses"
-            widget: "object"
-            fields:
-              - {label: "中文", name: "zh", widget: "list", field: {label: "课程名", name: "course", widget: "string"}}
-              - {label: "English", name: "en", widget: "list", field: {label: "Course", name: "course", widget: "string"}}
-          - label: "描述"
-            name: "description"
-            widget: "object"
-            fields:
-              - {label: "中文", name: "zh", widget: "text"}
-              - {label: "English", name: "en", widget: "text"}
-
-  # ==========================================================================
-  # 2. Milestones — Learning milestones timeline
-  # ==========================================================================
-  - name: "milestones"
-    label: "里程碑"
-    label_singular: "里程碑"
-    description: "学习历程时间线"
-    format: "json"
-    file: "content/milestones.json"
-    fields:
-      - label: "学习里程碑"
-        name: "learningMilestones"
-        widget: "object"
-        collapsed: false
-        fields:
-          - label: "标题"
-            name: "heading"
-            widget: "object"
-            fields:
-              - {label: "中文", name: "zh", widget: "string"}
-              - {label: "English", name: "en", widget: "string"}
-          - label: "简介"
-            name: "intro"
-            widget: "object"
-            fields:
-              - {label: "中文", name: "zh", widget: "string"}
-              - {label: "English", name: "en", widget: "string"}
-          - label: "里程碑列表"
-            name: "milestones"
-            widget: "list"
-            summary: "{{date}} — {{fields.title.zh}}"
-            fields:
-              - {label: "日期", name: "date", widget: "string"}
-              - {label: "图标 (Emoji)", name: "icon", widget: "string"}
-              - label: "标题"
-                name: "title"
+              - label: "学校"
+                name: "school"
                 widget: "object"
                 fields:
                   - {label: "中文", name: "zh", widget: "string"}
                   - {label: "English", name: "en", widget: "string"}
+              - label: "学位"
+                name: "degree"
+                widget: "object"
+                fields:
+                  - {label: "中文", name: "zh", widget: "string"}
+                  - {label: "English", name: "en", widget: "string"}
+              - label: "时间段"
+                name: "period"
+                widget: "object"
+                fields:
+                  - {label: "中文", name: "zh", widget: "string"}
+                  - {label: "English", name: "en", widget: "string"}
+              - label: "课程"
+                name: "courses"
+                widget: "object"
+                fields:
+                  - {label: "中文", name: "zh", widget: "list", field: {label: "课程名", name: "course", widget: "string"}}
+                  - {label: "English", name: "en", widget: "list", field: {label: "Course", name: "course", widget: "string"}}
               - label: "描述"
-                name: "desc"
+                name: "description"
                 widget: "object"
                 fields:
                   - {label: "中文", name: "zh", widget: "text"}
                   - {label: "English", name: "en", widget: "text"}
 
   # ==========================================================================
-  # 3. Experience — Work experience panels and honors
+  # 2. Milestones — Learning milestones timeline
   # ==========================================================================
-  - name: "experience"
-    label: "经历"
-    label_singular: "经历"
-    description: "团队、运动、学习经历与荣誉"
-    format: "json"
-    file: "content/experience.json"
-    fields:
-      - label: "经历"
-        name: "experience"
-        widget: "object"
-        collapsed: false
+  - name: "milestones"
+    label: "里程碑"
+    files:
+      - name: "milestones"
+        label: "里程碑"
+        file: "content/milestones.json"
+        format: "json"
         fields:
-          - label: "标签页"
-            name: "tabs"
+          - label: "学习里程碑"
+            name: "learningMilestones"
             widget: "object"
-            fields:
-              - {label: "中文", name: "zh", widget: "list", field: {label: "标签", name: "tab", widget: "string"}}
-              - {label: "English", name: "en", widget: "list", field: {label: "Tab", name: "tab", widget: "string"}}
-          - label: "经历面板"
-            name: "panels"
-            widget: "list"
-            summary: "{{fields.title.zh}}"
+            collapsed: false
             fields:
               - label: "标题"
-                name: "title"
-                widget: "object"
-                fields:
-                  - {label: "中文（可含 HTML）", name: "zh", widget: "text"}
-                  - {label: "English (may include HTML)", name: "en", widget: "text"}
-              - label: "日期"
-                name: "date"
+                name: "heading"
                 widget: "object"
                 fields:
                   - {label: "中文", name: "zh", widget: "string"}
                   - {label: "English", name: "en", widget: "string"}
-              - label: "事项"
-                name: "items"
+              - label: "简介"
+                name: "intro"
                 widget: "object"
                 fields:
-                  - {label: "中文", name: "zh", widget: "list", field: {label: "事项", name: "item", widget: "text"}}
-                  - {label: "English", name: "en", widget: "list", field: {label: "Item", name: "item", widget: "text"}}
-              - label: "子项（可选）"
-                name: "sub"
+                  - {label: "中文", name: "zh", widget: "string"}
+                  - {label: "English", name: "en", widget: "string"}
+              - label: "里程碑列表"
+                name: "milestones"
+                widget: "list"
+                summary: "{{date}} — {{fields.title.zh}}"
+                fields:
+                  - {label: "日期", name: "date", widget: "string"}
+                  - {label: "图标 (Emoji)", name: "icon", widget: "string"}
+                  - label: "标题"
+                    name: "title"
+                    widget: "object"
+                    fields:
+                      - {label: "中文", name: "zh", widget: "string"}
+                      - {label: "English", name: "en", widget: "string"}
+                  - label: "描述"
+                    name: "desc"
+                    widget: "object"
+                    fields:
+                      - {label: "中文", name: "zh", widget: "text"}
+                      - {label: "English", name: "en", widget: "text"}
+
+  # ==========================================================================
+  # 3. Experience — Work experience panels and honors
+  # ==========================================================================
+  - name: "experience"
+    label: "经历"
+    files:
+      - name: "experience"
+        label: "经历"
+        file: "content/experience.json"
+        format: "json"
+        fields:
+          - label: "经历"
+            name: "experience"
+            widget: "object"
+            collapsed: false
+            fields:
+              - label: "标签页"
+                name: "tabs"
                 widget: "object"
-                required: false
+                fields:
+                  - {label: "中文", name: "zh", widget: "list", field: {label: "标签", name: "tab", widget: "string"}}
+                  - {label: "English", name: "en", widget: "list", field: {label: "Tab", name: "tab", widget: "string"}}
+              - label: "经历面板"
+                name: "panels"
+                widget: "list"
+                summary: "{{fields.title.zh}}"
                 fields:
                   - label: "标题"
                     name: "title"
                     widget: "object"
                     fields:
-                      - {label: "中文", name: "zh", widget: "text"}
-                      - {label: "English", name: "en", widget: "text"}
+                      - {label: "中文（可含 HTML）", name: "zh", widget: "text"}
+                      - {label: "English (may include HTML)", name: "en", widget: "text"}
                   - label: "日期"
                     name: "date"
                     widget: "object"
@@ -255,52 +234,113 @@ collections:
                     fields:
                       - {label: "中文", name: "zh", widget: "list", field: {label: "事项", name: "item", widget: "text"}}
                       - {label: "English", name: "en", widget: "list", field: {label: "Item", name: "item", widget: "text"}}
-      - label: "荣誉"
-        name: "honors"
-        widget: "list"
-        summary: "{{fields.num}} — {{fields.label.zh}}"
-        fields:
-          - {label: "标识", name: "num", widget: "string"}
-          - label: "标签"
-            name: "label"
-            widget: "object"
+                  - label: "子项（可选）"
+                    name: "sub"
+                    widget: "object"
+                    required: false
+                    fields:
+                      - label: "标题"
+                        name: "title"
+                        widget: "object"
+                        fields:
+                          - {label: "中文", name: "zh", widget: "text"}
+                          - {label: "English", name: "en", widget: "text"}
+                      - label: "日期"
+                        name: "date"
+                        widget: "object"
+                        fields:
+                          - {label: "中文", name: "zh", widget: "string"}
+                          - {label: "English", name: "en", widget: "string"}
+                      - label: "事项"
+                        name: "items"
+                        widget: "object"
+                        fields:
+                          - {label: "中文", name: "zh", widget: "list", field: {label: "事项", name: "item", widget: "text"}}
+                          - {label: "English", name: "en", widget: "list", field: {label: "Item", name: "item", widget: "text"}}
+          - label: "荣誉"
+            name: "honors"
+            widget: "list"
+            summary: "{{fields.num}} — {{fields.label.zh}}"
             fields:
-              - {label: "中文", name: "zh", widget: "string"}
-              - {label: "English", name: "en", widget: "string"}
+              - {label: "标识", name: "num", widget: "string"}
+              - label: "标签"
+                name: "label"
+                widget: "object"
+                fields:
+                  - {label: "中文", name: "zh", widget: "string"}
+                  - {label: "English", name: "en", widget: "string"}
 
   # ==========================================================================
   # 4. Research — Research interests
   # ==========================================================================
   - name: "research"
     label: "研究方向"
-    label_singular: "研究方向"
-    description: "研究兴趣领域"
-    format: "json"
-    file: "content/research.json"
-    fields:
-      - label: "研究方向"
-        name: "research"
-        widget: "object"
-        collapsed: false
+    files:
+      - name: "research"
+        label: "研究方向"
+        file: "content/research.json"
+        format: "json"
         fields:
-          - label: "标题"
-            name: "heading"
+          - label: "研究方向"
+            name: "research"
             widget: "object"
+            collapsed: false
             fields:
-              - {label: "中文", name: "zh", widget: "string"}
-              - {label: "English", name: "en", widget: "string"}
-          - label: "简介"
-            name: "intro"
-            widget: "object"
-            fields:
-              - {label: "中文", name: "zh", widget: "text"}
-              - {label: "English", name: "en", widget: "text"}
-          - label: "研究领域"
-            name: "areas"
+              - label: "标题"
+                name: "heading"
+                widget: "object"
+                fields:
+                  - {label: "中文", name: "zh", widget: "string"}
+                  - {label: "English", name: "en", widget: "string"}
+              - label: "简介"
+                name: "intro"
+                widget: "object"
+                fields:
+                  - {label: "中文", name: "zh", widget: "text"}
+                  - {label: "English", name: "en", widget: "text"}
+              - label: "研究领域"
+                name: "areas"
+                widget: "list"
+                summary: "{{fields.icon}} {{fields.title.zh}}"
+                fields:
+                  - {label: "图标 (Emoji)", name: "icon", widget: "string"}
+                  - label: "标题"
+                    name: "title"
+                    widget: "object"
+                    fields:
+                      - {label: "中文", name: "zh", widget: "string"}
+                      - {label: "English", name: "en", widget: "string"}
+                  - label: "描述"
+                    name: "desc"
+                    widget: "object"
+                    fields:
+                      - {label: "中文", name: "zh", widget: "text"}
+                      - {label: "English", name: "en", widget: "text"}
+
+  # ==========================================================================
+  # 5. Projects — Main projects and mini side projects
+  # ==========================================================================
+  - name: "projects"
+    label: "项目"
+    files:
+      - name: "projects"
+        label: "项目"
+        file: "content/projects.json"
+        format: "json"
+        fields:
+          - label: "主要项目"
+            name: "projects"
             widget: "list"
-            summary: "{{fields.icon}} {{fields.title.zh}}"
+            summary: "{{fields.id}} — {{fields.title.zh}}"
             fields:
-              - {label: "图标 (Emoji)", name: "icon", widget: "string"}
+              - {label: "ID", name: "id", widget: "string"}
+              - {label: "精选项目", name: "featured", widget: "boolean", default: false}
+              - label: "上标"
+                name: "overline"
+                widget: "object"
+                fields:
+                  - {label: "中文", name: "zh", widget: "string"}
+                  - {label: "English", name: "en", widget: "string"}
               - label: "标题"
                 name: "title"
                 widget: "object"
@@ -313,473 +353,483 @@ collections:
                 fields:
                   - {label: "中文", name: "zh", widget: "text"}
                   - {label: "English", name: "en", widget: "text"}
-
-  # ==========================================================================
-  # 5. Projects — Main projects and mini side projects
-  # ==========================================================================
-  - name: "projects"
-    label: "项目"
-    label_singular: "项目"
-    description: "主要项目与小型项目"
-    format: "json"
-    file: "content/projects.json"
-    fields:
-      - label: "主要项目"
-        name: "projects"
-        widget: "list"
-        summary: "{{fields.id}} — {{fields.title.zh}}"
-        fields:
-          - {label: "ID", name: "id", widget: "string"}
-          - {label: "精选项目", name: "featured", widget: "boolean", default: false}
-          - label: "上标"
-            name: "overline"
-            widget: "object"
-            fields:
-              - {label: "中文", name: "zh", widget: "string"}
-              - {label: "English", name: "en", widget: "string"}
-          - label: "标题"
-            name: "title"
-            widget: "object"
-            fields:
-              - {label: "中文", name: "zh", widget: "string"}
-              - {label: "English", name: "en", widget: "string"}
-          - label: "描述"
-            name: "desc"
-            widget: "object"
-            fields:
-              - {label: "中文", name: "zh", widget: "text"}
-              - {label: "English", name: "en", widget: "text"}
-          - label: "技术栈"
-            name: "tech"
-            widget: "list"
-            field: {label: "技术", name: "tech", widget: "string"}
-          - label: "状态"
-            name: "status"
-            widget: "object"
-            fields:
-              - {label: "中文", name: "zh", widget: "string"}
-              - {label: "English", name: "en", widget: "string"}
-          - label: "时间段"
-            name: "period"
-            widget: "object"
-            fields:
-              - {label: "中文", name: "zh", widget: "string"}
-              - {label: "English", name: "en", widget: "string"}
-          - label: "角色"
-            name: "role"
-            widget: "object"
-            fields:
-              - {label: "中文", name: "zh", widget: "string"}
-              - {label: "English", name: "en", widget: "string"}
-          - label: "学到的东西"
-            name: "learnings"
-            widget: "object"
-            fields:
-              - {label: "中文", name: "zh", widget: "list", field: {label: "收获", name: "learning", widget: "text"}}
-              - {label: "English", name: "en", widget: "list", field: {label: "Learning", name: "learning", widget: "text"}}
-          - label: "挑战"
-            name: "challenges"
-            widget: "object"
-            fields:
-              - {label: "中文", name: "zh", widget: "text"}
-              - {label: "English", name: "en", widget: "text"}
-          - label: "时间线"
-            name: "timeline"
-            widget: "object"
-            fields:
-              - {label: "中文", name: "zh", widget: "text"}
-              - {label: "English", name: "en", widget: "text"}
-          - label: "链接"
-            name: "links"
-            widget: "list"
-            summary: "{{fields.label.zh}} → {{fields.url}}"
-            fields:
-              - {label: "URL", name: "url", widget: "string"}
-              - label: "标签"
-                name: "label"
+              - label: "技术栈"
+                name: "tech"
+                widget: "list"
+                field: {label: "技术", name: "tech", widget: "string"}
+              - label: "状态"
+                name: "status"
                 widget: "object"
                 fields:
                   - {label: "中文", name: "zh", widget: "string"}
                   - {label: "English", name: "en", widget: "string"}
-      - label: "小型项目"
-        name: "miniProjects"
-        widget: "list"
-        summary: "{{fields.icon}} {{fields.title.zh}}"
-        fields:
-          - {label: "图标", name: "icon", widget: "string"}
-          - label: "标题"
-            name: "title"
-            widget: "object"
+              - label: "时间段"
+                name: "period"
+                widget: "object"
+                fields:
+                  - {label: "中文", name: "zh", widget: "string"}
+                  - {label: "English", name: "en", widget: "string"}
+              - label: "角色"
+                name: "role"
+                widget: "object"
+                fields:
+                  - {label: "中文", name: "zh", widget: "string"}
+                  - {label: "English", name: "en", widget: "string"}
+              - label: "学到的东西"
+                name: "learnings"
+                widget: "object"
+                fields:
+                  - {label: "中文", name: "zh", widget: "list", field: {label: "收获", name: "learning", widget: "text"}}
+                  - {label: "English", name: "en", widget: "list", field: {label: "Learning", name: "learning", widget: "text"}}
+              - label: "挑战"
+                name: "challenges"
+                widget: "object"
+                fields:
+                  - {label: "中文", name: "zh", widget: "text"}
+                  - {label: "English", name: "en", widget: "text"}
+              - label: "时间线"
+                name: "timeline"
+                widget: "object"
+                fields:
+                  - {label: "中文", name: "zh", widget: "text"}
+                  - {label: "English", name: "en", widget: "text"}
+              - label: "链接"
+                name: "links"
+                widget: "list"
+                summary: "{{fields.label.zh}} → {{fields.url}}"
+                fields:
+                  - {label: "URL", name: "url", widget: "string"}
+                  - label: "标签"
+                    name: "label"
+                    widget: "object"
+                    fields:
+                      - {label: "中文", name: "zh", widget: "string"}
+                      - {label: "English", name: "en", widget: "string"}
+          - label: "小型项目"
+            name: "miniProjects"
+            widget: "list"
+            summary: "{{fields.icon}} {{fields.title.zh}}"
             fields:
-              - {label: "中文", name: "zh", widget: "string"}
-              - {label: "English", name: "en", widget: "string"}
-          - label: "描述"
-            name: "desc"
-            widget: "object"
-            fields:
-              - {label: "中文", name: "zh", widget: "text"}
-              - {label: "English", name: "en", widget: "text"}
-          - {label: "技术栈", name: "tech", widget: "string"}
+              - {label: "图标", name: "icon", widget: "string"}
+              - label: "标题"
+                name: "title"
+                widget: "object"
+                fields:
+                  - {label: "中文", name: "zh", widget: "string"}
+                  - {label: "English", name: "en", widget: "string"}
+              - label: "描述"
+                name: "desc"
+                widget: "object"
+                fields:
+                  - {label: "中文", name: "zh", widget: "text"}
+                  - {label: "English", name: "en", widget: "text"}
+              - {label: "技术栈", name: "tech", widget: "string"}
 
   # ==========================================================================
   # 6. Now — Current focus areas (3 columns)
   # ==========================================================================
   - name: "now"
     label: "此刻"
-    label_singular: "此刻"
-    description: "当前关注：在读、在做、下一步"
-    format: "json"
-    file: "content/now.json"
-    fields:
-      - label: "此刻状态"
-        name: "now"
-        widget: "object"
-        collapsed: false
+    files:
+      - name: "now"
+        label: "此刻"
+        file: "content/now.json"
+        format: "json"
         fields:
-          - label: "标题"
-            name: "heading"
+          - label: "此刻状态"
+            name: "now"
             widget: "object"
+            collapsed: false
             fields:
-              - {label: "中文", name: "zh", widget: "string"}
-              - {label: "English", name: "en", widget: "string"}
-          - label: "栏目"
-            name: "columns"
-            widget: "list"
-            summary: "{{fields.label.zh}}"
-            fields:
-              - label: "标签"
-                name: "label"
+              - label: "标题"
+                name: "heading"
                 widget: "object"
                 fields:
                   - {label: "中文", name: "zh", widget: "string"}
                   - {label: "English", name: "en", widget: "string"}
-              - label: "事项"
-                name: "items"
-                widget: "object"
+              - label: "栏目"
+                name: "columns"
+                widget: "list"
+                summary: "{{fields.label.zh}}"
                 fields:
-                  - {label: "中文", name: "zh", widget: "list", field: {label: "事项", name: "item", widget: "text"}}
-                  - {label: "English", name: "en", widget: "list", field: {label: "Item", name: "item", widget: "text"}}
+                  - label: "标签"
+                    name: "label"
+                    widget: "object"
+                    fields:
+                      - {label: "中文", name: "zh", widget: "string"}
+                      - {label: "English", name: "en", widget: "string"}
+                  - label: "事项"
+                    name: "items"
+                    widget: "object"
+                    fields:
+                      - {label: "中文", name: "zh", widget: "list", field: {label: "事项", name: "item", widget: "text"}}
+                      - {label: "English", name: "en", widget: "list", field: {label: "Item", name: "item", widget: "text"}}
 
   # ==========================================================================
   # 7. Creative — Creative works and life highlights
   # ==========================================================================
   - name: "creative"
     label: "创作"
-    label_singular: "创作"
-    description: "创作作品与生活点滴"
-    format: "json"
-    file: "content/creative.json"
-    fields:
-      - label: "创作作品"
-        name: "creative"
-        widget: "list"
-        summary: "{{fields.genre.zh}} — {{fields.title.zh}}"
+    files:
+      - name: "creative"
+        label: "创作"
+        file: "content/creative.json"
+        format: "json"
         fields:
-          - label: "体裁"
-            name: "genre"
-            widget: "object"
+          - label: "创作作品"
+            name: "creative"
+            widget: "list"
+            summary: "{{fields.genre.zh}} — {{fields.title.zh}}"
             fields:
-              - {label: "中文", name: "zh", widget: "string"}
-              - {label: "English", name: "en", widget: "string"}
-          - label: "标题"
-            name: "title"
-            widget: "object"
+              - label: "体裁"
+                name: "genre"
+                widget: "object"
+                fields:
+                  - {label: "中文", name: "zh", widget: "string"}
+                  - {label: "English", name: "en", widget: "string"}
+              - label: "标题"
+                name: "title"
+                widget: "object"
+                fields:
+                  - {label: "中文", name: "zh", widget: "string"}
+                  - {label: "English", name: "en", widget: "string"}
+              - {label: "日期（可选）", name: "date", widget: "string", required: false}
+              - {label: "阅读时长（可选）", name: "readingTime", widget: "string", required: false}
+              - label: "摘录"
+                name: "excerpt"
+                widget: "object"
+                fields:
+                  - {label: "中文", name: "zh", widget: "text"}
+                  - {label: "English", name: "en", widget: "text"}
+          - label: "生活点滴"
+            name: "life"
+            widget: "list"
+            summary: "{{fields.icon}} {{fields.label.zh}}"
             fields:
-              - {label: "中文", name: "zh", widget: "string"}
-              - {label: "English", name: "en", widget: "string"}
-          - {label: "日期（可选）", name: "date", widget: "string", required: false}
-          - {label: "阅读时长（可选）", name: "readingTime", widget: "string", required: false}
-          - label: "摘录"
-            name: "excerpt"
-            widget: "object"
-            fields:
-              - {label: "中文", name: "zh", widget: "text"}
-              - {label: "English", name: "en", widget: "text"}
-      - label: "生活点滴"
-        name: "life"
-        widget: "list"
-        summary: "{{fields.icon}} {{fields.label.zh}}"
-        fields:
-          - {label: "图标 (Emoji)", name: "icon", widget: "string"}
-          - label: "标签"
-            name: "label"
-            widget: "object"
-            fields:
-              - {label: "中文", name: "zh", widget: "string"}
-              - {label: "English", name: "en", widget: "string"}
-          - label: "描述"
-            name: "desc"
-            widget: "object"
-            fields:
-              - {label: "中文", name: "zh", widget: "string"}
-              - {label: "English", name: "en", widget: "string"}
+              - {label: "图标 (Emoji)", name: "icon", widget: "string"}
+              - label: "标签"
+                name: "label"
+                widget: "object"
+                fields:
+                  - {label: "中文", name: "zh", widget: "string"}
+                  - {label: "English", name: "en", widget: "string"}
+              - label: "描述"
+                name: "desc"
+                widget: "object"
+                fields:
+                  - {label: "中文", name: "zh", widget: "string"}
+                  - {label: "English", name: "en", widget: "string"}
 
   # ==========================================================================
   # 8. Toolbox — Tools and technologies
   # ==========================================================================
   - name: "toolbox"
     label: "工具箱"
-    label_singular: "工具箱"
-    description: "工具、语言、工作流分类"
-    format: "json"
-    file: "content/toolbox.json"
-    fields:
-      - label: "工具箱"
-        name: "toolbox"
-        widget: "object"
-        collapsed: false
+    files:
+      - name: "toolbox"
+        label: "工具箱"
+        file: "content/toolbox.json"
+        format: "json"
         fields:
-          - label: "标题"
-            name: "heading"
+          - label: "工具箱"
+            name: "toolbox"
             widget: "object"
+            collapsed: false
             fields:
-              - {label: "中文", name: "zh", widget: "string"}
-              - {label: "English", name: "en", widget: "string"}
-          - label: "分类"
-            name: "categories"
-            widget: "list"
-            summary: "{{fields.label.zh}}"
-            fields:
-              - label: "分类名"
-                name: "label"
+              - label: "标题"
+                name: "heading"
                 widget: "object"
                 fields:
                   - {label: "中文", name: "zh", widget: "string"}
                   - {label: "English", name: "en", widget: "string"}
-              - label: "工具列表"
-                name: "items"
+              - label: "分类"
+                name: "categories"
                 widget: "list"
-                summary: "{{name}}"
+                summary: "{{fields.label.zh}}"
                 fields:
-                  - {label: "名称", name: "name", widget: "string"}
-                  - label: "描述"
-                    name: "desc"
+                  - label: "分类名"
+                    name: "label"
                     widget: "object"
                     fields:
-                      - {label: "中文", name: "zh", widget: "text"}
-                      - {label: "English", name: "en", widget: "text"}
+                      - {label: "中文", name: "zh", widget: "string"}
+                      - {label: "English", name: "en", widget: "string"}
+                  - label: "工具列表"
+                    name: "items"
+                    widget: "list"
+                    summary: "{{name}}"
+                    fields:
+                      - {label: "名称", name: "name", widget: "string"}
+                      - label: "描述"
+                        name: "desc"
+                        widget: "object"
+                        fields:
+                          - {label: "中文", name: "zh", widget: "text"}
+                          - {label: "English", name: "en", widget: "text"}
 
   # ==========================================================================
   # 9. Resources — Learning resources by category
   # ==========================================================================
   - name: "resources"
     label: "资源"
-    label_singular: "资源"
-    description: "学习资源分类"
-    format: "json"
-    file: "content/resources.json"
-    fields:
-      - label: "学习资源"
-        name: "resources"
-        widget: "object"
-        collapsed: false
+    files:
+      - name: "resources"
+        label: "资源"
+        file: "content/resources.json"
+        format: "json"
         fields:
-          - label: "标题"
-            name: "title"
+          - label: "学习资源"
+            name: "resources"
             widget: "object"
+            collapsed: false
             fields:
-              - {label: "中文", name: "zh", widget: "string"}
-              - {label: "English", name: "en", widget: "string"}
-          - label: "描述"
-            name: "desc"
-            widget: "object"
-            fields:
-              - {label: "中文", name: "zh", widget: "text"}
-              - {label: "English", name: "en", widget: "text"}
-          - label: "分类"
-            name: "categories"
-            widget: "list"
-            summary: "{{fields.icon}} {{fields.label.zh}}"
-            fields:
-              - {label: "图标 (Emoji)", name: "icon", widget: "string"}
-              - label: "分类名"
-                name: "label"
+              - label: "标题"
+                name: "title"
                 widget: "object"
                 fields:
                   - {label: "中文", name: "zh", widget: "string"}
                   - {label: "English", name: "en", widget: "string"}
-              - label: "资源列表"
-                name: "items"
-                widget: "list"
-                summary: "{{name}}"
+              - label: "描述"
+                name: "desc"
+                widget: "object"
                 fields:
-                  - {label: "名称", name: "name", widget: "string"}
-                  - {label: "链接 (URL)", name: "url", widget: "string"}
-                  - label: "描述"
-                    name: "desc"
+                  - {label: "中文", name: "zh", widget: "text"}
+                  - {label: "English", name: "en", widget: "text"}
+              - label: "分类"
+                name: "categories"
+                widget: "list"
+                summary: "{{fields.icon}} {{fields.label.zh}}"
+                fields:
+                  - {label: "图标 (Emoji)", name: "icon", widget: "string"}
+                  - label: "分类名"
+                    name: "label"
                     widget: "object"
                     fields:
-                      - {label: "中文", name: "zh", widget: "text"}
-                      - {label: "English", name: "en", widget: "text"}
+                      - {label: "中文", name: "zh", widget: "string"}
+                      - {label: "English", name: "en", widget: "string"}
+                  - label: "资源列表"
+                    name: "items"
+                    widget: "list"
+                    summary: "{{name}}"
+                    fields:
+                      - {label: "名称", name: "name", widget: "string"}
+                      - {label: "链接 (URL)", name: "url", widget: "string"}
+                      - label: "描述"
+                        name: "desc"
+                        widget: "object"
+                        fields:
+                          - {label: "中文", name: "zh", widget: "text"}
+                          - {label: "English", name: "en", widget: "text"}
 
   # ==========================================================================
   # 10. Navigation — Nav bar i18n translations
   # ==========================================================================
   - name: "navigation"
     label: "导航"
-    label_singular: "导航"
-    description: "导航栏中英文文案"
-    format: "json"
-    file: "content/navigation.json"
-    fields:
-      - label: "国际化"
-        name: "i18n"
-        widget: "object"
-        collapsed: false
+    files:
+      - name: "navigation"
+        label: "导航"
+        file: "content/navigation.json"
+        format: "json"
         fields:
-          - label: "导航"
-            name: "nav"
+          - label: "国际化"
+            name: "i18n"
             widget: "object"
             collapsed: false
             fields:
-              - label: "Logo"
-                name: "logo"
+              - label: "导航"
+                name: "nav"
+                widget: "object"
+                collapsed: false
+                fields:
+                  - label: "Logo"
+                    name: "logo"
+                    widget: "object"
+                    fields:
+                      - {label: "中文", name: "zh", widget: "string"}
+                      - {label: "English", name: "en", widget: "string"}
+                  - label: "导航项"
+                    name: "items"
+                    widget: "list"
+                    summary: "{{zh}} → {{href}}"
+                    fields:
+                      - {label: "链接", name: "href", widget: "string"}
+                      - {label: "中文", name: "zh", widget: "string"}
+                      - {label: "English", name: "en", widget: "string"}
+                  - label: "简历按钮"
+                    name: "resumeBtn"
+                    widget: "object"
+                    fields:
+                      - {label: "中文", name: "zh", widget: "string"}
+                      - {label: "English", name: "en", widget: "string"}
+                  - label: "更多按钮"
+                    name: "moreBtn"
+                    widget: "object"
+                    fields:
+                      - {label: "中文", name: "zh", widget: "string"}
+                      - {label: "English", name: "en", widget: "string"}
+                  - label: "下拉菜单"
+                    name: "dropdown"
+                    widget: "list"
+                    summary: "{{zh}} → {{href}}"
+                    fields:
+                      - {label: "链接", name: "href", widget: "string"}
+                      - {label: "中文", name: "zh", widget: "string"}
+                      - {label: "English", name: "en", widget: "string"}
+              - label: "图片占位符"
+                name: "photoPlaceholder"
                 widget: "object"
                 fields:
                   - {label: "中文", name: "zh", widget: "string"}
                   - {label: "English", name: "en", widget: "string"}
-              - label: "导航项"
-                name: "items"
-                widget: "list"
-                summary: "{{zh}} → {{href}}"
-                fields:
-                  - {label: "链接", name: "href", widget: "string"}
-                  - {label: "中文", name: "zh", widget: "string"}
-                  - {label: "English", name: "en", widget: "string"}
-              - label: "简历按钮"
-                name: "resumeBtn"
-                widget: "object"
-                fields:
-                  - {label: "中文", name: "zh", widget: "string"}
-                  - {label: "English", name: "en", widget: "string"}
-              - label: "更多按钮"
-                name: "moreBtn"
-                widget: "object"
-                fields:
-                  - {label: "中文", name: "zh", widget: "string"}
-                  - {label: "English", name: "en", widget: "string"}
-              - label: "下拉菜单"
-                name: "dropdown"
-                widget: "list"
-                summary: "{{zh}} → {{href}}"
-                fields:
-                  - {label: "链接", name: "href", widget: "string"}
-                  - {label: "中文", name: "zh", widget: "string"}
-                  - {label: "English", name: "en", widget: "string"}
-          - label: "图片占位符"
-            name: "photoPlaceholder"
-            widget: "object"
-            fields:
-              - {label: "中文", name: "zh", widget: "string"}
-              - {label: "English", name: "en", widget: "string"}
 
   # ==========================================================================
   # 11. Reading — Reading notes with rich body content
   # ==========================================================================
   - name: "reading"
     label: "阅读"
-    label_singular: "阅读笔记"
-    description: "阅读笔记与文章"
-    format: "json"
-    file: "content/reading.json"
-    fields:
-      - label: "阅读笔记"
-        name: "reading"
-        widget: "list"
-        summary: "{{fields.title.zh}}"
+    files:
+      - name: "reading"
+        label: "阅读"
+        file: "content/reading.json"
+        format: "json"
         fields:
-          - label: "标题"
-            name: "title"
-            widget: "object"
-            fields:
-              - {label: "中文", name: "zh", widget: "string"}
-              - {label: "English", name: "en", widget: "string"}
-          - label: "元信息"
-            name: "meta"
-            widget: "object"
-            fields:
-              - {label: "中文", name: "zh", widget: "string"}
-              - {label: "English", name: "en", widget: "string"}
-          - label: "笔记"
-            name: "note"
-            widget: "object"
-            fields:
-              - {label: "中文", name: "zh", widget: "text"}
-              - {label: "English", name: "en", widget: "text"}
-          - label: "标签"
-            name: "tags"
+          - label: "阅读笔记"
+            name: "reading"
             widget: "list"
-            field: {label: "标签", name: "tag", widget: "string"}
-          - {label: "阅读时长", name: "readingTime", widget: "string"}
-          - label: "关键点"
-            name: "keyPoints"
-            widget: "list"
+            summary: "{{fields.title.zh}}"
             fields:
-              - {label: "中文", name: "zh", widget: "text"}
-              - {label: "English", name: "en", widget: "text"}
-          - {label: "来源 (URL)", name: "source", widget: "string", required: false}
-          - label: "来源标签"
-            name: "sourceLabel"
-            widget: "object"
-            required: false
-            fields:
-              - {label: "中文", name: "zh", widget: "string"}
-              - {label: "English", name: "en", widget: "string"}
-          - label: "相关阅读 (ID 索引)"
-            name: "relatedReading"
-            widget: "list"
-            required: false
-            field: {label: "ID", name: "id", widget: "number", value_type: "int"}
-          - label: "正文"
-            name: "body"
-            widget: "text"
-            hint: "JSON 数组格式 — 谨慎编辑。包含 type/content/items 等字段的结构化文章内容。"
-            required: false
+              - label: "标题"
+                name: "title"
+                widget: "object"
+                fields:
+                  - {label: "中文", name: "zh", widget: "string"}
+                  - {label: "English", name: "en", widget: "string"}
+              - label: "元信息"
+                name: "meta"
+                widget: "object"
+                fields:
+                  - {label: "中文", name: "zh", widget: "string"}
+                  - {label: "English", name: "en", widget: "string"}
+              - label: "笔记"
+                name: "note"
+                widget: "object"
+                fields:
+                  - {label: "中文", name: "zh", widget: "text"}
+                  - {label: "English", name: "en", widget: "text"}
+              - label: "标签"
+                name: "tags"
+                widget: "list"
+                field: {label: "标签", name: "tag", widget: "string"}
+              - {label: "阅读时长", name: "readingTime", widget: "string"}
+              - label: "关键点"
+                name: "keyPoints"
+                widget: "list"
+                fields:
+                  - {label: "中文", name: "zh", widget: "text"}
+                  - {label: "English", name: "en", widget: "text"}
+              - {label: "来源 (URL)", name: "source", widget: "string", required: false}
+              - label: "来源标签"
+                name: "sourceLabel"
+                widget: "object"
+                required: false
+                fields:
+                  - {label: "中文", name: "zh", widget: "string"}
+                  - {label: "English", name: "en", widget: "string"}
+              - label: "相关阅读 (ID 索引)"
+                name: "relatedReading"
+                widget: "list"
+                required: false
+                field: {label: "ID", name: "id", widget: "number", value_type: "int"}
+              - label: "正文"
+                name: "body"
+                widget: "text"
+                hint: "JSON 数组格式 — 谨慎编辑。包含 type/content/items 等字段的结构化文章内容。"
+                required: false
 
   # ==========================================================================
   # 12. Notebook — Study notebook entries with body content
   # ==========================================================================
   - name: "notebook"
     label: "笔记"
-    label_singular: "笔记"
-    description: "学习笔记条目"
-    format: "json"
-    file: "content/notebook.json"
-    fields:
-      - label: "笔记列表"
-        name: "notebook"
-        widget: "list"
-        summary: "{{fields.title.zh}}"
+    files:
+      - name: "notebook"
+        label: "笔记"
+        file: "content/notebook.json"
+        format: "json"
         fields:
-          - label: "日期"
-            name: "date"
-            widget: "object"
-            fields:
-              - {label: "中文", name: "zh", widget: "string"}
-              - {label: "English", name: "en", widget: "string"}
-          - label: "标题"
-            name: "title"
-            widget: "object"
-            fields:
-              - {label: "中文", name: "zh", widget: "string"}
-              - {label: "English", name: "en", widget: "string"}
-          - label: "描述"
-            name: "desc"
-            widget: "object"
-            fields:
-              - {label: "中文", name: "zh", widget: "text"}
-              - {label: "English", name: "en", widget: "text"}
-          - {label: "标签", name: "tag", widget: "string"}
-          - {label: "阅读时长", name: "readingTime", widget: "string", required: false}
-          - label: "概念"
-            name: "concepts"
+          - label: "笔记列表"
+            name: "notebook"
             widget: "list"
-            required: false
+            summary: "{{fields.title.zh}}"
             fields:
-              - {label: "中文", name: "zh", widget: "text"}
-              - {label: "English", name: "en", widget: "text"}
-          - label: "正文"
-            name: "body"
-            widget: "text"
-            hint: "JSON 数组格式 — 谨慎编辑。包含 type/content/items/lang 等字段的结构化文章内容。"
-            required: false
+              - label: "日期"
+                name: "date"
+                widget: "object"
+                fields:
+                  - {label: "中文", name: "zh", widget: "string"}
+                  - {label: "English", name: "en", widget: "string"}
+              - label: "标题"
+                name: "title"
+                widget: "object"
+                fields:
+                  - {label: "中文", name: "zh", widget: "string"}
+                  - {label: "English", name: "en", widget: "string"}
+              - label: "描述"
+                name: "desc"
+                widget: "object"
+                fields:
+                  - {label: "中文", name: "zh", widget: "text"}
+                  - {label: "English", name: "en", widget: "text"}
+              - {label: "标签", name: "tag", widget: "string"}
+              - {label: "阅读时长", name: "readingTime", widget: "string", required: false}
+              - label: "概念"
+                name: "concepts"
+                widget: "list"
+                required: false
+                fields:
+                  - {label: "中文", name: "zh", widget: "text"}
+                  - {label: "English", name: "en", widget: "text"}
+              - label: "正文"
+                name: "body"
+                widget: "text"
+                hint: "JSON 数组格式 — 谨慎编辑。包含 type/content/items/lang 等字段的结构化文章内容。"
+                required: false
+
+  # ==========================================================================
+  # 13. Gallery — Photo showcase with categories
+  # ==========================================================================
+  - name: "gallery"
+    label: "图库"
+    files:
+      - name: "gallery"
+        label: "图库"
+        file: "content/gallery.json"
+        format: "json"
+        fields:
+          - label: "分类"
+            name: "categories"
+            widget: "list"
+            fields:
+              - {label: "分类ID", name: "id", widget: "string"}
+              - {label: "图标", name: "icon", widget: "string"}
+              - label: "标签"
+                name: "label"
+                widget: "object"
+                fields:
+                  - {label: "中文", name: "zh", widget: "string"}
+                  - {label: "English", name: "en", widget: "string"}
+          - label: "图片列表"
+            name: "items"
+            widget: "list"
+            fields:
+              - {label: "图片URL", name: "src", widget: "string"}
+              - {label: "缩略图URL", name: "thumb", widget: "string", required: false}
+              - label: "标题"
+                name: "title"
+                widget: "object"
+                fields:
+                  - {label: "中文", name: "zh", widget: "string"}
+                  - {label: "English", name: "en", widget: "string"}
+              - {label: "分类ID", name: "category", widget: "string", hint: "aigc, photo, 或 anime"}
+              - {label: "宽度", name: "width", widget: "number", value_type: "int"}
+              - {label: "高度", name: "height", widget: "number", value_type: "int"}

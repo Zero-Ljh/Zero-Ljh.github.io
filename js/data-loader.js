@@ -10,7 +10,7 @@
   var CONTENT_FILES = [
     'site', 'milestones', 'experience', 'research',
     'projects', 'now', 'creative', 'toolbox',
-    'resources', 'navigation', 'reading', 'notebook'
+    'resources', 'navigation', 'reading', 'notebook', 'gallery'
   ];
 
   window.__DATA_READY = false;

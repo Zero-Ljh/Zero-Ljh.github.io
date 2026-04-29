@@ -42,6 +42,7 @@ function handleRoute() {
   if (hash === 'resume') { showResume(); return; }
   if (hash === 'resources') { showResources(); return; }
   if (hash === 'tags') { showTags(); return; }
+  if (hash === 'gallery') { showGallery(); return; }
 
   const m5 = hash.match(/^tag\/(.+)$/);
   if (m5) { showTagItems(decodeURIComponent(m5[1])); return; }
@@ -107,10 +108,16 @@ function subPageShell(contentHTML, backLabel, backHash) {
       <div class="sub-body-wrap">
         <div class="sub-top-bar">
           <a href="#" onclick="${hashAction}" class="sub-back">← ${backLabel}</a>
-          <button class="sub-share" onclick="copyPageLink(this)" title="${lang === 'zh' ? '复制链接' : 'Copy Link'}">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
-            <span>${lang === 'zh' ? '复制链接' : 'Copy'}</span>
-          </button>
+          <div class="sub-top-actions">
+            <div class="sub-lang-toggle">
+              <button class="sub-lang-btn${lang === 'zh' ? ' active' : ''}" onclick="setLang('zh')">中</button>
+              <button class="sub-lang-btn${lang === 'en' ? ' active' : ''}" onclick="setLang('en')">EN</button>
+            </div>
+            <button class="sub-share" onclick="copyPageLink(this)" title="${lang === 'zh' ? '复制链接' : 'Copy Link'}">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+              <span>${lang === 'zh' ? '复制链接' : 'Copy'}</span>
+            </button>
+          </div>
         </div>
         ${contentHTML}
         <div class="sub-back-top">
@@ -804,6 +811,116 @@ function filterBlog(tag, btn) {
       card.classList.add('filtered-out');
     }
   });
+}
+
+/* ===== 图库展示 ===== */
+function showGallery() {
+  var lang = currentLang;
+  var container = document.getElementById('sub-view');
+  if (!container || !DATA.gallery) { showMainView(); return; }
+
+  var gallery = DATA.gallery;
+  var activeCat = 'all';
+
+  function renderGallery(cat) {
+    activeCat = cat;
+    var items = cat === 'all' ? gallery.items : gallery.items.filter(function(i) { return i.category === cat; });
+
+    var filterHtml = '<div class="gallery-filter">' +
+      '<button class="gallery-filter-btn' + (cat === 'all' ? ' active' : '') + '" onclick="window._filterGallery(\'all\')">' + (lang === 'zh' ? '全部' : 'All') + '</button>';
+    gallery.categories.forEach(function(c) {
+      filterHtml += '<button class="gallery-filter-btn' + (cat === c.id ? ' active' : '') + '" onclick="window._filterGallery(\'' + c.id + '\')">' + c.icon + ' ' + c.label[lang] + '</button>';
+    });
+    filterHtml += '</div>';
+
+    var masonryHtml = '<div class="gallery-masonry">';
+    items.forEach(function(item, idx) {
+      var globalIdx = gallery.items.indexOf(item);
+      masonryHtml += '<div class="gallery-item" onclick="window._openLightbox(' + globalIdx + ')">' +
+        '<img src="' + (item.thumb || item.src) + '" alt="' + escHTML(item.title[lang]) + '" loading="lazy">' +
+        '<div class="gallery-item-overlay"><span class="gallery-item-title">' + item.title[lang] + '</span></div>' +
+        '</div>';
+    });
+    masonryHtml += '</div>';
+
+    document.getElementById('gallery-content').innerHTML = filterHtml + masonryHtml;
+    window._galleryCat = cat;
+  }
+
+  window._openLightbox = function(idx) {
+    window._lightboxIdx = idx;
+    window._lightboxItems = window._galleryCat === 'all'
+      ? gallery.items
+      : gallery.items.filter(function(i) { return i.category === window._galleryCat; });
+    // Find the index within filtered items
+    var item = gallery.items[idx];
+    var filteredIdx = window._lightboxItems.indexOf(item);
+    window._lightboxIdx = filteredIdx >= 0 ? filteredIdx : 0;
+    document.getElementById('gallery-lightbox').classList.add('open');
+    updateLightboxImage();
+    document.body.style.overflow = 'hidden';
+  };
+
+  window._closeLightbox = function() {
+    document.getElementById('gallery-lightbox').classList.remove('open');
+    document.body.style.overflow = '';
+  };
+
+  window._lightboxPrev = function() {
+    if (window._lightboxIdx > 0) { window._lightboxIdx--; updateLightboxImage(); }
+  };
+
+  window._lightboxNext = function() {
+    if (window._lightboxIdx < window._lightboxItems.length - 1) { window._lightboxIdx++; updateLightboxImage(); }
+  };
+
+  function updateLightboxImage() {
+    var item = window._lightboxItems[window._lightboxIdx];
+    if (!item) return;
+    document.getElementById('lightbox-img').src = item.src;
+    document.getElementById('lightbox-img').alt = item.title[currentLang];
+    document.getElementById('lightbox-counter').textContent = (window._lightboxIdx + 1) + ' / ' + window._lightboxItems.length;
+  }
+
+  window._filterGallery = function(cat) { renderGallery(cat); };
+
+  // Keyboard nav
+  document.addEventListener('keydown', function _galleryKb(e) {
+    var lb = document.getElementById('gallery-lightbox');
+    if (!lb || !lb.classList.contains('open')) return;
+    if (e.key === 'Escape') window._closeLightbox();
+    if (e.key === 'ArrowLeft') window._lightboxPrev();
+    if (e.key === 'ArrowRight') window._lightboxNext();
+  });
+
+  var lightboxHTML = '<div id="gallery-lightbox" class="gallery-lightbox" onclick="if(event.target===this)window._closeLightbox()">' +
+    '<button class="gallery-lightbox-close" onclick="window._closeLightbox()" aria-label="Close">✕</button>' +
+    '<button class="gallery-lightbox-nav gallery-lightbox-prev" onclick="event.stopPropagation();window._lightboxPrev()" aria-label="Previous">‹</button>' +
+    '<img id="lightbox-img" src="" alt="">' +
+    '<button class="gallery-lightbox-nav gallery-lightbox-next" onclick="event.stopPropagation();window._lightboxNext()" aria-label="Next">›</button>' +
+    '<span id="lightbox-counter" class="gallery-lightbox-counter"></span>' +
+    '</div>';
+
+  container.innerHTML = subPageShell(
+    '<p class="sub-label">' + (lang === 'zh' ? '图库' : 'Gallery') + '</p>' +
+    '<h1 class="sub-title" style="margin-bottom:32px">' + (lang === 'zh' ? '影像记录' : 'Visual Moments') + '</h1>' +
+    '<div id="gallery-content"></div>' +
+    lightboxHTML,
+    lang === 'zh' ? '返回' : 'Back'
+  );
+
+  showSubView();
+
+  // Gallery uses dark background (override warm reading mode)
+  var bodyWrap = container.querySelector('.sub-body-wrap');
+  if (bodyWrap) { bodyWrap.style.background = 'var(--navy)'; bodyWrap.style.color = 'var(--slate)'; bodyWrap.style.maxWidth = '1100px'; }
+
+  renderGallery('all');
+
+  if (typeof updateSEO === 'function') updateSEO(
+    lang === 'zh' ? '图库 - 李军辉' : 'Gallery - Junhui Li',
+    lang === 'zh' ? '李军辉的影像记录' : "Junhui Li's visual gallery"
+  );
 }
 
 /* ===== 初始化 ===== */
