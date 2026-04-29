@@ -139,11 +139,11 @@ const DATA = {
   /* ===== 阅读记录 ===== */
   reading: [
     {
-      title: { zh: '大模型部署与微调 — 学习笔记', en: 'LLM Deployment & Fine-Tuning — Study Notes' },
+      title: { zh: '大模型部署与微调 — 理论学习', en: 'LLM Deployment & Fine-Tuning — Theory Study' },
       meta: { zh: '2026年4月 · 课程学习', en: 'Apr 2026 · Course Study' },
       note: {
-        zh: '正在学习如何本地部署开源模型（如 DeepSeek）、用 LoRA 微调、以及推理优化。这对理解大模型的实际应用很重要。',
-        en: 'Learning how to deploy open-source models locally (like DeepSeek), fine-tune with LoRA, and optimize inference. Essential for understanding real-world LLM applications.'
+        zh: '正在学习大模型部署和微调的理论知识——了解 LoRA 原理、推理优化、模型量化等概念。目前是理论学习阶段，还没有在本地跑过微调实验（设备配置有限），但理解原理本身就是重要的第一步。',
+        en: 'Studying the theory behind LLM deployment and fine-tuning — LoRA principles, inference optimization, model quantization. Currently at the theory stage; havent run fine-tuning experiments locally yet (limited hardware), but understanding the principles is itself an important first step.'
       },
       tags: ['LLM', 'DeepSeek', '微调'],
       readingTime: '8 min',
@@ -157,20 +157,20 @@ const DATA = {
       sourceLabel: { zh: 'Datawhale 开源教程', en: 'Datawhale Open Source Tutorial' },
       relatedReading: [1, 3],
       body: [
-        { type: 'p', content: { zh: '最近报名了大模型部署与微调课程，以下是学习笔记和心得体会。', en: 'I recently enrolled in an LLM deployment and fine-tuning course. Here are my notes and insights.' } },
+        { type: 'p', content: { zh: '我报名了大模型部署与微调的课程，目前正在学习理论知识。由于设备配置有限（参数量大的模型跑不动），还未进行实际微调操作，但理解这些概念本身就是为未来打基础。', en: 'I enrolled in an LLM deployment and fine-tuning course, currently studying the theory. I havent done actual fine-tuning yet due to limited hardware, but understanding these concepts is building a foundation for the future.' } },
         { type: 'h2', content: { zh: '课程内容概览', en: 'Course Overview' } },
         { type: 'ul', items: [
-          { zh: '本地部署开源模型（DeepSeek、Llama 等）', en: 'Local deployment of open-source models (DeepSeek, Llama, etc.)' },
-          { zh: '使用 LoRA/QLoRA 进行参数高效微调', en: 'Parameter-efficient fine-tuning with LoRA/QLoRA' },
-          { zh: '推理优化：量化、KV Cache、vLLM', en: 'Inference optimization: quantization, KV cache, vLLM' }
+          { zh: '了解开源模型的本地部署流程', en: 'Understanding the workflow of local model deployment' },
+          { zh: '学习 LoRA/QLoRA 参数高效微调的原理', en: 'Learning the principles of parameter-efficient fine-tuning (LoRA/QLoRA)' },
+          { zh: '推理优化的概念：量化、KV Cache、vLLM', en: 'Concepts of inference optimization: quantization, KV cache, vLLM' }
         ] },
         { type: 'blockquote', content: { zh: '微调不是从零训练，而是在预训练模型的基础上，用少量标注数据让模型适应特定任务。', en: 'Fine-tuning is not training from scratch — it adapts a pre-trained model to specific tasks with small labeled datasets.' } },
         { type: 'h2', content: { zh: '我的收获', en: 'My Takeaways' } },
         { type: 'ul', items: [
-          { zh: '理解了 LoRA 的原理：通过低秩矩阵分解来近似权重更新', en: 'Understood LoRA: low-rank matrix decomposition to approximate weight updates' },
-          { zh: '学会了用 Ollama 本地运行和测试模型', en: 'Learned to run and test models locally with Ollama' },
-          { zh: '了解了模型量化对推理速度和内存的影响', en: 'Understood how quantization affects inference speed and memory' },
-          { zh: '对 DeepSeek 的 MoE 架构有了更深理解', en: 'Deeper understanding of DeepSeek\'s MoE architecture' }
+          { zh: '理解了 LoRA 的原理：通过低秩矩阵分解来近似权重更新，大幅降低微调门槛', en: 'Understood LoRA: low-rank matrix decomposition approximates weight updates, dramatically lowering the fine-tuning barrier' },
+          { zh: '了解了 Ollama 本地运行模型的流程', en: 'Learned about the workflow for running models locally with Ollama' },
+          { zh: '明白了模型量化的作用：降低显存占用，让普通设备也能跑大模型', en: 'Understood quantization: reducing memory usage so larger models can run on consumer hardware' },
+          { zh: '对 MoE 架构（如 DeepSeek）的设计思路有了概念性理解', en: 'Gained conceptual understanding of MoE architecture design (e.g., DeepSeek)' }
         ] },
         { type: 'p', content: { zh: '下一步计划：在自己机器上跑通一个完整的微调实验。', en: 'Next step: Run a complete fine-tuning experiment on my own machine.' } }
       ]
@@ -202,26 +202,38 @@ const DATA = {
       ]
     },
     {
-      title: { zh: '在读《人工智能：一种现代方法》', en: "Reading: 'Artificial Intelligence: A Modern Approach'" },
-      meta: { zh: '在读 · 教材', en: 'Ongoing · Textbook' },
-      readingTime: 'Ongoing',
+      title: { zh: '我的书架：最近在读什么', en: 'My Bookshelf: What I\'m Reading' },
+      meta: { zh: '2026年4月 · 阅读记录', en: 'Apr 2026 · Reading Log' },
+      readingTime: '3 min',
       note: {
-        zh: '逐章学习经典 AI 教材，目前在搜索算法和逻辑部分。',
-        en: 'Working through the classic AI textbook chapter by chapter. Currently on search algorithms and logic.'
+        zh: '除了 AI 和技术书，我也读哲学、心理学。涉猎广不是分心，是把世界看得更清楚。',
+        en: "Beyond AI and tech, I also read philosophy and psychology. Wide-ranging reading isn't distraction — it's how you see the world more clearly."
       },
-      tags: ['学习', '基础'],
+      tags: ['阅读', '跨学科'],
       keyPoints: [
-        { zh: 'AI 的核心是智能体（Agent）——通过感知环境、理性思考、执行动作来达成目标', en: "AI's core concept is the agent — perceiving, reasoning, and acting to achieve goals" },
-        { zh: '搜索算法（BFS/DFS/A*）是许多 AI 系统的基础构建块', en: 'Search algorithms (BFS/DFS/A*) are foundational building blocks of many AI systems' },
-        { zh: '逻辑与知识表示让 AI 能进行显式推理，而非仅靠模式匹配', en: 'Logic and knowledge representation enable explicit reasoning, not just pattern matching' }
+        { zh: '《白话机器学习的数学》——用通俗语言讲 ML 数学基础，适合入门', en: "'Math for ML (in plain language)' — ML math fundamentals explained simply, great for beginners" },
+        { zh: '《被讨厌的勇气》——阿德勒心理学，学会不被他人评价左右', en: "'The Courage to Be Disliked' — Adlerian psychology, learning to not be controlled by others' judgment" },
+        { zh: '《普林斯顿微积分读本》——从高中开始读，微积分入门经典', en: "'The Calculus Lifesaver' — started in high school, classic calculus入门" }
       ],
       body: [
-        { type: 'p', content: { zh: '这是 AI 领域的经典教材，被称为"AI 圣经"。作为大一学生，我选择逐章精读，而非囫囵吞枣。', en: "This is the classic AI textbook, often called the 'AI Bible.' As a freshman, I'm reading it chapter by chapter rather than skimming." } },
-        { type: 'h2', content: { zh: '为什么选这本书', en: 'Why This Book' } },
-        { type: 'p', content: { zh: '网上有很多速成教程，但我想打好基础。这本书从智能体、搜索、逻辑等基本概念讲起，逐步深入到机器学习和深度学习——这种自底向上的结构适合建立完整的知识体系。', en: "There are many crash courses online, but I want to build a solid foundation. This book starts from basic concepts like agents, search, and logic, then progressively goes deeper into ML and DL — a bottom-up structure that suits building a complete knowledge framework." } },
-        { type: 'h2', content: { zh: '目前在学什么', en: 'Current Progress' } },
-        { type: 'p', content: { zh: '正在学搜索算法部分——BFS、DFS、A*、启发式搜索。理解这些算法不仅是为了考试，更是因为它们的思想在 AI 的许多领域（路径规划、游戏 AI、优化问题）都适用。', en: "Currently on search algorithms — BFS, DFS, A*, heuristic search. Understanding these isn't just for exams — their thinking applies across many AI domains (path planning, game AI, optimization)." } },
-        { type: 'blockquote', content: { zh: '好的基础不是让你走得更快，而是让你在遇到复杂问题时不会迷失方向。', en: 'Good fundamentals don\'t make you faster — they keep you from getting lost when facing complex problems.' } }
+        { type: 'p', content: { zh: '读书对我来说不是"打卡"，而是在好奇心驱动下自然地探索。以下是最近在读和读过的一些书。', en: "Reading for me isn't about checking boxes — it's exploring naturally, driven by curiosity. Here are some books I've been reading." } },
+        { type: 'h2', content: { zh: 'AI 与数学', en: 'AI & Math' } },
+        { type: 'ul', items: [
+          { zh: '《白话机器学习的数学》——用最直白的语言讲回归、分类、正则化背后的数学', en: "'Math for ML in Plain Language' — regression, classification, regularization math explained in plain terms" },
+          { zh: '《普林斯顿微积分读本》——高中开始啃的微积分入门书，断断续续在读', en: "'The Calculus Lifesaver' — started in high school, a friendly intro to calculus I keep coming back to" }
+        ] },
+        { type: 'h2', content: { zh: '人文与社科', en: 'Humanities & Social Science' } },
+        { type: 'ul', items: [
+          { zh: '《毛泽东选集》——理解中国近现代史和思维方式的重要窗口', en: "'Selected Works of Mao Zedong' — important lens for understanding modern Chinese history and thinking" },
+          { zh: '《传习录》——王阳明心学经典，"知行合一"对我影响很大', en: "'Instructions for Practical Living' — Wang Yangming's classic on the unity of knowledge and action" }
+        ] },
+        { type: 'h2', content: { zh: '心理学', en: 'Psychology' } },
+        { type: 'ul', items: [
+          { zh: '《非暴力沟通》——学会不带评判地表达，对人际关系帮助很大', en: "'Nonviolent Communication' — learning to express without judgment, hugely helpful for relationships" },
+          { zh: '《自卑与超越》——阿德勒谈自卑感的来源和超越之道', en: "'What Life Should Mean to You' — Adler on the sources of inferiority and paths to overcome it" },
+          { zh: '《被讨厌的勇气》——阿德勒心理学通俗版，不被他人认可也可以自由', en: "'The Courage to Be Disliked' — Adlerian psychology for the modern reader, freedom from needing others' approval" }
+        ] },
+        { type: 'blockquote', content: { zh: '涉猎广泛不是分心，是把世界看得更清楚。——这也是我为人大一的真实写照。', en: "Wide-ranging reading isn't distraction — it's how you see the world more clearly. This is my honest freshman-year self." } }
       ]
     },
     {
@@ -314,8 +326,8 @@ const DATA = {
         title: { zh: '自主学习 <span class="location">@ 个人</span>', en: 'Self-Directed Learning <span class="location">@ Personal</span>' },
         date: { zh: '2025年 — 至今', en: '2025 — Present' },
         items: {
-          zh: ['自学 Python 编程基础', '关注大模型前沿动态（DeepSeek、GPT、开源模型）', '在 B 站学习政经哲史类课程', '观看《百家讲坛》了解中国传统文化'],
-          en: ['Python programming basics (self-taught)', 'Following cutting-edge LLM developments (DeepSeek, GPT, open-source models)', 'Watching Bilibili courses on politics, economics, philosophy, and history', "Watching 'Lecture Room' (Bai Jia Jiang Tan) for Chinese culture"]
+          zh: ['自学 Python 编程基础', '关注大模型前沿动态', '在 B 站学习政经哲史类课程'],
+          en: ['Python programming basics (self-taught)', 'Following cutting-edge LLM developments', 'Watching Bilibili courses on politics, economics, philosophy, and history']
         }
       }
     ]
@@ -330,8 +342,8 @@ const DATA = {
 
   /* ===== 研究方向 ===== */
   research: {
-    heading: { zh: '研究方向', en: 'Research Interests' },
-    intro: { zh: '我正在探索的方向，希望找到志同道合的导师和团队。', en: 'Areas I am exploring — looking for mentors and teammates.' },
+    heading: { zh: '兴趣探索', en: 'Exploring' },
+    intro: { zh: '我正在探索的方向。起步阶段，保持好奇，希望找到志同道合的导师引导我深入。', en: 'Areas I am exploring. Early stage, staying curious — looking for mentors to guide me deeper.' },
     areas: [
       { icon: '01', title: { zh: '大语言模型', en: 'Large Language Models' }, desc: { zh: '模型部署、微调（LoRA/QLoRA）、推理优化', en: 'Model deployment, fine-tuning (LoRA/QLoRA), inference optimization' } },
       { icon: '02', title: { zh: '机器人与具身智能', en: 'Robotics & Embodied AI' }, desc: { zh: '嵌入式系统、传感器集成、真实硬件实践', en: 'Embedded systems, sensor integration, hands-on hardware' } },
@@ -448,8 +460,8 @@ const DATA = {
       {
         label: { zh: '在读', en: 'Reading' },
         items: {
-          zh: ['《人工智能：一种现代方法》', 'DeepSeek V4 技术报告', '深度学习课程（B站）', '百家讲坛（历史系列）'],
-          en: ['AI: A Modern Approach (textbook)', 'DeepSeek V4 technical report', 'Deep Learning course (Bilibili)', 'Baijia Lecture Room (history series)']
+          zh: ['《白话机器学习的数学》', '《普林斯顿微积分读本》', '《被讨厌的勇气》', '深度学习课程（B站）'],
+          en: ['Math for Machine Learning (in plain language)', 'The Calculus Lifesaver (Princeton)', 'The Courage to Be Disliked', 'Deep Learning course (Bilibili)']
         }
       },
       {
@@ -462,8 +474,8 @@ const DATA = {
       {
         label: { zh: '下一步', en: 'Next Up' },
         items: {
-          zh: ['开始学 PyTorch 深度学习框架', '跑通第一个模型微调实验', '找 AI/机器人方向的课题组'],
-          en: ['Start learning PyTorch', 'Run my first fine-tuning experiment', 'Find an AI/Robotics research lab']
+          zh: ['开始学 PyTorch 深度学习框架', '继续加强数学基础（线代、微积分）', '找 AI/机器人方向的课题组'],
+          en: ['Start learning PyTorch', 'Strengthen math foundations (linear algebra, calculus)', 'Find an AI/Robotics research lab']
         }
       }
     ]

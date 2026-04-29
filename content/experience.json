@@ -91,15 +91,13 @@
         "items": {
           "zh": [
             "自学 Python 编程基础",
-            "关注大模型前沿动态（DeepSeek、GPT、开源模型）",
-            "在 B 站学习政经哲史类课程",
-            "观看《百家讲坛》了解中国传统文化"
+            "关注大模型前沿动态",
+            "在 B 站学习政经哲史类课程"
           ],
           "en": [
             "Python programming basics (self-taught)",
-            "Following cutting-edge LLM developments (DeepSeek, GPT, open-source models)",
-            "Watching Bilibili courses on politics, economics, philosophy, and history",
-            "Watching 'Lecture Room' (Bai Jia Jiang Tan) for Chinese culture"
+            "Following cutting-edge LLM developments",
+            "Watching Bilibili courses on politics, economics, philosophy, and history"
           ]
         }
       }
