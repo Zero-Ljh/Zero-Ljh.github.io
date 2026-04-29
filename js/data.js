@@ -28,8 +28,8 @@ const DATA = {
       en: 'Currently studying deep learning &amp; LLM deployment/fine-tuning. Box-to-box midfielder — campus freshman cup 2nd place.'
     },
     seeking: {
-      zh: '🔬 寻找 AI/机器人方向的课题组——偏好工程方向，起初希望导师手把手引导，适应后能逐步独立。如果你在招收本科生，我很想聊聊。',
-      en: '🔬 Seeking an AI/Robotics research lab — prefer engineering over pure theory, and value mentorship with growing independence. If you are recruiting undergraduates, I would love to chat.'
+      zh: '寻找 AI/机器人方向的课题组——偏好工程方向，起初希望导师手把手引导，适应后能逐步独立。如果你在招收本科生，我很想聊聊。',
+      en: 'Seeking an AI/Robotics research lab — prefer engineering over pure theory, and value mentorship with growing independence. If you are recruiting undergraduates, I would love to chat.'
     },
     skills: [
       { name: 'Python', level: 70 },
@@ -72,49 +72,49 @@ const DATA = {
     milestones: [
       {
         date: '2025.09',
-        icon: '🎓',
+        icon: '01',
         title: { zh: '大学入学', en: 'University Started' },
         desc: { zh: '进入武汉科技大学人工智能科创专业，开启大学生活', en: 'Started at WUST, AI Innovation program' }
       },
       {
         date: '2025.09-10',
-        icon: '🐍',
+        icon: '02',
         title: { zh: '自学 Python 基础', en: 'Python Basics' },
         desc: { zh: '从零学习 Python：基础语法、数据结构、简单项目', en: 'Learned Python from scratch: syntax, data structures, mini projects' }
       },
       {
         date: '2025.10',
-        icon: '⚽',
+        icon: '03',
         title: { zh: '新生杯二等奖', en: 'Freshman Cup 2nd Place' },
         desc: { zh: '代表学院参加新生杯足球赛，扫荡型中场，获得二等奖', en: 'Represented the college in the freshman football cup, box-to-box midfielder, won 2nd place' }
       },
       {
         date: '2025.11',
-        icon: '🤖',
+        icon: '04',
         title: { zh: '加入百炼机器人团队', en: 'Joined Bailian Robotics' },
         desc: { zh: '通过选拔加入机器人团队，开始学习嵌入式系统与机器人控制', en: 'Joined the robotics team, started learning embedded systems and robot control' }
       },
       {
         date: '2025.12',
-        icon: '🧠',
+        icon: '05',
         title: { zh: '关注 AI 前沿', en: 'AI Frontier Exploration' },
         desc: { zh: '开始系统关注大模型进展，学习 Transformer 原理与 AI 工具链', en: 'Started following LLM developments, learning Transformer architecture and AI toolchain' }
       },
       {
         date: '2026.01-03',
-        icon: '🔧',
+        icon: '06',
         title: { zh: '掌握 Vibe Coding', en: 'Mastering Vibe Coding' },
         desc: { zh: '使用 Claude Code 等 AI 工具高效开发，搭建本个人主页', en: 'Learned AI-assisted development with Claude Code, built this portfolio' }
       },
       {
         date: '2026.04',
-        icon: '📝',
+        icon: '07',
         title: { zh: '大模型部署与微调', en: 'LLM Deployment & Fine-Tuning' },
         desc: { zh: '报名学习大模型部署微调课程，动手实践 LoRA 微调', en: 'Enrolled in LLM deployment & fine-tuning course, hands-on LoRA practice' }
       },
       {
         date: '2026.04',
-        icon: '🔥',
+        icon: '08',
         title: { zh: '开始学 PyTorch', en: 'Starting PyTorch' },
         desc: { zh: '开始学习 PyTorch 深度学习框架，为模型训练打基础', en: 'Beginning PyTorch deep learning framework for model training' }
       }
@@ -333,10 +333,10 @@ const DATA = {
     heading: { zh: '研究方向', en: 'Research Interests' },
     intro: { zh: '我正在探索的方向，希望找到志同道合的导师和团队。', en: 'Areas I am exploring — looking for mentors and teammates.' },
     areas: [
-      { icon: '🧠', title: { zh: '大语言模型', en: 'Large Language Models' }, desc: { zh: '模型部署、微调（LoRA/QLoRA）、推理优化', en: 'Model deployment, fine-tuning (LoRA/QLoRA), inference optimization' } },
-      { icon: '🤖', title: { zh: '机器人与具身智能', en: 'Robotics & Embodied AI' }, desc: { zh: '嵌入式系统、传感器集成、真实硬件实践', en: 'Embedded systems, sensor integration, hands-on hardware' } },
-      { icon: '🔧', title: { zh: 'AI 工程化', en: 'AI Engineering' }, desc: { zh: 'Vibe Coding、工具链搭建、高效开发实践', en: 'Vibe Coding, toolchain setup, efficient dev practices' } },
-      { icon: '📚', title: { zh: '持续学习', en: 'Continuous Learning' }, desc: { zh: '深度学习基础、PyTorch、经典 AI 教材', en: 'Deep learning fundamentals, PyTorch, classic AI textbooks' } }
+      { icon: '01', title: { zh: '大语言模型', en: 'Large Language Models' }, desc: { zh: '模型部署、微调（LoRA/QLoRA）、推理优化', en: 'Model deployment, fine-tuning (LoRA/QLoRA), inference optimization' } },
+      { icon: '02', title: { zh: '机器人与具身智能', en: 'Robotics & Embodied AI' }, desc: { zh: '嵌入式系统、传感器集成、真实硬件实践', en: 'Embedded systems, sensor integration, hands-on hardware' } },
+      { icon: '03', title: { zh: 'AI 工程化', en: 'AI Engineering' }, desc: { zh: 'Vibe Coding、工具链搭建、高效开发实践', en: 'Vibe Coding, toolchain setup, efficient dev practices' } },
+      { icon: '04', title: { zh: '持续学习', en: 'Continuous Learning' }, desc: { zh: '深度学习基础、PyTorch、经典 AI 教材', en: 'Deep learning fundamentals, PyTorch, classic AI textbooks' } }
     ]
   },
 
@@ -446,21 +446,21 @@ const DATA = {
     heading: { zh: '最近在做什么。', en: "What I'm focused on right now." },
     columns: [
       {
-        label: { zh: '📖 在读', en: '📖 Reading' },
+        label: { zh: '在读', en: 'Reading' },
         items: {
           zh: ['《人工智能：一种现代方法》', 'DeepSeek V4 技术报告', '深度学习课程（B站）', '百家讲坛（历史系列）'],
           en: ['AI: A Modern Approach (textbook)', 'DeepSeek V4 technical report', 'Deep Learning course (Bilibili)', 'Baijia Lecture Room (history series)']
         }
       },
       {
-        label: { zh: '🔨 在做', en: '🔨 Doing' },
+        label: { zh: '在做', en: 'Doing' },
         items: {
           zh: ['学 C++，搭建复习工作流', '百炼机器人团队嵌入式开发', '用 Claude Code 维护个人主页', '关注 AI 新闻，跟进前沿'],
           en: ['Learning C++, built a review workflow', 'Embedded dev with Bailian Robotics', 'Maintaining this site with Claude Code', 'Tracking AI news and frontier dev']
         }
       },
       {
-        label: { zh: '🎯 下一步', en: '🎯 Next Up' },
+        label: { zh: '下一步', en: 'Next Up' },
         items: {
           zh: ['开始学 PyTorch 深度学习框架', '跑通第一个模型微调实验', '找 AI/机器人方向的课题组'],
           en: ['Start learning PyTorch', 'Run my first fine-tuning experiment', 'Find an AI/Robotics research lab']
@@ -537,9 +537,9 @@ const DATA = {
   /* ===== 图库 ===== */
   gallery: {
     categories: [
-      { id: 'aigc', icon: '🤖', label: { zh: 'AI 生成', en: 'AI Generated' } },
-      { id: 'photo', icon: '📷', label: { zh: '摄影', en: 'Photography' } },
-      { id: 'anime', icon: '🎨', label: { zh: '动漫', en: 'Anime' } }
+      { id: 'aigc', icon: '', label: { zh: 'AI 生成', en: 'AI Generated' } },
+      { id: 'photo', icon: '', label: { zh: '摄影', en: 'Photography' } },
+      { id: 'anime', icon: '', label: { zh: '动漫', en: 'Anime' } }
     ],
     items: [
       { src: 'https://picsum.photos/seed/cyber01/800/600', thumb: 'https://picsum.photos/seed/cyber01/400/300', title: { zh: '赛博都市', en: 'Cyber City' }, category: 'aigc', width: 800, height: 600 },
@@ -585,10 +585,10 @@ const DATA = {
 
   /* ===== 课余生活 ===== */
   life: [
-    { icon: '⚽', label: { zh: '足球 · 院系杯', en: 'Football · University Cup' }, desc: { zh: '扫荡型中场', en: 'Box-to-box midfielder' } },
-    { icon: '📚', label: { zh: '阅读 · 终身学习', en: 'Reading · Lifelong Learning' }, desc: { zh: '文史哲政经 + AI', en: 'Humanities to AI' } },
-    { icon: '🤖', label: { zh: '机器人 · 动手实践', en: 'Robotics · Hands-on' }, desc: { zh: '百炼团队嵌入式', en: 'Bailian embedded dev' } },
-    { icon: '🧠', label: { zh: '心理 · 同伴支持', en: 'Mental Health · Peer Support' }, desc: { zh: '心协干事', en: 'Health Association officer' } }
+    { icon: '◆', label: { zh: '足球 · 院系杯', en: 'Football · University Cup' }, desc: { zh: '扫荡型中场', en: 'Box-to-box midfielder' } },
+    { icon: '◆', label: { zh: '阅读 · 终身学习', en: 'Reading · Lifelong Learning' }, desc: { zh: '文史哲政经 + AI', en: 'Humanities to AI' } },
+    { icon: '◆', label: { zh: '机器人 · 动手实践', en: 'Robotics · Hands-on' }, desc: { zh: '百炼团队嵌入式', en: 'Bailian embedded dev' } },
+    { icon: '◆', label: { zh: '心理 · 同伴支持', en: 'Mental Health · Peer Support' }, desc: { zh: '心协干事', en: 'Health Association officer' } }
   ],
 
   /* ===== 工具箱 ===== */
@@ -628,7 +628,7 @@ const DATA = {
     desc: { zh: '我在 AI 学习中发现的优质资源，分享给同样在路上的你。', en: 'Quality resources I have discovered on my AI learning journey, shared with fellow learners.' },
     categories: [
       {
-        icon: '📖',
+        icon: '01',
         label: { zh: '课程 & 教材', en: 'Courses & Textbooks' },
         items: [
           {
@@ -654,7 +654,7 @@ const DATA = {
         ]
       },
       {
-        icon: '🔧',
+        icon: '02',
         label: { zh: '工具 & 框架', en: 'Tools & Frameworks' },
         items: [
           {
@@ -675,7 +675,7 @@ const DATA = {
         ]
       },
       {
-        icon: '📝',
+        icon: '03',
         label: { zh: '博客 & 频道', en: 'Blogs & Channels' },
         items: [
           {
@@ -696,7 +696,7 @@ const DATA = {
         ]
       },
       {
-        icon: '🌐',
+        icon: '04',
         label: { zh: '社区 & 平台', en: 'Communities & Platforms' },
         items: [
           {
@@ -733,19 +733,19 @@ const DATA = {
       resumeBtn: { zh: '简历', en: 'Resume' },
       moreBtn: { zh: '更多 ▼', en: 'More ▼' },
       dropdown: [
-        { href: '#notebook', zh: '📓 笔记', en: 'Notebook' },
-        { href: '#blog', zh: '📝 文章', en: 'Blog' },
-        { href: '#other-projects', zh: '📦 小项目', en: 'Side Builds' },
-        { href: '#resume', zh: '📄 简历', en: 'Resume' },
-        { href: '#archive', zh: '🗂️ 归档', en: 'Archive' },
-        { href: '#resources', zh: '📚 资源', en: 'Resources' },
-        { href: '#gallery', zh: '🖼️ 图库', en: 'Gallery' },
-        { href: '#tags', zh: '🏷️ 标签', en: 'Tags' },
-        { href: '#creative', zh: '✏️ 创作', en: 'Creative' },
-        { href: '#life', zh: '📸 生活', en: 'Life' },
-        { href: '#toolbox', zh: '🧰 工具箱', en: 'Toolbox' },
-        { href: '#research', zh: '🔬 研究方向', en: 'Research' },
-        { href: '#contact', zh: '💬 联系', en: 'Contact' }
+        { href: '#notebook', zh: '笔记', en: 'Notebook' },
+        { href: '#blog', zh: '文章', en: 'Blog' },
+        { href: '#other-projects', zh: '小项目', en: 'Side Builds' },
+        { href: '#resume', zh: '简历', en: 'Resume' },
+        { href: '#archive', zh: '归档', en: 'Archive' },
+        { href: '#resources', zh: '资源', en: 'Resources' },
+        { href: '#gallery', zh: '图库', en: 'Gallery' },
+        { href: '#tags', zh: '标签', en: 'Tags' },
+        { href: '#creative', zh: '创作', en: 'Creative' },
+        { href: '#life', zh: '生活', en: 'Life' },
+        { href: '#toolbox', zh: '工具箱', en: 'Toolbox' },
+        { href: '#research', zh: '研究方向', en: 'Research' },
+        { href: '#contact', zh: '联系', en: 'Contact' }
       ]
     },
     photoPlaceholder: { zh: '照片待加', en: 'photo soon' }

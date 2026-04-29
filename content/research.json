@@ -10,7 +10,7 @@
     },
     "areas": [
       {
-        "icon": "🧠",
+        "icon": "01",
         "title": {
           "zh": "大语言模型",
           "en": "Large Language Models"
@@ -21,7 +21,7 @@
         }
       },
       {
-        "icon": "🤖",
+        "icon": "02",
         "title": {
           "zh": "机器人与具身智能",
           "en": "Robotics & Embodied AI"
@@ -32,7 +32,7 @@
         }
       },
       {
-        "icon": "🔧",
+        "icon": "03",
         "title": {
           "zh": "AI 工程化",
           "en": "AI Engineering"
@@ -43,7 +43,7 @@
         }
       },
       {
-        "icon": "📚",
+        "icon": "04",
         "title": {
           "zh": "持续学习",
           "en": "Continuous Learning"

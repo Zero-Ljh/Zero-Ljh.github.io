@@ -7,8 +7,8 @@
     "columns": [
       {
         "label": {
-          "zh": "📖 在读",
-          "en": "📖 Reading"
+          "zh": "在读",
+          "en": "Reading"
         },
         "items": {
           "zh": [
@@ -27,8 +27,8 @@
       },
       {
         "label": {
-          "zh": "🔨 在做",
-          "en": "🔨 Doing"
+          "zh": "在做",
+          "en": "Doing"
         },
         "items": {
           "zh": [
@@ -47,8 +47,8 @@
       },
       {
         "label": {
-          "zh": "🎯 下一步",
-          "en": "🎯 Next Up"
+          "zh": "下一步",
+          "en": "Next Up"
         },
         "items": {
           "zh": [

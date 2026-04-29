@@ -10,7 +10,7 @@
     },
     "categories": [
       {
-        "icon": "📖",
+        "icon": "01",
         "label": {
           "zh": "课程 & 教材",
           "en": "Courses & Textbooks"
@@ -51,7 +51,7 @@
         ]
       },
       {
-        "icon": "🔧",
+        "icon": "02",
         "label": {
           "zh": "工具 & 框架",
           "en": "Tools & Frameworks"
@@ -84,7 +84,7 @@
         ]
       },
       {
-        "icon": "📝",
+        "icon": "03",
         "label": {
           "zh": "博客 & 频道",
           "en": "Blogs & Channels"
@@ -117,7 +117,7 @@
         ]
       },
       {
-        "icon": "🌐",
+        "icon": "04",
         "label": {
           "zh": "社区 & 平台",
           "en": "Communities & Platforms"

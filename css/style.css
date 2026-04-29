@@ -248,7 +248,7 @@ body.menu-open .sidebar,body.menu-open .email-side{opacity:0;pointer-events:none
 .research-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
 .research-card{padding:28px 24px;background:var(--light-navy);border-radius:var(--radius);transition:all 0.3s ease;border:1px solid transparent}
 .research-card:hover{transform:translateY(-3px);border-color:rgba(212,162,89,0.15);box-shadow:0 8px 24px -8px rgba(0,0,0,0.2)}
-.research-icon{font-size:28px;margin-bottom:12px}
+.research-icon{font-family:var(--font-mono);font-size:13px;color:var(--gold);margin-bottom:12px;letter-spacing:1px;opacity:0.7}
 .research-card h3{font-family:var(--font-display);font-size:17px;color:var(--warm-white);margin-bottom:8px}
 .research-card p{font-size:var(--fz-sm);color:var(--slate);line-height:1.6}
 

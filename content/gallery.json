@@ -3,7 +3,7 @@
     "categories": [
       {
         "id": "aigc",
-        "icon": "🤖",
+        "icon": "",
         "label": {
           "zh": "AI 生成",
           "en": "AI Generated"
@@ -11,7 +11,7 @@
       },
       {
         "id": "photo",
-        "icon": "📷",
+        "icon": "",
         "label": {
           "zh": "摄影",
           "en": "Photography"
@@ -19,7 +19,7 @@
       },
       {
         "id": "anime",
-        "icon": "🎨",
+        "icon": "",
         "label": {
           "zh": "动漫",
           "en": "Anime"

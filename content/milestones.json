@@ -11,7 +11,7 @@
     "milestones": [
       {
         "date": "2025.09",
-        "icon": "🎓",
+        "icon": "01",
         "title": {
           "zh": "大学入学",
           "en": "University Started"
@@ -23,7 +23,7 @@
       },
       {
         "date": "2025.09-10",
-        "icon": "🐍",
+        "icon": "02",
         "title": {
           "zh": "自学 Python 基础",
           "en": "Python Basics"
@@ -35,7 +35,7 @@
       },
       {
         "date": "2025.10",
-        "icon": "⚽",
+        "icon": "03",
         "title": {
           "zh": "新生杯二等奖",
           "en": "Freshman Cup 2nd Place"
@@ -47,7 +47,7 @@
       },
       {
         "date": "2025.11",
-        "icon": "🤖",
+        "icon": "04",
         "title": {
           "zh": "加入百炼机器人团队",
           "en": "Joined Bailian Robotics"
@@ -59,7 +59,7 @@
       },
       {
         "date": "2025.12",
-        "icon": "🧠",
+        "icon": "05",
         "title": {
           "zh": "关注 AI 前沿",
           "en": "AI Frontier Exploration"
@@ -71,7 +71,7 @@
       },
       {
         "date": "2026.01-03",
-        "icon": "🔧",
+        "icon": "06",
         "title": {
           "zh": "掌握 Vibe Coding",
           "en": "Mastering Vibe Coding"
@@ -83,7 +83,7 @@
       },
       {
         "date": "2026.04",
-        "icon": "📝",
+        "icon": "07",
         "title": {
           "zh": "大模型部署与微调",
           "en": "LLM Deployment & Fine-Tuning"
@@ -95,7 +95,7 @@
       },
       {
         "date": "2026.04",
-        "icon": "🔥",
+        "icon": "08",
         "title": {
           "zh": "开始学 PyTorch",
           "en": "Starting PyTorch"
