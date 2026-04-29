@@ -542,18 +542,11 @@ const DATA = {
       { id: 'anime', icon: '', label: { zh: '动漫', en: 'Anime' } }
     ],
     items: [
-      { src: 'https://picsum.photos/seed/cyber01/800/600', thumb: 'https://picsum.photos/seed/cyber01/400/300', title: { zh: '赛博都市', en: 'Cyber City' }, category: 'aigc', width: 800, height: 600 },
-      { src: 'https://picsum.photos/seed/nebula02/600/900', thumb: 'https://picsum.photos/seed/nebula02/300/450', title: { zh: '星云', en: 'Nebula' }, category: 'aigc', width: 600, height: 900 },
-      { src: 'https://picsum.photos/seed/dream03/900/600', thumb: 'https://picsum.photos/seed/dream03/450/300', title: { zh: '数字梦境', en: 'Digital Dream' }, category: 'aigc', width: 900, height: 600 },
-      { src: 'https://picsum.photos/seed/garden04/700/700', thumb: 'https://picsum.photos/seed/garden04/350/350', title: { zh: '像素花园', en: 'Pixel Garden' }, category: 'aigc', width: 700, height: 700 },
-      { src: 'https://picsum.photos/seed/mountain01/800/500', thumb: 'https://picsum.photos/seed/mountain01/400/250', title: { zh: '山间晨光', en: 'Mountain Dawn' }, category: 'photo', width: 800, height: 500 },
-      { src: 'https://picsum.photos/seed/city02/600/800', thumb: 'https://picsum.photos/seed/city02/300/400', title: { zh: '城市剪影', en: 'City Silhouette' }, category: 'photo', width: 600, height: 800 },
-      { src: 'https://picsum.photos/seed/sunset03/900/500', thumb: 'https://picsum.photos/seed/sunset03/450/250', title: { zh: '海边日落', en: 'Seaside Sunset' }, category: 'photo', width: 900, height: 500 },
-      { src: 'https://picsum.photos/seed/rain04/500/700', thumb: 'https://picsum.photos/seed/rain04/250/350', title: { zh: '雨中街景', en: 'Rainy Street' }, category: 'photo', width: 500, height: 700 },
-      { src: 'https://picsum.photos/seed/sakura01/700/500', thumb: 'https://picsum.photos/seed/sakura01/350/250', title: { zh: '樱花树下', en: 'Under Sakura' }, category: 'anime', width: 700, height: 500 },
-      { src: 'https://picsum.photos/seed/starry02/500/800', thumb: 'https://picsum.photos/seed/starry02/250/400', title: { zh: '星空少年', en: 'Starry Boy' }, category: 'anime', width: 500, height: 800 },
-      { src: 'https://picsum.photos/seed/castle03/800/600', thumb: 'https://picsum.photos/seed/castle03/400/300', title: { zh: '幻想城堡', en: 'Fantasy Castle' }, category: 'anime', width: 800, height: 600 },
-      { src: 'https://picsum.photos/seed/firework04/600/700', thumb: 'https://picsum.photos/seed/firework04/300/350', title: { zh: '夏夜烟火', en: 'Summer Fireworks' }, category: 'anime', width: 600, height: 700 }
+      { src: 'assets/gallery/01.jpeg', thumb: 'assets/gallery/01.jpeg', title: { zh: '作品 01', en: 'Work 01' }, category: 'aigc', width: 800, height: 600 },
+      { src: 'assets/gallery/02.png', thumb: 'assets/gallery/02.png', title: { zh: '作品 02', en: 'Work 02' }, category: 'aigc', width: 800, height: 600 },
+      { src: 'assets/gallery/03.jpeg', thumb: 'assets/gallery/03.jpeg', title: { zh: '作品 03', en: 'Work 03' }, category: 'aigc', width: 800, height: 600 },
+      { src: 'assets/gallery/04.png', thumb: 'assets/gallery/04.png', title: { zh: '作品 04', en: 'Work 04' }, category: 'aigc', width: 800, height: 600 },
+      { src: 'assets/gallery/05.jpeg', thumb: 'assets/gallery/05.jpeg', title: { zh: '作品 05', en: 'Work 05' }, category: 'aigc', width: 800, height: 600 }
     ]
   },
 
