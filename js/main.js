@@ -122,7 +122,7 @@ function renderReading() {
         <div class="meta">${item.meta[lang]}${item.readingTime ? ' · ' + item.readingTime : ''}</div>
         <div class="note">${item.note[lang]}</div>
       </div>
-      <div class="reading-tags">${item.tags.map(t => `<span>${t}</span>`).join('')}</div>
+      <div class="reading-tags">${item.tags.map(t => `<span onclick="event.stopPropagation();window.location.hash='tag/${encodeURIComponent(t)}'" style="cursor:pointer" title="${lang === 'zh' ? '查看所有以此标签的内容' : 'View all items with this tag'}">${t}</span>`).join('')}</div>
     </a>`;
   }).join('');
 }

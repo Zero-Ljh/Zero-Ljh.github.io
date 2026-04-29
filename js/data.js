@@ -280,6 +280,8 @@ const DATA = {
       },
       tech: ['Robotics', 'Embedded', 'Team'],
       status: { zh: '进行中', en: 'Ongoing' },
+      period: { zh: '2025年 — 至今', en: '2025 — Present' },
+      role: { zh: '团队干员', en: 'Team Member' },
       learnings: {
         zh: ['嵌入式编程基础', '传感器数据采集与处理', '团队协作与版本控制', '从硬件到软件的完整流程'],
         en: ['Embedded programming fundamentals', 'Sensor data acquisition and processing', 'Team collaboration and version control', 'End-to-end hardware-to-software workflow']
@@ -302,6 +304,9 @@ const DATA = {
         en: 'Self-taught Python basics including data structures, control flow, functions, and introductory projects. Building a foundation for AI/ML work. Next step: PyTorch.'
       },
       tech: ['Python'],
+      status: { zh: '已完成', en: 'Completed' },
+      period: { zh: '2025年 — 2026年', en: '2025 — 2026' },
+      role: { zh: '个人项目', en: 'Personal Project' },
       learnings: {
         zh: ['数据结构与算法基础', '函数式编程思维', '文件操作与数据处理', '简单爬虫与自动化脚本'],
         en: ['Data structures and algorithms basics', 'Functional programming mindset', 'File I/O and data processing', 'Simple web scraping and automation scripts']
@@ -507,6 +512,103 @@ const DATA = {
     ]
   },
 
+  /* ===== 学习资源 ===== */
+  resources: {
+    title: { zh: '学习资源', en: 'Resources' },
+    desc: { zh: '我在 AI 学习中发现的优质资源，分享给同样在路上的你。', en: 'Quality resources I have discovered on my AI learning journey, shared with fellow learners.' },
+    categories: [
+      {
+        icon: '📖',
+        label: { zh: '课程 & 教材', en: 'Courses & Textbooks' },
+        items: [
+          {
+            name: '动手学深度学习 (D2L)',
+            url: 'https://d2l.ai/',
+            desc: { zh: '李沐的深度学习课程，代码+理论结合，非常适合入门', en: "Li Mu's deep learning course — code and theory combined, ideal for beginners" }
+          },
+          {
+            name: 'CS229 Machine Learning',
+            url: 'https://cs229.stanford.edu/',
+            desc: { zh: '斯坦福经典 ML 课程，Andrew Ng 主讲，理论扎实', en: "Stanford's classic ML course by Andrew Ng" }
+          },
+          {
+            name: '《人工智能：一种现代方法》',
+            url: 'https://aima.cs.berkeley.edu/',
+            desc: { zh: 'AI 领域的百科全书式教材，我目前正在读', en: 'The encyclopedia of AI textbooks — I am currently reading this' }
+          },
+          {
+            name: 'Fast.ai Practical Deep Learning',
+            url: 'https://course.fast.ai/',
+            desc: { zh: '自上而下的教学法，先跑起来再理解原理', en: 'Top-down approach — run first, understand later' }
+          }
+        ]
+      },
+      {
+        icon: '🔧',
+        label: { zh: '工具 & 框架', en: 'Tools & Frameworks' },
+        items: [
+          {
+            name: 'PyTorch',
+            url: 'https://pytorch.org/',
+            desc: { zh: '我正要开始学的深度学习框架', en: 'The DL framework I am starting to learn' }
+          },
+          {
+            name: 'Ollama',
+            url: 'https://ollama.ai/',
+            desc: { zh: '本地运行大模型的最简单方式', en: 'Easiest way to run LLMs locally' }
+          },
+          {
+            name: 'Hugging Face',
+            url: 'https://huggingface.co/',
+            desc: { zh: '模型和数据集的 GitHub，开源模型宝库', en: 'The GitHub of models and datasets' }
+          }
+        ]
+      },
+      {
+        icon: '📝',
+        label: { zh: '博客 & 频道', en: 'Blogs & Channels' },
+        items: [
+          {
+            name: "Lil'Log",
+            url: 'https://lilianweng.github.io/',
+            desc: { zh: '深入浅出的大模型技术博客，每篇都值得精读', en: 'In-depth LLM technical blog — every post is worth reading carefully' }
+          },
+          {
+            name: '李沐论文精读',
+            url: 'https://space.bilibili.com/1567748478',
+            desc: { zh: 'B站最好的论文讲解系列，适合入门科研', en: "Best paper walkthrough series on Bilibili for research beginners" }
+          },
+          {
+            name: '3Blue1Brown',
+            url: 'https://www.youtube.com/@3blue1brown',
+            desc: { zh: '最直观的数学可视化，神经网络系列必看', en: 'The most intuitive math visualization — neural networks series is a must-watch' }
+          }
+        ]
+      },
+      {
+        icon: '🌐',
+        label: { zh: '社区 & 平台', en: 'Communities & Platforms' },
+        items: [
+          {
+            name: 'GitHub',
+            url: 'https://github.com/',
+            desc: { zh: '读开源代码是最好的学习方式', en: 'Reading open source code is the best way to learn' }
+          },
+          {
+            name: 'Kaggle',
+            url: 'https://www.kaggle.com/',
+            desc: { zh: '数据集 + 竞赛 + 学习笔记，一站式平台', en: 'Datasets + competitions + learning notebooks, all in one' }
+          },
+          {
+            name: 'arXiv',
+            url: 'https://arxiv.org/',
+            desc: { zh: 'AI 论文预印本，跟踪最新研究动态', en: 'AI paper preprints — track the latest research' }
+          }
+        ]
+      }
+    ]
+  },
+
   /* ===== UI 导航文字 ===== */
   i18n: {
     nav: {
@@ -526,6 +628,8 @@ const DATA = {
         { href: '#other-projects', zh: '📦 小项目', en: 'Side Builds' },
         { href: '#resume', zh: '📄 简历', en: 'Resume' },
         { href: '#archive', zh: '🗂️ 归档', en: 'Archive' },
+        { href: '#resources', zh: '📚 资源', en: 'Resources' },
+        { href: '#tags', zh: '🏷️ 标签', en: 'Tags' },
         { href: '#creative', zh: '✏️ 创作', en: 'Creative' },
         { href: '#life', zh: '📸 生活', en: 'Life' },
         { href: '#toolbox', zh: '🧰 工具箱', en: 'Toolbox' },
