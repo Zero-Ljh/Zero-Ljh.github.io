@@ -17,10 +17,14 @@ Navy + Gold 设计风格，中英双语，零依赖。
 |------|------|
 | `index.html` | 骨架结构（只有容器和静态内容） |
 | `css/style.css` | 全部样式 + CSS 变量 |
-| `js/data.js` | **内容数据**（唯一数据源，改内容编辑此文件） |
-| `js/i18n.js` | 中英双语切换（`renderAll()` 驱动） |
-| `js/main.js` | 渲染引擎（从 data.js → HTML 渲染所有板块） |
-| `js/router.js` | 哈希路由（子页面导航） |
+| `js/data.js` | **内容数据**（同步回退，本地开发直接编此文件） |
+| `js/data-loader.js` | 异步加载 `content/*.json`（CMS 数据源优先，失败回退 data.js） |
+| `js/i18n.js` | 中英双语切换（`setLang()` 驱动 `renderAll()`） |
+| `js/main.js` | 渲染引擎（~20 个 render 函数） |
+| `js/router.js` | 哈希路由（14 条路由 + 子页面骨架 + 灯箱） |
+| `content/*.json` | CMS 管理的内容数据（13 个 JSON 文件） |
+| `admin/` | Sveltia CMS 面板（index.html + config.yml） |
+| `sw.js` | Service Worker（PWA 离线，缓存优先） |
 
 ---
 
@@ -28,16 +32,9 @@ Navy + Gold 设计风格，中英双语，零依赖。
 
 ### Session Start Protocol（AI 工作前必读）
 
-开始任何编码之前，按此顺序阅读以下"说明书"：
-
-1. **`CLAUDE.md`**（当前文件）—— 项目架构、代码约定
-2. **`docs/superpowers/specs/2026-04-28-vibe-coding-guide.md`** —— Vibe Coding 原则、Agent 分工方案
-3. **`docs/superpowers/specs/2026-04-28-workflow-research.md`** —— 分支策略、CI/CD、Commit 规范
-4. **`docs/superpowers/specs/2026-04-28-brittany-scope-plan.md`** —— Brittany Chiang v4 对照、功能全景
-
-根据任务类型决定是否读取：
-- **设计相关** → 读取 `docs/superpowers/specs/2026-04-28-personal-homepage-design.md`
-- **架构/数据变更** → 读取 `docs/superpowers/specs/2026-04-28-personal-homepage-tech.md`
+1. **`CLAUDE.md`**（当前文件）—— 项目架构、代码约定、Commit 规范
+2. **`README.md`** —— 功能概览、文件结构、部署说明
+3. **关键文件** —— 修改前先读 `js/data.js`（数据结构）、`js/main.js`（渲染逻辑）、`js/router.js`（路由）
 
 ### 开发流程（Vibe Coding 版本）
 
@@ -123,8 +120,8 @@ docs: 更新 README 中的项目说明
 
 ### 内容更新方式
 
-**推荐方式：编辑 `js/data.js`**
-每个板块有对应数据对象，修改后刷新页面即可。
+- **线上更新**：访问 `/admin/` → Sveltia CMS 可视化编辑 → 保存 → 自动提交部署
+- **本地开发**：编辑 `js/data.js` → 刷新浏览器 → 确认后运行同步脚本更新 `content/*.json`
 
 ### Issue 模板
 
