@@ -579,36 +579,62 @@ function showArchive() {
   const total = DATA.projects.length + DATA.miniProjects.length;
   const countLabel = lang === 'zh' ? total + ' 个项目' : total + ' projects';
 
-  const projectItems = DATA.projects.map(p => `
-    <div class="archive-item">
-      <div class="archive-year">${p.overline[lang]}</div>
-      <div class="archive-info">
-        <h3><a href="#project/${p.id}">${p.title[lang]}</a></h3>
-        <p>${p.desc[lang]}</p>
-        <div class="archive-tech">${p.tech.map(t => `<span>${t}</span>`).join('')}</div>
+  // Extract year from period field (e.g. "2025 — Present" -> "2025")
+  function extractYear(p) {
+    const periodStr = p.period ? (p.period[lang] || p.period.en || '') : '';
+    const match = periodStr.match(/(\d{4})/);
+    return match ? match[1] : '';
+  }
+
+  // Group projects by year
+  const groups = {};
+  DATA.projects.forEach(p => {
+    const year = extractYear(p);
+    if (!groups[year]) groups[year] = [];
+    groups[year].push(p);
+  });
+
+  // Sort years descending
+  const sortedYears = Object.keys(groups).sort((a, b) => b.localeCompare(a));
+
+  const projectHTML = sortedYears.map(year => `
+    <div class="archive-year-group">
+      <div class="archive-year-divider">
+        <span class="year-num">${year}</span>
+        <span class="year-line"></span>
       </div>
+      ${groups[year].map(p => `
+        <div class="archive-row">
+          <a href="#project/${p.id}" class="archive-name">${p.title[lang]}</a>
+          <span class="archive-desc">${p.desc[lang]}</span>
+          <span class="archive-tags">${p.tech.join(' · ')}</span>
+        </div>
+      `).join('')}
     </div>
   `).join('');
 
-  const miniItems = DATA.miniProjects.map(m => `
-    <div class="archive-item mini">
-      <div class="archive-year">${m.icon}</div>
-      <div class="archive-info">
-        <h3>${m.title[lang]}</h3>
-        <p>${m.desc[lang]}</p>
-        <div class="archive-tech">${m.tech}</div>
+  const miniHTML = DATA.miniProjects.length ? `
+    <div class="archive-year-group">
+      <div class="archive-year-divider">
+        <span class="year-num">${lang === 'zh' ? '更多' : 'More'}</span>
+        <span class="year-line"></span>
       </div>
+      ${DATA.miniProjects.map(m => `
+        <div class="archive-row">
+          <span class="archive-name">${m.title[lang]}</span>
+          <span class="archive-desc">${m.desc[lang]}</span>
+          <span class="archive-tags">${m.tech}</span>
+        </div>
+      `).join('')}
     </div>
-  `).join('');
+  ` : '';
 
   container.innerHTML = subPageShell(`
     <p class="sub-label" style="margin-bottom:4px">${lang === 'zh' ? '归档' : 'Archive'}</p>
     <h1 class="sub-title" style="margin-bottom:4px">${lang === 'zh' ? '全部项目' : 'All Projects'}</h1>
     <p class="sub-meta-line" style="margin-bottom:48px">${countLabel}</p>
-    <div class="archive-list">
-      ${projectItems}
-      ${DATA.miniProjects.length ? '<h2 class="archive-section-title">' + (lang === 'zh' ? '小项目' : 'Mini Projects') + '</h2>' + miniItems : ''}
-    </div>
+    ${projectHTML}
+    ${miniHTML}
   `, lang === 'zh' ? '返回' : 'Back');
   showSubView();
   var abw = container.querySelector('.sub-body-wrap');
@@ -628,13 +654,26 @@ function showResume() {
   const p = DATA.profile;
   const edu = DATA.education;
 
-  let html = `
+  /* 顶部双栏Header */
+  const headerHTML = `
     <div class="resume-header">
-      <h1 class="sub-title" style="margin-bottom:4px">${p.name[lang]}</h1>
-      <p class="resume-degree">${edu.degree[lang]}</p>
-      <p class="resume-period">${edu.period[lang]}</p>
+      <div class="resume-header-left">
+        <h1 class="resume-name">${p.name[lang]}</h1>
+        <p class="resume-header-meta">
+          ${edu.degree[lang]}<span class="resume-header-dot"> · </span>${edu.period[lang]}
+        </p>
+      </div>
+      <div class="resume-header-right">
+        <div class="resume-contact-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+          <a href="https://github.com/${p.githubUsername}" target="_blank" rel="noopener">github.com/${p.githubUsername}</a>
+        </div>
+      </div>
     </div>
+  `;
 
+  /* 教育背景 */
+  const eduHTML = `
     <div class="resume-section">
       <h2>${lang === 'zh' ? '教育背景' : 'Education'}</h2>
       <div class="resume-item">
@@ -645,54 +684,83 @@ function showResume() {
         </div>
       </div>
     </div>
+  `;
 
-    <div class="resume-section">
-      <h2>${lang === 'zh' ? '经历' : 'Experience'}</h2>`;
-
+  /* 经历（时间线） */
+  let expItems = '';
   DATA.experience.panels.forEach(panel => {
-    html += `
-      <div class="resume-item">
-        <h3>${panel.title[lang]}</h3>
-        <p class="resume-date">${panel.date[lang]}</p>
-        <ul>
-          ${panel.items[lang].map(item => `<li>${item}</li>`).join('')}
-        </ul>`;
+    expItems += `
+      <div class="resume-timeline-item">
+        <div class="resume-timeline-dot"></div>
+        <div class="resume-timeline-body">
+          <h3>${panel.title[lang]}</h3>
+          <p class="resume-date">${panel.date[lang]}</p>
+          <ul>
+            ${panel.items[lang].map(item => `<li>${item}</li>`).join('')}
+          </ul>`;
 
     if (panel.sub) {
-      html += `
-        <div class="resume-sub-item">
-          <h4>${panel.sub.title[lang]}</h4>
-          <p class="resume-date">${panel.sub.date[lang]}</p>
-          <ul>
-            ${panel.sub.items[lang].map(item => `<li>${item}</li>`).join('')}
-          </ul>
-        </div>`;
+      expItems += `
+          <div class="resume-sub-item">
+            <h4>${panel.sub.title[lang]}</h4>
+            <p class="resume-date">${panel.sub.date[lang]}</p>
+            <ul>
+              ${panel.sub.items[lang].map(item => `<li>${item}</li>`).join('')}
+            </ul>
+          </div>`;
     }
 
-    html += `</div>`;
+    expItems += `</div></div>`;
   });
 
-  html += `
-    </div>
-
+  /* 技能标签格 */
+  const skillsHTML = `
     <div class="resume-section">
       <h2>${lang === 'zh' ? '技能' : 'Skills'}</h2>
-      <div class="resume-courses">
-        ${DATA.profile.skills.map(s => `<span class="resume-tag">${s}</span>`).join('')}
+      <div class="resume-skills-grid">
+        ${p.skills.map(s => `
+          <span class="resume-skill-pill">
+            <span class="resume-skill-name">${s.name}</span>
+            ${s.label ? `<span class="resume-skill-label">${s.label[lang]}</span>` : ''}
+          </span>
+        `).join('')}
       </div>
     </div>
+  `;
 
+  /* 荣誉横排卡片 */
+  const honorsHTML = `
     <div class="resume-section">
       <h2>${lang === 'zh' ? '荣誉' : 'Honors'}</h2>
       <div class="resume-honors">
         ${DATA.honors.map(h => `
-          <div class="resume-honor-item">
+          <div class="resume-honor-card">
             <span class="resume-honor-num">${h.num}</span>
             <span class="resume-honor-label">${h.label[lang]}</span>
           </div>
         `).join('')}
       </div>
-    </div>`;
+    </div>
+  `;
+
+  const html = `
+    ${headerHTML}
+    ${eduHTML}
+    <div class="resume-grid">
+      <div class="resume-grid-left">
+        <div class="resume-section">
+          <h2>${lang === 'zh' ? '经历' : 'Experience'}</h2>
+          <div class="resume-timeline">
+            ${expItems}
+          </div>
+        </div>
+      </div>
+      <div class="resume-grid-right">
+        ${skillsHTML}
+        ${honorsHTML}
+      </div>
+    </div>
+  `;
 
   container.innerHTML = subPageShell(html, lang === 'zh' ? '返回主页' : 'Back to Home');
   showSubView();

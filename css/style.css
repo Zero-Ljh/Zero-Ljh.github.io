@@ -502,20 +502,6 @@ footer .footer-tagline{font-family:var(--font-serif);font-size:13px;color:var(--
 .sub-content img:hover{box-shadow:0 8px 30px rgba(0,0,0,0.1);transform:translateY(-2px)}
 .sub-content img + em,.project-screenshot + em{display:block;text-align:center;font-family:var(--font-serif);font-size:13px;color:var(--sub-muted);margin-top:-16px;margin-bottom:28px;font-style:italic}
 
-/* ---- Archive Page ---- */
-.archive-list{display:flex;flex-direction:column;gap:0}
-.archive-item{display:grid;grid-template-columns:100px 1fr;gap:24px;padding:20px 0;border-bottom:1px solid var(--sub-border);transition:background 0.2s;border-radius:4px;padding-left:12px;margin-left:-12px}
-.archive-item:hover{background:rgba(var(--sub-accent-rgb),0.04)}
-.archive-item.mini{opacity:0.8}
-.archive-year{font-family:var(--font-mono);font-size:12px;color:var(--sub-accent);padding-top:2px;font-weight:500}
-.archive-info h3{margin:0 0 6px;font-family:var(--font-display);font-size:18px;font-weight:600}
-.archive-info h3 a{color:var(--sub-heading);text-decoration:none;transition:var(--transition)}
-.archive-info h3 a:hover{color:var(--sub-accent)}
-.archive-info p{font-size:14px;color:var(--sub-muted);line-height:1.6;margin:0 0 8px}
-.archive-tech{display:flex;gap:8px;flex-wrap:wrap}
-.archive-tech span{font-family:var(--font-mono);font-size:10px;padding:2px 8px;border-radius:10px;background:rgba(var(--sub-accent-rgb),0.08);color:var(--sub-accent)}
-.archive-section-title{font-family:var(--font-display);font-size:20px;color:var(--sub-heading);margin:32px 0 8px;padding-top:16px}
-
 /* ---- Resume Page ---- */
 .resume-header{margin-bottom:40px}
 .resume-degree{font-size:var(--fz-lg);color:var(--sub-text);margin-bottom:4px;font-weight:500}
@@ -687,15 +673,25 @@ footer .footer-tagline{font-family:var(--font-serif);font-size:13px;color:var(--
   --sub-topbar-bg: rgba(8,8,12,0.9);
   --sub-toggle-bg: #14141a;
 }
-.sub-theme-archive .sub-title{font-size:clamp(32px,5vw,52px);letter-spacing:-0.03em}
+.sub-theme-archive .sub-title{font-size:clamp(40px,6vw,64px);letter-spacing:-0.03em}
 .sub-theme-archive .sub-title::after{display:none}
 .sub-theme-archive .sub-meta-line{background:transparent;border:none;padding:0;margin-bottom:48px}
-.sub-theme-archive .archive-item{grid-template-columns:80px 1fr;padding:24px 0}
-.sub-theme-archive .archive-item:hover{background:rgba(255,255,255,0.02)}
-.sub-theme-archive .archive-year{color:var(--sub-muted);font-size:11px}
-.sub-theme-archive .archive-info h3 a{font-size:20px}
-.sub-theme-archive .archive-tech span{background:rgba(255,255,255,0.03);color:var(--sub-text)}
-.sub-theme-archive .archive-section-title{font-size:16px}
+
+/* Archive — year divider */
+.sub-theme-archive .archive-year-group{margin-bottom:48px}
+.sub-theme-archive .archive-year-divider{display:flex;align-items:center;gap:16px;margin-bottom:24px}
+.sub-theme-archive .year-num{font-family:var(--font-display);font-size:48px;color:var(--sub-accent);line-height:1;font-weight:700}
+.sub-theme-archive .year-line{flex:1;height:1px;background:var(--sub-border)}
+
+/* Archive — project row */
+.sub-theme-archive .archive-row{display:grid;grid-template-columns:200px 1fr auto;gap:24px;padding:16px 20px;align-items:start;border-radius:4px;transition:var(--transition);cursor:default}
+.sub-theme-archive .archive-row:hover{background:rgba(255,255,255,0.02);translate:8px 0}
+.sub-theme-archive .archive-row:nth-child(odd){margin-left:40px}
+.sub-theme-archive .archive-name{font-size:18px;font-weight:600;color:var(--sub-heading);text-decoration:none;line-height:1.4}
+.sub-theme-archive .archive-name:hover{color:var(--sub-accent)}
+.sub-theme-archive .archive-desc{font-size:14px;color:var(--sub-text);line-height:1.5}
+.sub-theme-archive .archive-tags{font-size:12px;color:var(--sub-muted);white-space:nowrap;font-family:var(--font-mono)}
+
 .sub-theme-archive .sub-nav a{color:var(--sub-text);border-color:var(--sub-border)}
 .sub-theme-archive .sub-nav a:hover{color:var(--sub-heading);border-color:rgba(255,255,255,0.1)}
 
@@ -707,24 +703,6 @@ footer .footer-tagline{font-family:var(--font-serif);font-size:13px;color:var(--
 .sub-theme-print .sub-lang-toggle{background:#f0ede6}
 .sub-theme-print .sub-lang-btn{color:#8b8b96}
 .sub-theme-print .sub-lang-btn.active{background:#b8953e;color:white}
-.sub-theme-print .sub-title{color:#1a1a2e;font-family:var(--font-display);font-size:clamp(32px,5vw,48px)}
-.sub-theme-print .sub-title::after{background:#b8953e;width:40px}
-.sub-theme-print .sub-meta-line{color:#8b8b96;background:transparent;border:none;padding:0;margin-bottom:36px;font-size:11px}
-.sub-theme-print .resume-section{border-bottom:1px solid #e8e4dc}
-.sub-theme-print .resume-section h2{color:#b8953e;font-size:11px;letter-spacing:2px}
-.sub-theme-print .resume-item h3{color:#1a1a2e;font-size:18px}
-.sub-theme-print .resume-item h3 .location{color:#b8953e}
-.sub-theme-print .resume-sub-item{border-left-color:#e8e4dc}
-.sub-theme-print .resume-sub-item h4{color:#1a1a2e}
-.sub-theme-print .resume-date{color:#8b8b96}
-.sub-theme-print .resume-item-desc{color:#5a5a6e}
-.sub-theme-print .resume-item ul li{color:#3d3d4a}
-.sub-theme-print .resume-item ul li::before{color:#b8953e}
-.sub-theme-print .resume-tag{background:rgba(184,149,62,0.08);color:#b8953e;border-color:rgba(184,149,62,0.2)}
-.sub-theme-print .resume-honor-item{background:#faf8f5;border-color:#e8e4dc}
-.sub-theme-print .resume-honor-item:hover{border-color:rgba(184,149,62,0.3);background:rgba(184,149,62,0.04)}
-.sub-theme-print .resume-honor-num{color:#b8953e}
-.sub-theme-print .resume-honor-label{color:#8b8b96}
 .sub-theme-print .sub-nav{border-top-color:#e8e4dc}
 .sub-theme-print .sub-nav a{color:#3d3d4a;border-color:#e8e4dc}
 .sub-theme-print .sub-nav a:hover{border-color:rgba(184,149,62,0.3);background:rgba(184,149,62,0.04)}
@@ -733,6 +711,275 @@ footer .footer-tagline{font-family:var(--font-serif);font-size:13px;color:var(--
 .sub-theme-print .sub-back-top a:hover{color:#b8953e}
 .sub-theme-print .sub-share{color:#8b8b96;border-color:#e8e4dc}
 .sub-theme-print .sub-share:hover{color:#b8953e;border-color:#b8953e}
+
+/* Resume Header — Dual Column */
+.sub-theme-print .resume-header{
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:32px;
+  margin-bottom:48px;
+  align-items:start
+}
+.sub-theme-print .resume-name{
+  font-family:var(--font-display);
+  font-size:clamp(36px,5vw,52px);
+  color:#1a1a2e;
+  line-height:1.15;
+  margin-bottom:8px
+}
+.sub-theme-print .resume-header-meta{
+  font-size:15px;
+  color:#8b8b96;
+  line-height:1.5
+}
+.sub-theme-print .resume-header-dot{color:#b8953e}
+.sub-theme-print .resume-header-right{
+  text-align:right;
+  padding-top:6px
+}
+.sub-theme-print .resume-contact-item{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  font-size:14px;
+  color:#5a5a6e;
+  margin-bottom:6px
+}
+.sub-theme-print .resume-contact-item svg{color:#b8953e;flex-shrink:0}
+.sub-theme-print .resume-contact-item a{
+  color:#5a5a6e;
+  text-decoration:none;
+  transition:color 0.2s
+}
+.sub-theme-print .resume-contact-item a:hover{color:#b8953e}
+
+/* Section Containers */
+.sub-theme-print .resume-section{
+  border-bottom:1px solid #e8e4dc;
+  padding-bottom:24px;
+  margin-bottom:28px
+}
+.sub-theme-print .resume-section:last-child{
+  border-bottom:none;
+  padding-bottom:0;
+  margin-bottom:0
+}
+.sub-theme-print .resume-section h2{
+  color:#b8953e;
+  font-size:10px;
+  letter-spacing:2.5px;
+  text-transform:uppercase;
+  margin-bottom:16px;
+  font-family:var(--font-sans);
+  font-weight:600
+}
+
+/* Resume Items (Education etc.) */
+.sub-theme-print .resume-item{
+  margin-bottom:20px
+}
+.sub-theme-print .resume-item:last-child{margin-bottom:0}
+.sub-theme-print .resume-item h3{
+  color:#1a1a2e;
+  font-size:18px;
+  font-weight:600;
+  margin-bottom:4px
+}
+.sub-theme-print .resume-item h3 .location{color:#b8953e}
+.sub-theme-print .resume-item-desc{
+  color:#5a5a6e;
+  font-size:14px;
+  line-height:1.6;
+  margin-bottom:10px
+}
+
+/* Course / Skill Tags */
+.sub-theme-print .resume-courses{
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px
+}
+.sub-theme-print .resume-tag{
+  background:rgba(184,149,62,0.08);
+  color:#b8953e;
+  border:1px solid rgba(184,149,62,0.2);
+  font-size:11px;
+  padding:3px 10px;
+  border-radius:2px
+}
+
+/* Grid: Experience (3) + Skills (2) */
+.sub-theme-print .resume-grid{
+  display:grid;
+  grid-template-columns:3fr 2fr;
+  gap:48px
+}
+
+/* Timeline */
+.sub-theme-print .resume-timeline-item{
+  display:grid;
+  grid-template-columns:12px 1fr;
+  gap:16px;
+  position:relative;
+  padding-bottom:24px
+}
+.sub-theme-print .resume-timeline-item:last-child{padding-bottom:0}
+.sub-theme-print .resume-timeline-dot{
+  width:10px;
+  height:10px;
+  border-radius:50%;
+  background:#b8953e;
+  margin-top:6px;
+  position:relative;
+  z-index:1
+}
+.sub-theme-print .resume-timeline-item::before{
+  content:'';
+  position:absolute;
+  left:4.5px;
+  top:16px;
+  bottom:0;
+  width:1px;
+  background:#e8e4dc
+}
+.sub-theme-print .resume-timeline-item:last-child::before{display:none}
+.sub-theme-print .resume-timeline-body h3{
+  color:#1a1a2e;
+  font-size:16px;
+  font-weight:600;
+  margin-bottom:2px
+}
+.sub-theme-print .resume-timeline-body h3 .location{color:#b8953e}
+.sub-theme-print .resume-date{
+  color:#8b8b96;
+  font-size:12px;
+  margin-bottom:6px
+}
+.sub-theme-print .resume-timeline-body ul{
+  list-style:none;
+  padding:0;
+  margin:0
+}
+.sub-theme-print .resume-timeline-body ul li{
+  color:#3d3d4a;
+  font-size:14px;
+  line-height:1.5;
+  margin-bottom:4px;
+  padding-left:14px;
+  position:relative
+}
+.sub-theme-print .resume-timeline-body ul li::before{
+  content:'—';
+  position:absolute;
+  left:0;
+  color:#b8953e
+}
+
+/* Sub Item (nested experience) */
+.sub-theme-print .resume-sub-item{
+  margin-top:12px;
+  padding-left:12px;
+  border-left:2px solid #e8e4dc
+}
+.sub-theme-print .resume-sub-item h4{
+  color:#1a1a2e;
+  font-size:15px;
+  font-weight:600;
+  margin-bottom:2px
+}
+
+/* Skills Pill Grid */
+.sub-theme-print .resume-skills-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px
+}
+.sub-theme-print .resume-skill-pill{
+  background:rgba(184,149,62,0.06);
+  border:1px solid rgba(184,149,62,0.15);
+  padding:8px 12px;
+  border-radius:3px;
+  display:flex;
+  flex-direction:column;
+  gap:2px;
+  transition:border-color 0.2s,background 0.2s
+}
+.sub-theme-print .resume-skill-pill:hover{
+  border-color:rgba(184,149,62,0.3);
+  background:rgba(184,149,62,0.1)
+}
+.sub-theme-print .resume-skill-name{
+  color:#1a1a2e;
+  font-size:13px;
+  font-weight:500
+}
+.sub-theme-print .resume-skill-label{
+  color:#b8953e;
+  font-size:10px;
+  letter-spacing:0.5px
+}
+
+/* Honors Horizontal Cards */
+.sub-theme-print .resume-honors{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap
+}
+.sub-theme-print .resume-honor-card{
+  flex:1;
+  min-width:100px;
+  background:#faf8f5;
+  border:1px solid #e8e4dc;
+  padding:16px;
+  text-align:center;
+  border-radius:3px;
+  transition:border-color 0.2s,background 0.2s
+}
+.sub-theme-print .resume-honor-card:hover{
+  border-color:rgba(184,149,62,0.3);
+  background:rgba(184,149,62,0.04)
+}
+.sub-theme-print .resume-honor-num{
+  display:block;
+  color:#b8953e;
+  font-size:22px;
+  font-weight:700;
+  margin-bottom:4px;
+  font-family:var(--font-display)
+}
+.sub-theme-print .resume-honor-label{
+  color:#8b8b96;
+  font-size:11px;
+  line-height:1.4
+}
+
+/* Print Styles */
+@media print{
+  .sub-theme-print .sub-top-bar,
+  .sub-theme-print .sub-back-top,
+  .sub-theme-print .sub-share,
+  .sub-theme-print .sub-lang-toggle{display:none!important}
+  .sub-theme-print .resume-grid{page-break-inside:avoid}
+  .sub-theme-print .resume-section{page-break-inside:avoid}
+}
+
+/* Mobile: stack dual column into single */
+@media(max-width:768px){
+  .sub-theme-print .resume-header{
+    grid-template-columns:1fr;
+    gap:16px
+  }
+  .sub-theme-print .resume-header-right{
+    text-align:left;
+    padding-top:0
+  }
+  .sub-theme-print .resume-grid{
+    grid-template-columns:1fr;
+    gap:32px
+  }
+  .sub-theme-print .resume-honors{flex-direction:column}
+  .sub-theme-print .resume-honor-card{min-width:auto}
+}
 
 /* Library — Resources (navy + gold, organized) */
 .sub-body-wrap.sub-theme-library{
@@ -946,12 +1193,14 @@ footer .footer-tagline{font-family:var(--font-serif);font-size:13px;color:var(--
   .search-results{max-height:60vh}
   .reading-item{grid-template-columns:1fr;gap:10px}
   .reading-tags{justify-content:flex-start}
-  .archive-item{grid-template-columns:1fr;gap:6px}
-  .archive-year{font-size:11px}
+  .sub-theme-archive .archive-row{grid-template-columns:1fr;gap:6px;padding:16px 0}
+  .sub-theme-archive .archive-row:nth-child(odd){margin-left:0}
+  .sub-theme-archive .archive-row:hover{translate:4px 0}
+  .sub-theme-archive .year-num{font-size:36px}
+  .sub-theme-archive .archive-year-group{margin-bottom:36px}
   .sub-page .sub-body-wrap{padding:60px 28px 100px}
   .hero::before{width:300px;height:300px;top:-20%;right:-30%}
   .hero::after{width:200px;height:200px;top:-80px;right:-60px}
-  .sub-theme-archive .archive-item{grid-template-columns:1fr;gap:6px}
 }
 
 @media(max-width:480px){
