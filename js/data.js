@@ -546,7 +546,7 @@ const DATA = {
       { src: 'assets/gallery/02.png', thumb: 'assets/gallery/02.png', title: { zh: '作品 02', en: 'Work 02' }, category: 'aigc', width: 800, height: 600 },
       { src: 'assets/gallery/03.jpeg', thumb: 'assets/gallery/03.jpeg', title: { zh: '作品 03', en: 'Work 03' }, category: 'aigc', width: 800, height: 600 },
       { src: 'assets/gallery/04.png', thumb: 'assets/gallery/04.png', title: { zh: '作品 04', en: 'Work 04' }, category: 'aigc', width: 800, height: 600 },
-      { src: 'assets/gallery/05.jpeg', thumb: 'assets/gallery/05.jpeg', title: { zh: '作品 05', en: 'Work 05' }, category: 'aigc', width: 800, height: 600 }
+      { src: 'assets/gallery/05.jpeg', thumb: 'assets/gallery/05.jpeg', title: { zh: '作品 05', en: 'Work 05' }, category: 'photo', width: 800, height: 600 }
     ]
   },
 
