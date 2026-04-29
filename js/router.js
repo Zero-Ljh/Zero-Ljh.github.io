@@ -56,8 +56,8 @@ function showMainView() {
   document.body.style.backgroundColor = '';
   window.scrollTo(0, 0);
 
-  // 确保导航栏在主页正常显示
-  if (nav) { nav.classList.remove('nav-hidden'); }
+  // 主页显示导航栏
+  if (nav) nav.style.display = '';
 
   // 过渡完成后清理 sub 内容
   setTimeout(() => {
@@ -77,8 +77,8 @@ function showSubView() {
   document.body.style.backgroundColor = '#f6f3ef';
   window.scrollTo(0, 0);
 
-  // 确保导航栏在子页面可见
-  if (nav) { nav.classList.remove('nav-hidden'); nav.classList.add('scrolled'); }
+  // 子页面隐藏导航栏，纯阅读模式
+  if (nav) nav.style.display = 'none';
 }
 
 /* ===== 子页面骨架 ===== */
