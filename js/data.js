@@ -28,10 +28,17 @@ const DATA = {
       en: 'Currently studying deep learning &amp; LLM deployment/fine-tuning. Box-to-box midfielder — campus freshman cup 2nd place.'
     },
     seeking: {
-      zh: '🔬 我正在寻找 AI/机器人方向的课题组，希望能跟着导师动手做研究。如果你在招收本科生，我很想聊聊。',
-      en: '🔬 I am looking for a research lab in AI/Robotics to join as an undergraduate. If you are recruiting, I would love to chat.'
+      zh: '🔬 寻找 AI/机器人方向的课题组——偏好工程方向，起初希望导师手把手引导，适应后能逐步独立。如果你在招收本科生，我很想聊聊。',
+      en: '🔬 Seeking an AI/Robotics research lab — prefer engineering over pure theory, and value mentorship with growing independence. If you are recruiting undergraduates, I would love to chat.'
     },
-    skills: ['Python', 'C++', 'LLM / Deep Learning', 'Vibe Coding', 'AI 工具链', 'Robotics (学习中)'],
+    skills: [
+      { name: 'Python', level: 70 },
+      { name: 'C++', level: 50 },
+      { name: 'LLM / Deep Learning', level: 55 },
+      { name: 'Vibe Coding', level: 65 },
+      { name: 'AI 工具链', level: 60 },
+      { name: 'Robotics', level: 35, label: { zh: '学习中', en: 'Learning' } }
+    ],
     resumeUrl: 'assets/resume.pdf',
     githubUsername: 'Zero-Ljh'
   },
@@ -154,7 +161,19 @@ const DATA = {
         en: 'Working with the team on robotics development. Currently learning the fundamentals of embedded systems, sensor integration, and robot control. This is where I am getting my hands dirty with real hardware.'
       },
       tech: ['Robotics', 'Embedded', 'Team'],
-      status: { zh: '进行中', en: 'Ongoing' }
+      status: { zh: '进行中', en: 'Ongoing' },
+      learnings: {
+        zh: ['嵌入式编程基础', '传感器数据采集与处理', '团队协作与版本控制', '从硬件到软件的完整流程'],
+        en: ['Embedded programming fundamentals', 'Sensor data acquisition and processing', 'Team collaboration and version control', 'End-to-end hardware-to-software workflow']
+      },
+      challenges: {
+        zh: '最大的挑战是从纯软件思维切换到硬件思维——需要考虑物理限制、供电、实时性等问题。',
+        en: 'The biggest challenge was switching from a pure software mindset to hardware thinking — physical constraints, power, real-time requirements all matter.'
+      },
+      timeline: {
+        zh: '2025年9月加入 → 2025年11月完成基础培训 → 至今参与系统开发',
+        en: 'Joined Sep 2025 → Completed basic training Nov 2025 → Participating in system development'
+      }
     },
     {
       id: 'python-learning',
@@ -164,7 +183,11 @@ const DATA = {
         zh: '自学 Python 基础，包括数据结构、控制流、函数和入门项目。为 AI/ML 打基础。下一步：PyTorch。',
         en: 'Self-taught Python basics including data structures, control flow, functions, and introductory projects. Building a foundation for AI/ML work. Next step: PyTorch.'
       },
-      tech: ['Python']
+      tech: ['Python'],
+      learnings: {
+        zh: ['数据结构与算法基础', '函数式编程思维', '文件操作与数据处理', '简单爬虫与自动化脚本'],
+        en: ['Data structures and algorithms basics', 'Functional programming mindset', 'File I/O and data processing', 'Simple web scraping and automation scripts']
+      }
     }
   ],
 

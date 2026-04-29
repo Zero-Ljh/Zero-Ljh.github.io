@@ -69,9 +69,23 @@ function renderAbout() {
       <p>${p.about[1][lang]}</p>
       <p style="font-size:var(--fz-md);color:var(--dark-slate);border-left:2px solid var(--gold);padding-left:16px;margin-top:24px">${p.highlight[lang]}</p>
       <p style="font-size:var(--fz-md);color:var(--gold);border:1px solid rgba(212,162,89,0.2);border-radius:var(--radius);padding:14px 18px;margin-top:20px;background:rgba(212,162,89,0.04);line-height:1.7">${p.seeking[lang]}</p>
-      <ul class="tech-grid">
-        ${p.skills.map(s => `<li>${s}</li>`).join('')}
-      </ul>
+      <div class="skills-bars">
+        ${p.skills.map(s => {
+          const name = typeof s === 'string' ? s : s.name;
+          const level = typeof s === 'object' ? s.level : 60;
+          const label = (typeof s === 'object' && s.label) ? s.label[lang] : '';
+          return `
+            <div class="skill-item">
+              <div class="skill-info">
+                <span class="skill-name">${name}</span>
+                ${label ? `<span class="skill-label">${label}</span>` : ''}
+              </div>
+              <div class="skill-bar" style="--target:${level}%">
+                <div class="skill-fill"></div>
+              </div>
+            </div>`;
+        }).join('')}
+      </div>
     </div>
     <div class="about-image">
       <div class="frame">
@@ -106,33 +120,29 @@ function renderReading() {
 function renderExperience() {
   const container = document.getElementById('exp-container');
   const lang = currentLang;
-  const exp = DATA.experience;
 
-  let html = `<div class="exp-tabs" style="position:relative;">
-    <div class="exp-indicator" id="exp-indicator" style="top:0;"></div>`;
-
-  exp.tabs[lang].forEach((tab, i) => {
-    html += `<button class="exp-tab${i === 0 ? ' active' : ''}" onclick="switchExp(${i})">${tab}</button>`;
-  });
-
-  html += `</div><div class="exp-panels">`;
-
-  exp.panels.forEach((panel, i) => {
-    html += `<div class="exp-panel${i === 0 ? ' active' : ''}" id="exp-${i}">
-      <h3>${panel.title[lang]}</h3>
-      <p class="date">${panel.date[lang]}</p>
-      <ul>${panel.items[lang].map(item => `<li>${item}</li>`).join('')}</ul>`;
-
+  let html = '<div class="timeline">';
+  DATA.experience.panels.forEach((panel) => {
+    html += `
+      <div class="timeline-item">
+        <div class="timeline-date">${panel.date[lang]}</div>
+        <div class="timeline-content">
+          <h3>${panel.title[lang]}</h3>
+          <ul>${panel.items[lang].map(item => `<li>${item}</li>`).join('')}</ul>
+        </div>
+      </div>`;
     if (panel.sub) {
-      html += `<br><h3>${panel.sub.title[lang]}</h3>
-        <p class="date">${panel.sub.date[lang]}</p>
-        <ul>${panel.sub.items[lang].map(item => `<li>${item}</li>`).join('')}</ul>`;
+      html += `
+        <div class="timeline-item sub">
+          <div class="timeline-date">${panel.sub.date[lang]}</div>
+          <div class="timeline-content">
+            <h3>${panel.sub.title[lang]}</h3>
+            <ul>${panel.sub.items[lang].map(item => `<li>${item}</li>`).join('')}</ul>
+          </div>
+        </div>`;
     }
-
-    html += `</div>`;
   });
-
-  html += `</div>`;
+  html += '</div>';
   container.innerHTML = html;
 }
 
@@ -337,6 +347,11 @@ function renderAll() {
   renderCreative();
   renderLife();
   fetchGitHubRepos();
+
+  // 技能条动画：等 DOM 渲染完成后再触发
+  setTimeout(() => {
+    document.querySelectorAll('.skill-bar').forEach(bar => bar.classList.add('visible'));
+  }, 300);
 }
 
 /* ===== Scroll Reveal ===== */
@@ -375,28 +390,6 @@ const revealObserver = new IntersectionObserver(entries => {
     });
   }, 100));
 })();
-
-/* ===== Experience Tab ===== */
-function switchExp(index) {
-  const tabs = document.querySelectorAll('.exp-tab');
-  const panels = document.querySelectorAll('.exp-panel');
-  const indicator = document.getElementById('exp-indicator');
-  if (!tabs.length) return;
-
-  tabs.forEach((t, i) => t.classList.toggle('active', i === index));
-  panels.forEach((p, i) => p.classList.toggle('active', i === index));
-
-  if (indicator) {
-    if (window.innerWidth <= 768) {
-      indicator.style.width = tabs[index].offsetWidth + 'px';
-      indicator.style.left = tabs[index].offsetLeft + 'px';
-    } else {
-      indicator.style.top = index * 40 + 'px';
-      indicator.style.width = '2px';
-      indicator.style.left = '-2px';
-    }
-  }
-}
 
 /* ===== Dropdown ===== */
 function toggleDropdown() {
@@ -661,9 +654,4 @@ document.addEventListener('DOMContentLoaded', () => {
   createProgressBar();
   heroEntry();
   document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale').forEach(el => revealObserver.observe(el));
-  // 响应式 Tab 指示器
-  window.addEventListener('resize', () => {
-    const active = Array.from(document.querySelectorAll('.exp-tab')).findIndex(t => t.classList.contains('active'));
-    if (active >= 0) switchExp(active);
-  });
 });

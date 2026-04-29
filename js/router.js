@@ -227,6 +227,30 @@ function showProjectDetail(id) {
     extras += `</div>`;
   }
 
+  // 学到了什么
+  if (project.learnings && project.learnings[lang].length) {
+    extras += `<div class="project-detail-section">
+      <h3>${lang === 'zh' ? '学到了什么' : 'What I Learned'}</h3>
+      <div class="project-learnings">${project.learnings[lang].map(l => `<span>${l}</span>`).join('')}</div>
+    </div>`;
+  }
+
+  // 遇到的挑战
+  if (project.challenges && project.challenges[lang]) {
+    extras += `<div class="project-detail-section">
+      <h3>${lang === 'zh' ? '遇到的挑战' : 'Challenges'}</h3>
+      <div class="project-challenge">${project.challenges[lang]}</div>
+    </div>`;
+  }
+
+  // 时间线
+  if (project.timeline && project.timeline[lang]) {
+    extras += `<div class="project-detail-section">
+      <h3>${lang === 'zh' ? '时间线' : 'Timeline'}</h3>
+      <p class="project-timeline">${project.timeline[lang]}</p>
+    </div>`;
+  }
+
   // 技术栈
   extras += `<div class="sub-tags tech-badges">${project.tech.map(t => `<span>${t}</span>`).join('')}</div>`;
 
