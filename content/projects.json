@@ -1,0 +1,179 @@
+{
+  "projects": [
+    {
+      "id": "bailian-robot",
+      "featured": true,
+      "overline": {
+        "zh": "进行中",
+        "en": "Ongoing"
+      },
+      "title": {
+        "zh": "百炼机器人项目",
+        "en": "Bailian Robotics Project"
+      },
+      "desc": {
+        "zh": "与团队一起进行机器人开发。目前正在学习嵌入式系统基础、传感器集成和机器人控制。这是我在真实硬件上动手实践的地方。",
+        "en": "Working with the team on robotics development. Currently learning the fundamentals of embedded systems, sensor integration, and robot control. This is where I am getting my hands dirty with real hardware."
+      },
+      "tech": [
+        "Robotics",
+        "Embedded",
+        "Team"
+      ],
+      "status": {
+        "zh": "进行中",
+        "en": "Ongoing"
+      },
+      "period": {
+        "zh": "2025年 — 至今",
+        "en": "2025 — Present"
+      },
+      "role": {
+        "zh": "团队干员",
+        "en": "Team Member"
+      },
+      "learnings": {
+        "zh": [
+          "嵌入式编程基础",
+          "传感器数据采集与处理",
+          "团队协作与版本控制",
+          "从硬件到软件的完整流程"
+        ],
+        "en": [
+          "Embedded programming fundamentals",
+          "Sensor data acquisition and processing",
+          "Team collaboration and version control",
+          "End-to-end hardware-to-software workflow"
+        ]
+      },
+      "challenges": {
+        "zh": "最大的挑战是从纯软件思维切换到硬件思维——需要考虑物理限制、供电、实时性等问题。",
+        "en": "The biggest challenge was switching from a pure software mindset to hardware thinking — physical constraints, power, real-time requirements all matter."
+      },
+      "timeline": {
+        "zh": "2025年9月加入 → 2025年11月完成基础培训 → 至今参与系统开发",
+        "en": "Joined Sep 2025 → Completed basic training Nov 2025 → Participating in system development"
+      },
+      "links": [
+        {
+          "url": "#about",
+          "label": {
+            "zh": "了解团队",
+            "en": "About Team"
+          }
+        }
+      ]
+    },
+    {
+      "id": "python-learning",
+      "overline": {
+        "zh": "自学",
+        "en": "Self-Study"
+      },
+      "title": {
+        "zh": "Python 学习之旅",
+        "en": "Python Learning Journey"
+      },
+      "desc": {
+        "zh": "自学 Python 基础，包括数据结构、控制流、函数和入门项目。为 AI/ML 打基础。下一步：PyTorch。",
+        "en": "Self-taught Python basics including data structures, control flow, functions, and introductory projects. Building a foundation for AI/ML work. Next step: PyTorch."
+      },
+      "tech": [
+        "Python"
+      ],
+      "status": {
+        "zh": "已完成",
+        "en": "Completed"
+      },
+      "period": {
+        "zh": "2025年 — 2026年",
+        "en": "2025 — 2026"
+      },
+      "role": {
+        "zh": "个人项目",
+        "en": "Personal Project"
+      },
+      "learnings": {
+        "zh": [
+          "数据结构与算法基础",
+          "函数式编程思维",
+          "文件操作与数据处理",
+          "简单爬虫与自动化脚本"
+        ],
+        "en": [
+          "Data structures and algorithms basics",
+          "Functional programming mindset",
+          "File I/O and data processing",
+          "Simple web scraping and automation scripts"
+        ]
+      },
+      "challenges": {
+        "zh": "从零开始学编程的最大挑战不是语法，而是\"编程思维\"——把问题分解成可执行的步骤。刚开始连 for 循环都想不明白，但坚持写小练习后慢慢有了感觉。",
+        "en": "The biggest challenge learning programming from scratch wasn't syntax — it was 'computational thinking': breaking problems into executable steps. I couldn't even understand for-loops at first, but persistence with small exercises slowly built intuition."
+      },
+      "timeline": {
+        "zh": "2025年10月自学基础语法 → 2025年12月完成第一个爬虫 → 2026年1月搭建自动化脚本 → 进行中：用 Python 学深度学习",
+        "en": "Oct 2025 learned basic syntax → Dec 2025 completed first scraper → Jan 2026 built automation scripts → Ongoing: learning DL with Python"
+      },
+      "links": [
+        {
+          "url": "https://github.com/Zero-Ljh",
+          "label": {
+            "zh": "GitHub 主页",
+            "en": "GitHub Profile"
+          }
+        }
+      ]
+    }
+  ],
+  "miniProjects": [
+    {
+      "icon": "01",
+      "title": {
+        "zh": "本个人主页",
+        "en": "This Portfolio Website"
+      },
+      "desc": {
+        "zh": "纯手工搭建的 HTML/CSS/JS 个人主页。双语、响应式、零依赖。通过 GitHub Pages 部署。",
+        "en": "Built from scratch with HTML/CSS/JS. Bilingual, responsive, zero dependencies. Deployed via GitHub Pages."
+      },
+      "tech": "HTML · CSS · JS"
+    },
+    {
+      "icon": "02",
+      "title": {
+        "zh": "C++ 复习工作流",
+        "en": "C++ Review Workflow"
+      },
+      "desc": {
+        "zh": "搭建了一套自动化复习流程，结合 AI 辅助理解和练习，提高学习效率。",
+        "en": "Built an automated review workflow combining AI-assisted understanding and practice to boost learning efficiency."
+      },
+      "tech": "C++ · AI 工具链"
+    },
+    {
+      "icon": "03",
+      "title": {
+        "zh": "机器人团队任务",
+        "en": "Robotics Team Tasks"
+      },
+      "desc": {
+        "zh": "在百炼机器人团队参与系统开发。随学习深入会持续更新。",
+        "en": "Contributing to robotics system development at Bailian team. More details coming as I learn more."
+      },
+      "tech": "Robotics · C"
+    },
+    {
+      "icon": "04",
+      "title": {
+        "zh": "Python 简单爬虫",
+        "en": "Simple Python Web Scraper"
+      },
+      "desc": {
+        "zh": "用 Python 写了第一个爬虫程序，批量获取网页数据。虽然基本是跟着教程做的，但跑通的那一刻还是很兴奋。",
+        "en": "Wrote my first web scraper in Python to batch-fetch web data. Mostly followed a tutorial, but the moment it actually worked was thrilling."
+      },
+      "tech": "Python"
+    }
+  ]
+}

@@ -1,0 +1,110 @@
+{
+  "learningMilestones": {
+    "heading": {
+      "zh": "学习里程碑",
+      "en": "Learning Milestones"
+    },
+    "intro": {
+      "zh": "从零开始的成长之路",
+      "en": "My learning journey from scratch"
+    },
+    "milestones": [
+      {
+        "date": "2025.09",
+        "icon": "🎓",
+        "title": {
+          "zh": "大学入学",
+          "en": "University Started"
+        },
+        "desc": {
+          "zh": "进入武汉科技大学人工智能科创专业，开启大学生活",
+          "en": "Started at WUST, AI Innovation program"
+        }
+      },
+      {
+        "date": "2025.09-10",
+        "icon": "🐍",
+        "title": {
+          "zh": "自学 Python 基础",
+          "en": "Python Basics"
+        },
+        "desc": {
+          "zh": "从零学习 Python：基础语法、数据结构、简单项目",
+          "en": "Learned Python from scratch: syntax, data structures, mini projects"
+        }
+      },
+      {
+        "date": "2025.10",
+        "icon": "⚽",
+        "title": {
+          "zh": "新生杯二等奖",
+          "en": "Freshman Cup 2nd Place"
+        },
+        "desc": {
+          "zh": "代表学院参加新生杯足球赛，扫荡型中场，获得二等奖",
+          "en": "Represented the college in the freshman football cup, box-to-box midfielder, won 2nd place"
+        }
+      },
+      {
+        "date": "2025.11",
+        "icon": "🤖",
+        "title": {
+          "zh": "加入百炼机器人团队",
+          "en": "Joined Bailian Robotics"
+        },
+        "desc": {
+          "zh": "通过选拔加入机器人团队，开始学习嵌入式系统与机器人控制",
+          "en": "Joined the robotics team, started learning embedded systems and robot control"
+        }
+      },
+      {
+        "date": "2025.12",
+        "icon": "🧠",
+        "title": {
+          "zh": "关注 AI 前沿",
+          "en": "AI Frontier Exploration"
+        },
+        "desc": {
+          "zh": "开始系统关注大模型进展，学习 Transformer 原理与 AI 工具链",
+          "en": "Started following LLM developments, learning Transformer architecture and AI toolchain"
+        }
+      },
+      {
+        "date": "2026.01-03",
+        "icon": "🔧",
+        "title": {
+          "zh": "掌握 Vibe Coding",
+          "en": "Mastering Vibe Coding"
+        },
+        "desc": {
+          "zh": "使用 Claude Code 等 AI 工具高效开发，搭建本个人主页",
+          "en": "Learned AI-assisted development with Claude Code, built this portfolio"
+        }
+      },
+      {
+        "date": "2026.04",
+        "icon": "📝",
+        "title": {
+          "zh": "大模型部署与微调",
+          "en": "LLM Deployment & Fine-Tuning"
+        },
+        "desc": {
+          "zh": "报名学习大模型部署微调课程，动手实践 LoRA 微调",
+          "en": "Enrolled in LLM deployment & fine-tuning course, hands-on LoRA practice"
+        }
+      },
+      {
+        "date": "2026.04",
+        "icon": "🔥",
+        "title": {
+          "zh": "开始学 PyTorch",
+          "en": "Starting PyTorch"
+        },
+        "desc": {
+          "zh": "开始学习 PyTorch 深度学习框架，为模型训练打基础",
+          "en": "Beginning PyTorch deep learning framework for model training"
+        }
+      }
+    ]
+  }
+}

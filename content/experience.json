@@ -1,0 +1,131 @@
+{
+  "experience": {
+    "tabs": {
+      "zh": [
+        "团队",
+        "运动",
+        "学习"
+      ],
+      "en": [
+        "Teams",
+        "Sports",
+        "Learning"
+      ]
+    },
+    "panels": [
+      {
+        "title": {
+          "zh": "干员 <span class=\"location\">@ 百炼机器人团队</span>",
+          "en": "Member <span class=\"location\">@ Bailian Robotics Team</span>"
+        },
+        "date": {
+          "zh": "2025年 — 至今",
+          "en": "2025 — Present"
+        },
+        "items": {
+          "zh": [
+            "参与机器人系统开发与维护工作",
+            "学习嵌入式系统与机器人控制基础",
+            "与团队成员协作准备竞赛"
+          ],
+          "en": [
+            "Participating in robotics system development and maintenance",
+            "Learning embedded systems and robot control basics",
+            "Collaborating with team members on competition preparations"
+          ]
+        },
+        "sub": {
+          "title": {
+            "zh": "干事 <span class=\"location\">@ 心理健康协会</span>",
+            "en": "Officer <span class=\"location\">@ Psychological Health Association</span>"
+          },
+          "date": {
+            "zh": "2025年 — 至今",
+            "en": "2025 — Present"
+          },
+          "items": {
+            "zh": [
+              "组织校园心理健康宣传活动",
+              "参与同伴咨询与社群建设"
+            ],
+            "en": [
+              "Organizing mental health awareness activities on campus",
+              "Supporting peer counseling and community building"
+            ]
+          }
+        }
+      },
+      {
+        "title": {
+          "zh": "足球队员 <span class=\"location\">@ 院系杯</span>",
+          "en": "Football Team Member <span class=\"location\">@ University Cup</span>"
+        },
+        "date": {
+          "zh": "2025年 — 至今",
+          "en": "2025 — Present"
+        },
+        "items": {
+          "zh": [
+            "新生杯足球赛二等奖 · 扫荡型中场",
+            "代表学院参加校院系杯足球赛",
+            "在比赛中获得奖项",
+            "具备团队协作精神与坚韧品质"
+          ],
+          "en": [
+            "Freshman Cup 2nd place · Box-to-box midfielder",
+            "Represented the college in the university football cup",
+            "Won awards in the campus tournament",
+            "Team player with discipline and perseverance"
+          ]
+        }
+      },
+      {
+        "title": {
+          "zh": "自主学习 <span class=\"location\">@ 个人</span>",
+          "en": "Self-Directed Learning <span class=\"location\">@ Personal</span>"
+        },
+        "date": {
+          "zh": "2025年 — 至今",
+          "en": "2025 — Present"
+        },
+        "items": {
+          "zh": [
+            "自学 Python 编程基础",
+            "关注大模型前沿动态（DeepSeek、GPT、开源模型）",
+            "在 B 站学习政经哲史类课程",
+            "观看《百家讲坛》了解中国传统文化"
+          ],
+          "en": [
+            "Python programming basics (self-taught)",
+            "Following cutting-edge LLM developments (DeepSeek, GPT, open-source models)",
+            "Watching Bilibili courses on politics, economics, philosophy, and history",
+            "Watching 'Lecture Room' (Bai Jia Jiang Tan) for Chinese culture"
+          ]
+        }
+      }
+    ]
+  },
+  "honors": [
+    {
+      "num": "获奖",
+      "label": {
+        "zh": "院系杯足球赛 · 校级",
+        "en": "Football Cup · University Level"
+      }
+    },
+    {
+      "num": "干事",
+      "label": {
+        "zh": "心理健康协会",
+        "en": "Psychological Health Association"
+      }
+    },
+    {
+      "num": "干员",
+      "label": {
+        "zh": "百炼机器人团队",
+        "en": "Bailian Robotics Team"
+      }
+    }
+  ]
+}

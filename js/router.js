@@ -18,7 +18,7 @@ function handleRoute() {
 
   // Section 锚点
   const sections = ['about','stats','milestones','reading','experience','projects','other-projects',
-    'now','notebook','creative','life','contact'];
+    'now','notebook','creative','life','contact','research','toolbox'];
   if (sections.includes(hash)) {
     showMainView();
     setTimeout(() => document.getElementById(hash)?.scrollIntoView({ behavior: 'smooth' }), 100);
@@ -809,6 +809,7 @@ function filterBlog(tag, btn) {
 /* ===== 初始化 ===== */
 function initRouter() {
   window.addEventListener('hashchange', handleRoute);
-  handleRoute();
+  if (window.__DATA_READY) { handleRoute(); }
+  else { window.addEventListener('data-ready', function() { handleRoute(); }, { once: true }); }
 }
 document.addEventListener('DOMContentLoaded', initRouter);

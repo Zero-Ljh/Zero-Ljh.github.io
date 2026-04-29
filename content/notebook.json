@@ -1,0 +1,206 @@
+{
+  "notebook": [
+    {
+      "date": "Apr 2026 · 5 min",
+      "title": {
+        "zh": "Python 基础：本月学习总结",
+        "en": "Python Basics: What I Learned This Month"
+      },
+      "desc": {
+        "zh": "列表、字典、循环、函数——基础构建块。每天写小代码培养手感。",
+        "en": "Lists, dictionaries, loops, functions — the building blocks. Writing small programs every day to build muscle memory."
+      },
+      "tag": "Python",
+      "readingTime": "5 min",
+      "concepts": [
+        {
+          "zh": "列表推导式比循环更简洁高效",
+          "en": "List comprehensions are more concise than loops"
+        },
+        {
+          "zh": "字典用于键值映射，查询速度快",
+          "en": "Dictionaries are fast for key-value lookups"
+        },
+        {
+          "zh": "函数是代码复用的基本单元",
+          "en": "Functions are the basic unit of code reuse"
+        }
+      ],
+      "body": [
+        {
+          "type": "p",
+          "content": {
+            "zh": "这个月我系统地学习了 Python 的基础知识。以下是主要学习内容和心得。",
+            "en": "This month I systematically studied Python basics. Here are the main topics and takeaways."
+          }
+        },
+        {
+          "type": "h2",
+          "content": {
+            "zh": "一、列表与列表推导式",
+            "en": "1. Lists & List Comprehensions"
+          }
+        },
+        {
+          "type": "p",
+          "content": {
+            "zh": "列表是 Python 中最常用的数据结构之一。列表推导式 <code>[expr for item in iterable]</code> 让代码更简洁高效。",
+            "en": "Lists are one of the most commonly used data structures in Python. List comprehensions <code>[expr for item in iterable]</code> make code more concise."
+          }
+        },
+        {
+          "type": "code",
+          "content": {
+            "zh": "# 传统方式\nsquares = []\nfor i in range(10):\n    squares.append(i ** 2)\n\n# 列表推导式（更简洁）\nsquares = [i ** 2 for i in range(10)]",
+            "en": "# Traditional way\nsquares = []\nfor i in range(10):\n    squares.append(i ** 2)\n\n# List comprehension (more concise)\nsquares = [i ** 2 for i in range(10)]"
+          },
+          "lang": "python"
+        },
+        {
+          "type": "h2",
+          "content": {
+            "zh": "二、字典与键值对",
+            "en": "2. Dictionaries"
+          }
+        },
+        {
+          "type": "p",
+          "content": {
+            "zh": "字典提供 O(1) 的查找速度，适合存储键值映射关系。",
+            "en": "Dictionaries provide O(1) lookup speed, great for key-value mappings."
+          }
+        },
+        {
+          "type": "code",
+          "content": {
+            "zh": "student = {\n    \"name\": \"李军辉\",\n    \"major\": \"AI\",\n    \"year\": 2025\n}\nprint(student[\"name\"])  # 李军辉",
+            "en": "student = {\n    \"name\": \"Junhui Li\",\n    \"major\": \"AI\",\n    \"year\": 2025\n}\nprint(student[\"name\"])  # Junhui Li"
+          },
+          "lang": "python"
+        },
+        {
+          "type": "h2",
+          "content": {
+            "zh": "三、函数与代码复用",
+            "en": "3. Functions & Reusability"
+          }
+        },
+        {
+          "type": "p",
+          "content": {
+            "zh": "函数是代码复用的基本单元。Python 支持默认参数、关键字参数和可变参数。",
+            "en": "Functions are the basic unit of code reuse. Python supports default args, keyword args, and variable-length args."
+          }
+        },
+        {
+          "type": "code",
+          "content": {
+            "zh": "def greet(name, greeting=\"你好\"):\n    return f\"{greeting}，{name}！\"\n\nprint(greet(\"世界\"))  # 你好，世界！\nprint(greet(\"World\", \"Hello\"))  # Hello, World!",
+            "en": "def greet(name, greeting=\"Hello\"):\n    return f\"{greeting}, {name}!\"\n\nprint(greet(\"World\"))  # Hello, World!\nprint(greet(\"世界\", \"你好\"))  # 你好，世界！"
+          },
+          "lang": "python"
+        },
+        {
+          "type": "h3",
+          "content": {
+            "zh": "学习心得",
+            "en": "Key Takeaways"
+          }
+        },
+        {
+          "type": "ul",
+          "items": [
+            {
+              "zh": "列表推导式比 for 循环更简洁，可读性更好",
+              "en": "List comprehensions are more readable than for loops"
+            },
+            {
+              "zh": "字典的 keys() / values() / items() 方法很实用",
+              "en": "Dictionary keys() / values() / items() methods are very useful"
+            },
+            {
+              "zh": "函数参数灵活性：默认参数、*args、**kwargs",
+              "en": "Function parameter flexibility: defaults, *args, **kwargs"
+            }
+          ]
+        },
+        {
+          "type": "p",
+          "content": {
+            "zh": "下个月计划学习面向对象编程和文件操作。",
+            "en": "Next month: Object-oriented programming and file I/O."
+          }
+        }
+      ]
+    },
+    {
+      "date": "Apr 2026 · 3 min",
+      "title": {
+        "zh": "我对大语言模型的理解",
+        "en": "My Understanding of LLMs"
+      },
+      "desc": {
+        "zh": "Transformer 工作原理（通俗版）、训练数据的作用、以及为什么 DeepSeek 的 MoE 架构很重要。",
+        "en": "How transformers work (in simple terms), what training data does, and why DeepSeek's MoE architecture is a big deal."
+      },
+      "tag": "LLM"
+    },
+    {
+      "date": {
+        "zh": "即将更新...",
+        "en": "Coming soon..."
+      },
+      "title": {
+        "zh": "大学课程反思",
+        "en": "University Course Reflections"
+      },
+      "desc": {
+        "zh": "人工智能专业课程的学习笔记和自我学习记录。本学期会持续更新。",
+        "en": "Notes from my AI courses and self-study sessions. Will be updated regularly throughout the semester."
+      },
+      "tag": "Soon"
+    },
+    {
+      "date": {
+        "zh": "即将更新...",
+        "en": "Coming soon..."
+      },
+      "title": {
+        "zh": "B 站课程笔记",
+        "en": "Bilibili Course Takeaways"
+      },
+      "desc": {
+        "zh": "课余在 B 站学习政经哲史课程的笔记整理。",
+        "en": "Notes from politics, economics, philosophy, and history courses I watch on Bilibili in my free time."
+      },
+      "tag": "Soon"
+    },
+    {
+      "date": "Apr 2026 · 4 min",
+      "title": {
+        "zh": "C++ 复习工作流：我是怎么搭建的",
+        "en": "My C++ Review Workflow Setup"
+      },
+      "desc": {
+        "zh": "结合 AI 工具搭建自动化复习流程——生成题目、检查答案、记录错题。不是学 C++ 最快的方法，但是最适合我的方法。",
+        "en": "Built an automated review workflow with AI tools — generates questions, checks answers, tracks mistakes. Not the fastest way to learn C++, but the way that works best for me."
+      },
+      "tag": "C++",
+      "readingTime": "4 min",
+      "concepts": [
+        {
+          "zh": "AI 辅助学习不等于偷懒，是提高效率",
+          "en": "AI-assisted learning isn't laziness, it's efficiency"
+        },
+        {
+          "zh": "错题记录比刷题更重要",
+          "en": "Error tracking matters more than volume"
+        },
+        {
+          "zh": "工具要服务方法，方法要服务目标",
+          "en": "Tools serve methods, methods serve goals"
+        }
+      ]
+    }
+  ]
+}

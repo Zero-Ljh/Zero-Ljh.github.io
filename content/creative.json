@@ -1,0 +1,108 @@
+{
+  "creative": [
+    {
+      "genre": {
+        "zh": "古诗",
+        "en": "Classical Poem"
+      },
+      "title": {
+        "zh": "无题",
+        "en": "Untitled"
+      },
+      "excerpt": {
+        "zh": "（请将你的古诗发给我，我会放入）",
+        "en": "(Send me your poem and I will put it here)"
+      }
+    },
+    {
+      "genre": {
+        "zh": "文章",
+        "en": "Essay"
+      },
+      "title": {
+        "zh": "（文章标题）",
+        "en": "(Title)"
+      },
+      "excerpt": {
+        "zh": "（请将你的文章发给我）",
+        "en": "(Send me your article)"
+      }
+    },
+    {
+      "genre": {
+        "zh": "现代诗",
+        "en": "Modern Poem"
+      },
+      "title": {
+        "zh": "（诗歌标题）",
+        "en": "(Title)"
+      },
+      "excerpt": {
+        "zh": "（请将你的诗歌发给我）",
+        "en": "(Send me your poem)"
+      }
+    },
+    {
+      "genre": {
+        "zh": "随笔",
+        "en": "Prose"
+      },
+      "title": {
+        "zh": "我的大一",
+        "en": "My First Year of College"
+      },
+      "date": "Apr 2026",
+      "readingTime": "3 min",
+      "excerpt": {
+        "zh": "进入大学，就像打开一扇通往只存在于书本中的世界的大门……",
+        "en": "Starting university is like opening a door to a world you have only read about..."
+      }
+    }
+  ],
+  "life": [
+    {
+      "icon": "⚽",
+      "label": {
+        "zh": "足球 · 院系杯",
+        "en": "Football · University Cup"
+      },
+      "desc": {
+        "zh": "扫荡型中场",
+        "en": "Box-to-box midfielder"
+      }
+    },
+    {
+      "icon": "📚",
+      "label": {
+        "zh": "阅读 · 终身学习",
+        "en": "Reading · Lifelong Learning"
+      },
+      "desc": {
+        "zh": "文史哲政经 + AI",
+        "en": "Humanities to AI"
+      }
+    },
+    {
+      "icon": "🤖",
+      "label": {
+        "zh": "机器人 · 动手实践",
+        "en": "Robotics · Hands-on"
+      },
+      "desc": {
+        "zh": "百炼团队嵌入式",
+        "en": "Bailian embedded dev"
+      }
+    },
+    {
+      "icon": "🧠",
+      "label": {
+        "zh": "心理 · 同伴支持",
+        "en": "Mental Health · Peer Support"
+      },
+      "desc": {
+        "zh": "心协干事",
+        "en": "Health Association officer"
+      }
+    }
+  ]
+}

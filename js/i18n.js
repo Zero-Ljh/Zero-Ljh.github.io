@@ -17,8 +17,8 @@ function setLang(lang) {
     b.classList.toggle('active', b.id === 'lang-' + lang || b.id === 'mobile-lang-' + lang)
   );
 
-  // 重新渲染全部动态内容
-  if (typeof renderAll === 'function') renderAll();
+  // 重新渲染全部动态内容（仅当 CMS 数据已就绪）
+  if (window.__DATA_READY && typeof renderAll === 'function') renderAll();
 
   // 如果在子页面，重新渲染子页面内容
   const hash = window.location.hash.slice(1);

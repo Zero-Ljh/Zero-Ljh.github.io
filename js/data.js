@@ -47,7 +47,7 @@ const DATA = {
       zh: '偏好工程方向。起初希望导师手把手引导，适应后逐步独立。涉猎广泛（AI·文史哲政经济），但知道要先做好自己的位置。',
       en: 'Prefer engineering over theory. Value mentorship with growing independence. Wide-ranging interests (AI, humanities, politics, economics) — but I know to master my position first.'
     },
-    resumeUrl: 'assets/resume.pdf',
+    resumeUrl: 'assets/resume-en.pdf',
     githubUsername: 'Zero-Ljh'
   },
 
@@ -146,6 +146,16 @@ const DATA = {
         en: 'Learning how to deploy open-source models locally (like DeepSeek), fine-tune with LoRA, and optimize inference. Essential for understanding real-world LLM applications.'
       },
       tags: ['LLM', 'DeepSeek', '微调'],
+      readingTime: '8 min',
+      keyPoints: [
+        { zh: 'LoRA 通过低秩矩阵分解，只需训练极少参数即可适配下游任务', en: 'LoRA uses low-rank matrix decomposition to adapt models with very few trainable parameters' },
+        { zh: 'Ollama 让本地运行大模型变得极其简单，一行命令即可', en: 'Ollama makes running LLMs locally trivially easy — just one command' },
+        { zh: '模型量化（INT8/INT4）大幅降低显存占用，几乎不影响效果', en: 'Model quantization (INT8/INT4) drastically reduces memory usage with minimal quality loss' },
+        { zh: 'DeepSeek 的 MoE 架构让大模型推理成本大幅下降', en: "DeepSeek's MoE architecture significantly reduces LLM inference costs" }
+      ],
+      source: 'https://github.com/datawhalechina/self-llm',
+      sourceLabel: { zh: 'Datawhale 开源教程', en: 'Datawhale Open Source Tutorial' },
+      relatedReading: [1, 3],
       body: [
         { type: 'p', content: { zh: '最近报名了大模型部署与微调课程，以下是学习笔记和心得体会。', en: 'I recently enrolled in an LLM deployment and fine-tuning course. Here are my notes and insights.' } },
         { type: 'h2', content: { zh: '课程内容概览', en: 'Course Overview' } },
@@ -172,7 +182,24 @@ const DATA = {
         zh: '持续关注 DeepSeek、OpenAI 等最新进展。开源模型的快速迭代让我对 AI 的未来充满期待，也促使我动手尝试。',
         en: "Keeping up with the latest from DeepSeek, OpenAI, and others. The rapid iteration of open-source models excites me about the future and motivates me to build things myself."
       },
-      tags: ['AI News', 'OpenAI']
+      tags: ['AI News', 'OpenAI'],
+      readingTime: '4 min',
+      keyPoints: [
+        { zh: '开源模型（DeepSeek V4、Llama 4）正在快速缩小与闭源模型的差距', en: 'Open-source models (DeepSeek V4, Llama 4) are rapidly closing the gap with proprietary ones' },
+        { zh: '多模态和 Agent 是 2026 年最重要的两个方向', en: 'Multimodal and Agent are the two most important trends of 2026' },
+        { zh: '推理成本的下降让个人开发者也能用上顶级模型', en: 'Falling inference costs let individual developers access top-tier models' }
+      ],
+      source: 'https://news.ycombinator.com/',
+      sourceLabel: { zh: 'Hacker News 科技新闻', en: 'Hacker News' },
+      body: [
+        { type: 'p', content: { zh: '每天花 30 分钟浏览 AI 新闻已经成了我的习惯。以下是我对近期动态的观察和思考。', en: 'Spending 30 minutes on AI news has become a daily habit. Here are my observations and thoughts on recent developments.' } },
+        { type: 'h2', content: { zh: '开源 vs 闭源：差距正在缩小', en: 'Open vs Closed: The Gap is Closing' } },
+        { type: 'p', content: { zh: 'DeepSeek V4 的表现令人惊叹——在多项基准上与 GPT-5 不相上下，而训练成本仅为闭源模型的几分之一。Llama 4 也在推理能力上大幅提升。开源模型的迭代速度已经超过了大多数人的预期。', en: "DeepSeek V4 is stunning — matching GPT-5 on multiple benchmarks while costing a fraction to train. Llama 4 also shows major leaps in reasoning. The iteration speed of open-source models has exceeded most people's expectations." } },
+        { type: 'h2', content: { zh: 'Agent 时代即将到来', en: 'The Agent Era is Coming' } },
+        { type: 'p', content: { zh: '2026 年最热的词是「Agent」。从 Claude Code 到各种自动化 Agent 框架，AI 正在从「回答问题」进化到「完成任务」。这对我作为大一学生来说既是机遇也是挑战——学会用 AI 工具本身就是在为未来做准备。', en: "The hottest word of 2026 is 'Agent.' From Claude Code to various automation frameworks, AI is evolving from 'answering questions' to 'completing tasks.' As a freshman, this is both opportunity and challenge — learning to use AI tools is itself preparation for the future." } },
+        { type: 'h2', content: { zh: '我的感受', en: 'My Take' } },
+        { type: 'p', content: { zh: '作为刚入门的 AI 学生，最让我兴奋的是进入门槛在持续降低。不需要 PhD 也能跑模型、做实验、构建应用。但这也意味着需要更自律——工具变强了，思考不能变弱。', en: "As a beginner AI student, what excites me most is how the barrier to entry keeps dropping. No PhD needed to run models, do experiments, build applications. But this also means more self-discipline is needed — tools got stronger, thinking shouldn't get weaker." } }
+      ]
     },
     {
       title: { zh: '在读《人工智能：一种现代方法》', en: "Reading: 'Artificial Intelligence: A Modern Approach'" },
@@ -182,7 +209,20 @@ const DATA = {
         zh: '逐章学习经典 AI 教材，目前在搜索算法和逻辑部分。',
         en: 'Working through the classic AI textbook chapter by chapter. Currently on search algorithms and logic.'
       },
-      tags: ['学习', '基础']
+      tags: ['学习', '基础'],
+      keyPoints: [
+        { zh: 'AI 的核心是智能体（Agent）——通过感知环境、理性思考、执行动作来达成目标', en: "AI's core concept is the agent — perceiving, reasoning, and acting to achieve goals" },
+        { zh: '搜索算法（BFS/DFS/A*）是许多 AI 系统的基础构建块', en: 'Search algorithms (BFS/DFS/A*) are foundational building blocks of many AI systems' },
+        { zh: '逻辑与知识表示让 AI 能进行显式推理，而非仅靠模式匹配', en: 'Logic and knowledge representation enable explicit reasoning, not just pattern matching' }
+      ],
+      body: [
+        { type: 'p', content: { zh: '这是 AI 领域的经典教材，被称为"AI 圣经"。作为大一学生，我选择逐章精读，而非囫囵吞枣。', en: "This is the classic AI textbook, often called the 'AI Bible.' As a freshman, I'm reading it chapter by chapter rather than skimming." } },
+        { type: 'h2', content: { zh: '为什么选这本书', en: 'Why This Book' } },
+        { type: 'p', content: { zh: '网上有很多速成教程，但我想打好基础。这本书从智能体、搜索、逻辑等基本概念讲起，逐步深入到机器学习和深度学习——这种自底向上的结构适合建立完整的知识体系。', en: "There are many crash courses online, but I want to build a solid foundation. This book starts from basic concepts like agents, search, and logic, then progressively goes deeper into ML and DL — a bottom-up structure that suits building a complete knowledge framework." } },
+        { type: 'h2', content: { zh: '目前在学什么', en: 'Current Progress' } },
+        { type: 'p', content: { zh: '正在学搜索算法部分——BFS、DFS、A*、启发式搜索。理解这些算法不仅是为了考试，更是因为它们的思想在 AI 的许多领域（路径规划、游戏 AI、优化问题）都适用。', en: "Currently on search algorithms — BFS, DFS, A*, heuristic search. Understanding these isn't just for exams — their thinking applies across many AI domains (path planning, game AI, optimization)." } },
+        { type: 'blockquote', content: { zh: '好的基础不是让你走得更快，而是让你在遇到复杂问题时不会迷失方向。', en: 'Good fundamentals don\'t make you faster — they keep you from getting lost when facing complex problems.' } }
+      ]
     },
     {
       title: { zh: 'Vibe Coding 初体验：用 AI 写代码是什么感觉', en: 'First Impressions of Vibe Coding' },
@@ -192,7 +232,27 @@ const DATA = {
         en: 'Switching from Copilot to Claude Code — the biggest change isn\'t speed, it\'s mindset. Think clearly about what you want, then let AI help you build it. Just like football: read the field first, then move.'
       },
       tags: ['Vibe Coding', 'Claude Code', '思考'],
-      readingTime: '3 min'
+      readingTime: '3 min',
+      keyPoints: [
+        { zh: 'Vibe Coding 的核心不是"AI 替你写代码"，而是"先想清楚要什么，再描述给 AI"', en: "Vibe Coding's core isn't 'AI writes code for you' — it's 'think clearly about what you want, then describe it to AI'" },
+        { zh: '工具从 Copilot 换到 Claude Code 后，开发效率提升了数倍', en: 'Switching from Copilot to Claude Code boosted development efficiency several times over' },
+        { zh: 'AI 编程最大的改变是思维方式——从"怎么实现"变成"要做什么"', en: "The biggest change is mindset — from 'how do I implement this' to 'what do I want to achieve'" }
+      ],
+      body: [
+        { type: 'p', content: { zh: '从 Copilot 的代码补全到 Claude Code 的对话式开发，我的编程方式发生了根本性变化。这篇文章分享我的真实体验。', en: 'From Copilot code completion to Claude Code conversational development, my approach to programming has fundamentally changed. Here is my honest experience.' } },
+        { type: 'h2', content: { zh: '起点：Copilot 的代码补全', en: 'Starting Point: Copilot Code Completion' } },
+        { type: 'p', content: { zh: '最开始用 Copilot 时，感觉就像有个聪明的自动补全助手。它能猜出我想写什么，省了不少打字时间。但本质上，还是我在写代码，AI 只是辅助。', en: 'When I first used Copilot, it felt like having a smart autocomplete assistant. It could guess what I wanted to write, saving typing time. But essentially, I was still writing code — AI was just helping.' } },
+        { type: 'h2', content: { zh: '转折：Claude Code 的对话式开发', en: 'Turning Point: Claude Code Conversational Dev' } },
+        { type: 'p', content: { zh: 'Claude Code 完全改变了游戏规则。不是补全代码，而是理解需求——我描述想要什么，它生成完整方案。这种感觉不像在编程，更像在和一个有经验的工程师讨论。', en: 'Claude Code changed the game entirely. Not code completion, but understanding requirements — I describe what I want, it generates a complete solution. This feels less like programming and more like discussing with an experienced engineer.' } },
+        { type: 'blockquote', content: { zh: '这和踢球一样：先阅读场上形势，再做动作。不用每脚球都自己带——站好位置，传出去，效率更高。', en: "Just like football: read the field first, then move. You don't need to dribble every ball — hold your position, pass, and you'll be more effective." } },
+        { type: 'h2', content: { zh: '学会了什么', en: 'What I Learned' } },
+        { type: 'ul', items: [
+          { zh: '表述需求比写代码更重要——清晰的描述 > 精湛的技艺', en: 'Describing requirements matters more than writing code — clear description > exquisite skill' },
+          { zh: 'AI 会犯错，需要你来判断——保持批判性思维', en: 'AI makes mistakes, you need to judge — keep critical thinking' },
+          { zh: '小批量、高频次的开发节奏最适合 AI 协作', en: 'Small batch, high frequency development rhythm works best with AI' },
+          { zh: '这个个人主页就是用 Vibe Coding 方式搭建的', en: 'This portfolio website was built entirely through Vibe Coding' }
+        ] }
+      ]
     },
     {
       title: { zh: '从文科到 AI：一个交叉学科的视角', en: 'From Humanities to AI: A Cross-Disciplinary View' },
@@ -202,7 +262,20 @@ const DATA = {
         en: 'My interest in humanities and AI aren\'t contradictory. AI is transforming every field — understanding people and society is key to building truly useful AI. Wide-ranging interests aren\'t distraction, they\'re investment.'
       },
       tags: ['AI', '跨学科', '思考'],
-      readingTime: '2 min'
+      readingTime: '2 min',
+      keyPoints: [
+        { zh: '理解人、理解社会，才能做出真正有用的 AI', en: 'Understanding people and society is key to building truly useful AI' },
+        { zh: '涉猎广泛不是分心，是积累——不同领域的视角会在意想不到的地方交汇', en: 'Wide-ranging interests aren\'t distraction, they\'re investment — perspectives from different fields converge in unexpected places' },
+        { zh: 'AI 的本质是工具，工具的价值取决于用工具的人', en: "AI's essence is a tool, and a tool's value depends on who wields it" }
+      ],
+      body: [
+        { type: 'p', content: { zh: '有人问我：你学 AI，为什么还花时间看文史哲政经？这不是分心吗？这篇文章是我的回答。', en: "People ask me: you're studying AI, why spend time on humanities, history, politics, and economics? Isn't that distraction? Here's my answer." } },
+        { type: 'h2', content: { zh: 'AI 不是孤立的技术', en: 'AI Is Not an Isolated Technology' } },
+        { type: 'p', content: { zh: 'AI 正在进入每一个领域——法律、医疗、教育、金融、艺术。如果只懂技术不懂领域，就做不出真正有价值的东西。理解人和社会，才知道 AI 应该解决什么问题。', en: 'AI is entering every field — law, medicine, education, finance, art. If you only understand tech without understanding the domain, you cannot build truly valuable things. Understanding people and society tells you what problems AI should solve.' } },
+        { type: 'h2', content: { zh: '交叉学科的优势', en: 'The Cross-Disciplinary Advantage' } },
+        { type: 'p', content: { zh: '读历史让我理解长期趋势，哲学让我思考智能的本质，政治经济让我看到技术背后的社会力量。这些看起来和代码无关的知识，实际上在帮我建立判断力——什么值得做，什么只是炒作。', en: 'History helps me understand long-term trends, philosophy makes me think about the nature of intelligence, politics and economics show me the social forces behind technology. This knowledge that seems unrelated to code actually helps me build judgment — what\'s worth doing vs. what\'s just hype.' } },
+        { type: 'blockquote', content: { zh: '最好的工程师不是最会写代码的人，而是最理解问题的人。', en: 'The best engineers aren\'t the ones who write the most code — they\'re the ones who understand problems best.' } }
+      ]
     }
   ],
 
@@ -293,7 +366,10 @@ const DATA = {
       timeline: {
         zh: '2025年9月加入 → 2025年11月完成基础培训 → 至今参与系统开发',
         en: 'Joined Sep 2025 → Completed basic training Nov 2025 → Participating in system development'
-      }
+      },
+      links: [
+        { url: '#about', label: { zh: '了解团队', en: 'About Team' } }
+      ]
     },
     {
       id: 'python-learning',
@@ -310,7 +386,18 @@ const DATA = {
       learnings: {
         zh: ['数据结构与算法基础', '函数式编程思维', '文件操作与数据处理', '简单爬虫与自动化脚本'],
         en: ['Data structures and algorithms basics', 'Functional programming mindset', 'File I/O and data processing', 'Simple web scraping and automation scripts']
-      }
+      },
+      challenges: {
+        zh: '从零开始学编程的最大挑战不是语法，而是"编程思维"——把问题分解成可执行的步骤。刚开始连 for 循环都想不明白，但坚持写小练习后慢慢有了感觉。',
+        en: "The biggest challenge learning programming from scratch wasn't syntax — it was 'computational thinking': breaking problems into executable steps. I couldn't even understand for-loops at first, but persistence with small exercises slowly built intuition."
+      },
+      timeline: {
+        zh: '2025年10月自学基础语法 → 2025年12月完成第一个爬虫 → 2026年1月搭建自动化脚本 → 进行中：用 Python 学深度学习',
+        en: 'Oct 2025 learned basic syntax → Dec 2025 completed first scraper → Jan 2026 built automation scripts → Ongoing: learning DL with Python'
+      },
+      links: [
+        { url: 'https://github.com/Zero-Ljh', label: { zh: 'GitHub 主页', en: 'GitHub Profile' } }
+      ]
     }
   ],
 

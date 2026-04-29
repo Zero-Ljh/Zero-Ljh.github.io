@@ -39,6 +39,11 @@ function renderNav() {
   });
 
   desktopHtml += `</div></div>
+    <button class="search-toggle search-toggle-desk" onclick="openSearch()" aria-label="Search" title="Search">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+      </svg>
+    </button>
     <div class="lang-toggle">
       <button class="lang-btn active" onclick="setLang('zh')" id="lang-zh">中</button>
       <button class="lang-btn" onclick="setLang('en')" id="lang-en">EN</button>
@@ -686,6 +691,183 @@ function fetchGitHubRepos() {
     });
 }
 
+/* ===== 搜索功能 ===== */
+function openSearch() {
+  const overlay = document.getElementById('search-overlay');
+  if (!overlay) return;
+  overlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  const input = document.getElementById('search-input');
+  if (input) setTimeout(function(){ input.focus(); }, 100);
+}
+
+function closeSearch() {
+  const overlay = document.getElementById('search-overlay');
+  if (!overlay) return;
+  overlay.classList.remove('open');
+  document.body.style.overflow = '';
+  var lang = typeof currentLang !== 'undefined' ? currentLang : 'zh';
+  document.getElementById('search-results').innerHTML =
+    '<p class="search-hint" data-zh="输入关键词开始搜索" data-en="Type to search">' +
+    (lang === 'zh' ? '输入关键词开始搜索' : 'Type to search') + '</p>';
+  var input = document.getElementById('search-input');
+  if (input) input.value = '';
+}
+
+function searchSite(query) {
+  var q = query.trim().toLowerCase();
+  if (!q) return [];
+  var results = [];
+  var lang = typeof currentLang !== 'undefined' ? currentLang : 'zh';
+
+  function matches() {
+    for (var i = 0; i < arguments.length; i++) {
+      if (arguments[i] && String(arguments[i]).toLowerCase().indexOf(q) !== -1) return true;
+    }
+    return false;
+  }
+
+  function addResult(type, title, excerpt, href) {
+    for (var i = 0; i < results.length; i++) {
+      if (results[i].href === href && results[i].type === type) return;
+    }
+    results.push({ type: type, title: title, excerpt: excerpt, href: href });
+  }
+
+  function stripHTML(html) {
+    if (!html) return '';
+    var div = document.createElement('div');
+    div.innerHTML = html;
+    return div.textContent || div.innerText || '';
+  }
+
+  // 1. Reading
+  if (DATA.reading) {
+    for (var i = 0; i < DATA.reading.length; i++) {
+      var item = DATA.reading[i];
+      if (matches(item.title.zh, item.title.en, item.meta.zh, item.meta.en, item.note.zh, item.note.en)) {
+        addResult('reading', item.title[lang], stripHTML(item.note[lang]), '#reading/' + i);
+      }
+    }
+  }
+
+  // 2. Projects
+  if (DATA.projects) {
+    for (var i = 0; i < DATA.projects.length; i++) {
+      var item = DATA.projects[i];
+      if (matches(item.title.zh, item.title.en, item.desc.zh, item.desc.en)) {
+        addResult('project', item.title[lang], stripHTML(item.desc[lang]), '#project/' + item.id);
+      }
+    }
+  }
+
+  // 3. Mini Projects
+  if (DATA.miniProjects) {
+    for (var i = 0; i < DATA.miniProjects.length; i++) {
+      var item = DATA.miniProjects[i];
+      if (matches(item.title.zh, item.title.en, item.desc.zh, item.desc.en)) {
+        addResult('mini-project', item.title[lang], stripHTML(item.desc[lang]), '#other-projects');
+      }
+    }
+  }
+
+  // 4. Notebook
+  if (DATA.notebook) {
+    for (var i = 0; i < DATA.notebook.length; i++) {
+      var item = DATA.notebook[i];
+      if (matches(item.title.zh, item.title.en, item.desc.zh, item.desc.en)) {
+        addResult('note', item.title[lang], stripHTML(item.desc[lang]), '#notebook/' + i);
+      }
+    }
+  }
+
+  // 5. Creative
+  if (DATA.creative) {
+    for (var i = 0; i < DATA.creative.length; i++) {
+      var item = DATA.creative[i];
+      if (matches(item.title.zh, item.title.en, item.excerpt.zh, item.excerpt.en)) {
+        addResult('creative', item.title[lang], stripHTML(item.excerpt[lang]), '#creative/' + i);
+      }
+    }
+  }
+
+  // 6. Research areas
+  if (DATA.research && DATA.research.areas) {
+    for (var i = 0; i < DATA.research.areas.length; i++) {
+      var item = DATA.research.areas[i];
+      if (matches(item.title.zh, item.title.en, item.desc.zh, item.desc.en)) {
+        addResult('research', item.title[lang], stripHTML(item.desc[lang]), '#research');
+      }
+    }
+  }
+
+  // 7. Toolbox items
+  if (DATA.toolbox && DATA.toolbox.categories) {
+    for (var c = 0; c < DATA.toolbox.categories.length; c++) {
+      var cat = DATA.toolbox.categories[c];
+      if (cat.items) {
+        for (var j = 0; j < cat.items.length; j++) {
+          var item = cat.items[j];
+          if (matches(item.name, item.desc.zh, item.desc.en)) {
+            addResult('tool', item.name, stripHTML(item.desc[lang]), '#toolbox');
+          }
+        }
+      }
+    }
+  }
+
+  return results;
+}
+
+function searchTypeLabel(type, lang) {
+  var map = {
+    'reading': { zh: '阅读', en: 'Reading' },
+    'project': { zh: '项目', en: 'Project' },
+    'mini-project': { zh: '小项目', en: 'Mini' },
+    'note': { zh: '笔记', en: 'Note' },
+    'creative': { zh: '创作', en: 'Creative' },
+    'research': { zh: '研究', en: 'Research' },
+    'tool': { zh: '工具', en: 'Tool' }
+  };
+  return map[type] ? map[type][lang] : type;
+}
+
+function highlightText(text, query) {
+  if (!text || !query) return text || '';
+  var idx = text.toLowerCase().indexOf(query.toLowerCase());
+  if (idx === -1) return text;
+  var before = text.slice(0, idx);
+  var match = text.slice(idx, idx + query.length);
+  var after = text.slice(idx + query.length);
+  return before + '<mark>' + match + '</mark>' + after;
+}
+
+function renderSearchResults(query) {
+  var container = document.getElementById('search-results');
+  var results = searchSite(query);
+  var lang = typeof currentLang !== 'undefined' ? currentLang : 'zh';
+
+  if (results.length === 0) {
+    container.innerHTML = '<p class="search-empty" data-zh="未找到相关结果" data-en="No results found">' +
+      (lang === 'zh' ? '未找到相关结果' : 'No results found') + '</p>';
+    return;
+  }
+
+  var html = '';
+  for (var i = 0; i < results.length; i++) {
+    var r = results[i];
+    var excerpt = r.excerpt ? highlightText(r.excerpt.length > 80 ? r.excerpt.slice(0, 80) + '…' : r.excerpt, query) : '';
+    html += '<a class="search-result-item" href="' + r.href + '" onclick="closeSearch()">' +
+      '<span class="search-result-type">' + searchTypeLabel(r.type, lang) + '</span>' +
+      '<span class="search-result-title">' + highlightText(r.title, query) + '</span>';
+    if (excerpt) {
+      html += '<span class="search-result-excerpt">' + excerpt + '</span>';
+    }
+    html += '</a>';
+  }
+  container.innerHTML = html;
+}
+
 /* ===== SEO 动态更新 ===== */
 const SEO_DEFAULTS = {
   title: document.title,
@@ -760,11 +942,52 @@ function initLoader() {
 /* ===== Init ===== */
 document.addEventListener('DOMContentLoaded', () => {
   initLoader();
-  // setLang 内部调用 renderAll（含 fetchGitHubRepos），只需一次
-  if (typeof setLang === 'function') setLang(currentLang);
-  initMobileMenu();
-  createBackToTop();
-  createProgressBar();
-  heroEntry();
-  document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale').forEach(el => revealObserver.observe(el));
+  // 等待 CMS 数据就绪后再渲染（data.js 作为回退）
+  Promise.resolve(window.__dataPromise).then(function() {
+    if (typeof setLang === 'function') setLang(currentLang);
+    initMobileMenu();
+    createBackToTop();
+    createProgressBar();
+    heroEntry();
+    document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale').forEach(function(el) { revealObserver.observe(el); });
+  });
+
+  // 搜索：键盘快捷键（Ctrl+K 或 /）
+  document.addEventListener('keydown', function(e) {
+    if ((e.ctrlKey || e.metaKey) && (e.key === 'k' || e.key === 'K')) {
+      e.preventDefault();
+      openSearch();
+    }
+    const overlay = document.getElementById('search-overlay');
+    if (e.key === 'Escape' && overlay && overlay.classList.contains('open')) {
+      closeSearch();
+    }
+  });
+
+  // 搜索：/ 键打开（不在输入框中时）
+  document.addEventListener('keydown', function(e) {
+    if (e.key === '/' && document.getElementById('search-overlay') && !document.getElementById('search-overlay').classList.contains('open')) {
+      var tag = e.target.tagName;
+      if (tag !== 'INPUT' && tag !== 'TEXTAREA' && !e.target.isContentEditable) {
+        e.preventDefault();
+        openSearch();
+      }
+    }
+  });
+
+  // 搜索：防抖输入
+  var searchInput = document.getElementById('search-input');
+  if (searchInput) {
+    searchInput.addEventListener('input', debounce(function() {
+      var q = this.value.trim();
+      if (q.length >= 1) {
+        renderSearchResults(q);
+      } else {
+        var lang = typeof currentLang !== 'undefined' ? currentLang : 'zh';
+        document.getElementById('search-results').innerHTML =
+          '<p class="search-hint" data-zh="输入关键词开始搜索" data-en="Type to search">' +
+          (lang === 'zh' ? '输入关键词开始搜索' : 'Type to search') + '</p>';
+      }
+    }, 200));
+  }
 });
