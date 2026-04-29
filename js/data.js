@@ -183,6 +183,26 @@ const DATA = {
         en: 'Working through the classic AI textbook chapter by chapter. Currently on search algorithms and logic.'
       },
       tags: ['学习', '基础']
+    },
+    {
+      title: { zh: 'Vibe Coding 初体验：用 AI 写代码是什么感觉', en: 'First Impressions of Vibe Coding' },
+      meta: { zh: '2026年4月 · 实践分享', en: 'Apr 2026 · Experience' },
+      note: {
+        zh: '从 Copilot 换到 Claude Code，最大的感受不是代码变快了，而是思考方式变了——先想清楚要什么，再让 AI 帮你实现。这和踢球一样：先阅读场上形势，再做动作。',
+        en: 'Switching from Copilot to Claude Code — the biggest change isn\'t speed, it\'s mindset. Think clearly about what you want, then let AI help you build it. Just like football: read the field first, then move.'
+      },
+      tags: ['Vibe Coding', 'Claude Code', '思考'],
+      readingTime: '3 min'
+    },
+    {
+      title: { zh: '从文科到 AI：一个交叉学科的视角', en: 'From Humanities to AI: A Cross-Disciplinary View' },
+      meta: { zh: '2026年4月 · 个人反思', en: 'Apr 2026 · Reflection' },
+      note: {
+        zh: '我对文史哲政经的兴趣和 AI 并不矛盾。AI 正在改变每一个领域——理解人、理解社会，才能做出真正有用的 AI。涉猎广泛不是分心，是积累。',
+        en: 'My interest in humanities and AI aren\'t contradictory. AI is transforming every field — understanding people and society is key to building truly useful AI. Wide-ranging interests aren\'t distraction, they\'re investment.'
+      },
+      tags: ['AI', '跨学科', '思考'],
+      readingTime: '2 min'
     }
   ],
 
@@ -317,6 +337,15 @@ const DATA = {
         en: 'Contributing to robotics system development at Bailian team. More details coming as I learn more.'
       },
       tech: 'Robotics · C'
+    },
+    {
+      icon: '04',
+      title: { zh: 'Python 简单爬虫', en: 'Simple Python Web Scraper' },
+      desc: {
+        zh: '用 Python 写了第一个爬虫程序，批量获取网页数据。虽然基本是跟着教程做的，但跑通的那一刻还是很兴奋。',
+        en: 'Wrote my first web scraper in Python to batch-fetch web data. Mostly followed a tutorial, but the moment it actually worked was thrilling.'
+      },
+      tech: 'Python'
     }
   ],
 
@@ -398,6 +427,18 @@ const DATA = {
       title: { zh: 'B 站课程笔记', en: 'Bilibili Course Takeaways' },
       desc: { zh: '课余在 B 站学习政经哲史课程的笔记整理。', en: 'Notes from politics, economics, philosophy, and history courses I watch on Bilibili in my free time.' },
       tag: 'Soon'
+    },
+    {
+      date: 'Apr 2026 · 4 min',
+      title: { zh: 'C++ 复习工作流：我是怎么搭建的', en: 'My C++ Review Workflow Setup' },
+      desc: { zh: '结合 AI 工具搭建自动化复习流程——生成题目、检查答案、记录错题。不是学 C++ 最快的方法，但是最适合我的方法。', en: 'Built an automated review workflow with AI tools — generates questions, checks answers, tracks mistakes. Not the fastest way to learn C++, but the way that works best for me.' },
+      tag: 'C++',
+      readingTime: '4 min',
+      concepts: [
+        { zh: 'AI 辅助学习不等于偷懒，是提高效率', en: 'AI-assisted learning isn\'t laziness, it\'s efficiency' },
+        { zh: '错题记录比刷题更重要', en: 'Error tracking matters more than volume' },
+        { zh: '工具要服务方法，方法要服务目标', en: 'Tools serve methods, methods serve goals' }
+      ]
     }
   ],
 
