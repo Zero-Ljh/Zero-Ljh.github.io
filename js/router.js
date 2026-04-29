@@ -59,6 +59,12 @@ function showMainView() {
   // 主页显示导航栏
   if (nav) nav.style.display = '';
 
+  // 恢复侧边栏和邮箱
+  const sidebar = document.querySelector('.sidebar');
+  const emailSide = document.querySelector('.email-side');
+  if (sidebar) sidebar.style.display = '';
+  if (emailSide) emailSide.style.display = '';
+
   // 过渡完成后清理 sub 内容
   setTimeout(() => {
     if (sub.classList.contains('view-hidden')) sub.innerHTML = '';
@@ -79,6 +85,12 @@ function showSubView() {
 
   // 子页面隐藏导航栏，纯阅读模式
   if (nav) nav.style.display = 'none';
+
+  // 隐藏侧边栏和邮箱，减少阅读干扰
+  const sidebar = document.querySelector('.sidebar');
+  const emailSide = document.querySelector('.email-side');
+  if (sidebar) sidebar.style.display = 'none';
+  if (emailSide) emailSide.style.display = 'none';
 }
 
 /* ===== 子页面骨架 ===== */
@@ -90,11 +102,14 @@ function subPageShell(contentHTML, backLabel) {
         <div class="sub-top-bar">
           <a href="#" onclick="window.location.hash='';return false;" class="sub-back">← ${backLabel}</a>
           <button class="sub-share" onclick="copyPageLink(this)" title="${lang === 'zh' ? '复制链接' : 'Copy Link'}">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
             <span>${lang === 'zh' ? '复制链接' : 'Copy'}</span>
           </button>
         </div>
         ${contentHTML}
+        <div class="sub-back-top">
+          <a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">↑ ${lang === 'zh' ? '回到顶部' : 'Back to top'}</a>
+        </div>
       </div>
     </div>`;
 }
