@@ -992,13 +992,23 @@ function showGallery() {
       var globalIdx = gallery.items.indexOf(item);
       masonryHtml += '<div class="gallery-item" onclick="window._openLightbox(' + globalIdx + ')">' +
         '<img src="' + (item.thumb || item.src) + '" alt="' + escHTML(item.title[lang]) + '" loading="lazy">' +
-        '<div class="gallery-item-overlay"><span class="gallery-item-title">' + item.title[lang] + '</span></div>' +
+        '<div class="gallery-item-overlay"><div class="gallery-item-label">' +
+        '<span class="label-num">No. ' + (idx + 1) + ' / ' + items.length + '</span>' +
+        '<span class="label-title">' + item.title[lang] + '</span>' +
+        '<span class="label-meta">' + (item.category === 'aigc' ? (lang === 'zh' ? 'AI 生成' : 'AI Generated') : (item.category === 'photo' ? (lang === 'zh' ? '摄影' : 'Photography') : (lang === 'zh' ? '动漫' : 'Anime'))) + '</span>' +
+        '</div></div>' +
         '</div>';
     });
     masonryHtml += '</div>';
 
     document.getElementById('gallery-content').innerHTML = filterHtml + masonryHtml;
     window._galleryCat = cat;
+    requestAnimationFrame(function() {
+      var items = document.querySelectorAll('.gallery-item');
+      items.forEach(function(item, i) {
+        item.style.animationDelay = (i * 100) + 'ms';
+      });
+    });
   }
 
   window._openLightbox = function(idx) {
@@ -1034,11 +1044,29 @@ function showGallery() {
     var item = window._lightboxItems[window._lightboxIdx];
     if (!item) return;
     var img = document.getElementById('lightbox-img');
-    img.classList.add('loading');
-    img.src = item.src;
-    img.alt = item.title ? (typeof item.title === 'object' ? item.title[currentLang] : item.title) : '';
-    img.onload = function() { img.classList.remove('loading'); };
-    document.getElementById('lightbox-counter').textContent = (window._lightboxIdx + 1) + ' / ' + window._lightboxItems.length;
+
+    // 当前图缩放淡出
+    if (img.src && !img.classList.contains('loading')) {
+      img.classList.add('exiting');
+      setTimeout(function() {
+        img.classList.remove('exiting');
+        setNewImage();
+      }, 350);
+    } else {
+      setNewImage();
+    }
+
+    function setNewImage() {
+      img.classList.add('loading');
+      img.src = item.src;
+      img.alt = item.title ? (typeof item.title === 'object' ? item.title[currentLang] : item.title) : '';
+      img.onload = function() {
+        img.classList.remove('loading');
+        img.classList.add('entering');
+        setTimeout(function() { img.classList.remove('entering'); }, 500);
+      };
+      document.getElementById('lightbox-counter').textContent = (window._lightboxIdx + 1) + ' / ' + window._lightboxItems.length;
+    }
   }
 
   window._filterGallery = function(cat) { renderGallery(cat); };
@@ -1067,6 +1095,7 @@ function showGallery() {
   var lightboxHTML = '<div id="gallery-lightbox" class="gallery-lightbox" onclick="if(event.target===this)window._closeLightbox()">' +
     '<button class="gallery-lightbox-close" onclick="window._closeLightbox()" aria-label="Close">✕</button>' +
     '<button class="gallery-lightbox-nav gallery-lightbox-prev" onclick="event.stopPropagation();window._lightboxPrev()" aria-label="Previous">‹</button>' +
+    '<div class="spotlight"></div>' +
     '<img id="lightbox-img" src="" alt="">' +
     '<button class="gallery-lightbox-nav gallery-lightbox-next" onclick="event.stopPropagation();window._lightboxNext()" aria-label="Next">›</button>' +
     '<span id="lightbox-counter" class="gallery-lightbox-counter"></span>' +
@@ -1102,6 +1131,25 @@ function showGallery() {
   }
 
   renderGallery('all');
+
+  // 悬浮视差倾斜（仅在用户未减少动效时绑定）
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.querySelectorAll('.gallery-item').forEach(function(item) {
+      item.addEventListener('mousemove', function(e) {
+        var rect = item.getBoundingClientRect();
+        var x = e.clientX - rect.left;
+        var y = e.clientY - rect.top;
+        var centerX = rect.width / 2;
+        var centerY = rect.height / 2;
+        var rotateX = (y - centerY) / centerY * -5;
+        var rotateY = (x - centerX) / centerX * 5;
+        item.style.transform = 'perspective(800px) rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg)';
+      });
+      item.addEventListener('mouseleave', function() {
+        item.style.transform = 'perspective(800px) rotateX(0) rotateY(0)';
+      });
+    });
+  }
 
   if (typeof updateSEO === 'function') updateSEO(
     lang === 'zh' ? '图库 - 李军辉' : 'Gallery - Junhui Li',
