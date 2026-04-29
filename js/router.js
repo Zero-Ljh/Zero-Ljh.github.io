@@ -48,12 +48,16 @@ function handleRoute() {
 function showMainView() {
   const main = document.getElementById('main-content');
   const sub = document.getElementById('sub-view');
+  const nav = document.getElementById('nav');
   if (!main || !sub) return;
 
   sub.classList.add('view-hidden');
   main.classList.remove('view-hidden');
   document.body.style.backgroundColor = '';
   window.scrollTo(0, 0);
+
+  // 确保导航栏在主页正常显示
+  if (nav) { nav.classList.remove('nav-hidden'); }
 
   // 过渡完成后清理 sub 内容
   setTimeout(() => {
@@ -65,31 +69,31 @@ function showMainView() {
 function showSubView() {
   const main = document.getElementById('main-content');
   const sub = document.getElementById('sub-view');
+  const nav = document.getElementById('nav');
   if (!main || !sub) return;
 
   main.classList.add('view-hidden');
   sub.classList.remove('view-hidden');
   document.body.style.backgroundColor = '#f6f3ef';
   window.scrollTo(0, 0);
+
+  // 确保导航栏在子页面可见
+  if (nav) { nav.classList.remove('nav-hidden'); nav.classList.add('scrolled'); }
 }
 
 /* ===== 子页面骨架 ===== */
 function subPageShell(contentHTML, backLabel) {
   const lang = currentLang;
-  const logo = DATA.i18n.nav.logo[lang];
   return `
     <div class="sub-page">
-      <div class="sub-header">
-        <a href="#" class="site-name">${logo}</a>
-        <div class="sub-header-actions">
+      <div class="sub-body-wrap">
+        <div class="sub-top-bar">
+          <a href="#" onclick="window.location.hash='';return false;" class="sub-back">← ${backLabel}</a>
           <button class="sub-share" onclick="copyPageLink(this)" title="${lang === 'zh' ? '复制链接' : 'Copy Link'}">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
             <span>${lang === 'zh' ? '复制链接' : 'Copy'}</span>
           </button>
-          <a href="#" onclick="window.location.hash='';return false;" class="sub-back">← ${backLabel}</a>
         </div>
-      </div>
-      <div class="sub-body-wrap">
         ${contentHTML}
       </div>
     </div>`;
