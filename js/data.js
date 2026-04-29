@@ -19,8 +19,8 @@ const DATA = {
         en: 'I believe in the power of <strong>continuous learning</strong>. I taught myself Python, am now learning C++, and have built an automated review workflow to reinforce what I study. No exams driving me — just pure curiosity.'
       },
       {
-        zh: '我也在努力做一个<strong>全面发展</strong>的人。足球场上我是扫荡型中场，拿过新生杯二等奖；在心理协会做干事帮助同学；在百炼机器人团队学嵌入式开发。技术很重要，但人更重要。',
-        en: "I also strive to be a <strong>well-rounded</strong> person. On the football field, I'm a box-to-box midfielder and won 2nd place in the freshman cup; as an officer in the Psychological Health Association, I support fellow students; at Bailian Robotics Team, I'm learning embedded development. Tech matters, but people matter more."
+        zh: '我也在努力做一个<strong>全面发展</strong>的人。兴趣涉猎广泛——从文史哲政经到人工智能，什么都想了解。足球场上我是扫荡型中场，拿过新生杯二等奖；在心理协会做干事帮助同学；在百炼机器人团队学嵌入式开发。技术很重要，但人更重要。',
+        en: "I also strive to be a <strong>well-rounded</strong> person. My interests span wide — from humanities, history, politics, and economics to artificial intelligence. On the football field, I'm a box-to-box midfielder and won 2nd place in the freshman cup; as an officer in the Psychological Health Association, I support fellow students; at Bailian Robotics Team, I'm learning embedded development. Tech matters, but people matter more."
       }
     ],
     highlight: {
@@ -39,9 +39,25 @@ const DATA = {
       { name: 'AI 工具链', level: 60 },
       { name: 'Robotics', level: 35, label: { zh: '学习中', en: 'Learning' } }
     ],
+    philosophy: {
+      zh: '先思考，后行动。减少无效跑动，站好位置，学会阅读。',
+      en: 'Think first, act second. Cut wasted motion — read the field, hold your position.'
+    },
+    mentorNote: {
+      zh: '偏好工程方向。起初希望导师手把手引导，适应后逐步独立。涉猎广泛（AI·文史哲政经济），但知道要先做好自己的位置。',
+      en: 'Prefer engineering over theory. Value mentorship with growing independence. Wide-ranging interests (AI, humanities, politics, economics) — but I know to master my position first.'
+    },
     resumeUrl: 'assets/resume.pdf',
     githubUsername: 'Zero-Ljh'
   },
+
+  /* ===== 快速概览（自动从数据派生） ===== */
+  stats: [
+    { number: 4, label: { zh: '研究方向', en: 'Research Areas' } },
+    { number: 5, label: { zh: '项目', en: 'Projects' } },
+    { number: 3, label: { zh: '奖项与荣誉', en: 'Awards & Honors' } },
+    { number: 6, label: { zh: '兴趣领域', en: 'Interest Areas' } }
+  ],
 
   /* ===== 教育背景 ===== */
   education: {
@@ -154,6 +170,7 @@ const DATA = {
   projects: [
     {
       id: 'bailian-robot',
+      featured: true,
       overline: { zh: '进行中', en: 'Ongoing' },
       title: { zh: '百炼机器人项目', en: 'Bailian Robotics Project' },
       desc: {
@@ -335,6 +352,7 @@ const DATA = {
       moreBtn: { zh: '更多 ▼', en: 'More ▼' },
       dropdown: [
         { href: '#notebook', zh: '📓 笔记', en: 'Notebook' },
+        { href: '#blog', zh: '📝 文章', en: 'Blog' },
         { href: '#other-projects', zh: '📦 小项目', en: 'Side Builds' },
         { href: '#resume', zh: '📄 简历', en: 'Resume' },
         { href: '#archive', zh: '🗂️ 归档', en: 'Archive' },

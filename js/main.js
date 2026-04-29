@@ -69,6 +69,7 @@ function renderAbout() {
       <p>${p.about[1][lang]}</p>
       <p style="font-size:var(--fz-md);color:var(--dark-slate);border-left:2px solid var(--gold);padding-left:16px;margin-top:24px">${p.highlight[lang]}</p>
       <p style="font-size:var(--fz-md);color:var(--gold);border:1px solid rgba(212,162,89,0.2);border-radius:var(--radius);padding:14px 18px;margin-top:20px;background:rgba(212,162,89,0.04);line-height:1.7">${p.seeking[lang]}</p>
+      <p style="font-size:var(--fz-sm);color:var(--slate);border-left:2px solid var(--gold);padding-left:16px;margin-top:12px;font-style:italic">${p.mentorNote[lang]}</p>
       <div class="skills-bars">
         ${p.skills.map(s => {
           const name = typeof s === 'string' ? s : s.name;
@@ -221,9 +222,21 @@ function renderProjects() {
 
   html += `<div id="project-cards">`;
 
-  html += DATA.projects.map((p, i) => `
-    <div class="project-card${i % 2 === 1 ? ' right' : ''}" data-tags="${p.tech.join(',')}">
+  // Featured first
+  const sorted = [...DATA.projects].sort((a, b) => {
+    if (a.featured && !b.featured) return -1;
+    if (!a.featured && b.featured) return 1;
+    return 0;
+  });
+
+  html += sorted.map((p, i) => {
+    const featuredBadge = p.featured
+      ? `<div class="featured-badge">${lang === 'zh' ? '⭐ 精选' : '⭐ Featured'}</div>`
+      : '';
+    return `
+    <div class="project-card${i % 2 === 1 ? ' right' : ''}${p.featured ? ' featured' : ''}" data-tags="${p.tech.join(',')}">
       <div class="project-content">
+        ${featuredBadge}
         <p class="project-overline">${p.overline[lang]}</p>
         <h3 class="project-title">${p.title[lang]}</h3>
         <div class="project-desc">${p.desc[lang]}</div>
@@ -237,8 +250,8 @@ function renderProjects() {
       <div class="project-image">
         <div class="img-placeholder">${p.title[lang]}<div class="overlay"></div></div>
       </div>
-    </div>
-  `).join('');
+    </div>`;
+  }).join('');
 
   html += `</div>`;
   container.innerHTML = html;
@@ -332,10 +345,47 @@ function renderLife() {
   `).join('');
 }
 
+/* ===== 快速概览 Stats ===== */
+function renderStats() {
+  const container = document.getElementById('stats-grid');
+  const lang = currentLang;
+  if (!container || !DATA.stats) return;
+
+  container.innerHTML = DATA.stats.map(s => `
+    <div class="stat-card">
+      <div class="stat-number" data-target="${s.number}">0</div>
+      <div class="stat-label">${s.label[lang]}</div>
+    </div>
+  `).join('');
+
+  // 数字动画
+  const nums = container.querySelectorAll('.stat-number[data-target]');
+  const countObserver = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      const el = e.target;
+      const target = parseInt(el.getAttribute('data-target'));
+      if (isNaN(target)) return;
+      let current = 0;
+      const duration = 800;
+      const step = () => {
+        current += Math.ceil(target / (duration / 16));
+        if (current >= target) { el.textContent = target; return; }
+        el.textContent = current;
+        requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+      countObserver.unobserve(el);
+    });
+  }, { threshold: 0.5 });
+  nums.forEach(n => countObserver.observe(n));
+}
+
 /* ===== 全部渲染 ===== */
 function renderAll() {
   renderNav();
   renderAbout();
+  renderStats();
   renderReading();
   renderExperience();
   renderHonors();

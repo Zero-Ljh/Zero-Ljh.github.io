@@ -2,5 +2,7 @@
 .DS_Store
 Thumbs.db
 .superpowers/
-.claude/
+# AI 配置 - 共享文件应提交，本地覆盖和运行时文件忽略
+.claude/settings.local.json
+.claude/audit.log
 docs/

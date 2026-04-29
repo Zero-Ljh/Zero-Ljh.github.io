@@ -17,7 +17,7 @@ function handleRoute() {
   if (!hash || hash === 'home') { showMainView(); return; }
 
   // Section 锚点
-  const sections = ['about','reading','experience','projects','other-projects',
+  const sections = ['about','stats','reading','experience','projects','other-projects',
     'now','notebook','creative','life','contact'];
   if (sections.includes(hash)) {
     showMainView();
@@ -38,6 +38,7 @@ function handleRoute() {
   if (m4) { showNoteDetail(parseInt(m4[1])); return; }
 
   if (hash === 'archive') { showArchive(); return; }
+  if (hash === 'blog') { showBlogIndex(); return; }
   if (hash === 'resume') { showResume(); return; }
 
   showMainView();
@@ -468,6 +469,69 @@ function showResume() {
     lang === 'zh' ? '简历 - 李军辉' : 'Resume - Junhui Li',
     lang === 'zh' ? '李军辉的个人简历' : "Junhui Li's Resume"
   );
+}
+
+/* ===== Blog 文章索引页 ===== */
+function showBlogIndex() {
+  const lang = currentLang;
+  const container = document.getElementById('sub-view');
+  if (!container) return;
+
+  // 所有笔记（含即将更新的）
+  const entries = DATA.notebook.map((note, i) => ({ ...note, idx: i }));
+
+  // 去重 tags
+  const allTags = [...new Set(entries.map(n => n.tag).filter(t => t && t !== 'Soon'))];
+
+  // 筛选条
+  let filterHtml = `<div class="blog-filter-bar">
+    <button class="blog-filter-btn active" onclick="filterBlog('all', this)">${lang === 'zh' ? '全部' : 'All'}</button>`;
+  allTags.forEach(tag => {
+    filterHtml += `<button class="blog-filter-btn" onclick="filterBlog('${tag}', this)">${tag}</button>`;
+  });
+  filterHtml += `</div>`;
+
+  // 文章卡片
+  const entriesHtml = entries.map((note) => {
+    const dateStr = typeof note.date === 'object' ? note.date[lang] : note.date;
+    const isSoon = note.tag === 'Soon';
+    return `
+    <a class="blog-card${isSoon ? ' coming-soon' : ''}" href="#notebook/${note.idx}" data-tag="${note.tag || ''}">
+      ${note.tag && note.tag !== 'Soon' ? `<span class="blog-tag">${note.tag}</span>` : ''}
+      <h3>${note.title[lang]}</h3>
+      <div class="blog-meta">${dateStr}${note.readingTime ? ' · ' + note.readingTime : ''}</div>
+      ${!isSoon ? `<p>${note.desc[lang]}</p>` : `<p style="color:#9ca3af;font-style:italic">${note.desc[lang]}</p>`}
+    </a>`;
+  }).join('');
+
+  container.innerHTML = subPageShell(`
+    <p class="sub-label">${lang === 'zh' ? '博客 · 学习记录' : 'Blog · Learning Notes'}</p>
+    <h1 class="sub-title">${lang === 'zh' ? '学习笔记' : 'Learning Blog'}</h1>
+    <p class="sub-meta-line" style="margin-bottom:32px">${lang === 'zh' ? '记录学习过程中的思考和发现' : 'Documenting my learning journey'}</p>
+    ${filterHtml}
+    <div class="blog-list" id="blog-list">
+      ${entriesHtml}
+    </div>
+  `, lang === 'zh' ? '返回主页' : 'Back to Home');
+
+  showSubView();
+  if (typeof updateSEO === 'function') updateSEO(
+    lang === 'zh' ? '学习笔记' : 'Learning Blog',
+    lang === 'zh' ? '李军辉的学习笔记与博客' : "Junhui Li's learning blog"
+  );
+}
+
+/* ===== Blog 筛选 ===== */
+function filterBlog(tag, btn) {
+  document.querySelectorAll('.blog-filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.blog-card').forEach(card => {
+    if (tag === 'all' || card.getAttribute('data-tag') === tag) {
+      card.classList.remove('filtered-out');
+    } else {
+      card.classList.add('filtered-out');
+    }
+  });
 }
 
 /* ===== 初始化 ===== */

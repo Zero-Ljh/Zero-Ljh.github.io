@@ -148,6 +148,7 @@ body.menu-open .sidebar,body.menu-open .email-side{opacity:0;pointer-events:none
 .hero .cta::before{content:'';position:absolute;inset:0;background:var(--gold-dim);transform:scaleX(0);transform-origin:right;transition:transform 0.4s cubic-bezier(0.22,1,0.36,1)}
 .hero .cta:hover::before{transform:scaleX(1);transform-origin:left}
 .hero .cta span{position:relative;z-index:1}
+.hero-quote{font-family:var(--font-serif);font-size:var(--fz-md);color:var(--dark-slate);font-style:italic;text-align:center;margin-top:32px;opacity:0;transform:translateY(20px);animation:fadeInUp 0.8s 0.8s ease forwards;max-width:500px;line-height:1.7}
 
 /* ---- Dividers ---- */
 .section-divider{width:100%;height:1px;background:linear-gradient(90deg,transparent,var(--light-navy),transparent);margin:0;position:relative}
@@ -240,7 +241,20 @@ body.menu-open .sidebar,body.menu-open .email-side{opacity:0;pointer-events:none
 .research-card h3{font-family:var(--font-display);font-size:17px;color:var(--warm-white);margin-bottom:8px}
 .research-card p{font-size:var(--fz-sm);color:var(--slate);line-height:1.6}
 
-/* ---- Project Filter ---- */
+/* ---- Stats ---- */
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.stat-card{padding:32px 24px;background:var(--light-navy);border-radius:var(--radius);text-align:center;transition:all 0.3s ease;border:1px solid transparent;position:relative;overflow:hidden}
+.stat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--gold),transparent);opacity:0.25;transition:opacity 0.3s ease}
+.stat-card:hover{transform:translateY(-4px);border-color:rgba(212,162,89,0.15);box-shadow:0 8px 24px -8px rgba(0,0,0,0.2)}
+.stat-card:hover::before{opacity:1}
+.stat-number{font-family:var(--font-display);font-size:36px;font-weight:700;color:var(--gold);margin-bottom:6px;line-height:1.2}
+.stat-label{font-family:var(--font-mono);font-size:10px;color:var(--slate);letter-spacing:0.5px;text-transform:uppercase}
+
+/* ---- Featured Badge ---- */
+.featured-badge{display:inline-block;font-family:var(--font-mono);font-size:9px;padding:3px 10px;border-radius:8px;background:rgba(212,162,89,0.12);color:var(--gold);border:1px solid rgba(212,162,89,0.25);letter-spacing:0.5px;margin-bottom:8px;text-transform:uppercase;animation:featuredPulse 3s ease-in-out infinite}
+@keyframes featuredPulse{0%,100%{box-shadow:0 0 0 0 rgba(212,162,89,0)}50%{box-shadow:0 0 8px 0 rgba(212,162,89,0.2)}}
+.project-card.featured .project-desc{border-color:rgba(212,162,89,0.15);background:linear-gradient(135deg,var(--light-navy) 0%,rgba(212,162,89,0.04) 100%)}
+.project-card.featured .project-title{color:var(--gold)}
 .filter-bar{display:flex;gap:8px;margin-bottom:40px;flex-wrap:wrap}
 .filter-btn{font-family:var(--font-mono);font-size:11px;padding:6px 16px;border-radius:20px;border:1px solid var(--gold);background:transparent;color:var(--gold);cursor:pointer;transition:var(--transition-fast);letter-spacing:0.3px}
 .filter-btn:hover{border-color:var(--warm-white);color:var(--warm-white)}
@@ -467,7 +481,20 @@ footer p{font-family:var(--font-mono);font-size:10px;color:var(--dark-slate);let
 .sub-related-item{font-family:var(--font-serif);font-size:var(--fz-md);color:#1e1e2e;text-decoration:none;padding:8px 12px;border-radius:4px;transition:background 0.2s;display:block}
 .sub-related-item:hover{background:rgba(212,162,89,0.08);color:#b8953e}
 
-/* ---- Project Detail ---- */
+/* ---- Blog Index (子页面) ---- */
+.blog-filter-bar{display:flex;gap:8px;margin-bottom:32px;flex-wrap:wrap}
+.blog-filter-btn{font-family:var(--font-mono);font-size:11px;padding:6px 16px;border-radius:20px;border:1px solid rgba(212,162,89,0.3);background:transparent;color:#b8953e;cursor:pointer;transition:all 0.2s ease}
+.blog-filter-btn:hover{border-color:#b8953e;background:rgba(212,162,89,0.04)}
+.blog-filter-btn.active{background:#b8953e;color:white;border-color:#b8953e}
+.blog-list{display:flex;flex-direction:column;gap:16px}
+.blog-card{display:block;padding:24px 28px;background:rgba(212,162,89,0.03);border:1px solid #e5e0d8;border-radius:6px;transition:all 0.2s ease;text-decoration:none;border-left:3px solid transparent}
+.blog-card:hover{background:rgba(212,162,89,0.06);border-color:rgba(212,162,89,0.2);border-left-color:#b8953e;transform:translateX(4px)}
+.blog-card.coming-soon{opacity:0.6}
+.blog-card .blog-tag{font-family:var(--font-mono);font-size:10px;color:#b8953e;display:inline-block;margin-bottom:8px;padding:2px 10px;border-radius:8px;background:rgba(212,162,89,0.1);border:1px solid rgba(212,162,89,0.2)}
+.blog-card h3{font-family:var(--font-display);font-size:18px;font-weight:600;color:#1e1e2e;margin-bottom:6px}
+.blog-card .blog-meta{font-family:var(--font-mono);font-size:10px;color:#6b7280;margin-bottom:8px}
+.blog-card p{font-size:14px;color:#4b5563;line-height:1.6;margin:0}
+.blog-card.filtered-out{display:none}
 .project-screenshot{margin:24px 0 32px;border-radius:6px;overflow:hidden;border:1px solid #e5e0d8;background:linear-gradient(135deg,#f0ebe3 0%,#f6f3ef 100%)}
 .project-screenshot .img-placeholder{aspect-ratio:16/10;display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:12px;color:#b8953e}
 .project-screenshot img{width:100%;display:block}
@@ -555,7 +582,7 @@ footer p{font-family:var(--font-mono);font-size:10px;color:var(--dark-slate);let
   .project-image{grid-column:1/2;grid-row:1/2;margin-bottom:12px}
   .project-card.right .project-image{grid-column:1/2;grid-row:1/2}
   .project-card.right .project-tech,.project-card.right .project-links{justify-content:flex-start}
-  .other-grid,.now-grid,.notebook-grid,.creative-grid,.life-grid,.honors-grid,.repo-grid,.research-grid{grid-template-columns:1fr}
+  .other-grid,.now-grid,.notebook-grid,.creative-grid,.life-grid,.honors-grid,.repo-grid,.research-grid,.stats-grid{grid-template-columns:1fr}
   .timeline{padding-left:20px}
   footer .social{display:flex}
   .dropdown-menu{right:auto;left:0}
@@ -576,6 +603,7 @@ footer p{font-family:var(--font-mono);font-size:10px;color:var(--dark-slate);let
   .section-heading h2{font-size:clamp(18px,5vw,22px)}
   .reading-item{padding:16px 18px}
   .honors-grid{grid-template-columns:1fr 1fr}
+  .stats-grid{grid-template-columns:1fr 1fr}
   .timeline{padding-left:16px}
   .timeline-item{padding-left:28px}
   .project-desc{font-size:var(--fz-md)}
