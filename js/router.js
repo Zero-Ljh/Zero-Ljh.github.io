@@ -268,9 +268,33 @@ function showReadingDetail(index) {
 
   // 正文（优先 body 字段，回退到 note 块引用）
   var bodyHtml = renderBody(item.body, lang);
+  var tocHtml = '';
   if (bodyHtml) {
+    // 自动目录：正文 h2 超过 3 个时生成 TOC
+    var h2Count = (bodyHtml.match(/<h2>/g) || []).length;
+    if (h2Count > 3) {
+      var tocItems = [];
+      bodyHtml = bodyHtml.replace(/<h2>([^<]+)<\/h2>/g, function(match, text) {
+        var slug = text.toLowerCase()
+          .replace(/<[^>]*>/g, '')
+          .replace(/[^a-z0-9一-鿿\s-]/g, '')
+          .replace(/\s+/g, '-')
+          .replace(/-+/g, '-')
+          .replace(/^-+|-+$/g, '');
+        if (!slug) slug = 'h';
+        var id = 'toc-' + slug;
+        tocItems.push({ text: text, id: id });
+        return '<h2 id="' + id + '">' + text + '</h2>';
+      });
+      if (tocItems.length > 3) {
+        tocHtml = '<nav class="sub-toc"><h2>' + (lang === 'zh' ? '目录' : 'Table of Contents') + '</h2><ol>' +
+          tocItems.map(function(item) { return '<li><a href="#' + item.id + '">' + item.text + '</a></li>'; }).join('') +
+          '</ol></nav>';
+      }
+    }
     // 有正文时: note 作为引用块放在正文前
     extras += `<div class="sub-blockquote">${item.note[lang]}</div>`;
+    extras += tocHtml;
     extras += '<div class="sub-content">' + bodyHtml + '</div>';
   } else {
     // 无正文时: 只显示 note 块引用（原有行为）
@@ -324,9 +348,21 @@ function showReadingDetail(index) {
   `, lang === 'zh' ? '返回阅读' : 'Back to Reading');
   showSubView();
   if (typeof updateSEO === 'function') updateSEO(item.title[lang], item.meta[lang]);
+
+  // 确保阅读进度条在子页面也正常工作
+  var progressBar = document.getElementById('reading-progress');
+  if (!progressBar) {
+    progressBar = document.createElement('div');
+    progressBar.id = 'reading-progress';
+    document.body.appendChild(progressBar);
+  }
+  // 等 DOM 渲染完成后触发一次更新
+  setTimeout(function() {
+    window.dispatchEvent(new Event('scroll'));
+  }, 100);
 }
 
-/* ===== 项目详情 ===== */
+/* ===== 项目详情（Case Study 布局） ===== */
 function showProjectDetail(id) {
   const project = DATA.projects.find(p => p.id === id);
   if (!project) { showMainView(); return; }
@@ -334,18 +370,25 @@ function showProjectDetail(id) {
   const container = document.getElementById('sub-view');
   if (!container) return;
 
-  let extras = '';
-
-  // 状态标签
+  // ---- 1. Status Badge ----
+  let badgeHTML = '';
   if (project.status) {
-    extras += `<div class="status-badge">${project.status[lang]}</div>`;
+    badgeHTML = `<div class="status-badge" style="margin-bottom:12px">${project.status[lang]}</div>`;
   }
 
-  // 截图（增强占位）
+  // ---- 2. Info Bar (Status | Period | Role) ----
+  let infoParts = [];
+  infoParts.push(`<span><span class="info-label">${lang === 'zh' ? '状态' : 'Status'}</span> ${project.status ? project.status[lang] : project.overline[lang]}</span>`);
+  if (project.period) infoParts.push(`<span><span class="info-label">${lang === 'zh' ? '时间' : 'Period'}</span> ${project.period[lang]}</span>`);
+  if (project.role) infoParts.push(`<span><span class="info-label">${lang === 'zh' ? '角色' : 'Role'}</span> ${project.role[lang]}</span>`);
+  const infoBarHTML = `<div class="project-info-bar" style="margin-bottom:32px">${infoParts.join('<span class="info-sep">|</span>')}</div>`;
+
+  // ---- 3. Screenshot (full-width) ----
+  let screenshotHTML = '';
   if (project.image) {
-    extras += `<div class="project-screenshot"><img src="${project.image}" alt="${project.title[lang]}"></div>`;
+    screenshotHTML = `<div class="project-screenshot" style="width:100%;margin-bottom:32px"><img src="${project.image}" alt="${project.title[lang]}"></div>`;
   } else {
-    extras += `<div class="project-screenshot"><div class="img-placeholder">
+    screenshotHTML = `<div class="project-screenshot" style="width:100%;margin-bottom:32px"><div class="img-placeholder">
       <div class="placeholder-geo"></div>
       <div class="placeholder-content">
         <span class="placeholder-title">${project.title[lang]}</span>
@@ -354,58 +397,67 @@ function showProjectDetail(id) {
     </div></div>`;
   }
 
-  // 描述
-  extras += `<div class="sub-content"><p>${project.desc[lang]}</p></div>`;
-
-  // 链接
+  // ---- 4. Description + Links ----
+  let contentHTML = `<div class="sub-content"><p>${project.desc[lang]}</p></div>`;
   if (project.links && project.links.length) {
-    extras += `<div class="project-links-section">`;
+    contentHTML += `<div class="project-links-section" style="margin-bottom:32px">`;
     project.links.forEach(link => {
-      extras += `<a href="${link.url}" target="_blank" rel="noreferrer">${link.label[lang]}</a>`;
+      contentHTML += `<a href="${link.url}" target="_blank" rel="noreferrer">${link.label[lang]}</a>`;
     });
-    extras += `</div>`;
+    contentHTML += `</div>`;
   }
 
-  // 学到了什么
+  // ---- 5. Two-column Grid: Learnings | Challenges ----
+  let learningsHTML = '';
+  let challengesHTML = '';
   if (project.learnings && project.learnings[lang].length) {
-    extras += `<div class="project-detail-section">
-      <h3>${lang === 'zh' ? '学到了什么' : 'What I Learned'}</h3>
+    learningsHTML = `<div>
+      <h3 style="margin-bottom:12px;font-size:1.1rem">${lang === 'zh' ? '学到了什么' : 'What I Learned'}</h3>
       <div class="project-learnings">${project.learnings[lang].map(l => `<span>${l}</span>`).join('')}</div>
     </div>`;
   }
-
-  // 遇到的挑战
   if (project.challenges && project.challenges[lang]) {
-    extras += `<div class="project-detail-section">
-      <h3>${lang === 'zh' ? '遇到的挑战' : 'Challenges'}</h3>
+    challengesHTML = `<div>
+      <h3 style="margin-bottom:12px;font-size:1.1rem">${lang === 'zh' ? '遇到的挑战' : 'Challenges'}</h3>
       <div class="project-challenge">${project.challenges[lang]}</div>
     </div>`;
   }
-
-  // 时间线
-  if (project.timeline && project.timeline[lang]) {
-    extras += `<div class="project-detail-section">
-      <h3>${lang === 'zh' ? '时间线' : 'Timeline'}</h3>
-      <p class="project-timeline">${project.timeline[lang]}</p>
+  let splitGridHTML = '';
+  if (learningsHTML || challengesHTML) {
+    splitGridHTML = `<div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:32px">
+      ${learningsHTML || '<div></div>'}
+      ${challengesHTML || '<div></div>'}
     </div>`;
   }
 
-  // 技术栈
-  extras += `<div class="sub-tags tech-badges">${project.tech.map(t => `<span>${t}</span>`).join('')}</div>`;
+  // ---- 6. Tech Stack (centered) ----
+  let techHTML = `<div class="sub-tags tech-badges" style="text-align:center;margin-bottom:32px">${project.tech.map(t => `<span>${t}</span>`).join('')}</div>`;
 
-  // 项目信息栏
-  let infoParts = [];
-  infoParts.push(`<span><span class="info-label">${lang === 'zh' ? '状态' : 'Status'}</span> ${project.status ? project.status[lang] : project.overline[lang]}</span>`);
-  if (project.period) infoParts.push(`<span><span class="info-label">${lang === 'zh' ? '时间' : 'Period'}</span> ${project.period[lang]}</span>`);
-  if (project.role) infoParts.push(`<span><span class="info-label">${lang === 'zh' ? '角色' : 'Role'}</span> ${project.role[lang]}</span>`);
-  const infoBarHTML = `<div class="project-info-bar">${infoParts.join('<span class="info-sep">|</span>')}</div>`;
+  // ---- 7. Timeline (horizontal flex steps) ----
+  let timelineHTML = '';
+  if (project.timeline && project.timeline[lang]) {
+    const raw = project.timeline[lang];
+    const steps = raw.includes(' → ') ? raw.split(' → ') : [raw];
+    const stepItems = steps.map((s, i) => `
+      <span style="display:inline-flex;align-items:center;gap:8px">
+        ${i > 0 ? `<span style="color:var(--color-gold,#c9a84c);font-size:1.2rem">→</span>` : ''}
+        <span style="background:var(--color-bg-secondary, #f0ebe6);padding:8px 16px;border-radius:8px;font-size:0.9rem">${s.trim()}</span>
+      </span>
+    `).join('');
+    timelineHTML = `<div class="project-detail-section" style="margin-bottom:32px">
+      <h3 style="margin-bottom:16px;font-size:1.1rem;text-align:center">${lang === 'zh' ? '时间线' : 'Timeline'}</h3>
+      <div style="display:flex;gap:4px;flex-wrap:wrap;justify-content:center;align-items:center">
+        ${stepItems}
+      </div>
+    </div>`;
+  }
 
-  // 相关项目（相同 tech 标签）
+  // ---- 8. Related Projects (card grid) ----
   const relatedProjects = DATA.projects.filter(p => p.id !== id && p.tech.some(t => project.tech.includes(t)));
   let relatedHTML = '';
   if (relatedProjects.length > 0) {
-    relatedHTML = `<div class="project-related">
-      <h3>${lang === 'zh' ? '相关项目' : 'Related Projects'}</h3>
+    relatedHTML = `<div class="project-related" style="margin-bottom:32px">
+      <h3 style="margin-bottom:16px;font-size:1.1rem">${lang === 'zh' ? '相关项目' : 'Related Projects'}</h3>
       <div class="related-list">
         ${relatedProjects.map(p => `
           <a href="#project/${p.id}" class="related-card">
@@ -417,18 +469,25 @@ function showProjectDetail(id) {
     </div>`;
   }
 
+  // ---- 9. Prev / Next Navigation ----
   const idx = DATA.projects.findIndex(p => p.id === id);
   const prevProj = idx > 0 ? { href: `#project/${DATA.projects[idx - 1].id}`, title: DATA.projects[idx - 1].title } : null;
   const nextProj = idx < DATA.projects.length - 1 ? { href: `#project/${DATA.projects[idx + 1].id}`, title: DATA.projects[idx + 1].title } : null;
 
+  // ---- Assemble into subPageShell ----
   container.innerHTML = subPageShell(`
-    <p class="sub-label">${project.overline[lang]}</p>
-    <h1 class="sub-title">${project.title[lang]}</h1>
+    ${badgeHTML}
+    <h1 class="sub-title" style="font-size:48px">${project.title[lang]}</h1>
     ${infoBarHTML}
-    ${extras}
+    ${screenshotHTML}
+    ${contentHTML}
+    ${splitGridHTML}
+    ${techHTML}
+    ${timelineHTML}
     ${relatedHTML}
     ${subNavHTML(prevProj, nextProj, lang)}
   `, lang === 'zh' ? '返回项目' : 'Back to Projects', 'projects');
+
   showSubView();
   var pbw = container.querySelector('.sub-body-wrap');
   if (pbw) pbw.classList.add('sub-theme-studio');
@@ -731,12 +790,30 @@ function showTags() {
     return groups[b].length - groups[a].length;
   });
 
+  if (sortedTags.length === 0) {
+    container.innerHTML = subPageShell(
+      emptyStateHTML('🏷️',
+        lang === 'zh' ? '还没有标签' : 'No Tags Yet',
+        lang === 'zh' ? '内容添加标签后会在这里展示' : 'Tags will appear here once content is tagged',
+        lang === 'zh' ? '返回主页' : 'Back to Home'
+      ),
+      lang === 'zh' ? '返回' : 'Back'
+    );
+    showSubView();
+    return;
+  }
+
   var totalItems = taggedItems.length;
   var countLabel = lang === 'zh' ? totalItems + ' 条内容' : totalItems + ' items';
 
+  var maxCount = 0;
+  sortedTags.forEach(function(tag) { if (groups[tag].length > maxCount) maxCount = groups[tag].length; });
+
   var cloudHtml = '<div class="tags-cloud">';
   sortedTags.forEach(function(tag) {
-    cloudHtml += '<a href="#tag/' + encodeURIComponent(tag) + '" class="tag-cloud-item">' +
+    var weight = Math.log(groups[tag].length + 1) / Math.log(maxCount + 1);
+    var fontSize = 14 + weight * 18;
+    cloudHtml += '<a href="#tag/' + encodeURIComponent(tag) + '" class="tag-cloud-item" style="font-size:' + fontSize + 'px">' +
       tag + ' <span class="count">(' + groups[tag].length + ')</span></a>';
   });
   cloudHtml += '</div>';
@@ -1142,6 +1219,17 @@ function showToolboxPage() {
   );
   showSubView();
   if (typeof updateSEO === 'function') updateSEO(tb.heading[lang], lang === 'zh' ? '李军辉的工具箱' : "Junhui Li's toolbox");
+}
+
+/* ===== 空状态通用函数 ===== */
+function emptyStateHTML(icon, title, desc, backLabel) {
+  var lang = currentLang;
+  return '<div class="empty-state">' +
+    '<div class="empty-icon">' + icon + '</div>' +
+    '<h2>' + (typeof title === 'object' ? title[lang] : title) + '</h2>' +
+    '<p>' + (typeof desc === 'object' ? desc[lang] : desc) + '</p>' +
+    '<a href="#" onclick="window.location.hash=\'\';return false" class="empty-back">← ' + (backLabel || (lang === 'zh' ? '返回主页' : 'Back to Home')) + '</a>' +
+    '</div>';
 }
 
 /* ===== 初始化 ===== */
