@@ -45,8 +45,8 @@ function renderNav() {
       </svg>
     </button>
     <div class="lang-toggle">
-      <button class="lang-btn active" onclick="setLang('zh')" id="lang-zh">中</button>
-      <button class="lang-btn" onclick="setLang('en')" id="lang-en">EN</button>
+      <button class="lang-btn${lang === 'zh' ? ' active' : ''}" onclick="setLang('zh')" id="lang-zh">中</button>
+      <button class="lang-btn${lang === 'en' ? ' active' : ''}" onclick="setLang('en')" id="lang-en">EN</button>
     </div>`;
 
   container.innerHTML = desktopHtml;
