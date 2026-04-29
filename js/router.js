@@ -1005,7 +1005,7 @@ function showBlogIndex() {
       ${note.tag && note.tag !== 'Soon' ? `<span class="blog-tag">${note.tag}</span>` : ''}
       <h3>${note.title[lang]}</h3>
       <div class="blog-meta">${dateStr}${note.readingTime ? ' · ' + note.readingTime : ''}</div>
-      ${!isSoon ? `<p>${note.desc[lang]}</p>` : `<p style="color:#9ca3af;font-style:italic">${note.desc[lang]}</p>`}
+      ${!isSoon ? `<p>${note.desc[lang]}</p>` : `<p style="color:#6b7280;font-style:italic">${note.desc[lang]}</p>`}
     </a>`;
   }).join('');
 
