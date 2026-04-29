@@ -150,11 +150,15 @@ body.menu-open .sidebar,body.menu-open .email-side{opacity:0;pointer-events:none
 .hero-quote{font-family:var(--font-serif);font-size:var(--fz-md);color:var(--dark-slate);font-style:italic;text-align:center;margin-top:32px;opacity:0;transform:translateY(20px);animation:fadeInUp 0.8s 0.8s ease forwards;max-width:500px;line-height:1.7}
 
 /* ---- Status Indicator ---- */
-.status-indicator{display:inline-flex;align-items:center;gap:10px;margin-top:32px;padding:8px 18px;background:var(--light-navy);border-radius:20px;border:1px solid rgba(212,162,89,0.15);font-family:var(--font-mono);font-size:11px;color:var(--slate);transition:var(--transition);opacity:0;transform:translateY(20px);animation:fadeInUp 0.8s 1.2s ease forwards}
-.status-indicator:hover{border-color:rgba(212,162,89,0.3);background:rgba(212,162,89,0.06)}
+.status-indicator{display:inline-flex;align-items:center;gap:10px;margin-top:32px;padding:8px 18px;background:var(--light-navy);border-radius:20px;border:1px solid rgba(212,162,89,0.15);font-family:var(--font-mono);font-size:11px;color:var(--slate);transition:all 0.3s cubic-bezier(0.22,1,0.36,1);opacity:0;transform:translateY(20px);animation:fadeInUp 0.8s 1.2s ease forwards;text-decoration:none;cursor:pointer}
+.status-indicator:hover{border-color:rgba(212,162,89,0.5);background:rgba(212,162,89,0.1);transform:translateY(-2px);box-shadow:0 4px 16px rgba(212,162,89,0.1);color:var(--gold)}
+.status-indicator:hover .status-dot{animation:statusPulseFast 0.8s ease-in-out infinite}
 .status-dot{width:8px;height:8px;border-radius:50%;background:#4ade80;flex-shrink:0;animation:statusPulse 2s ease-in-out infinite}
 @keyframes statusPulse{0%,100%{opacity:0.5;transform:scale(0.8)}50%{opacity:1;transform:scale(1.2)}}
+@keyframes statusPulseFast{0%,100%{opacity:0.6;transform:scale(0.7)}50%{opacity:1;transform:scale(1.3)}}
 .status-text{letter-spacing:0.3px}
+.status-arrow{opacity:0;transform:translateX(-6px);transition:all 0.3s cubic-bezier(0.22,1,0.36,1);font-size:12px;color:var(--gold)}
+.status-indicator:hover .status-arrow{opacity:1;transform:translateX(0)}
 
 /* ---- Dividers ---- */
 .section-divider{width:100%;height:1px;background:linear-gradient(90deg,transparent,var(--light-navy),transparent);margin:0;position:relative}
