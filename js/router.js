@@ -1257,6 +1257,8 @@ function showResearchPage() {
     lang === 'zh' ? '返回' : 'Back'
   );
   showSubView();
+  var rbw = container.querySelector('.sub-body-wrap');
+  if (rbw) rbw.classList.add('sub-theme-research');
   if (typeof updateSEO === 'function') updateSEO(r.heading[lang], r.intro[lang]);
 }
 
@@ -1315,6 +1317,8 @@ function showLifePage() {
     lang === 'zh' ? '返回' : 'Back'
   );
   showSubView();
+  var lbw = container.querySelector('.sub-body-wrap');
+  if (lbw) lbw.classList.add('sub-theme-life');
   if (typeof updateSEO === 'function') updateSEO(
     lang === 'zh' ? '生活 - 李军辉' : 'Life - Junhui Li',
     lang === 'zh' ? '李军辉的课余生活' : "Junhui Li's life beyond studying"
@@ -1345,6 +1349,8 @@ function showToolboxPage() {
     lang === 'zh' ? '返回' : 'Back'
   );
   showSubView();
+  var tbw = container.querySelector('.sub-body-wrap');
+  if (tbw) tbw.classList.add('sub-theme-toolbox');
   if (typeof updateSEO === 'function') updateSEO(tb.heading[lang], lang === 'zh' ? '李军辉的工具箱' : "Junhui Li's toolbox");
 }
 
