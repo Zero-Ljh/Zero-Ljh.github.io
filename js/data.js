@@ -738,11 +738,9 @@ const DATA = {
       resumeBtn: { zh: '简历', en: 'Resume' },
       moreBtn: { zh: '更多 ▼', en: 'More ▼' },
       dropdown: [
-        { href: '#notebook', zh: '笔记', en: 'Notebook' },
-        { href: '#blog', zh: '文章', en: 'Blog' },
-        { href: '#other-projects', zh: '小项目', en: 'Side Builds' },
+        { href: '#blog', zh: '笔记', en: 'Notebook' },
+        { href: '#archive', zh: '小项目', en: 'Side Builds' },
         { href: '#resume', zh: '简历', en: 'Resume' },
-        { href: '#archive', zh: '归档', en: 'Archive' },
         { href: '#resources', zh: '资源', en: 'Resources' },
         { href: '#gallery', zh: '图库', en: 'Gallery' },
         { href: '#tags', zh: '标签', en: 'Tags' },

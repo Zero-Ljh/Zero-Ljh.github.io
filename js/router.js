@@ -17,8 +17,7 @@ function handleRoute() {
   if (!hash || hash === 'home') { showMainView(); return; }
 
   // Section 锚点
-  const sections = ['about','stats','milestones','reading','experience','projects','other-projects',
-    'now','notebook','creative','life','contact','research','toolbox'];
+  const sections = ['about','reading','experience','projects','now','contact'];
   if (sections.includes(hash)) {
     showMainView();
     setTimeout(() => document.getElementById(hash)?.scrollIntoView({ behavior: 'smooth' }), 100);
@@ -43,6 +42,11 @@ function handleRoute() {
   if (hash === 'resources') { showResources(); return; }
   if (hash === 'tags') { showTags(); return; }
   if (hash === 'gallery') { showGallery(); return; }
+  if (hash === 'research') { showResearchPage(); return; }
+  if (hash === 'creative') { showCreativeIndex(); return; }
+  if (hash === 'life') { showLifePage(); return; }
+  if (hash === 'toolbox') { showToolboxPage(); return; }
+  if (hash === 'about-detail') { showAboutDetail(); return; }
 
   const m5 = hash.match(/^tag\/(.+)$/);
   if (m5) { showTagItems(decodeURIComponent(m5[1])); return; }
@@ -57,25 +61,37 @@ function showMainView() {
   const nav = document.getElementById('nav');
   if (!main || !sub) return;
 
-  sub.classList.add('view-hidden');
+  // 先显示主视图（确保文档流高度）
+  sub.innerHTML = '';
   main.classList.remove('view-hidden');
   document.body.style.backgroundColor = '';
-  window.scrollTo(0, 0);
-
-  // 主页显示导航栏
+  document.body.style.overflow = ''; // Bug 4: 强制重置 overflow
   if (nav) nav.style.display = '';
-
-  // 恢复侧边栏和邮箱
   const sidebar = document.querySelector('.sidebar');
   const emailSide = document.querySelector('.email-side');
   if (sidebar) sidebar.style.display = '';
   if (emailSide) emailSide.style.display = '';
-
-  // 过渡完成后清理 sub 内容
-  setTimeout(() => {
-    if (sub.classList.contains('view-hidden')) sub.innerHTML = '';
-  }, 500);
+  window.scrollTo(0, 0);
   if (typeof restoreSEO === 'function') restoreSEO();
+
+  // 再隐藏子视图（此时 main 已在文档流中，body 不会塌缩）
+  sub.classList.add('view-hidden');
+
+  // 等过渡动画完成后清空子视图 + 重播 Hero
+  setTimeout(function() {
+    sub.innerHTML = '';
+
+    // 重播Hero入场动画
+    setTimeout(function() {
+      var els = document.querySelectorAll('.hero .container > *');
+      els.forEach(function(el, i) {
+        el.style.animation = 'none';
+        el.offsetHeight;
+        el.style.animation = 'fadeInUp 0.6s ease backwards';
+        el.style.animationDelay = (i * 120) + 'ms';
+      });
+    }, 50);
+  }, 400);
 }
 
 function showSubView() {
@@ -84,19 +100,67 @@ function showSubView() {
   const nav = document.getElementById('nav');
   if (!main || !sub) return;
 
+  // 先隐藏主视图
   main.classList.add('view-hidden');
-  sub.classList.remove('view-hidden');
   document.body.style.backgroundColor = '#f6f3ef';
-  window.scrollTo(0, 0);
-
-  // 子页面隐藏导航栏，纯阅读模式
   if (nav) nav.style.display = 'none';
-
-  // 隐藏侧边栏和邮箱，减少阅读干扰
   const sidebar = document.querySelector('.sidebar');
   const emailSide = document.querySelector('.email-side');
   if (sidebar) sidebar.style.display = 'none';
   if (emailSide) emailSide.style.display = 'none';
+  window.scrollTo(0, 0);
+
+  // 等主视图淡出完成后再显示子视图
+  setTimeout(function() {
+    sub.classList.remove('view-hidden');
+    var h1 = sub.querySelector('h1');
+    if (h1) { h1.setAttribute('tabindex', '-1'); h1.focus({ preventScroll: true }); }
+  }, 400);
+}
+
+/* ===== About Detail 子页面 ===== */
+function showAboutDetail() {
+  var lang = currentLang;
+  var container = document.getElementById('sub-view');
+  if (!container) return;
+
+  var p = DATA.profile;
+  var edu = DATA.education;
+
+  var aboutHtml = p.about.map(function(para) {
+    return '<p>' + para[lang] + '</p>';
+  }).join('');
+
+  var skillsHtml = p.skills.map(function(s) {
+    var name = typeof s === 'string' ? s : s.name;
+    var level = typeof s === 'object' ? s.level : 60;
+    var label = (typeof s === 'object' && s.label) ? s.label[lang] : level + '%';
+    return name + ' (' + label + ')';
+  }).join(' · ');
+
+  var html = '<div class="sub-content">' +
+    aboutHtml +
+    '<h2>' + (lang === 'zh' ? '教育背景' : 'Education') + '</h2>' +
+    '<p><strong>' + edu.school[lang] + '</strong> — ' + edu.degree[lang] + '</p>' +
+    '<p>' + edu.description[lang] + '</p>' +
+    '<h2>' + (lang === 'zh' ? '我正在寻找' : "What I'm Looking For") + '</h2>' +
+    '<p>' + p.seeking[lang] + '</p>' +
+    '<h2>' + (lang === 'zh' ? '技能' : 'Skills') + '</h2>' +
+    '<p>' + skillsHtml + '</p>' +
+    '</div>';
+
+  container.innerHTML = subPageShell(
+    '<p class="sub-label">' + (lang === 'zh' ? '关于我' : 'About Me') + '</p>' +
+    '<h1 class="sub-title">' + p.name[lang] + '</h1>' +
+    '<p class="sub-meta-line">' + edu.degree[lang] + '</p>' +
+    html,
+    lang === 'zh' ? '返回主页' : 'Back to Home'
+  );
+  showSubView();
+  if (typeof updateSEO === 'function') updateSEO(
+    lang === 'zh' ? '关于 - ' + p.name.zh : 'About - ' + p.name.en,
+    p.about[0][lang].replace(/<[^>]*>/g, '').substring(0, 160)
+  );
 }
 
 /* ===== 子页面骨架 ===== */
@@ -170,7 +234,10 @@ function renderBody(body, lang) {
   }
   return body.map(function(section) {
     switch (section.type) {
-      case 'p': return '<p>' + section.content[lang] + '</p>';
+      case 'p':
+        var content = section.content[lang];
+        content = content.replace(/<a\s/g, '<a class="inline-link" ');
+        return '<p>' + content + '</p>';
       case 'h2': return '<h2>' + section.content[lang] + '</h2>';
       case 'h3': return '<h3>' + section.content[lang] + '</h3>';
       case 'code':
@@ -363,6 +430,8 @@ function showProjectDetail(id) {
     ${subNavHTML(prevProj, nextProj, lang)}
   `, lang === 'zh' ? '返回项目' : 'Back to Projects', 'projects');
   showSubView();
+  var pbw = container.querySelector('.sub-body-wrap');
+  if (pbw) pbw.classList.add('sub-theme-studio');
   if (typeof updateSEO === 'function') updateSEO(project.title[lang], project.desc[lang]);
 }
 
@@ -483,6 +552,8 @@ function showArchive() {
     </div>
   `, lang === 'zh' ? '返回' : 'Back');
   showSubView();
+  var abw = container.querySelector('.sub-body-wrap');
+  if (abw) abw.classList.add('sub-theme-archive');
   if (typeof updateSEO === 'function') updateSEO(
     lang === 'zh' ? '全部项目' : 'All Projects',
     lang === 'zh' ? '李军辉的项目归档' : "Junhui Li's project archive"
@@ -566,6 +637,8 @@ function showResume() {
 
   container.innerHTML = subPageShell(html, lang === 'zh' ? '返回主页' : 'Back to Home');
   showSubView();
+  var rbw = container.querySelector('.sub-body-wrap');
+  if (rbw) rbw.classList.add('sub-theme-print');
   if (typeof updateSEO === 'function') updateSEO(
     lang === 'zh' ? '简历 - 李军辉' : 'Resume - Junhui Li',
     lang === 'zh' ? '李军辉的个人简历' : "Junhui Li's Resume"
@@ -636,6 +709,8 @@ function showResources() {
     lang === 'zh' ? '返回' : 'Back'
   );
   showSubView();
+  var rbw2 = container.querySelector('.sub-body-wrap');
+  if (rbw2) rbw2.classList.add('sub-theme-library');
   if (typeof updateSEO === 'function') updateSEO(r.title[lang], r.desc[lang]);
 }
 
@@ -694,6 +769,8 @@ function showTags() {
     lang === 'zh' ? '返回' : 'Back'
   );
   showSubView();
+  var tbw = container.querySelector('.sub-body-wrap');
+  if (tbw) tbw.classList.add('sub-theme-index');
   if (typeof updateSEO === 'function') updateSEO(
     lang === 'zh' ? '内容标签' : 'Content Tags',
     lang === 'zh' ? '按标签浏览所有内容' : 'Browse all content by tag'
@@ -833,7 +910,7 @@ function showGallery() {
     });
     filterHtml += '</div>';
 
-    var masonryHtml = '<div class="gallery-masonry">';
+    var masonryHtml = '<div class="gallery-grid">';
     items.forEach(function(item, idx) {
       var globalIdx = gallery.items.indexOf(item);
       masonryHtml += '<div class="gallery-item" onclick="window._openLightbox(' + globalIdx + ')">' +
@@ -859,11 +936,13 @@ function showGallery() {
     document.getElementById('gallery-lightbox').classList.add('open');
     updateLightboxImage();
     document.body.style.overflow = 'hidden';
+    resetLightboxTimer();
   };
 
   window._closeLightbox = function() {
-    document.getElementById('gallery-lightbox').classList.remove('open');
+    try { document.getElementById('gallery-lightbox')?.classList.remove('open'); } catch(e) {}
     document.body.style.overflow = '';
+    clearTimeout(lightboxTimer);
   };
 
   window._lightboxPrev = function() {
@@ -877,8 +956,11 @@ function showGallery() {
   function updateLightboxImage() {
     var item = window._lightboxItems[window._lightboxIdx];
     if (!item) return;
-    document.getElementById('lightbox-img').src = item.src;
-    document.getElementById('lightbox-img').alt = item.title[currentLang];
+    var img = document.getElementById('lightbox-img');
+    img.classList.add('loading');
+    img.src = item.src;
+    img.alt = item.title ? (typeof item.title === 'object' ? item.title[currentLang] : item.title) : '';
+    img.onload = function() { img.classList.remove('loading'); };
     document.getElementById('lightbox-counter').textContent = (window._lightboxIdx + 1) + ' / ' + window._lightboxItems.length;
   }
 
@@ -892,6 +974,18 @@ function showGallery() {
     if (e.key === 'ArrowLeft') window._lightboxPrev();
     if (e.key === 'ArrowRight') window._lightboxNext();
   });
+
+  // Auto-hide lightbox UI after 3s of no mouse movement
+  var lightboxTimer;
+  function resetLightboxTimer() {
+    var lb = document.getElementById('gallery-lightbox');
+    if (lb) lb.classList.remove('idle');
+    clearTimeout(lightboxTimer);
+    lightboxTimer = setTimeout(function() {
+      var lb2 = document.getElementById('gallery-lightbox');
+      if (lb2) lb2.classList.add('idle');
+    }, 3000);
+  }
 
   var lightboxHTML = '<div id="gallery-lightbox" class="gallery-lightbox" onclick="if(event.target===this)window._closeLightbox()">' +
     '<button class="gallery-lightbox-close" onclick="window._closeLightbox()" aria-label="Close">✕</button>' +
@@ -910,10 +1004,25 @@ function showGallery() {
   );
 
   showSubView();
-
-  // Gallery uses dark background (override warm reading mode)
   var bodyWrap = container.querySelector('.sub-body-wrap');
-  if (bodyWrap) { bodyWrap.style.background = 'var(--navy)'; bodyWrap.style.color = 'var(--slate)'; bodyWrap.style.maxWidth = '1100px'; }
+  if (bodyWrap) { bodyWrap.classList.add('sub-theme-gallery'); }
+
+  // Bind lightbox auto-hide and touch events
+  var lightboxEl = document.getElementById('gallery-lightbox');
+  if (lightboxEl) {
+    lightboxEl.addEventListener('mousemove', resetLightboxTimer);
+    var touchStartX = 0;
+    lightboxEl.addEventListener('touchstart', function(e) {
+      touchStartX = e.changedTouches[0].screenX;
+    }, {passive: true});
+    lightboxEl.addEventListener('touchend', function(e) {
+      var dx = e.changedTouches[0].screenX - touchStartX;
+      if (Math.abs(dx) > 50) {
+        if (dx < 0) window._lightboxNext();
+        else window._lightboxPrev();
+      }
+    }, {passive: true});
+  }
 
   renderGallery('all');
 
@@ -921,6 +1030,118 @@ function showGallery() {
     lang === 'zh' ? '图库 - 李军辉' : 'Gallery - Junhui Li',
     lang === 'zh' ? '李军辉的影像记录' : "Junhui Li's visual gallery"
   );
+}
+
+/* ===== 兴趣探索子页 ===== */
+function showResearchPage() {
+  var lang = currentLang;
+  var container = document.getElementById('sub-view');
+  if (!container || !DATA.research) return;
+  var r = DATA.research;
+
+  var areasHtml = '<div class="research-grid-sub">';
+  r.areas.forEach(function(a) {
+    areasHtml += '<div class="research-card-sub"><div class="research-icon">' + a.icon + '</div><h3>' + a.title[lang] + '</h3><p>' + a.desc[lang] + '</p></div>';
+  });
+  areasHtml += '</div>';
+
+  container.innerHTML = subPageShell(
+    '<p class="sub-label">' + (lang === 'zh' ? '兴趣探索' : 'Exploring') + '</p>' +
+    '<h1 class="sub-title">' + r.heading[lang] + '</h1>' +
+    '<p class="sub-meta-line" style="margin-bottom:32px">' + r.intro[lang] + '</p>' +
+    areasHtml,
+    lang === 'zh' ? '返回' : 'Back'
+  );
+  showSubView();
+  if (typeof updateSEO === 'function') updateSEO(r.heading[lang], r.intro[lang]);
+}
+
+/* ===== 创作索引子页 ===== */
+function showCreativeIndex() {
+  var lang = currentLang;
+  var container = document.getElementById('sub-view');
+  if (!container || !DATA.creative) return;
+
+  var itemsHtml = '<div class="creative-sub-list">';
+  DATA.creative.forEach(function(c, i) {
+    itemsHtml += '<a href="#creative/' + i + '" class="creative-sub-card">' +
+      '<span class="creative-genre">' + c.genre[lang] + '</span>' +
+      '<h3>' + c.title[lang] + '</h3>' +
+      '<p>' + c.excerpt[lang] + '</p>' +
+      '</a>';
+  });
+  itemsHtml += '</div>';
+
+  container.innerHTML = subPageShell(
+    '<p class="sub-label">' + (lang === 'zh' ? '创作' : 'Creative') + '</p>' +
+    '<h1 class="sub-title">' + (lang === 'zh' ? '诗歌 · 文章 · 随笔' : 'Poetry · Essays · Prose') + '</h1>' +
+    '<p class="sub-meta-line" style="margin-bottom:32px">' + (lang === 'zh' ? '文字记录与表达' : 'Words and expression') + '</p>' +
+    itemsHtml,
+    lang === 'zh' ? '返回' : 'Back'
+  );
+  showSubView();
+  if (typeof updateSEO === 'function') updateSEO(
+    lang === 'zh' ? '创作 - 李军辉' : 'Creative - Junhui Li',
+    lang === 'zh' ? '李军辉的诗歌、文章与随笔' : "Junhui Li's creative writing"
+  );
+}
+
+/* ===== 课余生活子页 ===== */
+function showLifePage() {
+  var lang = currentLang;
+  var container = document.getElementById('sub-view');
+  if (!container || !DATA.life) return;
+
+  var icons = typeof FEATHER_ICONS !== 'undefined' ? FEATHER_ICONS : {};
+  var itemsHtml = '<div class="life-sub-grid">';
+  DATA.life.forEach(function(item) {
+    itemsHtml += '<div class="life-sub-item">' +
+      '<span class="life-sub-icon">' + (icons[item.icon] || item.icon) + '</span>' +
+      '<div class="life-sub-label">' + item.label[lang] + '</div>' +
+      (item.desc ? '<div class="life-sub-desc">' + item.desc[lang] + '</div>' : '') +
+      '</div>';
+  });
+  itemsHtml += '</div>';
+
+  container.innerHTML = subPageShell(
+    '<p class="sub-label">' + (lang === 'zh' ? '课余生活' : 'Life') + '</p>' +
+    '<h1 class="sub-title">' + (lang === 'zh' ? '足球 · 阅读 · 机器人 · 心理' : 'Football · Reading · Robotics · Mental Health') + '</h1>' +
+    '<p class="sub-meta-line" style="margin-bottom:32px">' + (lang === 'zh' ? '学习之外，我在做的那些事' : 'Beyond studying — what I spend time on') + '</p>' +
+    itemsHtml,
+    lang === 'zh' ? '返回' : 'Back'
+  );
+  showSubView();
+  if (typeof updateSEO === 'function') updateSEO(
+    lang === 'zh' ? '生活 - 李军辉' : 'Life - Junhui Li',
+    lang === 'zh' ? '李军辉的课余生活' : "Junhui Li's life beyond studying"
+  );
+}
+
+/* ===== 工具箱子页 ===== */
+function showToolboxPage() {
+  var lang = currentLang;
+  var container = document.getElementById('sub-view');
+  if (!container || !DATA.toolbox) return;
+  var tb = DATA.toolbox;
+
+  var catsHtml = '';
+  tb.categories.forEach(function(cat) {
+    catsHtml += '<div class="toolbox-sub-category"><h3>' + cat.label[lang] + '</h3><div class="toolbox-sub-items">';
+    cat.items.forEach(function(item) {
+      catsHtml += '<div class="toolbox-sub-item"><span class="tool-sub-name">' + item.name + '</span><span class="tool-sub-desc">' + item.desc[lang] + '</span></div>';
+    });
+    catsHtml += '</div></div>';
+  });
+
+  container.innerHTML = subPageShell(
+    '<p class="sub-label">' + (lang === 'zh' ? '工具箱' : 'Toolbox') + '</p>' +
+    '<h1 class="sub-title">' + tb.heading[lang] + '</h1>' +
+    '<p class="sub-meta-line" style="margin-bottom:32px">' + (lang === 'zh' ? '我在用的工具和工作流' : 'Tools and workflows I use') + '</p>' +
+    catsHtml,
+    lang === 'zh' ? '返回' : 'Back'
+  );
+  showSubView();
+  if (typeof updateSEO === 'function') updateSEO(tb.heading[lang], lang === 'zh' ? '李军辉的工具箱' : "Junhui Li's toolbox");
 }
 
 /* ===== 初始化 ===== */

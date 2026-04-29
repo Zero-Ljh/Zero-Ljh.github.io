@@ -25,13 +25,14 @@ function renderNav() {
   const t = DATA.i18n.nav;
 
   let desktopHtml = '';
-  t.items.forEach(item => {
-    desktopHtml += `<a href="${item.href}" data-en="${item.en}" data-zh="${item.zh}">${item[lang].toUpperCase()}</a>`;
+  t.items.forEach((item, i) => {
+    const num = String(i + 1).padStart(2, '0');
+    desktopHtml += `<a href="${item.href}" data-en="${num}. ${item.en}" data-zh="${num}. ${item.zh}">${num}. ${item[lang]}</a>`;
   });
 
   desktopHtml += `<a href="#" id="resume-btn" class="resume-btn" data-en="${t.resumeBtn.en}" data-zh="${t.resumeBtn.zh}" onclick="event.preventDefault();window.open('${DATA.profile.resumeUrl}','_blank')">${t.resumeBtn[lang]}</a>
     <div class="dropdown" id="more-dropdown">
-    <button class="dropdown-toggle" id="moreBtn" onclick="toggleDropdown()" data-en="${t.moreBtn.en}" data-zh="${t.moreBtn.zh}">${t.moreBtn[lang]}</button>
+    <button class="dropdown-toggle" id="moreBtn" onclick="toggleDropdown()" aria-haspopup="true" aria-expanded="false" data-en="${t.moreBtn.en}" data-zh="${t.moreBtn.zh}">${t.moreBtn[lang]}</button>
     <div class="dropdown-menu" id="dropdown-menu">`;
 
   t.dropdown.forEach(item => {
@@ -51,10 +52,14 @@ function renderNav() {
 
   container.innerHTML = desktopHtml;
 
-  // Mobile menu: all items + resume
+  // Mobile menu: items with numbers + dropdown without + resume
   if (mobileContainer) {
     let mobileHtml = '';
-    [...t.items, ...t.dropdown].forEach(item => {
+    t.items.forEach((item, i) => {
+      const num = String(i + 1).padStart(2, '0');
+      mobileHtml += `<a href="${item.href}" data-en="${num}. ${item.en}" data-zh="${num}. ${item.zh}">${num}. ${item[lang]}</a>`;
+    });
+    t.dropdown.forEach(item => {
       mobileHtml += `<a href="${item.href}" data-en="${item.en}" data-zh="${item.zh}">${item[lang]}</a>`;
     });
     mobileHtml += `<a href="#" class="mobile-resume" onclick="event.preventDefault();window.open('${DATA.profile.resumeUrl}','_blank')">${t.resumeBtn[lang]}</a>`;
@@ -96,8 +101,7 @@ function renderAbout() {
     <div class="about-image">
       <div class="frame">
         <div class="photo">
-          <div class="initials">LH</div>
-          <div class="caption">${DATA.i18n.photoPlaceholder[lang]}</div>
+          <img src="assets/images/avatar.jpg" alt="${p.name[lang]}" class="about-avatar">
         </div>
       </div>
     </div>`;
@@ -428,27 +432,23 @@ function renderStats() {
 
 /* ===== 全部渲染 ===== */
 function renderAll() {
+  var content = document.getElementById('main-content');
+  if (content) {
+    content.style.opacity = '0';
+    content.style.transition = 'opacity 0.2s ease';
+  }
+
   renderNav();
   renderAbout();
-  renderStats();
-  renderMilestones();
   renderReading();
   renderExperience();
-  renderHonors();
-  renderResearch();
   renderProjects();
-  renderMiniProjects();
   renderNow();
-  renderNotebook();
-  renderCreative();
-  renderLife();
-  renderToolbox();
-  fetchGitHubRepos();
 
-  // 技能条动画：等 DOM 渲染完成后再触发
-  setTimeout(() => {
-    document.querySelectorAll('.skill-bar').forEach(bar => bar.classList.add('visible'));
-  }, 300);
+  setTimeout(function() {
+    document.querySelectorAll('.skill-bar').forEach(function(bar) { bar.classList.add('visible'); });
+    if (content) { content.style.opacity = '1'; }
+  }, 100);
 }
 
 /* ===== 学习里程碑 ===== */
@@ -480,9 +480,9 @@ function renderMilestones() {
 }
 
 /* ===== Scroll Reveal ===== */
-const revealObserver = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (e.isIntersecting) e.target.classList.add('visible');
+const revealObserver = new IntersectionObserver(function(entries) {
+  entries.forEach(function(e) {
+    e.target.classList.toggle('visible', e.isIntersecting);
   });
 }, { threshold: 0.08 });
 
@@ -518,7 +518,15 @@ const revealObserver = new IntersectionObserver(entries => {
 
 /* ===== Dropdown ===== */
 function toggleDropdown() {
-  document.getElementById('dropdown-menu')?.classList.toggle('open');
+  const menu = document.getElementById('dropdown-menu');
+  const btn = document.getElementById('moreBtn');
+  if (!menu) return;
+  const isOpen = menu.classList.toggle('open');
+  if (btn) btn.setAttribute('aria-expanded', isOpen);
+  if (isOpen) {
+    const firstLink = menu.querySelector('a');
+    if (firstLink) setTimeout(function() { firstLink.focus(); }, 100);
+  }
 }
 document.addEventListener('click', (e) => {
   const dd = document.getElementById('more-dropdown');
@@ -583,15 +591,9 @@ function initMobileMenu() {
 
 /* ===== Hero Staggered Entry ===== */
 function heroEntry() {
-  const els = document.querySelectorAll('.hero-overline, .hero h1, .hero .sub, .hero p, .hero .cta');
+  const els = document.querySelectorAll('.hero .container > *');
   els.forEach((el, i) => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(20px)';
-    setTimeout(() => {
-      el.style.transition = 'opacity 0.8s ease, transform 0.8s cubic-bezier(0.22, 1, 0.36, 1)';
-      el.style.opacity = '1';
-      el.style.transform = 'translateY(0)';
-    }, 100 + i * 120);
+    el.style.animationDelay = `${i * 120}ms`;
   });
 }
 

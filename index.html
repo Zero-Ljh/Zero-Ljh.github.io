@@ -75,7 +75,7 @@
 <div id="loader" role="status" aria-label="Loading">
   <div class="loader-diamond">◇</div>
 </div>
-<a href="#main-content" class="skip-to-content">Skip to content</a>
+<a href="#main-content" class="skip-to-content" data-zh="跳到内容" data-en="Skip to content">Skip to content</a>
 
 <!-- Sidebar -->
 <div class="sidebar">
@@ -127,7 +127,7 @@
     <h1><em data-en="Junhui Li" data-zh="李军辉">李军辉</em></h1>
     <p class="sub" data-en="First-year · Exploring AI · Building things" data-zh="大一学生 · 探索 AI · 动手实践">大一学生 · 探索 AI · 动手实践</p>
     <p data-en="A first-year student at Wuhan University of Science and Technology, exploring the world of artificial intelligence — from large language models to hands-on robotics. Curious, learning, and building every day." data-zh="武汉科技大学大一学生，正在探索 AI 的世界——从大语言模型到机器人实践。保持好奇，每天都在学新东西。">武汉科技大学大一学生，正在探索 AI 的世界——从大语言模型到机器人实践。保持好奇，每天都在学新东西。</p>
-    <a href="#about" class="cta"><span data-en="Learn more →" data-zh="了解更多 →">了解更多 →</span></a>
+    <a href="#about-detail" class="cta"><span data-en="Learn more →" data-zh="了解更多 →">了解更多 →</span></a>
       <a href="#now" class="status-indicator" id="status-indicator" title="View what I'm doing now">
         <span class="status-dot"></span>
         <span class="status-text" data-zh="正在学习 PyTorch 深度学习框架" data-en="Currently learning PyTorch">正在学习 PyTorch 深度学习框架</span>
@@ -151,32 +151,6 @@
   <div class="about-grid" id="about-content"></div>
 </section>
 
-<div class="section-divider"></div>
-
-<!-- Stats -->
-<section id="stats" class="section secondary container reveal">
-  <div class="section-heading">
-    <span class="number">—</span>
-    <h2 data-en="At a Glance" data-zh="快速概览">STATS</h2>
-  </div>
-  <div class="stats-grid" id="stats-grid"></div>
-</section>
-
-<div class="section-divider"></div>
-
-<!-- Learning Milestones -->
-<section id="milestones" class="section secondary container reveal">
-  <div class="section-heading">
-    <span class="number">+</span>
-    <h2 data-en="Milestones" data-zh="学习里程碑">MILESTONES</h2>
-    <span class="tag" data-en="Growth timeline" data-zh="成长时间线">成长时间线</span>
-  </div>
-  <p id="milestones-intro" style="font-size:var(--fz-md);color:var(--dark-slate);margin-bottom:32px;max-width:600px"></p>
-  <div class="milestones-container" id="milestones-container"></div>
-</section>
-
-<div class="section-divider"></div>
-
 <!-- Reading -->
 <section id="reading" class="section container reveal">
   <div class="section-heading">
@@ -199,32 +173,6 @@
   <div id="exp-container"></div>
 </section>
 
-<div class="section-divider"></div>
-
-<!-- Honors -->
-<section class="section container reveal" style="padding:80px 0">
-  <div class="section-heading">
-    <span class="number">+</span>
-    <h2 data-en="Honors" data-zh="荣誉">HONORS</h2>
-  </div>
-  <div class="honors-grid" id="honors-grid"></div>
-</section>
-
-<div class="section-divider"></div>
-
-<!-- Research -->
-<section id="research" class="section container reveal">
-  <div class="section-heading">
-    <span class="number">—</span>
-    <h2 data-en="Exploring" data-zh="兴趣探索" id="research-heading">EXPLORING</h2>
-    <span class="tag" data-en="Curious beginner" data-zh="保持好奇">保持好奇</span>
-  </div>
-  <p id="research-intro" style="font-size:var(--fz-md);color:var(--slate);margin-bottom:32px;max-width:600px"></p>
-  <div class="research-grid" id="research-grid"></div>
-</section>
-
-<div class="section-divider"></div>
-
 <!-- Projects -->
 <section id="projects" class="section container reveal">
   <div class="section-heading">
@@ -234,31 +182,6 @@
   <div id="projects-list"></div>
 </section>
 
-<div class="section-divider accent"></div>
-
-<!-- Mini Projects -->
-<section id="other-projects" class="section secondary container reveal">
-  <div class="section-heading">
-    <span class="number">—</span>
-    <h2 data-en="Mini Projects" data-zh="小项目">MINI PROJECTS</h2>
-    <span class="tag" data-en="Growing collection" data-zh="持续积累中">持续积累中</span>
-  </div>
-  <div class="other-grid" id="mini-grid"></div>
-</section>
-
-<div class="section-divider thin"></div>
-
-<!-- GitHub Repos -->
-<section class="section secondary container reveal">
-  <div class="section-heading">
-    <span class="number">★</span>
-    <h2 data-en="GitHub Projects" data-zh="开源项目">GITHUB</h2>
-    <span class="tag" data-en="Latest repos" data-zh="最新仓库">最新仓库</span>
-  </div>
-  <div class="repo-grid" id="github-repos"></div>
-</section>
-
-<div class="section-divider thin"></div>
 <section id="now" class="section secondary container reveal">
   <div class="section-heading">
     <span class="number">—</span>
@@ -267,53 +190,6 @@
   </div>
   <p id="now-intro" style="font-size:var(--fz-md);color:var(--dark-slate);margin-bottom:32px;max-width:600px"></p>
   <div class="now-grid" id="now-grid"></div>
-</section>
-
-<div class="section-divider thin"></div>
-
-<!-- Notebook -->
-<section id="notebook" class="section secondary container reveal">
-  <div class="section-heading">
-    <span class="number">—</span>
-    <h2 data-en="Course Notes" data-zh="课程笔记">NOTES</h2>
-    <span class="tag" data-en="Learning in progress" data-zh="学习记录">学习记录</span>
-  </div>
-  <div class="notebook-grid" id="notebook-grid"></div>
-</section>
-
-<div class="section-divider thin"></div>
-
-<!-- Creative -->
-<section id="creative" class="section secondary container reveal">
-  <div class="section-heading">
-    <span class="number">—</span>
-    <h2 data-en="Creative Writing" data-zh="创作">CREATIVE</h2>
-    <span class="tag" data-en="Poetry · Prose" data-zh="诗歌 · 文章">诗歌 · 文章</span>
-  </div>
-  <div class="creative-grid" id="creative-grid"></div>
-</section>
-
-<div class="section-divider thin"></div>
-
-<!-- Life -->
-<section id="life" class="section secondary container reveal">
-  <div class="section-heading">
-    <span class="number">—</span>
-    <h2 data-en="Life" data-zh="课余生活">LIFE</h2>
-    <span class="tag" data-en="Football · Learning · Growth" data-zh="足球 · 学习 · 成长">足球 · 学习 · 成长</span>
-  </div>
-  <div class="life-grid" id="life-grid"></div>
-</section>
-
-<div class="section-divider thin"></div>
-
-<section id="toolbox" class="section secondary container reveal">
-  <div class="section-heading">
-    <span class="number">—</span>
-    <h2 data-en="Toolbox" data-zh="工具箱">TOOLBOX</h2>
-    <span class="tag" data-en="Tools I use" data-zh="常用工具">常用工具</span>
-  </div>
-  <div class="toolbox-grid" id="toolbox-grid"></div>
 </section>
 
 <div class="section-divider accent"></div>
@@ -326,6 +202,7 @@
     <p data-en="I'm always open to meeting people who share an interest in AI, robotics, or just want to chat about technology. Whether you're a fellow student or a professor — let's talk." data-zh="我始终乐于结识对 AI、机器人感兴趣的人，或者只是想聊技术。无论你是同学还是老师——很期待交流。">我始终乐于结识对 AI、机器人感兴趣的人，或者只是想聊技术。无论你是同学还是老师——很期待交流。</p>
     <a href="mailto:2430132207@qq.com" class="cta"><span data-en="Say Hello →" data-zh="发邮件 →">发邮件 →</span></a>
     <div class="form-separator" data-zh="或直接留言" data-en="Or leave a message"></div>
+    <!-- TODO: 替换为真实的 Formspree ID -->
     <form class="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
       <input type="text" name="name" placeholder="你的名字 / Your name" required data-zh-placeholder="你的名字" data-en-placeholder="Your name">
       <input type="email" name="email" placeholder="你的邮箱 / Your email" required data-zh-placeholder="你的邮箱" data-en-placeholder="Your email">
@@ -337,10 +214,10 @@
 
 <footer>
   <div class="social">
-    <a href="https://github.com/Zero-Ljh" target="_blank" title="GitHub">
+    <a href="https://github.com/Zero-Ljh" target="_blank" title="GitHub" aria-label="GitHub">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
     </a>
-    <a href="mailto:2430132207@qq.com" title="Email">
+    <a href="mailto:2430132207@qq.com" title="Email" aria-label="Email">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
     </a>
   </div>
@@ -371,7 +248,7 @@
 </div>
 
 <!-- Sub View -->
-<div id="sub-view" class="view-hidden" aria-live="polite" role="region" aria-label="Content page"></div>
+<div id="sub-view" class="view-hidden" role="region" aria-label="Content page"></div>
 
 <!-- Scripts -->
 <script src="js/data.js?v=3"></script>
