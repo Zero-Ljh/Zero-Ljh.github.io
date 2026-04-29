@@ -71,52 +71,52 @@ const DATA = {
     intro: { zh: '从零开始的成长之路', en: 'My learning journey from scratch' },
     milestones: [
       {
-        date: '2025.09',
+        date: '2025.08',
         icon: '01',
-        title: { zh: '大学入学', en: 'University Started' },
-        desc: { zh: '进入武汉科技大学人工智能科创专业，开启大学生活', en: 'Started at WUST, AI Innovation program' }
+        title: { zh: '自学 C 语言', en: 'Self-taught C' },
+        desc: { zh: '暑假提前接触编程，为大学课程打下程序设计基础', en: 'Started learning C programming over the summer, laying a foundation for university coursework' }
       },
       {
-        date: '2025.09-10',
+        date: '2025.09',
         icon: '02',
-        title: { zh: '自学 Python 基础', en: 'Python Basics' },
-        desc: { zh: '从零学习 Python：基础语法、数据结构、简单项目', en: 'Learned Python from scratch: syntax, data structures, mini projects' }
+        title: { zh: '大学入学', en: 'University Started' },
+        desc: { zh: '进入武汉科技大学，就读管理科学与工程类专业', en: 'Entered WUST, majoring in Management Science & Engineering' }
+      },
+      {
+        date: '2025.09',
+        icon: '03',
+        title: { zh: '加入心理健康协会', en: 'Joined Mental Health Association' },
+        desc: { zh: '成为心协干事，参与组织校园心理健康宣传活动与同伴支持', en: 'Became an officer, helping organize mental health awareness activities and peer support on campus' }
       },
       {
         date: '2025.10',
-        icon: '03',
+        icon: '04',
         title: { zh: '新生杯二等奖', en: 'Freshman Cup 2nd Place' },
         desc: { zh: '代表学院参加新生杯足球赛，扫荡型中场，获得二等奖', en: 'Represented the college in the freshman football cup, box-to-box midfielder, won 2nd place' }
       },
       {
-        date: '2025.11',
-        icon: '04',
-        title: { zh: '加入百炼机器人团队', en: 'Joined Bailian Robotics' },
-        desc: { zh: '通过选拔加入机器人团队，开始学习嵌入式系统与机器人控制', en: 'Joined the robotics team, started learning embedded systems and robot control' }
-      },
-      {
-        date: '2025.12',
+        date: '2026.01',
         icon: '05',
-        title: { zh: '关注 AI 前沿', en: 'AI Frontier Exploration' },
-        desc: { zh: '开始系统关注大模型进展，学习 Transformer 原理与 AI 工具链', en: 'Started following LLM developments, learning Transformer architecture and AI toolchain' }
+        title: { zh: '转入 AI 科创实验班', en: 'Joined AI Innovation Class' },
+        desc: { zh: '参加人工智能科创实验班选拔并成功进入，正式转向 AI 方向', en: 'Passed the selection for the AI Innovation Experimental Class, officially pivoting to AI' }
       },
       {
-        date: '2026.01-03',
+        date: '2026.02',
         icon: '06',
-        title: { zh: '掌握 Vibe Coding', en: 'Mastering Vibe Coding' },
-        desc: { zh: '使用 Claude Code 等 AI 工具高效开发，搭建本个人主页', en: 'Learned AI-assisted development with Claude Code, built this portfolio' }
+        title: { zh: 'Python + C++ 入门', en: 'Python & C++ Basics' },
+        desc: { zh: '在 B 站系统学习 Python 和 C++ 课程，开始搭建编程技能栈', en: 'Systematically studied Python and C++ through Bilibili courses, building up programming skills' }
       },
       {
         date: '2026.04',
         icon: '07',
-        title: { zh: '大模型部署与微调', en: 'LLM Deployment & Fine-Tuning' },
-        desc: { zh: '报名学习大模型部署微调课程，动手实践 LoRA 微调', en: 'Enrolled in LLM deployment & fine-tuning course, hands-on LoRA practice' }
+        title: { zh: '加入百炼机器人团队', en: 'Joined Bailian Robotics' },
+        desc: { zh: '通过选拔加入机器人团队，目前在学 MATLAB 与线性代数打基础', en: 'Joined the robotics team through selection. Currently building foundations with MATLAB and Linear Algebra' }
       },
       {
-        date: '2026.04',
+        date: '持续中',
         icon: '08',
-        title: { zh: '开始学 PyTorch', en: 'Starting PyTorch' },
-        desc: { zh: '开始学习 PyTorch 深度学习框架，为模型训练打基础', en: 'Beginning PyTorch deep learning framework for model training' }
+        title: { zh: 'AI 探索之旅', en: 'AI Exploration' },
+        desc: { zh: '穿插学习机器学习、大模型部署微调与 Vibe Coding，始终关注大模型前沿动态，在探索中前行', en: 'Learning ML, LLM deployment & fine-tuning, and Vibe Coding along the way. Always following LLM frontier developments — moving forward through exploration' }
       }
     ]
   },
@@ -124,15 +124,15 @@ const DATA = {
   /* ===== 教育背景 ===== */
   education: {
     school: { zh: '武汉科技大学', en: 'Wuhan University of Science and Technology' },
-    degree: { zh: '人工智能科创专业 · 本科在读', en: 'AI Innovation · Bachelor (In Progress)' },
+    degree: { zh: '人工智能科创实验班 · 本科在读', en: 'AI Innovation Experimental Class · Bachelor' },
     period: { zh: '2025年 — 2029年（预计）', en: '2025 — 2029 (Expected)' },
     courses: {
       zh: ['Python 程序设计', '数据结构与算法', '机器学习导论', '高等数学', '线性代数'],
       en: ['Python Programming', 'Data Structures & Algorithms', 'Intro to ML', 'Advanced Math', 'Linear Algebra']
     },
     description: {
-      zh: '大一在读，保持好奇心和学习热情。正在自学 AI/ML 基础知识，参与机器人团队实践。',
-      en: 'First-year student with curiosity and enthusiasm. Self-studying AI/ML fundamentals and participating in robotics team practice.'
+      zh: '大一在读，原管理科学与工程类，转入人工智能科创实验班。保持好奇心，正在打基础（MATLAB、线代）并探索 AI 方向。',
+      en: 'First-year student. Started in Management Science & Engineering, transferred into the AI Innovation Experimental Class. Currently building foundations (MATLAB, Linear Algebra) while exploring AI.'
     }
   },
 
@@ -407,8 +407,8 @@ const DATA = {
       icon: '01',
       title: { zh: '本个人主页', en: 'This Portfolio Website' },
       desc: {
-        zh: '纯手工搭建的 HTML/CSS/JS 个人主页。双语、响应式、零依赖。通过 GitHub Pages 部署。',
-        en: 'Built from scratch with HTML/CSS/JS. Bilingual, responsive, zero dependencies. Deployed via GitHub Pages.'
+        zh: '用 Vibe Coding 方式开发的个人主页。HTML/CSS/JS，双语、响应式、零依赖。通过 GitHub Pages 部署。',
+        en: 'Built with Vibe Coding using HTML/CSS/JS. Bilingual, responsive, zero dependencies. Deployed via GitHub Pages.'
       },
       tech: 'HTML · CSS · JS'
     },

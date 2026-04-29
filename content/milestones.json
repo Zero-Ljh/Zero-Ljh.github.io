@@ -10,32 +10,44 @@
     },
     "milestones": [
       {
-        "date": "2025.09",
+        "date": "2025.08",
         "icon": "01",
+        "title": {
+          "zh": "自学 C 语言",
+          "en": "Self-taught C"
+        },
+        "desc": {
+          "zh": "暑假提前接触编程，为大学课程打下程序设计基础",
+          "en": "Started learning C programming over the summer, laying a foundation for university coursework"
+        }
+      },
+      {
+        "date": "2025.09",
+        "icon": "02",
         "title": {
           "zh": "大学入学",
           "en": "University Started"
         },
         "desc": {
-          "zh": "进入武汉科技大学人工智能科创专业，开启大学生活",
-          "en": "Started at WUST, AI Innovation program"
+          "zh": "进入武汉科技大学，就读管理科学与工程类专业",
+          "en": "Entered WUST, majoring in Management Science & Engineering"
         }
       },
       {
-        "date": "2025.09-10",
-        "icon": "02",
+        "date": "2025.09",
+        "icon": "03",
         "title": {
-          "zh": "自学 Python 基础",
-          "en": "Python Basics"
+          "zh": "加入心理健康协会",
+          "en": "Joined Mental Health Association"
         },
         "desc": {
-          "zh": "从零学习 Python：基础语法、数据结构、简单项目",
-          "en": "Learned Python from scratch: syntax, data structures, mini projects"
+          "zh": "成为心协干事，参与组织校园心理健康宣传活动与同伴支持",
+          "en": "Became an officer, helping organize mental health awareness activities and peer support on campus"
         }
       },
       {
         "date": "2025.10",
-        "icon": "03",
+        "icon": "04",
         "title": {
           "zh": "新生杯二等奖",
           "en": "Freshman Cup 2nd Place"
@@ -46,63 +58,51 @@
         }
       },
       {
-        "date": "2025.11",
-        "icon": "04",
-        "title": {
-          "zh": "加入百炼机器人团队",
-          "en": "Joined Bailian Robotics"
-        },
-        "desc": {
-          "zh": "通过选拔加入机器人团队，开始学习嵌入式系统与机器人控制",
-          "en": "Joined the robotics team, started learning embedded systems and robot control"
-        }
-      },
-      {
-        "date": "2025.12",
+        "date": "2026.01",
         "icon": "05",
         "title": {
-          "zh": "关注 AI 前沿",
-          "en": "AI Frontier Exploration"
+          "zh": "转入 AI 科创实验班",
+          "en": "Joined AI Innovation Class"
         },
         "desc": {
-          "zh": "开始系统关注大模型进展，学习 Transformer 原理与 AI 工具链",
-          "en": "Started following LLM developments, learning Transformer architecture and AI toolchain"
+          "zh": "参加人工智能科创实验班选拔并成功进入，正式转向 AI 方向",
+          "en": "Passed the selection for the AI Innovation Experimental Class, officially pivoting to AI"
         }
       },
       {
-        "date": "2026.01-03",
+        "date": "2026.02",
         "icon": "06",
         "title": {
-          "zh": "掌握 Vibe Coding",
-          "en": "Mastering Vibe Coding"
+          "zh": "Python + C++ 入门",
+          "en": "Python & C++ Basics"
         },
         "desc": {
-          "zh": "使用 Claude Code 等 AI 工具高效开发，搭建本个人主页",
-          "en": "Learned AI-assisted development with Claude Code, built this portfolio"
+          "zh": "在 B 站系统学习 Python 和 C++ 课程，开始搭建编程技能栈",
+          "en": "Systematically studied Python and C++ through Bilibili courses, building up programming skills"
         }
       },
       {
         "date": "2026.04",
         "icon": "07",
         "title": {
-          "zh": "大模型部署与微调",
-          "en": "LLM Deployment & Fine-Tuning"
+          "zh": "加入百炼机器人团队",
+          "en": "Joined Bailian Robotics"
         },
         "desc": {
-          "zh": "报名学习大模型部署微调课程，动手实践 LoRA 微调",
-          "en": "Enrolled in LLM deployment & fine-tuning course, hands-on LoRA practice"
+          "zh": "通过选拔加入机器人团队，目前在学 MATLAB 与线性代数打基础",
+          "en": "Joined the robotics team through selection. Currently building foundations with MATLAB and Linear Algebra"
         }
       },
       {
-        "date": "2026.04",
+        "date": "持续中",
         "icon": "08",
         "title": {
-          "zh": "开始学 PyTorch",
-          "en": "Starting PyTorch"
+          "zh": "AI 探索之旅",
+          "en": "AI Exploration"
         },
         "desc": {
-          "zh": "开始学习 PyTorch 深度学习框架，为模型训练打基础",
-          "en": "Beginning PyTorch deep learning framework for model training"
+          "zh": "穿插学习机器学习、大模型部署微调与 Vibe Coding，始终关注大模型前沿动态，在探索中前行",
+          "en": "Learning ML, LLM deployment & fine-tuning, and Vibe Coding along the way. Always following LLM frontier developments — moving forward through exploration"
         }
       }
     ]

@@ -134,8 +134,8 @@
         "en": "This Portfolio Website"
       },
       "desc": {
-        "zh": "纯手工搭建的 HTML/CSS/JS 个人主页。双语、响应式、零依赖。通过 GitHub Pages 部署。",
-        "en": "Built from scratch with HTML/CSS/JS. Bilingual, responsive, zero dependencies. Deployed via GitHub Pages."
+        "zh": "用 Vibe Coding 方式开发的个人主页。HTML/CSS/JS，双语、响应式、零依赖。通过 GitHub Pages 部署。",
+        "en": "Built with Vibe Coding using HTML/CSS/JS. Bilingual, responsive, zero dependencies. Deployed via GitHub Pages."
       },
       "tech": "HTML · CSS · JS"
     },

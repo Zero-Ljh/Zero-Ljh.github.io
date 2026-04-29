@@ -107,8 +107,8 @@
       "en": "Wuhan University of Science and Technology"
     },
     "degree": {
-      "zh": "人工智能科创专业 · 本科在读",
-      "en": "AI Innovation · Bachelor (In Progress)"
+      "zh": "人工智能科创实验班 · 本科在读",
+      "en": "AI Innovation Experimental Class · Bachelor"
     },
     "period": {
       "zh": "2025年 — 2029年（预计）",
@@ -131,8 +131,8 @@
       ]
     },
     "description": {
-      "zh": "大一在读，保持好奇心和学习热情。正在自学 AI/ML 基础知识，参与机器人团队实践。",
-      "en": "First-year student with curiosity and enthusiasm. Self-studying AI/ML fundamentals and participating in robotics team practice."
+      "zh": "大一在读，原管理科学与工程类，转入人工智能科创实验班。保持好奇心，正在打基础（MATLAB、线代）并探索 AI 方向。",
+      "en": "First-year student. Started in Management Science & Engineering, transferred into the AI Innovation Experimental Class. Currently building foundations (MATLAB, Linear Algebra) while exploring AI."
     }
   }
 }
