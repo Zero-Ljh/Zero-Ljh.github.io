@@ -470,12 +470,10 @@ const DATA = {
 
   /* ===== 课余生活 ===== */
   life: [
-    { icon: '⚽', label: { zh: '足球 · 院系杯', en: 'Football · University Cup' } },
-    { icon: '📺', label: { zh: 'B 站学习', en: 'Bilibili Learning' } },
-    { icon: '📚', label: { zh: '百家讲坛', en: 'Bai Jia Jiang Tan' } },
-    { icon: '🤖', label: { zh: '机器人团队', en: 'Robotics Team' } },
-    { icon: '🧠', label: { zh: '心理协会', en: 'Psych Association' } },
-    { icon: '🌐', label: { zh: 'AI 动态', en: 'AI News' } }
+    { icon: '⚽', label: { zh: '足球 · 院系杯', en: 'Football · University Cup' }, desc: { zh: '扫荡型中场', en: 'Box-to-box midfielder' } },
+    { icon: '📚', label: { zh: '阅读 · 终身学习', en: 'Reading · Lifelong Learning' }, desc: { zh: '文史哲政经 + AI', en: 'Humanities to AI' } },
+    { icon: '🤖', label: { zh: '机器人 · 动手实践', en: 'Robotics · Hands-on' }, desc: { zh: '百炼团队嵌入式', en: 'Bailian embedded dev' } },
+    { icon: '🧠', label: { zh: '心理 · 同伴支持', en: 'Mental Health · Peer Support' }, desc: { zh: '心协干事', en: 'Health Association officer' } }
   ],
 
   /* ===== 工具箱 ===== */

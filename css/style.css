@@ -102,7 +102,6 @@ nav.nav-hidden{transform:translateY(-100%)}
 .dropdown-menu.open{opacity:1;visibility:visible;transform:translateY(0);pointer-events:auto}
 .dropdown-menu a{display:block;padding:10px 20px;font-size:12px;color:var(--slate);letter-spacing:.5px;text-decoration:none;transition:all 0.2s;border-left:2px solid transparent;margin:0}
 .dropdown-menu a:hover{background:rgba(212,162,89,0.06);color:var(--gold);border-left-color:var(--gold)}
-.dropdown-menu .divider{height:1px;background:var(--dark-slate);margin:4px 12px;opacity:0.3}
 
 /* ---- Hamburger ---- */
 .hamburger{display:none;position:relative;z-index:105;width:30px;height:22px;cursor:pointer;background:none;border:none;padding:0;flex-direction:column;justify-content:space-between}
@@ -279,7 +278,6 @@ body.menu-open .sidebar,body.menu-open .email-side{opacity:0;pointer-events:none
 .filter-btn{font-family:var(--font-mono);font-size:11px;padding:6px 16px;border-radius:20px;border:1px solid var(--gold);background:transparent;color:var(--gold);cursor:pointer;transition:var(--transition-fast);letter-spacing:0.3px}
 .filter-btn:hover{border-color:var(--warm-white);color:var(--warm-white)}
 .filter-btn.active{background:var(--gold);color:var(--dark-navy);border-color:var(--gold);font-weight:600}
-.filter-btn .count{opacity:0.6;margin-left:4px;font-size:10px}
 
 /* ---- Projects ---- */
 .project-card{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:100px;align-items:center;transition:opacity 0.4s ease,transform 0.4s cubic-bezier(0.22,1,0.36,1)}
@@ -324,7 +322,7 @@ body.menu-open .sidebar,body.menu-open .email-side{opacity:0;pointer-events:none
 /* ---- Now ---- */
 .now-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px}
 .now-card{padding:28px 24px;background:var(--light-navy);border-radius:var(--radius);transition:all 0.3s ease;position:relative;border:1px solid transparent}
-.now-card:hover{transform:translateY(-2px);border-color:rgba(212,162,89,0.08);box-shadow:0 8px 24px -8px rgba(0,0,0,0.2)}
+.now-card:hover{transform:translateY(-3px);border-color:rgba(212,162,89,0.15);box-shadow:0 8px 24px -8px rgba(0,0,0,0.2)}
 .now-card::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--gold),transparent);border-radius:var(--radius) var(--radius) 0 0;opacity:0.5;transition:opacity 0.3s ease}
 .now-card:hover::after{opacity:1}
 .now-card .label{font-family:var(--font-mono);font-size:10px;color:var(--gold);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px}
@@ -357,21 +355,24 @@ body.menu-open .sidebar,body.menu-open .email-side{opacity:0;pointer-events:none
 
 /* ---- Life ---- */
 .life-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
-.life-item{position:relative;border-radius:var(--radius);overflow:hidden;aspect-ratio:1;
+.life-item{position:relative;border-radius:var(--radius);overflow:hidden;padding:28px 20px 20px;
+  min-height:150px;
   background:linear-gradient(135deg,var(--light-navy) 0%,var(--navy) 100%);
-  display:flex;align-items:center;justify-content:center;cursor:pointer;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;
+  text-align:center;cursor:pointer;
   transition:all 0.3s ease;border:1px solid rgba(212,162,89,0.04)}
 .life-item:hover{transform:scale(1.03);border-color:rgba(212,162,89,0.15);box-shadow:0 8px 20px -8px rgba(0,0,0,0.3)}
-.life-item .icon-emblem{font-size:32px;opacity:0.15;color:var(--gold);transition:var(--transition)}
-.life-item:hover .icon-emblem{opacity:0.3;transform:scale(1.1)}
-.life-item .label{position:absolute;bottom:0;left:0;right:0;padding:16px;
-  background:linear-gradient(transparent,rgba(2,12,27,0.85));
-  color:var(--warm-white);font-size:13px;font-weight:400}
+.life-item .icon-emblem{font-size:36px;opacity:0.8;color:var(--gold);transition:var(--transition);margin-bottom:2px}
+.life-item:hover .icon-emblem{opacity:1;transform:scale(1.2)}
+.life-item .label{color:var(--warm-white);font-size:13px;font-weight:400;line-height:1.4}
+.life-item .desc{font-family:var(--font-mono);font-size:10px;color:var(--dark-slate);line-height:1.4;
+  opacity:0;max-height:0;overflow:hidden;transition:opacity 0.3s ease,max-height 0.3s ease}
+.life-item:hover .desc{opacity:1;max-height:30px}
 
 /* ---- Toolbox ---- */
 .toolbox-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px}
 .toolbox-category{padding:28px 24px;background:var(--light-navy);border-radius:var(--radius);transition:all 0.3s ease;border:1px solid transparent}
-.toolbox-category:hover{border-color:rgba(212,162,89,0.1);transform:translateY(-2px)}
+.toolbox-category:hover{border-color:rgba(212,162,89,0.15);transform:translateY(-3px);box-shadow:0 8px 24px -8px rgba(0,0,0,0.2)}
 .toolbox-category h3{font-family:var(--font-mono);font-size:11px;color:var(--gold);text-transform:uppercase;letter-spacing:1px;margin-bottom:16px}
 .toolbox-items{display:flex;flex-direction:column;gap:12px}
 .toolbox-item{display:flex;flex-direction:column;gap:2px}
@@ -399,7 +400,6 @@ body.menu-open .sidebar,body.menu-open .email-side{opacity:0;pointer-events:none
 .contact-form textarea{min-height:120px}
 .contact-form button{align-self:flex-start;padding:12px 28px;border:1px solid var(--gold);border-radius:var(--radius);background:transparent;color:var(--gold);font-family:var(--font-mono);font-size:var(--fz-sm);cursor:pointer;transition:var(--transition)}
 .contact-form button:hover{background:var(--gold-dim);color:var(--gold)}
-.contact-form .form-separator{text-align:center;font-family:var(--font-mono);font-size:11px;color:var(--dark-slate);margin:8px 0}
 
 /* ---- Footer ---- */
 footer{padding:48px 0 32px;display:flex;flex-direction:column;align-items:center;border-top:1px solid var(--light-navy);margin-top:80px}

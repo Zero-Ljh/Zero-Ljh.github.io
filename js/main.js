@@ -351,6 +351,7 @@ function renderLife() {
     <div class="life-item">
       <span class="icon-emblem">${item.icon}</span>
       <div class="label">${item.label[lang]}</div>
+      ${item.desc ? `<div class="desc">${item.desc[lang]}</div>` : ''}
     </div>
   `).join('');
 }
