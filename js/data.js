@@ -338,6 +338,37 @@ const DATA = {
     { icon: '🌐', label: { zh: 'AI 动态', en: 'AI News' } }
   ],
 
+  /* ===== 工具箱 ===== */
+  toolbox: {
+    heading: { zh: '工具箱', en: 'Toolbox' },
+    categories: [
+      {
+        label: { zh: 'AI 工具', en: 'AI Tools' },
+        items: [
+          { name: 'Claude Code', desc: { zh: '主力 AI 编程助手', en: 'Primary AI coding assistant' } },
+          { name: 'DeepSeek', desc: { zh: '高性价比大模型', en: 'Cost-effective LLM' } },
+          { name: 'GitHub Copilot', desc: { zh: '入门时的 AI 搭档', en: 'AI pair programmer when starting out' } }
+        ]
+      },
+      {
+        label: { zh: '编程语言', en: 'Languages' },
+        items: [
+          { name: 'Python', desc: { zh: '第一个编程语言，数据处理和脚本', en: 'First language, data processing & scripting' } },
+          { name: 'C++', desc: { zh: '正在学习，理解底层', en: 'Currently learning, understanding fundamentals' } },
+          { name: 'HTML/CSS/JS', desc: { zh: '搭建本网站', en: 'Built this website' } }
+        ]
+      },
+      {
+        label: { zh: '工作流', en: 'Workflow' },
+        items: [
+          { name: 'Vibe Coding', desc: { zh: 'AI 驱动的高效开发方式', en: 'AI-driven efficient development' } },
+          { name: 'GitHub Pages', desc: { zh: '静态网站部署', en: 'Static site deployment' } },
+          { name: 'VS Code', desc: { zh: '日常编辑器', en: 'Daily editor' } }
+        ]
+      }
+    ]
+  },
+
   /* ===== UI 导航文字 ===== */
   i18n: {
     nav: {
@@ -359,6 +390,7 @@ const DATA = {
         { href: '#archive', zh: '🗂️ 归档', en: 'Archive' },
         { href: '#creative', zh: '✏️ 创作', en: 'Creative' },
         { href: '#life', zh: '📸 生活', en: 'Life' },
+        { href: '#toolbox', zh: '🧰 工具箱', en: 'Toolbox' },
         { href: '#research', zh: '🔬 研究方向', en: 'Research' },
         { href: '#contact', zh: '💬 联系', en: 'Contact' }
       ]

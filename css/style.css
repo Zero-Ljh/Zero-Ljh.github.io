@@ -349,6 +349,16 @@ body.menu-open .sidebar,body.menu-open .email-side{opacity:0;pointer-events:none
   background:linear-gradient(transparent,rgba(2,12,27,0.85));
   color:var(--warm-white);font-size:13px;font-weight:400}
 
+/* ---- Toolbox ---- */
+.toolbox-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px}
+.toolbox-category{padding:28px 24px;background:var(--light-navy);border-radius:var(--radius);transition:all 0.3s ease;border:1px solid transparent}
+.toolbox-category:hover{border-color:rgba(212,162,89,0.1);transform:translateY(-2px)}
+.toolbox-category h3{font-family:var(--font-mono);font-size:11px;color:var(--gold);text-transform:uppercase;letter-spacing:1px;margin-bottom:16px}
+.toolbox-items{display:flex;flex-direction:column;gap:12px}
+.toolbox-item{display:flex;flex-direction:column;gap:2px}
+.tool-name{font-family:var(--font-display);font-size:15px;color:var(--warm-white);font-weight:500}
+.tool-desc{font-family:var(--font-mono);font-size:10px;color:var(--dark-slate)}
+
 /* ---- Contact ---- */
 .contact-wrap{display:flex;flex-direction:column;align-items:center;text-align:center;padding:80px 0;position:relative}
 .contact-wrap::before{content:'';position:absolute;top:0;left:10%;right:10%;height:1px;background:linear-gradient(90deg,transparent,rgba(212,162,89,0.12),transparent)}
@@ -378,13 +388,6 @@ footer .social{display:flex;gap:20px;align-items:center}
 footer .social a{color:var(--dark-slate);transition:color 0.2s;line-height:1}
 footer .social a:hover{color:var(--gold)}
 footer .footer-tagline{font-family:var(--font-serif);font-size:13px;color:var(--slate);opacity:0.6;font-style:italic;text-align:center;max-width:400px;line-height:1.6;margin-top:16px}
-.footer-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:40px;max-width:800px;width:100%;margin-bottom:32px}
-.footer-col{display:flex;flex-direction:column;gap:8px}
-.footer-col h4{font-family:var(--font-mono);font-size:11px;color:var(--gold);margin-bottom:4px;letter-spacing:1px;text-transform:uppercase}
-.footer-col a{font-family:var(--font-mono);font-size:11px;color:var(--dark-slate);text-decoration:none;transition:color 0.2s}
-.footer-col a:hover{color:var(--gold)}
-.footer-copyright{font-family:var(--font-mono);font-size:10px;color:var(--dark-slate);letter-spacing:0.5px;margin:0;padding-top:16px;border-top:1px solid var(--light-navy);width:100%;text-align:center}
-
 /* ---- Utility ---- */
 .hidden{display:none!important}
 
@@ -589,9 +592,8 @@ footer .footer-tagline{font-family:var(--font-serif);font-size:13px;color:var(--
   .project-card.right .project-image{grid-column:1/2;grid-row:1/2}
   .project-card.right .project-tech,.project-card.right .project-links{justify-content:flex-start}
   .other-grid,.now-grid,.notebook-grid,.creative-grid,.life-grid,.honors-grid,.repo-grid,.research-grid,.stats-grid{grid-template-columns:1fr}
+  .toolbox-grid{grid-template-columns:1fr 1fr}
   .timeline{padding-left:20px}
-  .footer-grid{grid-template-columns:1fr;gap:24px;text-align:center}
-  .footer-col{align-items:center}
   footer .social{display:flex}
   .dropdown-menu{right:auto;left:0}
   .reading-item{grid-template-columns:1fr;gap:10px}
@@ -612,6 +614,7 @@ footer .footer-tagline{font-family:var(--font-serif);font-size:13px;color:var(--
   .reading-item{padding:16px 18px}
   .honors-grid{grid-template-columns:1fr 1fr}
   .stats-grid{grid-template-columns:1fr 1fr}
+  .toolbox-grid{grid-template-columns:1fr}
   .timeline{padding-left:16px}
   .timeline-item{padding-left:28px}
   .project-desc{font-size:var(--fz-md)}

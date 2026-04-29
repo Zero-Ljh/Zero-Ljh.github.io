@@ -355,6 +355,28 @@ function renderLife() {
   `).join('');
 }
 
+/* ===== Toolbox ===== */
+function renderToolbox() {
+  const container = document.getElementById('toolbox-grid');
+  if (!container) return;
+  const lang = currentLang;
+  const tb = DATA.toolbox;
+
+  container.innerHTML = tb.categories.map(cat => `
+    <div class="toolbox-category">
+      <h3>${cat.label[lang]}</h3>
+      <div class="toolbox-items">
+        ${cat.items.map(item => `
+          <div class="toolbox-item">
+            <span class="tool-name">${item.name}</span>
+            <span class="tool-desc">${item.desc[lang]}</span>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  `).join('');
+}
+
 /* ===== 快速概览 Stats ===== */
 function renderStats() {
   const container = document.getElementById('stats-grid');
@@ -406,6 +428,7 @@ function renderAll() {
   renderNotebook();
   renderCreative();
   renderLife();
+  renderToolbox();
   fetchGitHubRepos();
 
   // 技能条动画：等 DOM 渲染完成后再触发
