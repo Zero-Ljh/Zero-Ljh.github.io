@@ -424,7 +424,7 @@ function showProjectDetail(id) {
   }
   let splitGridHTML = '';
   if (learningsHTML || challengesHTML) {
-    splitGridHTML = `<div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:32px">
+    splitGridHTML = `<div class="project-detail-grid">
       ${learningsHTML || '<div></div>'}
       ${challengesHTML || '<div></div>'}
     </div>`;
@@ -521,6 +521,8 @@ function showCreativeDetail(index) {
     ${subNavHTML(prev, next, lang)}
   `, lang === 'zh' ? '返回创作' : 'Back to Creative');
   showSubView();
+  var cbw = container.querySelector('.sub-body-wrap');
+  if (cbw) cbw.classList.add('sub-creative-detail');
   if (typeof updateSEO === 'function') updateSEO(item.title[lang], item.excerpt[lang].replace(/<[^>]*>/g, ''));
 }
 
@@ -567,6 +569,8 @@ function showNoteDetail(index) {
     ${subNavHTML(prev, next, lang)}
   `, lang === 'zh' ? '返回笔记' : 'Back to Notes');
   showSubView();
+  var nbw = container.querySelector('.sub-body-wrap');
+  if (nbw) nbw.classList.add('sub-notebook');
   if (typeof updateSEO === 'function') updateSEO(note.title[lang], note.desc[lang]);
 }
 
@@ -1016,6 +1020,8 @@ function showBlogIndex() {
   `, lang === 'zh' ? '返回主页' : 'Back to Home');
 
   showSubView();
+  var bbw = container.querySelector('.sub-body-wrap');
+  if (bbw) bbw.classList.add('sub-theme-blog');
   if (typeof updateSEO === 'function') updateSEO(
     lang === 'zh' ? '学习笔记' : 'Learning Blog',
     lang === 'zh' ? '李军辉的学习笔记与博客' : "Junhui Li's learning blog"
@@ -1202,20 +1208,25 @@ function showGallery() {
 
   // 悬浮视差倾斜（仅在用户未减少动效时绑定）
   if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    function tiltHandler(e) {
+      var el = e.currentTarget;
+      var rect = el.getBoundingClientRect();
+      var x = e.clientX - rect.left;
+      var y = e.clientY - rect.top;
+      var centerX = rect.width / 2;
+      var centerY = rect.height / 2;
+      var rotateX = (y - centerY) / centerY * -5;
+      var rotateY = (x - centerX) / centerX * 5;
+      el.style.transform = 'perspective(800px) rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg)';
+    }
+    function resetHandler(e) {
+      e.currentTarget.style.transform = 'perspective(800px) rotateX(0) rotateY(0)';
+    }
     document.querySelectorAll('.gallery-item').forEach(function(item) {
-      item.addEventListener('mousemove', function(e) {
-        var rect = item.getBoundingClientRect();
-        var x = e.clientX - rect.left;
-        var y = e.clientY - rect.top;
-        var centerX = rect.width / 2;
-        var centerY = rect.height / 2;
-        var rotateX = (y - centerY) / centerY * -5;
-        var rotateY = (x - centerX) / centerX * 5;
-        item.style.transform = 'perspective(800px) rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg)';
-      });
-      item.addEventListener('mouseleave', function() {
-        item.style.transform = 'perspective(800px) rotateX(0) rotateY(0)';
-      });
+      item.removeEventListener('mousemove', tiltHandler);
+      item.removeEventListener('mouseleave', resetHandler);
+      item.addEventListener('mousemove', tiltHandler);
+      item.addEventListener('mouseleave', resetHandler);
     });
   }
 
