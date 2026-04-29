@@ -418,6 +418,7 @@ function renderAll() {
   renderNav();
   renderAbout();
   renderStats();
+  renderMilestones();
   renderReading();
   renderExperience();
   renderHonors();
@@ -435,6 +436,34 @@ function renderAll() {
   setTimeout(() => {
     document.querySelectorAll('.skill-bar').forEach(bar => bar.classList.add('visible'));
   }, 300);
+}
+
+/* ===== 学习里程碑 ===== */
+function renderMilestones() {
+  const container = document.getElementById('milestones-container');
+  const intro = document.getElementById('milestones-intro');
+  const lang = currentLang;
+  const m = DATA.learningMilestones;
+
+  if (!container || !m || !m.milestones) return;
+
+  if (intro) intro.textContent = m.intro[lang];
+
+  container.innerHTML = m.milestones.map(ms => `
+    <div class="milestone-item reveal">
+      <div class="milestone-icon">${ms.icon}</div>
+      <div class="milestone-content">
+        <div class="milestone-date">${ms.date}</div>
+        <h3>${ms.title[lang]}</h3>
+        <p>${ms.desc[lang]}</p>
+      </div>
+    </div>
+  `).join('');
+
+  // Register dynamic reveal elements
+  requestAnimationFrame(() => {
+    container.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+  });
 }
 
 /* ===== Scroll Reveal ===== */

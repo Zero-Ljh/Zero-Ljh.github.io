@@ -17,7 +17,7 @@ function handleRoute() {
   if (!hash || hash === 'home') { showMainView(); return; }
 
   // Section 锚点
-  const sections = ['about','stats','reading','experience','projects','other-projects',
+  const sections = ['about','stats','milestones','reading','experience','projects','other-projects',
     'now','notebook','creative','life','contact'];
   if (sections.includes(hash)) {
     showMainView();
@@ -130,6 +130,31 @@ function copyPageLink(btn) {
   }).catch(() => {});
 }
 
+/* ===== 正文渲染 ===== */
+function renderBody(body, lang) {
+  if (!body || !body.length) return '';
+  function esc(str) {
+    return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+  return body.map(function(section) {
+    switch (section.type) {
+      case 'p': return '<p>' + section.content[lang] + '</p>';
+      case 'h2': return '<h2>' + section.content[lang] + '</h2>';
+      case 'h3': return '<h3>' + section.content[lang] + '</h3>';
+      case 'code':
+        var langAttr = section.lang ? ' data-lang="' + esc(section.lang) + '"' : '';
+        return '<div class="code-block"' + langAttr + '><pre><code>' + esc(section.content[lang]) + '</code></pre></div>';
+      case 'ul':
+        return '<ul>' + section.items.map(function(i) { return '<li>' + i[lang] + '</li>'; }).join('') + '</ul>';
+      case 'ol':
+        return '<ol>' + section.items.map(function(i) { return '<li>' + i[lang] + '</li>'; }).join('') + '</ol>';
+      case 'blockquote': return '<blockquote>' + section.content[lang] + '</blockquote>';
+      case 'hr': return '<hr>';
+      default: return '';
+    }
+  }).join('');
+}
+
 /* ===== 阅读详情 ===== */
 function showReadingDetail(index) {
   const item = DATA.reading[index];
@@ -142,8 +167,16 @@ function showReadingDetail(index) {
 
   let extras = '';
 
-  // 引用块
-  extras += `<div class="sub-blockquote">${item.note[lang]}</div>`;
+  // 正文（优先 body 字段，回退到 note 块引用）
+  var bodyHtml = renderBody(item.body, lang);
+  if (bodyHtml) {
+    // 有正文时: note 作为引用块放在正文前
+    extras += `<div class="sub-blockquote">${item.note[lang]}</div>`;
+    extras += '<div class="sub-content">' + bodyHtml + '</div>';
+  } else {
+    // 无正文时: 只显示 note 块引用（原有行为）
+    extras += `<div class="sub-blockquote">${item.note[lang]}</div>`;
+  }
 
   // 关键要点
   if (item.keyPoints && item.keyPoints.length) {
@@ -313,8 +346,13 @@ function showNoteDetail(index) {
 
   let extras = '';
 
-  // 内容
-  extras += `<div class="sub-content"><p>${note.desc[lang]}</p></div>`;
+  // 正文（优先 body 字段）
+  var bodyHtml = renderBody(note.body, lang);
+  if (bodyHtml) {
+    extras += '<div class="sub-content">' + bodyHtml + '</div>';
+  } else {
+    extras += `<div class="sub-content"><p>${note.desc[lang]}</p></div>`;
+  }
 
   // 关键概念
   if (note.concepts && note.concepts.length) {

@@ -59,6 +59,68 @@ const DATA = {
     { number: 6, label: { zh: '兴趣领域', en: 'Interest Areas' } }
   ],
 
+  /* ===== 当前状态 ===== */
+  currentFocus: {
+    zh: '正在学习 PyTorch 深度学习框架',
+    en: 'Currently learning PyTorch'
+  },
+
+  /* ===== 学习里程碑 ===== */
+  learningMilestones: {
+    heading: { zh: '学习里程碑', en: 'Learning Milestones' },
+    intro: { zh: '从零开始的成长之路', en: 'My learning journey from scratch' },
+    milestones: [
+      {
+        date: '2025.09',
+        icon: '🎓',
+        title: { zh: '大学入学', en: 'University Started' },
+        desc: { zh: '进入武汉科技大学人工智能科创专业，开启大学生活', en: 'Started at WUST, AI Innovation program' }
+      },
+      {
+        date: '2025.09-10',
+        icon: '🐍',
+        title: { zh: '自学 Python 基础', en: 'Python Basics' },
+        desc: { zh: '从零学习 Python：基础语法、数据结构、简单项目', en: 'Learned Python from scratch: syntax, data structures, mini projects' }
+      },
+      {
+        date: '2025.10',
+        icon: '⚽',
+        title: { zh: '新生杯二等奖', en: 'Freshman Cup 2nd Place' },
+        desc: { zh: '代表学院参加新生杯足球赛，扫荡型中场，获得二等奖', en: 'Represented the college in the freshman football cup, box-to-box midfielder, won 2nd place' }
+      },
+      {
+        date: '2025.11',
+        icon: '🤖',
+        title: { zh: '加入百炼机器人团队', en: 'Joined Bailian Robotics' },
+        desc: { zh: '通过选拔加入机器人团队，开始学习嵌入式系统与机器人控制', en: 'Joined the robotics team, started learning embedded systems and robot control' }
+      },
+      {
+        date: '2025.12',
+        icon: '🧠',
+        title: { zh: '关注 AI 前沿', en: 'AI Frontier Exploration' },
+        desc: { zh: '开始系统关注大模型进展，学习 Transformer 原理与 AI 工具链', en: 'Started following LLM developments, learning Transformer architecture and AI toolchain' }
+      },
+      {
+        date: '2026.01-03',
+        icon: '🔧',
+        title: { zh: '掌握 Vibe Coding', en: 'Mastering Vibe Coding' },
+        desc: { zh: '使用 Claude Code 等 AI 工具高效开发，搭建本个人主页', en: 'Learned AI-assisted development with Claude Code, built this portfolio' }
+      },
+      {
+        date: '2026.04',
+        icon: '📝',
+        title: { zh: '大模型部署与微调', en: 'LLM Deployment & Fine-Tuning' },
+        desc: { zh: '报名学习大模型部署微调课程，动手实践 LoRA 微调', en: 'Enrolled in LLM deployment & fine-tuning course, hands-on LoRA practice' }
+      },
+      {
+        date: '2026.04',
+        icon: '🔥',
+        title: { zh: '开始学 PyTorch', en: 'Starting PyTorch' },
+        desc: { zh: '开始学习 PyTorch 深度学习框架，为模型训练打基础', en: 'Beginning PyTorch deep learning framework for model training' }
+      }
+    ]
+  },
+
   /* ===== 教育背景 ===== */
   education: {
     school: { zh: '武汉科技大学', en: 'Wuhan University of Science and Technology' },
@@ -83,7 +145,25 @@ const DATA = {
         zh: '正在学习如何本地部署开源模型（如 DeepSeek）、用 LoRA 微调、以及推理优化。这对理解大模型的实际应用很重要。',
         en: 'Learning how to deploy open-source models locally (like DeepSeek), fine-tune with LoRA, and optimize inference. Essential for understanding real-world LLM applications.'
       },
-      tags: ['LLM', 'DeepSeek', '微调']
+      tags: ['LLM', 'DeepSeek', '微调'],
+      body: [
+        { type: 'p', content: { zh: '最近报名了大模型部署与微调课程，以下是学习笔记和心得体会。', en: 'I recently enrolled in an LLM deployment and fine-tuning course. Here are my notes and insights.' } },
+        { type: 'h2', content: { zh: '课程内容概览', en: 'Course Overview' } },
+        { type: 'ul', items: [
+          { zh: '本地部署开源模型（DeepSeek、Llama 等）', en: 'Local deployment of open-source models (DeepSeek, Llama, etc.)' },
+          { zh: '使用 LoRA/QLoRA 进行参数高效微调', en: 'Parameter-efficient fine-tuning with LoRA/QLoRA' },
+          { zh: '推理优化：量化、KV Cache、vLLM', en: 'Inference optimization: quantization, KV cache, vLLM' }
+        ] },
+        { type: 'blockquote', content: { zh: '微调不是从零训练，而是在预训练模型的基础上，用少量标注数据让模型适应特定任务。', en: 'Fine-tuning is not training from scratch — it adapts a pre-trained model to specific tasks with small labeled datasets.' } },
+        { type: 'h2', content: { zh: '我的收获', en: 'My Takeaways' } },
+        { type: 'ul', items: [
+          { zh: '理解了 LoRA 的原理：通过低秩矩阵分解来近似权重更新', en: 'Understood LoRA: low-rank matrix decomposition to approximate weight updates' },
+          { zh: '学会了用 Ollama 本地运行和测试模型', en: 'Learned to run and test models locally with Ollama' },
+          { zh: '了解了模型量化对推理速度和内存的影响', en: 'Understood how quantization affects inference speed and memory' },
+          { zh: '对 DeepSeek 的 MoE 架构有了更深理解', en: 'Deeper understanding of DeepSeek\'s MoE architecture' }
+        ] },
+        { type: 'p', content: { zh: '下一步计划：在自己机器上跑通一个完整的微调实验。', en: 'Next step: Run a complete fine-tuning experiment on my own machine.' } }
+      ]
     },
     {
       title: { zh: '关注 AI 前沿动态', en: 'Following AI Frontier Developments' },
@@ -280,6 +360,25 @@ const DATA = {
         { zh: '列表推导式比循环更简洁高效', en: 'List comprehensions are more concise than loops' },
         { zh: '字典用于键值映射，查询速度快', en: 'Dictionaries are fast for key-value lookups' },
         { zh: '函数是代码复用的基本单元', en: 'Functions are the basic unit of code reuse' }
+      ],
+      body: [
+        { type: 'p', content: { zh: '这个月我系统地学习了 Python 的基础知识。以下是主要学习内容和心得。', en: 'This month I systematically studied Python basics. Here are the main topics and takeaways.' } },
+        { type: 'h2', content: { zh: '一、列表与列表推导式', en: '1. Lists & List Comprehensions' } },
+        { type: 'p', content: { zh: '列表是 Python 中最常用的数据结构之一。列表推导式 <code>[expr for item in iterable]</code> 让代码更简洁高效。', en: 'Lists are one of the most commonly used data structures in Python. List comprehensions <code>[expr for item in iterable]</code> make code more concise.' } },
+        { type: 'code', content: { zh: '# 传统方式\nsquares = []\nfor i in range(10):\n    squares.append(i ** 2)\n\n# 列表推导式（更简洁）\nsquares = [i ** 2 for i in range(10)]', en: '# Traditional way\nsquares = []\nfor i in range(10):\n    squares.append(i ** 2)\n\n# List comprehension (more concise)\nsquares = [i ** 2 for i in range(10)]' }, lang: 'python' },
+        { type: 'h2', content: { zh: '二、字典与键值对', en: '2. Dictionaries' } },
+        { type: 'p', content: { zh: '字典提供 O(1) 的查找速度，适合存储键值映射关系。', en: 'Dictionaries provide O(1) lookup speed, great for key-value mappings.' } },
+        { type: 'code', content: { zh: 'student = {\n    "name": "李军辉",\n    "major": "AI",\n    "year": 2025\n}\nprint(student["name"])  # 李军辉', en: 'student = {\n    "name": "Junhui Li",\n    "major": "AI",\n    "year": 2025\n}\nprint(student["name"])  # Junhui Li' }, lang: 'python' },
+        { type: 'h2', content: { zh: '三、函数与代码复用', en: '3. Functions & Reusability' } },
+        { type: 'p', content: { zh: '函数是代码复用的基本单元。Python 支持默认参数、关键字参数和可变参数。', en: 'Functions are the basic unit of code reuse. Python supports default args, keyword args, and variable-length args.' } },
+        { type: 'code', content: { zh: 'def greet(name, greeting="你好"):\n    return f"{greeting}，{name}！"\n\nprint(greet("世界"))  # 你好，世界！\nprint(greet("World", "Hello"))  # Hello, World!', en: 'def greet(name, greeting="Hello"):\n    return f"{greeting}, {name}!"\n\nprint(greet("World"))  # Hello, World!\nprint(greet("世界", "你好"))  # 你好，世界！' }, lang: 'python' },
+        { type: 'h3', content: { zh: '学习心得', en: 'Key Takeaways' } },
+        { type: 'ul', items: [
+          { zh: '列表推导式比 for 循环更简洁，可读性更好', en: 'List comprehensions are more readable than for loops' },
+          { zh: '字典的 keys() / values() / items() 方法很实用', en: 'Dictionary keys() / values() / items() methods are very useful' },
+          { zh: '函数参数灵活性：默认参数、*args、**kwargs', en: 'Function parameter flexibility: defaults, *args, **kwargs' }
+        ] },
+        { type: 'p', content: { zh: '下个月计划学习面向对象编程和文件操作。', en: 'Next month: Object-oriented programming and file I/O.' } }
       ]
     },
     {

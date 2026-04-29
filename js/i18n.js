@@ -22,7 +22,7 @@ function setLang(lang) {
 
   // 如果在子页面，重新渲染子页面内容
   const hash = window.location.hash.slice(1);
-  const sectionAnchors = ['about','reading','experience','projects','other-projects',
+  const sectionAnchors = ['about','reading','milestones','experience','projects','other-projects',
     'now','notebook','creative','life','contact'];
   if (hash && hash !== 'home' && !sectionAnchors.includes(hash)) {
     if (typeof handleRoute === 'function') setTimeout(handleRoute, 0);
