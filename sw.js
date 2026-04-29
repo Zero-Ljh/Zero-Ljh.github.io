@@ -1,21 +1,36 @@
 /* ===========================================================================
  * Service Worker — PWA 离线支持
  * 策略：Cache First（缓存优先，回退网络）
- * 版本：v20260428
+ * 版本：v20260429-cms
  * =========================================================================== */
 
-const CACHE_NAME = "v20260428";
+const CACHE_NAME = "v20260429-cms";
 
 const PRECACHE_LIST = [
   "/",
   "/index.html",
   "/404.html",
   "/icon.svg",
+  "/manifest.json",
   "/css/style.css",
   "/js/data.js",
+  "/js/data-loader.js",
   "/js/i18n.js",
   "/js/main.js",
-  "/js/router.js"
+  "/js/router.js",
+  "/content/site.json",
+  "/content/navigation.json",
+  "/content/reading.json",
+  "/content/notebook.json",
+  "/content/projects.json",
+  "/content/experience.json",
+  "/content/research.json",
+  "/content/now.json",
+  "/content/creative.json",
+  "/content/milestones.json",
+  "/content/toolbox.json",
+  "/content/resources.json",
+  "/content/gallery.json"
 ];
 
 /* ---------------------------------------------------------------------------
