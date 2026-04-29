@@ -247,22 +247,22 @@ const DATA = {
       {
         label: { zh: '📖 在读', en: '📖 Reading' },
         items: {
-          zh: ['《人工智能：一种现代方法》', 'DeepSeek V4 技术报告', '百家讲坛（历史系列）'],
-          en: ['AI: A Modern Approach (textbook)', 'DeepSeek V4 technical report', 'Baijia Lecture Room (history series)']
+          zh: ['《人工智能：一种现代方法》', 'DeepSeek V4 技术报告', '深度学习课程（B站）', '百家讲坛（历史系列）'],
+          en: ['AI: A Modern Approach (textbook)', 'DeepSeek V4 technical report', 'Deep Learning course (Bilibili)', 'Baijia Lecture Room (history series)']
         }
       },
       {
         label: { zh: '🔨 在做', en: '🔨 Doing' },
         items: {
-          zh: ['深入学 Python', '百炼机器人团队任务', '搭建个人主页'],
-          en: ['Python deep dive', 'Robotics team tasks', 'Building this homepage']
+          zh: ['学 C++，搭建复习工作流', '百炼机器人团队嵌入式开发', '用 Claude Code 维护个人主页', '关注 AI 新闻，跟进前沿'],
+          en: ['Learning C++, built a review workflow', 'Embedded dev with Bailian Robotics', 'Maintaining this site with Claude Code', 'Tracking AI news and frontier dev']
         }
       },
       {
         label: { zh: '🎯 下一步', en: '🎯 Next Up' },
         items: {
-          zh: ['开始学 PyTorch', '尝试开源贡献', '写第一篇技术博客'],
-          en: ['Start PyTorch', 'Contribute to open source', 'Write first tech blog']
+          zh: ['开始学 PyTorch 深度学习框架', '跑通第一个模型微调实验', '找 AI/机器人方向的课题组'],
+          en: ['Start learning PyTorch', 'Run my first fine-tuning experiment', 'Find an AI/Robotics research lab']
         }
       }
     ]
