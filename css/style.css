@@ -230,6 +230,14 @@ body.menu-open .sidebar,body.menu-open .email-side{opacity:0;pointer-events:none
 .honor-card .num{font-family:var(--font-display);font-size:30px;font-weight:700;color:var(--gold);margin-bottom:4px;line-height:1.2;position:relative;z-index:1}
 .honor-card .label{font-size:var(--fz-sm);color:var(--slate);position:relative;z-index:1}
 
+/* ---- Research ---- */
+.research-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.research-card{padding:28px 24px;background:var(--light-navy);border-radius:var(--radius);transition:all 0.3s ease;border:1px solid transparent}
+.research-card:hover{transform:translateY(-3px);border-color:rgba(212,162,89,0.15);box-shadow:0 8px 24px -8px rgba(0,0,0,0.2)}
+.research-icon{font-size:28px;margin-bottom:12px}
+.research-card h3{font-family:var(--font-display);font-size:17px;color:var(--warm-white);margin-bottom:8px}
+.research-card p{font-size:var(--fz-sm);color:var(--slate);line-height:1.6}
+
 /* ---- Project Filter ---- */
 .filter-bar{display:flex;gap:8px;margin-bottom:40px;flex-wrap:wrap}
 .filter-btn{font-family:var(--font-mono);font-size:11px;padding:6px 16px;border-radius:20px;border:1px solid var(--gold);background:transparent;color:var(--gold);cursor:pointer;transition:var(--transition-fast);letter-spacing:0.3px}
@@ -537,7 +545,7 @@ footer p{font-family:var(--font-mono);font-size:10px;color:var(--dark-slate);let
   .project-image{grid-column:1/2;grid-row:1/2;margin-bottom:12px}
   .project-card.right .project-image{grid-column:1/2;grid-row:1/2}
   .project-card.right .project-tech,.project-card.right .project-links{justify-content:flex-start}
-  .other-grid,.now-grid,.notebook-grid,.creative-grid,.life-grid,.honors-grid,.repo-grid{grid-template-columns:1fr}
+  .other-grid,.now-grid,.notebook-grid,.creative-grid,.life-grid,.honors-grid,.repo-grid,.research-grid{grid-template-columns:1fr}
   .exp-container{flex-direction:column}
   .exp-tabs{flex-direction:row;border-left:none;border-bottom:2px solid var(--light-navy);min-width:auto;overflow-x:auto}
   .exp-indicator{top:auto;left:0;bottom:-2px;width:auto;height:2px}

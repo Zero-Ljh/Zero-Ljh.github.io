@@ -68,6 +68,7 @@ function renderAbout() {
       <p>${p.about[0][lang]}</p>
       <p>${p.about[1][lang]}</p>
       <p style="font-size:var(--fz-md);color:var(--dark-slate);border-left:2px solid var(--gold);padding-left:16px;margin-top:24px">${p.highlight[lang]}</p>
+      <p style="font-size:var(--fz-md);color:var(--gold);border:1px solid rgba(212,162,89,0.2);border-radius:var(--radius);padding:14px 18px;margin-top:20px;background:rgba(212,162,89,0.04);line-height:1.7">${p.seeking[lang]}</p>
       <ul class="tech-grid">
         ${p.skills.map(s => `<li>${s}</li>`).join('')}
       </ul>
@@ -168,6 +169,24 @@ function renderHonors() {
     });
   }, { threshold: 0.5 });
   nums.forEach(n => countObserver.observe(n));
+}
+
+/* ===== Research ===== */
+function renderResearch() {
+  const container = document.getElementById('research-grid');
+  const lang = currentLang;
+  const r = DATA.research;
+
+  document.getElementById('research-heading').textContent = r.heading[lang];
+  document.getElementById('research-intro').textContent = r.intro[lang];
+
+  container.innerHTML = r.areas.map(a => `
+    <div class="research-card">
+      <div class="research-icon">${a.icon}</div>
+      <h3>${a.title[lang]}</h3>
+      <p>${a.desc[lang]}</p>
+    </div>
+  `).join('');
 }
 
 /* ===== Projects ===== */
@@ -310,6 +329,7 @@ function renderAll() {
   renderReading();
   renderExperience();
   renderHonors();
+  renderResearch();
   renderProjects();
   renderMiniProjects();
   renderNow();

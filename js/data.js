@@ -27,6 +27,10 @@ const DATA = {
       zh: '目前在学深度学习、大模型部署微调，用 Vibe Coding 提高效率。足球扫荡型中场，新生杯二等奖。',
       en: 'Currently studying deep learning &amp; LLM deployment/fine-tuning. Box-to-box midfielder — campus freshman cup 2nd place.'
     },
+    seeking: {
+      zh: '🔬 我正在寻找 AI/机器人方向的课题组，希望能跟着导师动手做研究。如果你在招收本科生，我很想聊聊。',
+      en: '🔬 I am looking for a research lab in AI/Robotics to join as an undergraduate. If you are recruiting, I would love to chat.'
+    },
     skills: ['Python', 'C++', 'LLM / Deep Learning', 'Vibe Coding', 'AI 工具链', 'Robotics (学习中)'],
     resumeUrl: 'assets/resume.pdf',
     githubUsername: 'Zero-Ljh'
@@ -126,6 +130,18 @@ const DATA = {
     { num: '干事', label: { zh: '心理健康协会', en: 'Psychological Health Association' } },
     { num: '干员', label: { zh: '百炼机器人团队', en: 'Bailian Robotics Team' } }
   ],
+
+  /* ===== 研究方向 ===== */
+  research: {
+    heading: { zh: '研究方向', en: 'Research Interests' },
+    intro: { zh: '我正在探索的方向，希望找到志同道合的导师和团队。', en: 'Areas I am exploring — looking for mentors and teammates.' },
+    areas: [
+      { icon: '🧠', title: { zh: '大语言模型', en: 'Large Language Models' }, desc: { zh: '模型部署、微调（LoRA/QLoRA）、推理优化', en: 'Model deployment, fine-tuning (LoRA/QLoRA), inference optimization' } },
+      { icon: '🤖', title: { zh: '机器人与具身智能', en: 'Robotics & Embodied AI' }, desc: { zh: '嵌入式系统、传感器集成、真实硬件实践', en: 'Embedded systems, sensor integration, hands-on hardware' } },
+      { icon: '🔧', title: { zh: 'AI 工程化', en: 'AI Engineering' }, desc: { zh: 'Vibe Coding、工具链搭建、高效开发实践', en: 'Vibe Coding, toolchain setup, efficient dev practices' } },
+      { icon: '📚', title: { zh: '持续学习', en: 'Continuous Learning' }, desc: { zh: '深度学习基础、PyTorch、经典 AI 教材', en: 'Deep learning fundamentals, PyTorch, classic AI textbooks' } }
+    ]
+  },
 
   /* ===== 项目 ===== */
   projects: [
@@ -301,6 +317,7 @@ const DATA = {
         { href: '#archive', zh: '🗂️ 归档', en: 'Archive' },
         { href: '#creative', zh: '✏️ 创作', en: 'Creative' },
         { href: '#life', zh: '📸 生活', en: 'Life' },
+        { href: '#research', zh: '🔬 研究方向', en: 'Research' },
         { href: '#contact', zh: '💬 联系', en: 'Contact' }
       ]
     },
