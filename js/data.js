@@ -97,6 +97,7 @@ const DATA = {
     {
       title: { zh: '在读《人工智能：一种现代方法》', en: "Reading: 'Artificial Intelligence: A Modern Approach'" },
       meta: { zh: '在读 · 教材', en: 'Ongoing · Textbook' },
+      readingTime: 'Ongoing',
       note: {
         zh: '逐章学习经典 AI 教材，目前在搜索算法和逻辑部分。',
         en: 'Working through the classic AI textbook chapter by chapter. Currently on search algorithms and logic.'

@@ -104,17 +104,27 @@ function renderReading() {
   const lang = currentLang;
   const items = DATA.reading;
 
-  container.innerHTML = items.map((item, i) => `
-    <a class="reading-item" href="#reading/${i}">
-      <div class="reading-num">·</div>
+  // Section intro
+  const intro = document.getElementById('reading-intro');
+  if (intro) {
+    intro.textContent = lang === 'zh' ? '关注 AI 动态，记录学习思考。' : 'Tracking AI developments and documenting learning.';
+  }
+
+  container.innerHTML = items.map((item, i) => {
+    const isOngoing = item.readingTime && !item.readingTime.includes('min');
+    const dot = isOngoing ? '◆' : '·';
+    const activeClass = isOngoing ? ' reading-active' : '';
+    return `
+    <a class="reading-item${activeClass}" href="#reading/${i}">
+      <div class="reading-num">${dot}</div>
       <div class="reading-content">
         <h3>${item.title[lang]}</h3>
         <div class="meta">${item.meta[lang]}${item.readingTime ? ' · ' + item.readingTime : ''}</div>
         <div class="note">${item.note[lang]}</div>
       </div>
       <div class="reading-tags">${item.tags.map(t => `<span>${t}</span>`).join('')}</div>
-    </a>
-  `).join('');
+    </a>`;
+  }).join('');
 }
 
 /* ===== Experience ===== */
