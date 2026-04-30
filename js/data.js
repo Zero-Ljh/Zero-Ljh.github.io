@@ -646,14 +646,17 @@ const DATA = {
         items: [
           {
             name: '梗直哥',
+            url: 'https://space.bilibili.com/1921388479',
             desc: { zh: '前中科院博导，用动画讲深度学习、强化学习、大模型原理。"让AI不再难学"', en: 'Former professor at UCAS, explains DL, RL, and LLMs with animations. "Making AI accessible."' }
           },
           {
             name: '飞天闪客',
+            url: 'https://space.bilibili.com/325864133',
             desc: { zh: '0公式大白话讲AI底层逻辑，《AI百问》系列把DeepSeek V1-V4讲得明明白白', en: 'Zero formulas, plain language AI explanations. "AI 100 Questions" series makes DeepSeek V1-V4 crystal clear.' }
           },
           {
             name: '量子位',
+            url: 'https://space.bilibili.com/673779175',
             desc: { zh: '前沿科技媒体，追踪AI最新突破和人形机器人进展', en: 'Frontier tech media covering AI breakthroughs and humanoid robot progress.' }
           }
         ]
@@ -664,14 +667,17 @@ const DATA = {
         items: [
           {
             name: '漫土沉思录',
+            url: 'https://space.bilibili.com/266765166',
             desc: { zh: '清华博士在线教线代，《无痛线代》系列帮我啃下了线性代数', en: 'Tsinghua PhD teaching linear algebra. The "Painless Linear Algebra" series helped me get through it.' }
           },
           {
             name: '3Blue1Brown（B站官方）',
+            url: 'https://space.bilibili.com/88461692',
             desc: { zh: '最直观的数学可视化，神经网络系列和线性代数本质是必看经典', en: 'The most intuitive math visualization. Neural networks and essence of linear algebra series are must-watch.' }
           },
           {
             name: '毕导',
+            url: 'https://space.bilibili.com/254463269',
             desc: { zh: '百大UP主，用趣味物理化学实验保持对科学的好奇心', en: 'Top Bilibili creator. Fun physics and chemistry experiments that keep curiosity alive.' }
           }
         ]
@@ -682,10 +688,12 @@ const DATA = {
         items: [
           {
             name: '马克的技术工作坊',
+            url: 'https://space.bilibili.com/1815948385',
             desc: { zh: 'Claude Code、MCP、RAG、Agent 原理与实战，Vibe Coding 必备', en: 'Claude Code, MCP, RAG, Agent principles and practice — essential for Vibe Coding.' }
           },
           {
             name: '数字游牧人',
+            url: 'https://space.bilibili.com/4848323',
             desc: { zh: '科技创业者，分享AI应用与变现，了解AI怎么落地', en: 'Tech entrepreneur sharing AI applications and how AI is being used in the real world.' }
           }
         ]
@@ -696,6 +704,7 @@ const DATA = {
         items: [
           {
             name: '国仁全球大学堂',
+            url: 'https://space.bilibili.com/679619486',
             desc: { zh: '政经深度分析，温铁军等学者讲国际格局和金融体系', en: 'In-depth political and economic analysis. Scholars like Wen Tiejun on global structures and financial systems.' }
           },
           {
