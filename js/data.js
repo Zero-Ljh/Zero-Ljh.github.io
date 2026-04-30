@@ -592,8 +592,11 @@ const DATA = {
   life: [
     { icon: 'shield', label: { zh: '足球 · 院系杯', en: 'Football · University Cup' }, desc: { zh: '扫荡型中场', en: 'Box-to-box midfielder' } },
     { icon: 'book-open', label: { zh: '阅读 · 终身学习', en: 'Reading · Lifelong Learning' }, desc: { zh: '文史哲政经 + AI', en: 'Humanities to AI' } },
-    { icon: 'cpu', label: { zh: '机器人 · 动手实践', en: 'Robotics · Hands-on' }, desc: { zh: '百炼团队嵌入式', en: 'Bailian embedded dev' } },
-    { icon: 'heart', label: { zh: '心理 · 同伴支持', en: 'Mental Health · Peer Support' }, desc: { zh: '心协干事', en: 'Health Association officer' } }
+    { icon: 'cpu', label: { zh: '机器人 · 动手实践', en: 'Robotics · Hands-on' }, desc: { zh: '百炼团队算法组', en: 'Bailian algorithm group' } },
+    { icon: 'heart', label: { zh: '心理 · 同伴支持', en: 'Mental Health · Peer Support' }, desc: { zh: '心协干事 + AI 科普短剧', en: 'Health Association officer + AI short videos' } },
+    { icon: 'film', label: { zh: '影视 · 好故事', en: 'Movies · Good Stories' }, desc: { zh: '《人世间》《最美的青春》《请回答1988》', en: 'The World of Man, Youth in Beauty, Reply 1988' } },
+    { icon: 'music', label: { zh: '音乐 · 放松时刻', en: 'Music · Chill Time' }, desc: { zh: '听歌放松，享受节奏', en: 'Listening and enjoying the rhythm' } },
+    { icon: 'radio', label: { zh: '政经 · 听世界', en: 'Politics · World Affairs' }, desc: { zh: '关注王骁Alert、历史哥李易修、毛选讲解', en: 'Following Wang Xiao Alert, Li Yixiu, Mao studies' } }
   ],
 
   /* ===== 工具箱 ===== */
