@@ -118,48 +118,68 @@ function showSubView() {
   }, 400);
 }
 
-/* ===== About Detail 子页面 ===== */
+/* ===== About Detail 子页面（暖卡风格） ===== */
 function showAboutDetail() {
-  var lang = currentLang;
-  var container = document.getElementById('sub-view');
+  const L = currentLang;
+  const container = document.getElementById('sub-view');
   if (!container) return;
 
-  var p = DATA.profile;
-  var edu = DATA.education;
+  const p = DATA.profile;
+  const edu = DATA.education;
 
-  var aboutHtml = p.about.map(function(para) {
-    return '<p>' + para[lang] + '</p>';
+  const aboutHtml = p.about.map(function(para) {
+    return '<p>' + para[L] + '</p>';
   }).join('');
 
-  var skillsHtml = p.skills.map(function(s) {
+  const skillsHtml = p.skills.map(function(s) {
     var name = typeof s === 'string' ? s : s.name;
     var level = typeof s === 'object' ? s.level : 60;
-    var label = (typeof s === 'object' && s.label) ? s.label[lang] : level + '%';
+    var label = (typeof s === 'object' && s.label) ? s.label[L] : level + '%';
     return name + ' (' + label + ')';
   }).join(' · ');
 
-  var html = '<div class="sub-content">' +
-    aboutHtml +
-    '<h2>' + (lang === 'zh' ? '教育背景' : 'Education') + '</h2>' +
-    '<p><strong><a href="' + edu.url + '" target="_blank" rel="noopener" class="inline-link">' + edu.school[lang] + '</a></strong> — ' + edu.degree[lang] + '</p>' +
-    '<p>' + edu.description[lang] + '</p>' +
-    '<h2>' + (lang === 'zh' ? '我正在寻找' : "What I'm Looking For") + '</h2>' +
-    '<p>' + p.seeking[lang] + '</p>' +
-    '<h2>' + (lang === 'zh' ? '技能' : 'Skills') + '</h2>' +
-    '<p>' + skillsHtml + '</p>' +
-    '</div>';
+  container.innerHTML = `
+    <div class="ab-page">
+      <nav class="ab-bar">
+        <a href="#" onclick="window.location.hash='';return false;" class="ab-back">← ${L === 'zh' ? '返回主页' : 'Back to Home'}</a>
+        <span class="ab-lang">
+          <button class="ab-lb${L === 'zh' ? ' on' : ''}" onclick="setLang('zh')">中</button>
+          <button class="ab-lb${L === 'en' ? ' on' : ''}" onclick="setLang('en')">EN</button>
+        </span>
+      </nav>
+      <div class="ab-body">
+        <div class="ab-hero">
+          <div class="ab-avatar">${(p.name[L] || 'J').charAt(0)}</div>
+          <h1 class="ab-name">${p.name[L]}</h1>
+          <p class="ab-degree">${edu.degree[L]}</p>
+        </div>
+        <div class="ab-cards">
+          <div class="ab-card">
+            <h2 class="ab-card-title">${L === 'zh' ? '关于我' : 'About Me'}</h2>
+            ${aboutHtml}
+          </div>
+          <div class="ab-card">
+            <h2 class="ab-card-title">${L === 'zh' ? '教育背景' : 'Education'}</h2>
+            <p><strong><a href="${edu.url}" target="_blank" rel="noopener" class="inline-link">${edu.school[L]}</a></strong> — ${edu.degree[L]}</p>
+            <p>${edu.description[L]}</p>
+          </div>
+          <div class="ab-card">
+            <h2 class="ab-card-title">${L === 'zh' ? '我正在寻找' : "What I'm Looking For"}</h2>
+            <p>${p.seeking[L]}</p>
+          </div>
+          <div class="ab-card">
+            <h2 class="ab-card-title">${L === 'zh' ? '技能' : 'Skills'}</h2>
+            <p>${skillsHtml}</p>
+          </div>
+        </div>
+      </div>
+    </div>`;
 
-  container.innerHTML = subPageShell(
-    '<p class="sub-label">' + (lang === 'zh' ? '关于我' : 'About Me') + '</p>' +
-    '<h1 class="sub-title">' + p.name[lang] + '</h1>' +
-    '<p class="sub-meta-line">' + edu.degree[lang] + '</p>' +
-    html,
-    lang === 'zh' ? '返回主页' : 'Back to Home'
-  );
   showSubView();
+  document.body.style.backgroundColor = '#f7f3ed';
   if (typeof updateSEO === 'function') updateSEO(
-    lang === 'zh' ? '关于 - ' + p.name.zh : 'About - ' + p.name.en,
-    p.about[0][lang].replace(/<[^>]*>/g, '').substring(0, 160)
+    L === 'zh' ? '关于 - ' + p.name.zh : 'About - ' + p.name.en,
+    p.about[0][L].replace(/<[^>]*>/g, '').substring(0, 160)
   );
 }
 
@@ -254,338 +274,293 @@ function renderBody(body, lang) {
   }).join('');
 }
 
-/* ===== 阅读详情 ===== */
+/* ===== 阅读详情（粗野主义报刊风格） ===== */
 function showReadingDetail(index) {
   const item = DATA.reading[index];
   if (!item) { showMainView(); return; }
-  const lang = currentLang;
-  const container = document.getElementById('sub-view');
-  if (!container) return;
+  const L = currentLang;
+  const c = document.getElementById('sub-view');
+  if (!c) return;
 
-  const metaLine = item.meta[lang] + (item.readingTime ? ' · ' + item.readingTime : '');
+  const metaLine = item.meta[L] + (item.readingTime ? ' · ' + item.readingTime : '');
+  let bodyHtml = renderBody(item.body, L);
+  let body = bodyHtml ? bodyHtml : '';
 
-  let extras = '';
-
-  // 正文（优先 body 字段，回退到 note 块引用）
-  var bodyHtml = renderBody(item.body, lang);
-  var tocHtml = '';
-  if (bodyHtml) {
-    // 自动目录：正文 h2 超过 3 个时生成 TOC
-    var h2Count = (bodyHtml.match(/<h2>/g) || []).length;
-    if (h2Count > 3) {
-      var tocItems = [];
-      bodyHtml = bodyHtml.replace(/<h2>([^<]+)<\/h2>/g, function(match, text) {
-        var slug = text.toLowerCase()
-          .replace(/<[^>]*>/g, '')
-          .replace(/[^a-z0-9一-鿿\s-]/g, '')
-          .replace(/\s+/g, '-')
-          .replace(/-+/g, '-')
-          .replace(/^-+|-+$/g, '');
-        if (!slug) slug = 'h';
-        var id = 'toc-' + slug;
-        tocItems.push({ text: text, id: id });
-        return '<h2 id="' + id + '">' + text + '</h2>';
-      });
-      if (tocItems.length > 3) {
-        tocHtml = '<nav class="sub-toc"><h2>' + (lang === 'zh' ? '目录' : 'Table of Contents') + '</h2><ol>' +
-          tocItems.map(function(item) { return '<li><a href="#' + item.id + '">' + item.text + '</a></li>'; }).join('') +
-          '</ol></nav>';
-      }
-    }
-    // 有正文时: note 作为引用块放在正文前
-    extras += `<div class="sub-blockquote">${item.note[lang]}</div>`;
-    extras += tocHtml;
-    extras += '<div class="sub-content">' + bodyHtml + '</div>';
-  } else {
-    // 无正文时: 只显示 note 块引用（原有行为）
-    extras += `<div class="sub-blockquote">${item.note[lang]}</div>`;
-  }
-
-  // 关键要点
+  let take = '';
   if (item.keyPoints && item.keyPoints.length) {
-    extras += `<div class="sub-takeaways">
-      <h2>${lang === 'zh' ? '关键要点' : 'Key Takeaways'}</h2>
-      <ul>${item.keyPoints.map(kp => `<li>${kp[lang]}</li>`).join('')}</ul>
-    </div>`;
+    take = '<div class="rr-box"><span class="rr-box-h">' + (L === 'zh' ? '要点' : 'KEY') + '</span>' + item.keyPoints.map(kp => '<div class="rr-box-i">' + kp[L] + '</div>').join('') + '</div>';
   }
-
-  // 来源链接
+  let src = '';
   if (item.source) {
-    const url = typeof item.source === 'object' ? item.source[lang] : item.source;
-    const label = item.sourceLabel ? item.sourceLabel[lang] : (lang === 'zh' ? '查看原文' : 'View Source');
-    extras += `<a href="${url}" target="_blank" rel="noreferrer" class="sub-source-link">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-      ${label}
-    </a>`;
+    const url = typeof item.source === 'object' ? item.source[L] : item.source;
+    src = '<div class="rr-src"><span>↗</span> <a href="' + url + '" target="_blank">' + (item.sourceLabel ? item.sourceLabel[L] : (L === 'zh' ? '来源' : 'Source')) + '</a></div>';
   }
-
-  // 标签
-  extras += `<div class="sub-tags">${item.tags.map(t => `<span onclick="window.location.hash='tag/${encodeURIComponent(t)}'" style="cursor:pointer" title="${lang === 'zh' ? '查看相关' : 'View related'}">${t}</span>`).join('')}</div>`;
-
-  // 相关阅读
-  if (item.relatedReading && item.relatedReading.length) {
-    const related = item.relatedReading
-      .filter(i => i >= 0 && i < DATA.reading.length)
-      .map(i => `<a href="#reading/${i}" class="sub-related-item">${DATA.reading[i].title[lang]}</a>`)
-      .join('');
-    if (related) {
-      extras += `<div class="sub-related">
-        <h2>${lang === 'zh' ? '相关阅读' : 'Related'}</h2>
-        <div class="sub-related-list">${related}</div>
-      </div>`;
-    }
+  const relItems = (item.relatedReading || []).filter(i => i >= 0 && i < DATA.reading.length);
+  let rel = '';
+  if (relItems.length) {
+    rel = '<hr class="rr-hr"><div class="rr-rel">' + relItems.map(i => '<a href="#reading/' + i + '">' + DATA.reading[i].title[L] + '</a>').join('') + '</div>';
   }
+  const prev = index > 0 ? { h: '#reading/' + (index - 1), t: DATA.reading[index - 1].title[L] } : null;
+  const next = index < DATA.reading.length - 1 ? { h: '#reading/' + (index + 1), t: DATA.reading[index + 1].title[L] } : null;
+  let nav = '<div class="rr-nav">';
+  nav += prev ? '<a href="' + prev.h + '"><span>←</span><span>' + prev.t + '</span></a>' : '<span></span>';
+  nav += next ? '<a href="' + next.h + '" class="rr-nxt"><span>' + next.t + '</span><span>→</span></a>' : '<span></span>';
+  nav += '</div>';
 
-  const prev = index > 0 ? { href: `#reading/${index - 1}`, title: DATA.reading[index - 1].title } : null;
-  const next = index < DATA.reading.length - 1 ? { href: `#reading/${index + 1}`, title: DATA.reading[index + 1].title } : null;
+  c.innerHTML = `
+    <div class="rr">
+      <nav class="rr-bar">
+        <a href="#" onclick="window.location.hash='reading';return false;">← ${L === 'zh' ? '返回' : 'Back'}</a>
+        <span><button class="rr-lb${L === 'zh' ? ' on' : ''}" onclick="setLang('zh')">中</button><button class="rr-lb${L === 'en' ? ' on' : ''}" onclick="setLang('en')">EN</button></span>
+      </nav>
+      <div class="rr-rule"></div>
+      <article class="rr-body">
+        <div class="rr-hd">
+          <span class="rr-tags">${item.tags.map(t => t).join(' · ')}</span>
+          <h1 class="rr-t">${item.title[L]}</h1>
+          <div class="rr-meta">${metaLine}</div>
+        </div>
+        <div class="rr-note">${item.note[L]}</div>
+        ${take}
+        <div class="rr-col2">
+          ${body}
+        </div>
+        ${src}
+        ${rel}
+      </article>
+      <div class="rr-rule"></div>
+      ${nav}
+    </div>`;
 
-  container.innerHTML = subPageShell(`
-    <p class="sub-label">${item.meta[lang]}</p>
-    <h1 class="sub-title">${item.title[lang]}</h1>
-    <p class="sub-meta-line">${metaLine}</p>
-    ${extras}
-    ${subNavHTML(prev, next, lang)}
-  `, lang === 'zh' ? '返回阅读' : 'Back to Reading');
   showSubView();
-  if (typeof updateSEO === 'function') updateSEO(item.title[lang], item.meta[lang]);
+  document.body.style.backgroundColor = '#f0ede8';
+  if (typeof updateSEO === 'function') updateSEO(item.title[L], item.meta[L]);
 
-  // 确保阅读进度条在子页面也正常工作
-  var progressBar = document.getElementById('reading-progress');
-  if (!progressBar) {
-    progressBar = document.createElement('div');
-    progressBar.id = 'reading-progress';
-    document.body.appendChild(progressBar);
-  }
-  // 等 DOM 渲染完成后触发一次更新
-  setTimeout(function() {
-    window.dispatchEvent(new Event('scroll'));
-  }, 100);
+  let pb = document.getElementById('reading-progress');
+  if (!pb) { pb = document.createElement('div'); pb.id = 'reading-progress'; document.body.appendChild(pb); }
+  setTimeout(function() { window.dispatchEvent(new Event('scroll')); }, 100);
 }
 
-/* ===== 项目详情（Case Study 布局） ===== */
+/* ===== 项目详情（杂志编辑风格） ===== */
 function showProjectDetail(id) {
-  const project = DATA.projects.find(p => p.id === id);
-  if (!project) { showMainView(); return; }
-  const lang = currentLang;
-  const container = document.getElementById('sub-view');
-  if (!container) return;
+  const p = DATA.projects.find(pj => pj.id === id);
+  if (!p) { showMainView(); return; }
+  const L = currentLang;
+  const c = document.getElementById('sub-view');
+  if (!c) return;
 
-  // ---- 1. Status Badge ----
-  let badgeHTML = '';
-  if (project.status) {
-    badgeHTML = `<div class="status-badge" style="margin-bottom:12px">${project.status[lang]}</div>`;
-  }
+  const idx = DATA.projects.findIndex(pj => pj.id === id);
 
-  // ---- 2. Info Bar (Status | Period | Role) ----
-  let infoParts = [];
-  infoParts.push(`<span><span class="info-label">${lang === 'zh' ? '状态' : 'Status'}</span> ${project.status ? project.status[lang] : project.overline[lang]}</span>`);
-  if (project.period) infoParts.push(`<span><span class="info-label">${lang === 'zh' ? '时间' : 'Period'}</span> ${project.period[lang]}</span>`);
-  if (project.role) infoParts.push(`<span><span class="info-label">${lang === 'zh' ? '角色' : 'Role'}</span> ${project.role[lang]}</span>`);
-  const infoBarHTML = `<div class="project-info-bar" style="margin-bottom:32px">${infoParts.join('<span class="info-sep">|</span>')}</div>`;
-
-  // ---- 3. Screenshot (full-width) ----
-  let screenshotHTML = '';
-  if (project.image) {
-    screenshotHTML = `<div class="project-screenshot" style="width:100%;margin-bottom:32px"><img src="${project.image}" alt="${project.title[lang]}"></div>`;
+  // --- Screenshot ---
+  let fig;
+  if (p.image) {
+    fig = `<img src="${p.image}" alt="${p.title[L]}">`;
   } else {
-    screenshotHTML = `<div class="project-screenshot" style="width:100%;margin-bottom:32px"><div class="img-placeholder">
-      <div class="placeholder-geo"></div>
-      <div class="placeholder-content">
-        <span class="placeholder-title">${project.title[lang]}</span>
-        <span class="placeholder-sub">${lang === 'zh' ? '项目截图' : 'Project Screenshot'}</span>
+    fig = `<div class="pv-ph"><span class="pv-ph-icon">◆</span><span>${p.title[L]}</span><span class="pv-ph-sub">${L === 'zh' ? '项目截图' : 'Screenshot'}</span></div>`;
+  }
+
+  // --- Top bar ---
+  const top = `
+    <div class="pv-top">
+      <a href="#" onclick="window.location.hash='projects';return false;" class="pv-back">← ${L === 'zh' ? '返回' : 'Back'}</a>
+      <div class="pv-lang"><button class="pv-lb${L === 'zh' ? ' on' : ''}" onclick="setLang('zh')">中</button><button class="pv-lb${L === 'en' ? ' on' : ''}" onclick="setLang('en')">EN</button></div>
+    </div>`;
+
+  // --- Headline section: big title left, meta right ---
+  const period = p.period ? `<span class="pv-ml">${p.period[L]}</span>` : '';
+  const role = p.role ? `<span class="pv-ml">${p.role[L]}</span>` : '';
+  const tech = p.tech.map(t => `<span class="pv-tg">${t}</span>`).join('');
+  const status = p.status ? p.status[L] : p.overline[L];
+
+  // --- Links ---
+  let links = '';
+  if (p.links && p.links.length) {
+    links = p.links.map(l => `<a href="${l.url}" target="_blank" class="pv-lk">${l.label[L]}</a>`).join('');
+  }
+
+  // --- Learnings ---
+  let learn = '';
+  if (p.learnings && p.learnings[L].length) {
+    learn = `<div class="pv-lrn"><h3>${L === 'zh' ? '📖 学到的' : '📖 Learned'}</h3>${p.learnings[L].map(x => `<span class="pv-pl">${x}</span>`).join('')}</div>`;
+  }
+
+  // --- Challenges ---
+  let chal = '';
+  if (p.challenges && p.challenges[L]) {
+    chal = `<div class="pv-chal"><h3>${L === 'zh' ? '⚡ 挑战' : '⚡ Challenges'}</h3><p>${p.challenges[L]}</p></div>`;
+  }
+
+  // --- Timeline dots ---
+  let tl = '';
+  if (p.timeline && p.timeline[L]) {
+    const steps = p.timeline[L].split(' → ').map(s => s.trim());
+    tl = `<div class="pv-tl"><div class="pv-tl-in">${steps.map((s, i) => `<span class="pv-tl-d"><span class="pv-tl-c"></span><span>${s}</span></span>`).join('')}</div></div>`;
+  }
+
+  // --- Related ---
+  const rel = DATA.projects.filter(pj => pj.id !== id && pj.tech.some(t => p.tech.includes(t)));
+  let relHtml = '';
+  if (rel.length) {
+    relHtml = `<div class="pv-rel"><h2 class="pv-rel-h">${L === 'zh' ? '更多项目' : 'More Projects'}</h2><div class="pv-rel-g">${rel.map(r => `<a href="#project/${r.id}" class="pv-rc"><strong>${r.title[L]}</strong><span>${r.tech.slice(0,3).join(' · ')}</span></a>`).join('')}</div></div>`;
+  }
+
+  // --- Nav ---
+  const prev = idx > 0 ? DATA.projects[idx - 1] : null;
+  const next = idx < DATA.projects.length - 1 ? DATA.projects[idx + 1] : null;
+  let nav = '<div class="pv-nav"><div class="pv-nav-in">';
+  nav += prev ? `<a href="#project/${prev.id}" class="pv-nb"><span class="pv-nb-d">← ${L === 'zh' ? '上一篇' : 'Previous'}</span><span class="pv-nb-t">${prev.title[L]}</span></a>` : '<div></div>';
+  nav += next ? `<a href="#project/${next.id}" class="pv-nb pv-nb-r"><span class="pv-nb-d">${L === 'zh' ? '下一篇' : 'Next'} →</span><span class="pv-nb-t">${next.title[L]}</span></a>` : '<div></div>';
+  nav += '</div></div>';
+
+  // Title extract for pull quote
+  const pullQuote = p.desc[L].length > 80 ? p.desc[L].substring(0, 80) + '…' : p.desc[L];
+
+  c.innerHTML = `
+    ${top}
+    <article class="pv">
+      <header class="pv-hd">
+        <div class="pv-hd-l">
+          <span class="pv-num">${String(idx + 1).padStart(2, '0')}</span>
+          <h1 class="pv-title">${p.title[L]}</h1>
+        </div>
+        <div class="pv-hd-r">
+          <span class="pv-st">${status}</span>
+          <div class="pv-meta">${period}${role}</div>
+          <div class="pv-tags">${tech}</div>
+          ${links ? `<div class="pv-links">${links}</div>` : ''}
+        </div>
+      </header>
+
+      <div class="pv-fig">${fig}</div>
+
+      <div class="pv-body">
+        <p>${p.desc[L]}</p>
       </div>
-    </div></div>`;
-  }
 
-  // ---- 4. Description + Links ----
-  let contentHTML = `<div class="sub-content"><p>${project.desc[lang]}</p></div>`;
-  if (project.links && project.links.length) {
-    contentHTML += `<div class="project-links-section" style="margin-bottom:32px">`;
-    project.links.forEach(link => {
-      contentHTML += `<a href="${link.url}" target="_blank" rel="noreferrer">${link.label[lang]}</a>`;
-    });
-    contentHTML += `</div>`;
-  }
+      <aside class="pv-pq">
+        <span>❝</span>
+        <p>${pullQuote}</p>
+      </aside>
 
-  // ---- 5. Two-column Grid: Learnings | Challenges ----
-  let learningsHTML = '';
-  let challengesHTML = '';
-  if (project.learnings && project.learnings[lang].length) {
-    learningsHTML = `<div>
-      <h3 style="margin-bottom:12px;font-size:1.1rem">${lang === 'zh' ? '学到了什么' : 'What I Learned'}</h3>
-      <div class="project-learnings">${project.learnings[lang].map(l => `<span>${l}</span>`).join('')}</div>
-    </div>`;
-  }
-  if (project.challenges && project.challenges[lang]) {
-    challengesHTML = `<div>
-      <h3 style="margin-bottom:12px;font-size:1.1rem">${lang === 'zh' ? '遇到的挑战' : 'Challenges'}</h3>
-      <div class="project-challenge">${project.challenges[lang]}</div>
-    </div>`;
-  }
-  let splitGridHTML = '';
-  if (learningsHTML || challengesHTML) {
-    splitGridHTML = `<div class="project-detail-grid">
-      ${learningsHTML || '<div></div>'}
-      ${challengesHTML || '<div></div>'}
-    </div>`;
-  }
+      ${learn || chal ? `<div class="pv-lc">${learn}${chal}</div>` : ''}
 
-  // ---- 6. Tech Stack (centered) ----
-  let techHTML = `<div class="sub-tags tech-badges" style="text-align:center;margin-bottom:32px">${project.tech.map(t => `<span>${t}</span>`).join('')}</div>`;
+      ${tl}
 
-  // ---- 7. Timeline (horizontal flex steps) ----
-  let timelineHTML = '';
-  if (project.timeline && project.timeline[lang]) {
-    const raw = project.timeline[lang];
-    const steps = raw.includes(' → ') ? raw.split(' → ') : [raw];
-    const stepItems = steps.map((s, i) => `
-      <span style="display:inline-flex;align-items:center;gap:8px">
-        ${i > 0 ? `<span style="color:var(--color-gold,#c9a84c);font-size:1.2rem">→</span>` : ''}
-        <span style="background:var(--color-bg-secondary, #f0ebe6);padding:8px 16px;border-radius:8px;font-size:0.9rem">${s.trim()}</span>
-      </span>
-    `).join('');
-    timelineHTML = `<div class="project-detail-section" style="margin-bottom:32px">
-      <h3 style="margin-bottom:16px;font-size:1.1rem;text-align:center">${lang === 'zh' ? '时间线' : 'Timeline'}</h3>
-      <div style="display:flex;gap:4px;flex-wrap:wrap;justify-content:center;align-items:center">
-        ${stepItems}
-      </div>
-    </div>`;
-  }
-
-  // ---- 8. Related Projects (card grid) ----
-  const relatedProjects = DATA.projects.filter(p => p.id !== id && p.tech.some(t => project.tech.includes(t)));
-  let relatedHTML = '';
-  if (relatedProjects.length > 0) {
-    relatedHTML = `<div class="project-related" style="margin-bottom:32px">
-      <h3 style="margin-bottom:16px;font-size:1.1rem">${lang === 'zh' ? '相关项目' : 'Related Projects'}</h3>
-      <div class="related-list">
-        ${relatedProjects.map(p => `
-          <a href="#project/${p.id}" class="related-card">
-            <span class="related-card-title">${p.title[lang]}</span>
-            <span class="related-card-tech">${p.tech.slice(0,3).join(' · ')}</span>
-          </a>
-        `).join('')}
-      </div>
-    </div>`;
-  }
-
-  // ---- 9. Prev / Next Navigation ----
-  const idx = DATA.projects.findIndex(p => p.id === id);
-  const prevProj = idx > 0 ? { href: `#project/${DATA.projects[idx - 1].id}`, title: DATA.projects[idx - 1].title } : null;
-  const nextProj = idx < DATA.projects.length - 1 ? { href: `#project/${DATA.projects[idx + 1].id}`, title: DATA.projects[idx + 1].title } : null;
-
-  // ---- Assemble into subPageShell ----
-  container.innerHTML = subPageShell(`
-    ${badgeHTML}
-    <h1 class="sub-title" style="font-size:48px">${project.title[lang]}</h1>
-    ${infoBarHTML}
-    ${screenshotHTML}
-    ${contentHTML}
-    ${splitGridHTML}
-    ${techHTML}
-    ${timelineHTML}
-    ${relatedHTML}
-    ${subNavHTML(prevProj, nextProj, lang)}
-  `, lang === 'zh' ? '返回项目' : 'Back to Projects', 'projects');
+      ${relHtml}
+    </article>
+    ${nav}`;
 
   showSubView();
-  var pbw = container.querySelector('.sub-body-wrap');
-  if (pbw) pbw.classList.add('sub-theme-studio');
-  if (typeof updateSEO === 'function') updateSEO(project.title[lang], project.desc[lang]);
+  document.body.style.backgroundColor = '#f7f3ed';
+  if (typeof updateSEO === 'function') updateSEO(p.title[L], p.desc[L].replace(/<[^>]*>/g, ''));
 }
 
-/* ===== 创作全文 ===== */
+/* ===== 创作详情（暗色诗廊） ===== */
 function showCreativeDetail(index) {
   const item = DATA.creative[index];
   if (!item) { showMainView(); return; }
-  const lang = currentLang;
-  const container = document.getElementById('sub-view');
-  if (!container) return;
+  const L = currentLang;
+  const c = document.getElementById('sub-view');
+  if (!c) return;
 
-  const dateStr = item.date ? (typeof item.date === 'object' ? item.date[lang] : item.date) : '';
-  const metaParts = [item.genre[lang]];
-  if (dateStr) metaParts.push(dateStr);
-  if (item.readingTime) metaParts.push(item.readingTime);
-  const metaLine = metaParts.join(' · ');
+  const dateStr = item.date ? (typeof item.date === 'object' ? item.date[L] : item.date) : '';
+  const metaLine = [item.genre[L], dateStr, item.readingTime].filter(Boolean).join(' · ');
 
-  const prev = index > 0 ? { href: `#creative/${index - 1}`, title: DATA.creative[index - 1].title } : null;
-  const next = index < DATA.creative.length - 1 ? { href: `#creative/${index + 1}`, title: DATA.creative[index + 1].title } : null;
+  const prev = index > 0 ? { h: '#creative/' + (index - 1), t: DATA.creative[index - 1].title[L] } : null;
+  const next = index < DATA.creative.length - 1 ? { h: '#creative/' + (index + 1), t: DATA.creative[index + 1].title[L] } : null;
+  let nav = '<div class="cr-nav"><div class="cr-nav-in">';
+  nav += prev ? '<a href="' + prev.h + '" class="cr-nb"><span>←</span><span>' + prev.t + '</span></a>' : '<span></span>';
+  nav += next ? '<a href="' + next.h + '" class="cr-nb cr-nb-r"><span>' + next.t + '</span><span>→</span></a>' : '<span></span>';
+  nav += '</div></div>';
 
-  container.innerHTML = subPageShell(`
-    <p class="sub-label">${item.genre[lang]}</p>
-    <h1 class="sub-title" style="font-family:var(--font-serif)">${item.title[lang]}</h1>
-    <p class="sub-meta-line">${metaLine}</p>
-    <div class="artistic-separator">~ ~ ~</div>
-    <div class="poetic-body drop-cap">${item.excerpt[lang]}</div>
-    <div class="artistic-separator">~ ~ ~</div>
-    ${subNavHTML(prev, next, lang)}
-  `, lang === 'zh' ? '返回创作' : 'Back to Creative');
+  c.innerHTML = `
+    <div class="cr-page">
+      <div class="cr-bar">
+        <a href="#" onclick="window.location.hash='creative';return false;">← ${L === 'zh' ? '返回' : 'Back'}</a>
+        <span><button class="cr-lb${L === 'zh' ? ' on' : ''}" onclick="setLang('zh')">中</button><button class="cr-lb${L === 'en' ? ' on' : ''}" onclick="setLang('en')">EN</button></span>
+      </div>
+      <article class="cr">
+        <div class="cr-label">${item.genre[L]}</div>
+        <h1 class="cr-t">${item.title[L]}</h1>
+        <div class="cr-meta">${metaLine}</div>
+        <div class="cr-diamond">◇</div>
+        <div class="cr-body">${item.excerpt[L]}</div>
+        <div class="cr-diamond">◇</div>
+      </article>
+      ${nav}
+    </div>`;
+
   showSubView();
-  var cbw = container.querySelector('.sub-body-wrap');
-  if (cbw) cbw.classList.add('sub-creative-detail');
-  if (typeof updateSEO === 'function') updateSEO(item.title[lang], item.excerpt[lang].replace(/<[^>]*>/g, ''));
+  document.body.style.backgroundColor = '#121212';
+  if (typeof updateSEO === 'function') updateSEO(item.title[L], item.excerpt[L].replace(/<[^>]*>/g, ''));
 }
 
-/* ===== 笔记全文 ===== */
+/* ===== 笔记全文（终端 cat 风格 — 与博客一致） ===== */
 function showNoteDetail(index) {
   const note = DATA.notebook[index];
   if (!note) { showMainView(); return; }
-  const lang = currentLang;
-  const container = document.getElementById('sub-view');
-  if (!container) return;
+  const L = currentLang;
+  const c = document.getElementById('sub-view');
+  if (!c) return;
 
-  const dateStr = typeof note.date === 'object' ? note.date[lang] : note.date;
+  const dateStr = typeof note.date === 'object' ? note.date[L] : note.date;
   const metaLine = dateStr + (note.readingTime ? ' · ' + note.readingTime : '');
 
-  let extras = '';
+  let bodyHtml = renderBody(note.body, L);
+  let body = bodyHtml || '<p>' + note.desc[L] + '</p>';
 
-  // 正文（优先 body 字段）
-  var bodyHtml = renderBody(note.body, lang);
-  if (bodyHtml) {
-    extras += '<div class="sub-content">' + bodyHtml + '</div>';
-  } else {
-    extras += `<div class="sub-content"><p>${note.desc[lang]}</p></div>`;
-  }
-
-  // 关键概念
+  let concepts = '';
   if (note.concepts && note.concepts.length) {
-    extras += `<div class="concept-list">
-      <h2>${lang === 'zh' ? '关键概念' : 'Key Concepts'}</h2>
-      <ul>${note.concepts.map(c => `<li>${c[lang]}</li>`).join('')}</ul>
-    </div>`;
+    concepts = '<div class="nc-box"><div class="nc-box-h"># ' + (L === 'zh' ? '关键概念' : 'Key Concepts') + '</div>' + note.concepts.map(c => '<div class="nc-box-i">▹ ' + c[L] + '</div>').join('') + '</div>';
   }
 
-  // 标签
-  extras += `<div class="sub-tags"><span onclick="window.location.hash='tag/${encodeURIComponent(note.tag)}'" style="cursor:pointer" title="${lang === 'zh' ? '查看相关' : 'View related'}">${note.tag}</span></div>`;
+  const prev = index > 0 ? { h: '#notebook/' + (index - 1), t: DATA.notebook[index - 1].title[L] } : null;
+  const next = index < DATA.notebook.length - 1 ? { h: '#notebook/' + (index + 1), t: DATA.notebook[index + 1].title[L] } : null;
+  let nav = '<div class="nc-nav">';
+  nav += prev ? '<a href="' + prev.h + '" class="nc-nb"><span>←</span><span>' + prev.t + '</span></a>' : '<span></span>';
+  nav += next ? '<a href="' + next.h + '" class="nc-nb nc-nb-r"><span>' + next.t + '</span><span>→</span></a>' : '<span></span>';
+  nav += '</div>';
 
-  const prev = index > 0 ? { href: `#notebook/${index - 1}`, title: DATA.notebook[index - 1].title } : null;
-  const next = index < DATA.notebook.length - 1 ? { href: `#notebook/${index + 1}`, title: DATA.notebook[index + 1].title } : null;
+  c.innerHTML = `
+    <div class="nc">
+      <nav class="nc-nav">
+        <a href="#" onclick="window.location.hash='blog';return false;">← ${L === 'zh' ? '返回列表' : 'Back'}</a>
+        <span><button class="nc-lb${L === 'zh' ? ' on' : ''}" onclick="setLang('zh')">中</button><button class="nc-lb${L === 'en' ? ' on' : ''}" onclick="setLang('en')">EN</button></span>
+      </nav>
+      <div class="nc-prompt">
+        <span class="nc-user">visitor@learn</span>
+        <span class="nc-colon">:</span>
+        <span class="nc-path">~/notes</span>
+        <span class="nc-dollar">$</span>
+        <span class="nc-cmd">cat ${note.title[L].toLowerCase().replace(/[^a-z0-9]/g,'-')}.md</span>
+      </div>
+      <div class="nc-meta">
+        <span># ${note.tag}</span>
+        <span>${metaLine}</span>
+      </div>
+      <div class="nc-body">${body}</div>
+      ${concepts}
+      <div class="nc-sep">─── ${L === 'zh' ? '文件结束' : 'EOF'} ───</div>
+      ${nav}
+    </div>`;
 
-  container.innerHTML = subPageShell(`
-    <span class="sub-tag-badge">${note.tag}</span>
-    <h1 class="sub-title">${note.title[lang]}</h1>
-    <p class="sub-meta-line">${metaLine}</p>
-    ${extras}
-    ${subNavHTML(prev, next, lang)}
-  `, lang === 'zh' ? '返回笔记' : 'Back to Notes');
   showSubView();
-  var nbw = container.querySelector('.sub-body-wrap');
-  if (nbw) nbw.classList.add('sub-notebook');
-  if (typeof updateSEO === 'function') updateSEO(note.title[lang], note.desc[lang]);
+  document.body.style.backgroundColor = '#0d0d0d';
+  if (typeof updateSEO === 'function') updateSEO(note.title[L], note.desc[L]);
 }
 
-/* ===== 归档页 ===== */
+/* ===== 归档页（时间线风格） ===== */
 function showArchive() {
-  const lang = currentLang;
+  const L = currentLang;
   const container = document.getElementById('sub-view');
   if (!container) return;
 
   const total = DATA.projects.length + DATA.miniProjects.length;
-  const countLabel = lang === 'zh' ? total + ' 个项目' : total + ' projects';
+  const countLabel = L === 'zh' ? total + ' 个项目' : total + ' projects';
 
   // Extract year from period field (e.g. "2025 — Present" -> "2025")
   function extractYear(p) {
-    const periodStr = p.period ? (p.period[lang] || p.period.en || '') : '';
+    const periodStr = p.period ? (p.period[L] || p.period.en || '') : '';
     const match = periodStr.match(/(\d{4})/);
     return match ? match[1] : '';
   }
@@ -602,56 +577,70 @@ function showArchive() {
   const sortedYears = Object.keys(groups).sort((a, b) => b.localeCompare(a));
 
   const projectHTML = sortedYears.map(year => `
-    <div class="archive-year-group">
-      <div class="archive-year-divider">
-        <span class="year-num">${year}</span>
-        <span class="year-line"></span>
+    <div class="ar-year">
+      <div class="ar-year-head">
+        <span class="ar-year-num">${year}</span>
+        <span class="ar-year-line"></span>
       </div>
       ${groups[year].map(p => `
-        <div class="archive-row">
-          <a href="#project/${p.id}" class="archive-name">${p.title[lang]}</a>
-          <span class="archive-desc">${p.desc[lang]}</span>
-          <span class="archive-tags">${p.tech.join(' · ')}</span>
+        <div class="ar-row">
+          <a href="#project/${p.id}" class="ar-name">${p.title[L]}</a>
+          <span class="ar-desc">${p.desc[L]}</span>
+          <span class="ar-tags">${p.tech.join(' · ')}</span>
         </div>
       `).join('')}
     </div>
   `).join('');
 
   const miniHTML = DATA.miniProjects.length ? `
-    <div class="archive-year-group">
-      <div class="archive-year-divider">
-        <span class="year-num">${lang === 'zh' ? '更多' : 'More'}</span>
-        <span class="year-line"></span>
+    <div class="ar-year">
+      <div class="ar-year-head">
+        <span class="ar-year-num">${L === 'zh' ? '更多' : 'More'}</span>
+        <span class="ar-year-line"></span>
       </div>
       ${DATA.miniProjects.map(m => `
-        <div class="archive-row">
-          <span class="archive-name">${m.title[lang]}</span>
-          <span class="archive-desc">${m.desc[lang]}</span>
-          <span class="archive-tags">${m.tech}</span>
+        <div class="ar-row">
+          <span class="ar-name">${m.title[L]}</span>
+          <span class="ar-desc">${m.desc[L]}</span>
+          <span class="ar-tags">${m.tech}</span>
         </div>
       `).join('')}
     </div>
   ` : '';
 
-  container.innerHTML = subPageShell(`
-    <p class="sub-label" style="margin-bottom:4px">${lang === 'zh' ? '归档' : 'Archive'}</p>
-    <h1 class="sub-title" style="margin-bottom:4px">${lang === 'zh' ? '全部项目' : 'All Projects'}</h1>
-    <p class="sub-meta-line" style="margin-bottom:48px">${countLabel}</p>
-    ${projectHTML}
-    ${miniHTML}
-  `, lang === 'zh' ? '返回' : 'Back');
+  container.innerHTML = `
+    <div class="ar-page">
+      <nav class="ar-bar">
+        <a href="#" onclick="window.location.hash='';return false;" class="ar-back">← ${L === 'zh' ? '返回' : 'Back'}</a>
+        <span class="ar-lang">
+          <button class="ar-lb${L === 'zh' ? ' on' : ''}" onclick="setLang('zh')">中</button>
+          <button class="ar-lb${L === 'en' ? ' on' : ''}" onclick="setLang('en')">EN</button>
+        </span>
+      </nav>
+      <div class="ar-body">
+        <div class="ar-header">
+          <p class="ar-label" style="margin-bottom:4px">${L === 'zh' ? '归档' : 'Archive'}</p>
+          <h1 class="ar-title" style="margin-bottom:4px">${L === 'zh' ? '全部项目' : 'All Projects'}</h1>
+          <p class="ar-count" style="margin-bottom:48px">${countLabel}</p>
+        </div>
+        <div class="ar-timeline">
+          ${projectHTML}
+          ${miniHTML}
+        </div>
+      </div>
+    </div>`;
+
   showSubView();
-  var abw = container.querySelector('.sub-body-wrap');
-  if (abw) abw.classList.add('sub-theme-archive');
+  document.body.style.backgroundColor = '#fff';
   if (typeof updateSEO === 'function') updateSEO(
-    lang === 'zh' ? '全部项目' : 'All Projects',
-    lang === 'zh' ? '李军辉的项目归档' : "Junhui Li's project archive"
+    L === 'zh' ? '全部项目' : 'All Projects',
+    L === 'zh' ? '李军辉的项目归档' : "Junhui Li's project archive"
   );
 }
 
-/* ===== Resume 页面 ===== */
+/* ===== Resume 页面（打印文档风格） ===== */
 function showResume() {
-  const lang = currentLang;
+  const L = currentLang;
   const container = document.getElementById('sub-view');
   if (!container) return;
 
@@ -660,15 +649,15 @@ function showResume() {
 
   /* 顶部双栏Header */
   const headerHTML = `
-    <div class="resume-header">
-      <div class="resume-header-left">
-        <h1 class="resume-name">${p.name[lang]}</h1>
-        <p class="resume-header-meta">
-          ${edu.degree[lang]}<span class="resume-header-dot"> · </span>${edu.period[lang]}
+    <div class="re-header">
+      <div class="re-header-left">
+        <h1 class="re-name">${p.name[L]}</h1>
+        <p class="re-header-meta">
+          ${edu.degree[L]}<span class="re-header-dot"> · </span>${edu.period[L]}
         </p>
       </div>
-      <div class="resume-header-right">
-        <div class="resume-contact-item">
+      <div class="re-header-right">
+        <div class="re-contact-item">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
           <a href="https://github.com/${p.githubUsername}" target="_blank" rel="noopener">github.com/${p.githubUsername}</a>
         </div>
@@ -678,13 +667,13 @@ function showResume() {
 
   /* 教育背景 */
   const eduHTML = `
-    <div class="resume-section">
-      <h2>${lang === 'zh' ? '教育背景' : 'Education'}</h2>
-      <div class="resume-item">
-        <h3><a href="${edu.url}" target="_blank" rel="noopener" class="inline-link">${edu.school[lang]}</a></h3>
-        <p class="resume-item-desc">${edu.description[lang]}</p>
-        <div class="resume-courses">
-          ${edu.courses[lang].map(c => `<span class="resume-tag">${c}</span>`).join('')}
+    <div class="re-section">
+      <h2>${L === 'zh' ? '教育背景' : 'Education'}</h2>
+      <div class="re-item">
+        <h3><a href="${edu.url}" target="_blank" rel="noopener" class="inline-link">${edu.school[L]}</a></h3>
+        <p class="re-item-desc">${edu.description[L]}</p>
+        <div class="re-courses">
+          ${edu.courses[L].map(c => `<span class="re-tag">${c}</span>`).join('')}
         </div>
       </div>
     </div>
@@ -694,22 +683,22 @@ function showResume() {
   let expItems = '';
   DATA.experience.panels.forEach(panel => {
     expItems += `
-      <div class="resume-timeline-item">
-        <div class="resume-timeline-dot"></div>
-        <div class="resume-timeline-body">
-          <h3>${panel.title[lang]}</h3>
-          <p class="resume-date">${panel.date[lang]}</p>
+      <div class="re-timeline-item">
+        <div class="re-timeline-dot"></div>
+        <div class="re-timeline-body">
+          <h3>${panel.title[L]}</h3>
+          <p class="re-date">${panel.date[L]}</p>
           <ul>
-            ${panel.items[lang].map(item => `<li>${item}</li>`).join('')}
+            ${panel.items[L].map(item => `<li>${item}</li>`).join('')}
           </ul>`;
 
     if (panel.sub) {
       expItems += `
-          <div class="resume-sub-item">
-            <h4>${panel.sub.title[lang]}</h4>
-            <p class="resume-date">${panel.sub.date[lang]}</p>
+          <div class="re-sub-item">
+            <h4>${panel.sub.title[L]}</h4>
+            <p class="re-date">${panel.sub.date[L]}</p>
             <ul>
-              ${panel.sub.items[lang].map(item => `<li>${item}</li>`).join('')}
+              ${panel.sub.items[L].map(item => `<li>${item}</li>`).join('')}
             </ul>
           </div>`;
     }
@@ -719,13 +708,13 @@ function showResume() {
 
   /* 技能标签格 */
   const skillsHTML = `
-    <div class="resume-section">
-      <h2>${lang === 'zh' ? '技能' : 'Skills'}</h2>
-      <div class="resume-skills-grid">
+    <div class="re-section">
+      <h2>${L === 'zh' ? '技能' : 'Skills'}</h2>
+      <div class="re-skills-grid">
         ${p.skills.map(s => `
-          <span class="resume-skill-pill">
-            <span class="resume-skill-name">${s.name}</span>
-            ${s.label ? `<span class="resume-skill-label">${s.label[lang]}</span>` : ''}
+          <span class="re-skill-pill">
+            <span class="re-skill-name">${s.name}</span>
+            ${s.label ? `<span class="re-skill-label">${s.label[L]}</span>` : ''}
           </span>
         `).join('')}
       </div>
@@ -734,45 +723,53 @@ function showResume() {
 
   /* 荣誉横排卡片 */
   const honorsHTML = `
-    <div class="resume-section">
-      <h2>${lang === 'zh' ? '荣誉' : 'Honors'}</h2>
-      <div class="resume-honors">
+    <div class="re-section">
+      <h2>${L === 'zh' ? '荣誉' : 'Honors'}</h2>
+      <div class="re-honors">
         ${DATA.honors.map(h => `
-          <div class="resume-honor-card">
-            <span class="resume-honor-num">${h.num}</span>
-            <span class="resume-honor-label">${h.label[lang]}</span>
+          <div class="re-honor-card">
+            <span class="re-honor-num">${h.num}</span>
+            <span class="re-honor-label">${h.label[L]}</span>
           </div>
         `).join('')}
       </div>
     </div>
   `;
 
-  const html = `
-    ${headerHTML}
-    ${eduHTML}
-    <div class="resume-grid">
-      <div class="resume-grid-left">
-        <div class="resume-section">
-          <h2>${lang === 'zh' ? '经历' : 'Experience'}</h2>
-          <div class="resume-timeline">
-            ${expItems}
+  container.innerHTML = `
+    <div class="re-page">
+      <nav class="re-bar">
+        <a href="#" onclick="window.location.hash='';return false;" class="re-back">← ${L === 'zh' ? '返回主页' : 'Back to Home'}</a>
+        <span class="re-lang">
+          <button class="re-lb${L === 'zh' ? ' on' : ''}" onclick="setLang('zh')">中</button>
+          <button class="re-lb${L === 'en' ? ' on' : ''}" onclick="setLang('en')">EN</button>
+        </span>
+      </nav>
+      <div class="re-body">
+        ${headerHTML}
+        ${eduHTML}
+        <div class="re-grid">
+          <div class="re-grid-left">
+            <div class="re-section">
+              <h2>${L === 'zh' ? '经历' : 'Experience'}</h2>
+              <div class="re-timeline">
+                ${expItems}
+              </div>
+            </div>
+          </div>
+          <div class="re-grid-right">
+            ${skillsHTML}
+            ${honorsHTML}
           </div>
         </div>
       </div>
-      <div class="resume-grid-right">
-        ${skillsHTML}
-        ${honorsHTML}
-      </div>
-    </div>
-  `;
+    </div>`;
 
-  container.innerHTML = subPageShell(html, lang === 'zh' ? '返回主页' : 'Back to Home');
   showSubView();
-  var rbw = container.querySelector('.sub-body-wrap');
-  if (rbw) rbw.classList.add('sub-theme-print');
+  document.body.style.backgroundColor = '#faf8f5';
   if (typeof updateSEO === 'function') updateSEO(
-    lang === 'zh' ? '简历 - 李军辉' : 'Resume - Junhui Li',
-    lang === 'zh' ? '李军辉的个人简历' : "Junhui Li's Resume"
+    L === 'zh' ? '简历 - 李军辉' : 'Resume - Junhui Li',
+    L === 'zh' ? '李军辉的个人简历' : "Junhui Li's Resume"
   );
 }
 
@@ -810,96 +807,105 @@ function getAllTaggedItems(lang) {
   return all;
 }
 
-/* ===== 资源推荐页 ===== */
+/* ===== 资源推荐页（卡片目录风格） ===== */
 function showResources() {
-  var lang = currentLang;
-  var container = document.getElementById('sub-view');
-  if (!container) return;
+  const L = currentLang;
+  const c = document.getElementById('sub-view');
+  if (!c || !DATA.resources) return;
+  const r = DATA.resources;
 
-  var r = DATA.resources;
-  var catsHtml = '';
+  const cats = r.categories.map(cat => {
+    const items = cat.items.map(item =>
+      '<a href="' + item.url + '" target="_blank" rel="noreferrer" class="rs-card">' +
+        '<span class="rs-card-name">' + item.name + '</span>' +
+        '<span class="rs-card-desc">' + item.desc[L] + '</span>' +
+      '</a>'
+    ).join('');
+    return '<div class="rs-cat"><div class="rs-cat-h">' + cat.icon + ' <span>' + cat.label[L] + '</span></div><div class="rs-cat-body">' + items + '</div></div>';
+  }).join('');
 
-  r.categories.forEach(function(cat) {
-    catsHtml += '<div class="resources-section">' +
-      '<h2>' + cat.icon + ' ' + cat.label[lang] + '</h2>' +
-      '<div class="resources-list">' +
-      cat.items.map(function(item) {
-        return '<a href="' + item.url + '" target="_blank" rel="noreferrer" class="resource-item">' +
-          '<div class="resource-name">' + item.name + ' ↗</div>' +
-          '<div class="resource-desc">' + item.desc[lang] + '</div>' +
-          '</a>';
-      }).join('') +
-      '</div></div>';
-  });
+  c.innerHTML = `
+    <div class="rs">
+      <nav class="rs-bar">
+        <a href="#" onclick="window.location.hash='';return false;">← ${L === 'zh' ? '返回' : 'Back'}</a>
+        <span><button class="rs-lb${L === 'zh' ? ' on' : ''}" onclick="setLang('zh')">中</button><button class="rs-lb${L === 'en' ? ' on' : ''}" onclick="setLang('en')">EN</button></span>
+      </nav>
+      <main class="rs-body">
+        <div class="rs-hd">
+          <h1 class="rs-t">${r.title[L]}</h1>
+          <p class="rs-desc">${r.desc[L]}</p>
+        </div>
+        ${cats}
+      </main>
+    </div>`;
 
-  container.innerHTML = subPageShell(
-    '<p class="sub-label">' + (lang === 'zh' ? '推荐资源' : 'Recommended Resources') + '</p>' +
-    '<h1 class="sub-title">' + r.title[lang] + '</h1>' +
-    '<p class="sub-meta-line" style="margin-bottom:40px">' + r.desc[lang] + '</p>' +
-    catsHtml,
-    lang === 'zh' ? '返回' : 'Back'
-  );
   showSubView();
-  var rbw2 = container.querySelector('.sub-body-wrap');
-  if (rbw2) rbw2.classList.add('sub-theme-library');
-  if (typeof updateSEO === 'function') updateSEO(r.title[lang], r.desc[lang]);
+  document.body.style.backgroundColor = '#f5f0eb';
+  if (typeof updateSEO === 'function') updateSEO(r.title[L], r.desc[L]);
 }
 
 /* ===== 标签索引页 ===== */
 function showTags() {
-  var lang = currentLang;
-  var container = document.getElementById('sub-view');
-  if (!container) return;
+  const L = currentLang;
+  const c = document.getElementById('sub-view');
+  if (!c) return;
 
-  var taggedItems = getAllTaggedItems(lang);
-  var groups = {};
+  const taggedItems = getAllTaggedItems(L);
+  const groups = {};
   taggedItems.forEach(function(item) {
     if (!groups[item.tag]) groups[item.tag] = [];
     groups[item.tag].push(item);
   });
 
-  var sortedTags = Object.keys(groups).sort(function(a, b) {
+  const sortedTags = Object.keys(groups).sort(function(a, b) {
     return groups[b].length - groups[a].length;
   });
 
   if (sortedTags.length === 0) {
-    container.innerHTML = subPageShell(
-      emptyStateHTML('🏷️',
-        lang === 'zh' ? '还没有标签' : 'No Tags Yet',
-        lang === 'zh' ? '内容添加标签后会在这里展示' : 'Tags will appear here once content is tagged',
-        lang === 'zh' ? '返回主页' : 'Back to Home'
-      ),
-      lang === 'zh' ? '返回' : 'Back'
-    );
+    c.innerHTML =
+      '<div class="tg">' +
+        '<nav class="tg-bar">' +
+          '<a href="#" onclick="window.location.hash=\'\';return false;">← ' + (L === 'zh' ? '返回' : 'Back') + '</a>' +
+          '<span><button class="tg-lb' + (L === 'zh' ? ' on' : '') + '" onclick="setLang(\'zh\')">中</button><button class="tg-lb' + (L === 'en' ? ' on' : '') + '" onclick="setLang(\'en\')">EN</button></span>' +
+        '</nav>' +
+        '<main class="tg-body">' +
+          emptyStateHTML('🏷️',
+            L === 'zh' ? '还没有标签' : 'No Tags Yet',
+            L === 'zh' ? '内容添加标签后会在这里展示' : 'Tags will appear here once content is tagged',
+            L === 'zh' ? '返回主页' : 'Back to Home'
+          ) +
+        '</main>' +
+      '</div>';
     showSubView();
+    document.body.style.backgroundColor = '#f5f3ef';
     return;
   }
 
-  var totalItems = taggedItems.length;
-  var countLabel = lang === 'zh' ? totalItems + ' 条内容' : totalItems + ' items';
+  const totalItems = taggedItems.length;
+  const countLabel = L === 'zh' ? totalItems + ' 条内容' : totalItems + ' items';
 
-  var maxCount = 0;
+  let maxCount = 0;
   sortedTags.forEach(function(tag) { if (groups[tag].length > maxCount) maxCount = groups[tag].length; });
 
-  var cloudHtml = '<div class="tags-cloud">';
+  let cloudHtml = '<div class="tags-cloud">';
   sortedTags.forEach(function(tag) {
-    var weight = Math.log(groups[tag].length + 1) / Math.log(maxCount + 1);
-    var fontSize = 14 + weight * 18;
+    const weight = Math.log(groups[tag].length + 1) / Math.log(maxCount + 1);
+    const fontSize = 14 + weight * 18;
     cloudHtml += '<a href="#tag/' + encodeURIComponent(tag) + '" class="tag-cloud-item" style="font-size:' + fontSize + 'px">' +
       tag + ' <span class="count">(' + groups[tag].length + ')</span></a>';
   });
   cloudHtml += '</div>';
 
   // 逐标签显示内容组
-  var groupsHtml = '';
+  let groupsHtml = '';
   sortedTags.forEach(function(tag) {
     groupsHtml += '<div class="tag-group">' +
       '<h3 class="tag-group-title">#' + tag + ' <span class="count">(' + groups[tag].length + ')</span></h3>' +
       '<div class="tag-group-list">';
     groups[tag].forEach(function(item) {
-      var typeLabel = item.type === 'reading'
-        ? (lang === 'zh' ? '📖 阅读' : '📖 Reading')
-        : (lang === 'zh' ? '📓 笔记' : '📓 Note');
+      const typeLabel = item.type === 'reading'
+        ? (L === 'zh' ? '📖 阅读' : '📖 Reading')
+        : (L === 'zh' ? '📓 笔记' : '📓 Note');
       groupsHtml += '<a href="' + item.href + '" class="tag-group-item">' +
         '<span class="tag-item-type">' + typeLabel + '</span>' +
         '<span class="tag-item-title">' + item.title + '</span>' +
@@ -909,41 +915,49 @@ function showTags() {
     groupsHtml += '</div></div>';
   });
 
-  container.innerHTML = subPageShell(
-    '<p class="sub-label" style="margin-bottom:4px">' + (lang === 'zh' ? '标签' : 'Tags') + '</p>' +
-    '<h1 class="sub-title" style="margin-bottom:4px">' + (lang === 'zh' ? '内容标签' : 'Content Tags') + '</h1>' +
-    '<p class="sub-meta-line" style="margin-bottom:32px">' + countLabel + '</p>' +
-    cloudHtml +
-    groupsHtml,
-    lang === 'zh' ? '返回' : 'Back'
-  );
+  c.innerHTML =
+    '<div class="tg">' +
+      '<nav class="tg-bar">' +
+        '<a href="#" onclick="window.location.hash=\'\';return false;">← ' + (L === 'zh' ? '返回' : 'Back') + '</a>' +
+        '<span><button class="tg-lb' + (L === 'zh' ? ' on' : '') + '" onclick="setLang(\'zh\')">中</button><button class="tg-lb' + (L === 'en' ? ' on' : '') + '" onclick="setLang(\'en\')">EN</button></span>' +
+      '</nav>' +
+      '<main class="tg-body">' +
+        '<div class="tg-hd">' +
+          '<p class="sub-label">' + (L === 'zh' ? '标签' : 'Tags') + '</p>' +
+          '<h1 class="sub-title">' + (L === 'zh' ? '内容标签' : 'Content Tags') + '</h1>' +
+          '<p class="sub-meta-line">' + countLabel + '</p>' +
+        '</div>' +
+        cloudHtml +
+        groupsHtml +
+      '</main>' +
+    '</div>';
+
   showSubView();
-  var tbw = container.querySelector('.sub-body-wrap');
-  if (tbw) tbw.classList.add('sub-theme-index');
+  document.body.style.backgroundColor = '#f5f3ef';
   if (typeof updateSEO === 'function') updateSEO(
-    lang === 'zh' ? '内容标签' : 'Content Tags',
-    lang === 'zh' ? '按标签浏览所有内容' : 'Browse all content by tag'
+    L === 'zh' ? '内容标签' : 'Content Tags',
+    L === 'zh' ? '按标签浏览所有内容' : 'Browse all content by tag'
   );
 }
 
 /* ===== 标签筛选页 ===== */
 function showTagItems(tagName) {
-  var lang = currentLang;
-  var container = document.getElementById('sub-view');
-  if (!container) return;
+  const L = currentLang;
+  const c = document.getElementById('sub-view');
+  if (!c) return;
 
-  var taggedItems = getAllTaggedItems(lang);
-  var items = taggedItems.filter(function(item) { return item.tag === tagName; });
+  const taggedItems = getAllTaggedItems(L);
+  const items = taggedItems.filter(function(item) { return item.tag === tagName; });
 
   if (items.length === 0) { showTags(); return; }
 
-  var countLabel = items.length + ' ' + (lang === 'zh' ? '条内容' : 'items');
+  const countLabel = items.length + ' ' + (L === 'zh' ? '条内容' : 'items');
 
-  var listHtml = '<div class="tag-items-list">';
+  let listHtml = '<div class="tag-items-list">';
   items.forEach(function(item) {
-    var typeLabel = item.type === 'reading'
-      ? (lang === 'zh' ? '📖 阅读' : '📖 Reading')
-      : (lang === 'zh' ? '📓 笔记' : '📓 Note');
+    const typeLabel = item.type === 'reading'
+      ? (L === 'zh' ? '📖 阅读' : '📖 Reading')
+      : (L === 'zh' ? '📓 笔记' : '📓 Note');
     listHtml += '<a href="' + item.href + '" class="tag-item-card">' +
       '<div class="tag-item-type">' + typeLabel + '</div>' +
       '<div class="tag-item-title">' + item.title + '</div>' +
@@ -952,19 +966,28 @@ function showTagItems(tagName) {
   });
   listHtml += '</div>';
 
-  var backLabel = lang === 'zh' ? '← 所有标签' : '← All Tags';
-  var backBtn = '<div class="sub-back-top" style="margin-top:32px">' +
+  const backLabel = L === 'zh' ? '← 所有标签' : '← All Tags';
+  const backBtn = '<div class="ti-back-top" style="margin-top:32px">' +
     '<a href="#tags" onclick="event.preventDefault();window.location.hash=\'tags\'">' + backLabel + '</a></div>';
 
-  container.innerHTML = subPageShell(
-    '<p class="sub-label" style="margin-bottom:4px">' + (lang === 'zh' ? '标签' : 'Tag') + '</p>' +
-    '<h1 class="sub-title" style="margin-bottom:4px">#' + escHTML(tagName) + '</h1>' +
-    '<p class="sub-meta-line" style="margin-bottom:32px">' + countLabel + '</p>' +
-    listHtml +
-    backBtn,
-    lang === 'zh' ? '返回标签' : 'Back to Tags'
-  );
+  c.innerHTML =
+    '<div class="ti">' +
+      '<nav class="ti-bar">' +
+        '<a href="#" onclick="window.location.hash=\'\';return false;">← ' + (L === 'zh' ? '返回' : 'Back') + '</a>' +
+        '<span><button class="ti-lb' + (L === 'zh' ? ' on' : '') + '" onclick="setLang(\'zh\')">中</button><button class="ti-lb' + (L === 'en' ? ' on' : '') + '" onclick="setLang(\'en\')">EN</button></span>' +
+      '</nav>' +
+      '<main class="ti-body">' +
+        '<div class="ti-hd">' +
+          '<p class="sub-label">' + (L === 'zh' ? '标签' : 'Tag') + '</p>' +
+          '<h1 class="sub-title">#' + escHTML(tagName) + '</h1>' +
+          '<p class="sub-meta-line">' + countLabel + '</p>' +
+        '</div>' +
+        listHtml +
+        backBtn +
+      '</main>' +
+    '</div>';
   showSubView();
+  document.body.style.backgroundColor = '#f5f3ef';
   if (typeof updateSEO === 'function') updateSEO(
     '#' + tagName,
     tagName + ' - ' + countLabel
@@ -978,54 +1001,70 @@ function escHTML(str) {
 
 /* ===== Blog 文章索引页 ===== */
 function showBlogIndex() {
-  const lang = currentLang;
-  const container = document.getElementById('sub-view');
-  if (!container) return;
+  const L = currentLang;
+  const c = document.getElementById('sub-view');
+  if (!c) return;
 
-  // 所有笔记（含即将更新的）
   const entries = DATA.notebook.map((note, i) => ({ ...note, idx: i }));
-
-  // 去重 tags
   const allTags = [...new Set(entries.map(n => n.tag).filter(t => t && t !== 'Soon'))];
+  const fid = 'bf' + Date.now();
 
-  // 筛选条
-  let filterHtml = `<div class="blog-filter-bar">
-    <button class="blog-filter-btn active" onclick="filterBlog('all', this)">${lang === 'zh' ? '全部' : 'All'}</button>`;
-  allTags.forEach(tag => {
-    filterHtml += `<button class="blog-filter-btn" onclick="filterBlog('${tag}', this)">${tag}</button>`;
-  });
-  filterHtml += `</div>`;
+  let flt = '<div class="bf-bar"><span class="bf-dol">$</span> ls -la <span class="bf-fl">--tag</span>';
+  flt += ' <span class="bf-fl on" onclick="bf(\'all\',\'' + fid + '\')">all</span>';
+  allTags.forEach(t => { flt += ' <span class="bf-fl" onclick="bf(\'' + t + '\',\'' + fid + '\')">' + t + '</span>'; });
+  flt += '</div>';
 
-  // 文章卡片
-  const entriesHtml = entries.map((note) => {
-    const dateStr = typeof note.date === 'object' ? note.date[lang] : note.date;
-    const isSoon = note.tag === 'Soon';
-    return `
-    <a class="blog-card${isSoon ? ' coming-soon' : ''}" href="#notebook/${note.idx}" data-tag="${note.tag || ''}">
-      ${note.tag && note.tag !== 'Soon' ? `<span class="blog-tag">${note.tag}</span>` : ''}
-      <h3>${note.title[lang]}</h3>
-      <div class="blog-meta">${dateStr}${note.readingTime ? ' · ' + note.readingTime : ''}</div>
-      ${!isSoon ? `<p>${note.desc[lang]}</p>` : `<p style="color:#6b7280;font-style:italic">${note.desc[lang]}</p>`}
-    </a>`;
+  window.bf = function(tag, id) {
+    document.querySelectorAll('#' + id + ' .bf-fl').forEach(b => b.classList.remove('on'));
+    document.querySelectorAll('#' + id + ' .bf-fl').forEach(b => { if (b.textContent === tag) b.classList.add('on'); });
+    document.querySelectorAll('#bl-' + id + ' .bl-e').forEach(e => {
+      e.style.display = (!tag || tag === 'all' || e.getAttribute('d-t') === tag) ? '' : 'none';
+    });
+  };
+
+  const list = entries.map(n => {
+    const d = typeof n.date === 'object' ? n.date[L] : n.date;
+    const s = n.tag === 'Soon';
+    return '<a class="bl-e' + (s ? ' bl-soon' : '') + '" href="#notebook/' + n.idx + '" d-t="' + (n.tag || '') + '">' +
+      '<span class="bl-perm">' + (s ? 'lrwxr-xr-x' : '-rw-r--r--') + '</span>' +
+      '<span class="bl-size">' + (n.readingTime || '--') + '</span>' +
+      '<span class="bl-date">' + d + '</span>' +
+      '<span class="bl-name">' + n.title[L] + '</span>' +
+      '<span class="bl-tag">' + (n.tag && n.tag !== 'Soon' ? '#' + n.tag : '') + '</span>' +
+      '</a>';
   }).join('');
 
-  container.innerHTML = subPageShell(`
-    <p class="sub-label">${lang === 'zh' ? '博客 · 学习记录' : 'Blog · Learning Notes'}</p>
-    <h1 class="sub-title">${lang === 'zh' ? '学习笔记' : 'Learning Blog'}</h1>
-    <p class="sub-meta-line" style="margin-bottom:32px">${lang === 'zh' ? '记录学习过程中的思考和发现' : 'Documenting my learning journey'}</p>
-    ${filterHtml}
-    <div class="blog-list" id="blog-list">
-      ${entriesHtml}
-    </div>
-  `, lang === 'zh' ? '返回主页' : 'Back to Home');
+  c.innerHTML = `
+    <div class="bl">
+      <nav class="bl-nav">
+        <a href="#" onclick="window.location.hash='';return false;">← ${L === 'zh' ? '返回' : 'Back'}</a>
+        <span><button class="bl-lb${L === 'zh' ? ' on' : ''}" onclick="setLang('zh')">中</button><button class="bl-lb${L === 'en' ? ' on' : ''}" onclick="setLang('en')">EN</button></span>
+      </nav>
+      <header class="bl-hd">
+        <div class="bl-prompt">
+          <span class="bl-user">visitor@learn</span>
+          <span class="bl-colon">:</span>
+          <span class="bl-path">~/notes</span>
+          <span class="bl-dollar">$</span>
+          <span class="bl-cmd">ls -la</span>
+        </div>
+      </header>
+      <div id="${fid}">${flt}</div>
+      <div class="bl-body" id="bl-${fid}">
+        <div class="bl-hdr">
+          <span class="bl-perm">permissions</span>
+          <span class="bl-size">time</span>
+          <span class="bl-date">date</span>
+          <span class="bl-name">entry</span>
+          <span class="bl-tag">tag</span>
+        </div>
+        ${list}
+      </div>
+    </div>`;
 
   showSubView();
-  var bbw = container.querySelector('.sub-body-wrap');
-  if (bbw) bbw.classList.add('sub-theme-blog');
-  if (typeof updateSEO === 'function') updateSEO(
-    lang === 'zh' ? '学习笔记' : 'Learning Blog',
-    lang === 'zh' ? '李军辉的学习笔记与博客' : "Junhui Li's learning blog"
-  );
+  document.body.style.backgroundColor = '#0d0d0d';
+  if (typeof updateSEO === 'function') updateSEO(L === 'zh' ? '学习笔记' : 'Learning Blog', L === 'zh' ? '学习笔记与博客' : "Learning blog");
 }
 
 /* ===== Blog 筛选 ===== */
@@ -1238,73 +1277,94 @@ function showGallery() {
 
 /* ===== 兴趣探索子页 ===== */
 function showResearchPage() {
-  var lang = currentLang;
-  var container = document.getElementById('sub-view');
-  if (!container || !DATA.research) return;
-  var r = DATA.research;
+  const L = currentLang;
+  const c = document.getElementById('sub-view');
+  if (!c || !DATA.research) return;
+  const r = DATA.research;
 
-  var areasHtml = '<div class="research-grid-sub">';
+  let areasHtml = '<div class="research-grid-sub">';
   r.areas.forEach(function(a) {
-    areasHtml += '<div class="research-card-sub"><div class="research-icon">' + a.icon + '</div><h3>' + a.title[lang] + '</h3><p>' + a.desc[lang] + '</p></div>';
+    areasHtml += '<div class="research-card-sub"><div class="research-icon">' + a.icon + '</div><h3>' + a.title[L] + '</h3><p>' + a.desc[L] + '</p></div>';
   });
   areasHtml += '</div>';
 
-  container.innerHTML = subPageShell(
-    '<p class="sub-label">' + (lang === 'zh' ? '兴趣探索' : 'Exploring') + '</p>' +
-    '<h1 class="sub-title">' + r.heading[lang] + '</h1>' +
-    '<p class="sub-meta-line" style="margin-bottom:32px">' + r.intro[lang] + '</p>' +
-    areasHtml,
-    lang === 'zh' ? '返回' : 'Back'
-  );
+  c.innerHTML =
+    '<div class="rh">' +
+      '<nav class="rh-bar">' +
+        '<a href="#" onclick="window.location.hash=\'\';return false;">← ' + (L === 'zh' ? '返回' : 'Back') + '</a>' +
+        '<span><button class="rh-lb' + (L === 'zh' ? ' on' : '') + '" onclick="setLang(\'zh\')">中</button><button class="rh-lb' + (L === 'en' ? ' on' : '') + '" onclick="setLang(\'en\')">EN</button></span>' +
+      '</nav>' +
+      '<main class="rh-body">' +
+        '<div class="rh-hd">' +
+          '<p class="sub-label">' + (L === 'zh' ? '兴趣探索' : 'Exploring') + '</p>' +
+          '<h1 class="sub-title">' + r.heading[L] + '</h1>' +
+          '<p class="sub-meta-line">' + r.intro[L] + '</p>' +
+        '</div>' +
+        areasHtml +
+      '</main>' +
+    '</div>';
   showSubView();
-  var rbw = container.querySelector('.sub-body-wrap');
-  if (rbw) rbw.classList.add('sub-theme-research');
-  if (typeof updateSEO === 'function') updateSEO(r.heading[lang], r.intro[lang]);
+  document.body.style.backgroundColor = '#f0ede8';
+  if (typeof updateSEO === 'function') updateSEO(r.heading[L], r.intro[L]);
 }
 
-/* ===== 创作索引子页 ===== */
+/* ===== 创作索引子页（文学墙 — 每个作品独立构图） ===== */
 function showCreativeIndex() {
-  var lang = currentLang;
-  var container = document.getElementById('sub-view');
-  if (!container || !DATA.creative) return;
+  const L = currentLang;
+  const c = document.getElementById('sub-view');
+  if (!c || !DATA.creative) return;
 
-  var itemsHtml = '<div class="creative-sub-list">';
-  DATA.creative.forEach(function(c, i) {
-    itemsHtml += '<a href="#creative/' + i + '" class="creative-sub-card">' +
-      '<span class="creative-genre">' + c.genre[lang] + '</span>' +
-      '<h3>' + c.title[lang] + '</h3>' +
-      '<p>' + c.excerpt[lang] + '</p>' +
+  const items = DATA.creative.map((item, i) => {
+    const alt = i % 2;
+    if (alt) {
+      // Style B: genre bottom-right, title large, excerpt runs full
+      return '<a href="#creative/' + i + '" class="cw cw-b">' +
+        '<span class="cw-t">' + item.title[L] + '</span>' +
+        '<span class="cw-e">' + item.excerpt[L] + '</span>' +
+        '<span class="cw-g">' + item.genre[L] + '</span>' +
       '</a>';
-  });
-  itemsHtml += '</div>';
+    }
+    // Style A: genre top-left, title centered, excerpt compact
+    return '<a href="#creative/' + i + '" class="cw cw-a">' +
+      '<span class="cw-g">' + item.genre[L] + '</span>' +
+      '<span class="cw-t">' + item.title[L] + '</span>' +
+      '<span class="cw-e">' + item.excerpt[L] + '</span>' +
+    '</a>';
+  }).join('');
 
-  container.innerHTML = subPageShell(
-    '<p class="sub-label">' + (lang === 'zh' ? '创作' : 'Creative') + '</p>' +
-    '<h1 class="sub-title">' + (lang === 'zh' ? '诗歌 · 文章 · 随笔' : 'Poetry · Essays · Prose') + '</h1>' +
-    '<p class="sub-meta-line" style="margin-bottom:32px">' + (lang === 'zh' ? '文字记录与表达' : 'Words and expression') + '</p>' +
-    itemsHtml,
-    lang === 'zh' ? '返回' : 'Back'
-  );
+  c.innerHTML = `
+    <div class="cw-pg">
+      <nav class="cw-bar">
+        <a href="#" onclick="window.location.hash='';return false;">← ${L === 'zh' ? '返回' : 'Back'}</a>
+        <span><button class="cw-lb${L === 'zh' ? ' on' : ''}" onclick="setLang('zh')">中</button><button class="cw-lb${L === 'en' ? ' on' : ''}" onclick="setLang('en')">EN</button></span>
+      </nav>
+      <main class="cw-body">
+        <header class="cw-hd">
+          <h1 class="cw-h">${L === 'zh' ? '诗歌 · 文章 · 随笔' : 'Poetry · Essays · Prose'}</h1>
+          <p class="cw-sub">${L === 'zh' ? '文字记录与表达' : 'Words and expression'}</p>
+        </header>
+        <div class="cw-grid">${items}</div>
+      </main>
+    </div>`;
+
   showSubView();
-  if (typeof updateSEO === 'function') updateSEO(
-    lang === 'zh' ? '创作 - 李军辉' : 'Creative - Junhui Li',
-    lang === 'zh' ? '李军辉的诗歌、文章与随笔' : "Junhui Li's creative writing"
-  );
+  document.body.style.backgroundColor = '#0a0a0a';
+  if (typeof updateSEO === 'function') updateSEO(L === 'zh' ? '创作 - 李军辉' : 'Creative - Junhui Li', L === 'zh' ? '李军辉的诗歌、文章与随笔' : "Junhui Li's creative writing");
 }
 
 /* ===== 课余生活子页 ===== */
 function showLifePage() {
-  var lang = currentLang;
-  var container = document.getElementById('sub-view');
-  if (!container || !DATA.life) return;
+  const L = currentLang;
+  const c = document.getElementById('sub-view');
+  if (!c || !DATA.life) return;
 
-  var icons = typeof FEATHER_ICONS !== 'undefined' ? FEATHER_ICONS : {};
-  var itemsHtml = '<div class="life-sub-grid">';
+  const icons = typeof FEATHER_ICONS !== 'undefined' ? FEATHER_ICONS : {};
+  let itemsHtml = '<div class="life-sub-grid">';
   DATA.life.forEach(function(item) {
-    var content = '<span class="life-sub-icon">' + (icons[item.icon] || item.icon) + '</span>' +
-      '<div class="life-sub-label">' + item.label[lang] + '</div>' +
-      (item.desc ? '<div class="life-sub-desc">' + item.desc[lang] + '</div>' : '') +
-      (item.photo ? '<img src="' + item.photo + '" alt="' + item.label[lang] + '" class="life-sub-photo" loading="lazy">' : '');
+    const content = '<span class="life-sub-icon">' + (icons[item.icon] || item.icon) + '</span>' +
+      '<div class="life-sub-label">' + item.label[L] + '</div>' +
+      (item.desc ? '<div class="life-sub-desc">' + item.desc[L] + '</div>' : '') +
+      (item.photo ? '<img src="' + item.photo + '" alt="' + item.label[L] + '" class="life-sub-photo" loading="lazy">' : '');
     if (item.url) {
       itemsHtml += '<a href="' + item.url + '" target="_blank" rel="noopener" class="life-sub-item life-sub-item-link">' + content + '</a>';
     } else {
@@ -1313,25 +1373,25 @@ function showLifePage() {
   });
   itemsHtml += '</div>';
 
-  var lifePhotos = [];
+  let lifePhotos = [];
   if (DATA.gallery && DATA.gallery.items) {
     lifePhotos = DATA.gallery.items.filter(function(i) { return i.category === 'life'; });
   }
-  var photosHtml = '';
+  let photosHtml = '';
   if (lifePhotos.length) {
     photosHtml += '<div class="life-photos-section">';
     photosHtml += '<div class="life-photos-divider"></div>';
-    photosHtml += '<p class="life-photos-heading">' + (lang === 'zh' ? '📷 影像瞬间' : '📷 Life in Frames') + '</p>';
+    photosHtml += '<p class="life-photos-heading">' + (L === 'zh' ? '📷 影像瞬间' : '📷 Life in Frames') + '</p>';
     photosHtml += '<div class="life-photos-grid">';
     lifePhotos.forEach(function(p, idx) {
-      var title = (p.title && p.title[lang]) ? p.title[lang] : '';
+      const title = (p.title && p.title[L]) ? p.title[L] : '';
       photosHtml += '<div class="life-photo-item" onclick="window._lifeOpenLightbox(' + idx + ')">' +
         '<img src="' + (p.thumb || p.src) + '" alt="' + title + '" loading="lazy">' +
         (title ? '<div class="life-photo-label">' + title + '</div>' : '') +
         '</div>';
     });
     photosHtml += '</div>';
-    photosHtml += '<a href="#gallery" class="life-photos-more">' + (lang === 'zh' ? '查看全部照片 →' : 'All Photos →') + '</a>';
+    photosHtml += '<a href="#gallery" class="life-photos-more">' + (L === 'zh' ? '查看全部照片 →' : 'All Photos →') + '</a>';
     photosHtml += '</div>';
 
     photosHtml += '<div id="life-lightbox" class="life-lightbox-overlay" style="display:none">' +
@@ -1345,46 +1405,54 @@ function showLifePage() {
     window._lifePhotos = lifePhotos;
     window._lifePhotoIdx = 0;
     window._lifeOpenLightbox = function(idx) {
-      var lb = document.getElementById('life-lightbox');
+      const lb = document.getElementById('life-lightbox');
       if (!lb) return;
       window._lifePhotoIdx = idx;
-      var img = document.getElementById('life-lightbox-img');
+      const img = document.getElementById('life-lightbox-img');
       if (img) img.src = lifePhotos[idx].src;
       lb.style.display = 'flex';
       document.body.style.overflow = 'hidden';
-      var counter = document.getElementById('life-lightbox-counter');
+      const counter = document.getElementById('life-lightbox-counter');
       if (counter) counter.textContent = (idx + 1) + ' / ' + lifePhotos.length;
     };
     window._lifeCloseLightbox = function() {
-      var lb = document.getElementById('life-lightbox');
+      const lb = document.getElementById('life-lightbox');
       if (lb) lb.style.display = 'none';
       document.body.style.overflow = '';
     };
     window._lifePrevPhoto = function() {
-      var idx = window._lifePhotoIdx - 1;
+      let idx = window._lifePhotoIdx - 1;
       if (idx < 0) idx = window._lifePhotos.length - 1;
       window._lifeOpenLightbox(idx);
     };
     window._lifeNextPhoto = function() {
-      var idx = window._lifePhotoIdx + 1;
+      let idx = window._lifePhotoIdx + 1;
       if (idx >= window._lifePhotos.length) idx = 0;
       window._lifeOpenLightbox(idx);
     };
   }
 
-  container.innerHTML = subPageShell(
-    '<p class="sub-label">' + (lang === 'zh' ? '课余生活' : 'Life') + '</p>' +
-    '<h1 class="sub-title">' + (lang === 'zh' ? '足球 · 阅读 · 机器人 · 心理' : 'Football · Reading · Robotics · Mental Health') + '</h1>' +
-    '<p class="sub-meta-line" style="margin-bottom:32px">' + (lang === 'zh' ? '学习之外，我在做的那些事' : 'Beyond studying — what I spend time on') + '</p>' +
-    itemsHtml + photosHtml,
-    lang === 'zh' ? '返回' : 'Back'
-  );
+  c.innerHTML =
+    '<div class="lf">' +
+      '<nav class="lf-bar">' +
+        '<a href="#" onclick="window.location.hash=\'\';return false;">← ' + (L === 'zh' ? '返回' : 'Back') + '</a>' +
+        '<span><button class="lf-lb' + (L === 'zh' ? ' on' : '') + '" onclick="setLang(\'zh\')">中</button><button class="lf-lb' + (L === 'en' ? ' on' : '') + '" onclick="setLang(\'en\')">EN</button></span>' +
+      '</nav>' +
+      '<main class="lf-body">' +
+        '<div class="lf-hd">' +
+          '<p class="sub-label">' + (L === 'zh' ? '课余生活' : 'Life') + '</p>' +
+          '<h1 class="sub-title">' + (L === 'zh' ? '足球 · 阅读 · 机器人 · 心理' : 'Football · Reading · Robotics · Mental Health') + '</h1>' +
+          '<p class="sub-meta-line">' + (L === 'zh' ? '学习之外，我在做的那些事' : 'Beyond studying — what I spend time on') + '</p>' +
+        '</div>' +
+        itemsHtml +
+        photosHtml +
+      '</main>' +
+    '</div>';
   showSubView();
-  var lbw = container.querySelector('.sub-body-wrap');
-  if (lbw) lbw.classList.add('sub-theme-life');
+  document.body.style.backgroundColor = '#faf7f2';
   if (typeof updateSEO === 'function') updateSEO(
-    lang === 'zh' ? '生活 - 李军辉' : 'Life - Junhui Li',
-    lang === 'zh' ? '李军辉的课余生活' : "Junhui Li's life beyond studying"
+    L === 'zh' ? '生活 - 李军辉' : 'Life - Junhui Li',
+    L === 'zh' ? '李军辉的课余生活' : "Junhui Li's life beyond studying"
   );
 }
 
@@ -1396,33 +1464,44 @@ document.addEventListener('keydown', function(e) {
   if (e.key === 'ArrowRight') window._lifeNextPhoto();
 });
 
-/* ===== 工具箱子页 ===== */
+/* ===== 工具箱子页（工具目录风格） ===== */
 function showToolboxPage() {
-  var lang = currentLang;
-  var container = document.getElementById('sub-view');
-  if (!container || !DATA.toolbox) return;
-  var tb = DATA.toolbox;
+  const L = currentLang;
+  const c = document.getElementById('sub-view');
+  if (!c || !DATA.toolbox) return;
+  const tb = DATA.toolbox;
 
-  var catsHtml = '';
+  let catsHtml = '';
   tb.categories.forEach(function(cat) {
-    catsHtml += '<div class="toolbox-sub-category"><h3>' + cat.label[lang] + '</h3><div class="toolbox-sub-items">';
+    catsHtml += '<div class="tb-cat"><h3>' + cat.label[L] + '</h3><div class="tb-items">';
     cat.items.forEach(function(item) {
-      catsHtml += '<div class="toolbox-sub-item"><span class="tool-sub-name">' + item.name + '</span><span class="tool-sub-desc">' + item.desc[lang] + '</span></div>';
+      catsHtml += '<div class="tb-item"><span class="tb-item-name">' + item.name + '</span><span class="tb-item-desc">' + item.desc[L] + '</span></div>';
     });
     catsHtml += '</div></div>';
   });
 
-  container.innerHTML = subPageShell(
-    '<p class="sub-label">' + (lang === 'zh' ? '工具箱' : 'Toolbox') + '</p>' +
-    '<h1 class="sub-title">' + tb.heading[lang] + '</h1>' +
-    '<p class="sub-meta-line" style="margin-bottom:32px">' + (lang === 'zh' ? '我在用的工具和工作流' : 'Tools and workflows I use') + '</p>' +
-    catsHtml,
-    lang === 'zh' ? '返回' : 'Back'
-  );
+  c.innerHTML =
+    '<div class="tb">' +
+      '<nav class="tb-bar">' +
+        '<a href="#" onclick="window.location.hash=\'\';return false;">← ' + (L === 'zh' ? '返回' : 'Back') + '</a>' +
+        '<span><button class="tb-lb' + (L === 'zh' ? ' on' : '') + '" onclick="setLang(\'zh\')">中</button><button class="tb-lb' + (L === 'en' ? ' on' : '') + '" onclick="setLang(\'en\')">EN</button></span>' +
+      '</nav>' +
+      '<main class="tb-body">' +
+        '<div class="tb-hd">' +
+          '<p class="sub-label">' + (L === 'zh' ? '工具箱' : 'Toolbox') + '</p>' +
+          '<h1 class="sub-title">' + tb.heading[L] + '</h1>' +
+          '<p class="sub-meta-line">' + (L === 'zh' ? '我在用的工具和工作流' : 'Tools and workflows I use') + '</p>' +
+        '</div>' +
+        catsHtml +
+      '</main>' +
+    '</div>';
+
   showSubView();
-  var tbw = container.querySelector('.sub-body-wrap');
-  if (tbw) tbw.classList.add('sub-theme-toolbox');
-  if (typeof updateSEO === 'function') updateSEO(tb.heading[lang], lang === 'zh' ? '李军辉的工具箱' : "Junhui Li's toolbox");
+  document.body.style.backgroundColor = '#f8f6f2';
+  if (typeof updateSEO === 'function') updateSEO(
+    tb.heading[L],
+    L === 'zh' ? '李军辉的工具箱' : "Junhui Li's toolbox"
+  );
 }
 
 /* ===== 空状态通用函数 ===== */
