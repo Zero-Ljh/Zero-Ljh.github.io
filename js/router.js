@@ -1337,7 +1337,7 @@ function showLifePage() {
     photosHtml += '<div id="life-lightbox" class="life-lightbox-overlay" style="display:none">' +
       '<button class="gallery-lightbox-close" onclick="window._lifeCloseLightbox()" aria-label="Close">✕</button>' +
       '<button class="gallery-lightbox-nav gallery-lightbox-prev" onclick="window._lifePrevPhoto()" aria-label="Previous">‹</button>' +
-      '<img id="life-lightbox-img" src="" alt="" style="max-width:90vw;max-height:85vh;object-fit:contain;border-radius:4px">' +
+      '<img id="life-lightbox-img" src="" alt="">' +
       '<button class="gallery-lightbox-nav gallery-lightbox-next" onclick="window._lifeNextPhoto()" aria-label="Next">›</button>' +
       '<div class="life-lightbox-counter" id="life-lightbox-counter"></div>' +
       '</div>';

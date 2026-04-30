@@ -1767,6 +1767,7 @@ footer .footer-tagline{font-family:var(--font-serif);font-size:13px;color:var(--
 .life-lightbox-overlay .gallery-lightbox-prev{left:16px}
 .life-lightbox-overlay .gallery-lightbox-next{right:16px}
 .life-lightbox-overlay .gallery-lightbox-counter{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);font-family:var(--font-mono);font-size:12px;color:var(--slate);letter-spacing:1px}
+.life-lightbox-overlay #life-lightbox-img{max-width:90vw;max-height:85vh;width:auto;height:auto;object-fit:contain;border-radius:4px;box-shadow:0 20px 60px rgba(0,0,0,0.5);display:block}
 
 /* ---- Life Subpage: Responsive ---- */
 @media(max-width:768px){.life-photo-item{flex:1 1 100%}.life-photo-item img{height:200px}.life-lightbox-overlay .gallery-lightbox-nav{font-size:32px}}
