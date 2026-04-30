@@ -948,6 +948,64 @@ function initLoader() {
   setTimeout(hideLoader, 5000);
 }
 
+/* ===== Contact Form ===== */
+function handleContactForm() {
+  const form = document.querySelector('.contact-form');
+  if (!form) return;
+
+  const feedback = document.createElement('div');
+  feedback.className = 'form-feedback';
+  form.parentNode.insertBefore(feedback, form.nextSibling);
+
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    var lang = typeof currentLang !== 'undefined' ? currentLang : 'zh';
+    var button = form.querySelector('button[type="submit"]');
+    var originalText = button.innerHTML;
+
+    var data = {
+      name: form.name.value.trim(),
+      email: form.email.value.trim(),
+      message: form.message.value.trim()
+    };
+
+    // Disable button & show sending state
+    button.disabled = true;
+    button.innerHTML = lang === 'zh' ? '发送中...' : 'Sending...';
+    feedback.className = 'form-feedback';
+    feedback.textContent = '';
+    feedback.removeAttribute('data-zh');
+    feedback.removeAttribute('data-en');
+
+    try {
+      var res = await fetch(form.action, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+
+      if (res.ok) {
+        feedback.className = 'form-feedback success';
+        feedback.setAttribute('data-zh', '消息已发送！我会尽快回复你');
+        feedback.setAttribute('data-en', 'Message sent! I\'ll get back to you soon');
+        feedback.textContent = lang === 'zh' ? '消息已发送！我会尽快回复你' : 'Message sent! I\'ll get back to you soon';
+        form.reset();
+      } else {
+        throw new Error('Formspree responded with ' + res.status);
+      }
+    } catch (err) {
+      feedback.className = 'form-feedback error';
+      feedback.setAttribute('data-zh', '发送失败，请稍后重试或直接发邮件');
+      feedback.setAttribute('data-en', 'Failed to send. Please try again later or email me directly');
+      feedback.textContent = lang === 'zh' ? '发送失败，请稍后重试或直接发邮件' : 'Failed to send. Please try again later or email me directly';
+    } finally {
+      button.disabled = false;
+      button.innerHTML = originalText;
+    }
+  });
+}
+
 /* ===== Init ===== */
 document.addEventListener('DOMContentLoaded', () => {
   initLoader();
@@ -959,6 +1017,7 @@ document.addEventListener('DOMContentLoaded', () => {
     createProgressBar();
     heroEntry();
     document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale').forEach(function(el) { revealObserver.observe(el); });
+    handleContactForm();
   });
 
   // 搜索：键盘快捷键（Ctrl+K 或 /）
