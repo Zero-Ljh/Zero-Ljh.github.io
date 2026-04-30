@@ -124,10 +124,11 @@
 <section class="hero">
   <div class="container">
     <p class="hero-overline" data-en="Hi, I'm" data-zh="你好，我是">你好，我是</p>
+    <p class="hero-number" aria-hidden="true">//&nbsp;001</p>
     <h1><em data-en="Junhui Li" data-zh="李军辉">李军辉</em></h1>
     <p class="sub" data-en="First-year · Exploring AI · Building things" data-zh="大一学生 · 探索 AI · 动手实践">大一学生 · 探索 AI · 动手实践</p>
     <p data-en="A first-year student at Wuhan University of Science and Technology, exploring the world of artificial intelligence — from large language models to hands-on robotics. Curious, learning, and building every day." data-zh="武汉科技大学大一学生，正在探索 AI 的世界——从大语言模型到机器人实践。保持好奇，每天都在学新东西。">武汉科技大学大一学生，正在探索 AI 的世界——从大语言模型到机器人实践。保持好奇，每天都在学新东西。</p>
-    <a href="#about-detail" class="cta"><span data-en="Learn more →" data-zh="了解更多 →">了解更多 →</span></a>
+    <a href="#about-detail" class="cta"><span data-en="Get to know me →" data-zh="认识我 →">认识我 →</span></a>
       <a href="#now" class="status-indicator" id="status-indicator" title="View what I'm doing now">
         <span class="status-dot"></span>
         <span class="status-text" data-zh="正在学习 PyTorch 深度学习框架" data-en="Currently learning PyTorch">正在学习 PyTorch 深度学习框架</span>
@@ -136,6 +137,10 @@
       <blockquote class="hero-quote" data-zh="先思考，后行动。减少无效跑动，站好位置，学会阅读。" data-en="Think first, act second. Cut wasted motion — read the field, hold your position.">
         先思考，后行动。减少无效跑动，站好位置，学会阅读。
       </blockquote>
+      <div class="scroll-indicator" onclick="scrollToAbout()" data-zh="向下滚动" data-en="Scroll down" aria-label="Scroll to content">
+        <span class="scroll-indicator-text" data-zh="向下滚动" data-en="Scroll down">向下滚动</span>
+        <svg class="scroll-indicator-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
+      </div>
   </div>
 </section>
 
@@ -232,6 +237,7 @@
     <div class="search-header">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--gold);flex-shrink:0"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
       <input type="text" id="search-input" class="search-input" placeholder="搜索..." data-zh-placeholder="搜索..." data-en-placeholder="Search..." autocomplete="off">
+      <span class="search-hint-kbd">⌘K</span>
       <button class="search-close" onclick="closeSearch()" aria-label="Close">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
       </button>

@@ -80,21 +80,11 @@ function renderAbout() {
       <p style="font-size:var(--fz-md);color:var(--dark-slate);border-left:2px solid var(--gold);padding-left:16px;margin-top:24px">${p.highlight[lang]}</p>
       <p style="font-size:var(--fz-md);color:var(--gold);border:1px solid rgba(212,162,89,0.2);border-radius:var(--radius);padding:14px 18px;margin-top:20px;background:rgba(212,162,89,0.04);line-height:1.7">${p.seeking[lang]}</p>
       <p style="font-size:var(--fz-sm);color:var(--slate);border-left:2px solid var(--gold);padding-left:16px;margin-top:12px;font-style:italic">${p.mentorNote[lang]}</p>
-      <div class="skills-bars">
+      <div class="skills-list">
         ${p.skills.map(s => {
           const name = typeof s === 'string' ? s : s.name;
-          const level = typeof s === 'object' ? s.level : 60;
           const label = (typeof s === 'object' && s.label) ? s.label[lang] : '';
-          return `
-            <div class="skill-item">
-              <div class="skill-info">
-                <span class="skill-name">${name}</span>
-                ${label ? `<span class="skill-label">${label}</span>` : ''}
-              </div>
-              <div class="skill-bar" style="--target:${level}%">
-                <div class="skill-fill"></div>
-              </div>
-            </div>`;
+          return `<span class="skill-tag"><span class="skill-bullet">▹</span>${name}${label ? `<span class="skill-tag-label"> ${label}</span>` : ''}</span>`;
         }).join('')}
       </div>
     </div>
@@ -446,7 +436,6 @@ function renderAll() {
   renderNow();
 
   setTimeout(function() {
-    document.querySelectorAll('.skill-bar').forEach(function(bar) { bar.classList.add('visible'); });
     if (content) { content.style.opacity = '1'; }
   }, 100);
 }
@@ -595,6 +584,12 @@ function heroEntry() {
   els.forEach((el, i) => {
     el.style.animationDelay = `${i * 120}ms`;
   });
+}
+
+/* ===== 滚动到 About ===== */
+function scrollToAbout() {
+  var target = document.getElementById('about');
+  if (target) target.scrollIntoView({ behavior: 'smooth' });
 }
 
 /* ===== 回到顶部按钮 ===== */
