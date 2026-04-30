@@ -597,7 +597,7 @@ const DATA = {
     { icon: 'film', label: { zh: '影视 · 好故事', en: 'Movies · Good Stories' }, desc: { zh: '《人世间》《最美的青春》《请回答1988》', en: 'The World of Man, Youth in Beauty, Reply 1988' } },
     { icon: 'music', label: { zh: '音乐 · 放松时刻', en: 'Music · Chill Time' }, desc: { zh: '听歌放松，享受节奏', en: 'Listening and enjoying the rhythm' } },
     { icon: 'radio', label: { zh: '政经 · 听世界', en: 'Politics · World Affairs' }, desc: { zh: '关注王骁Alert、历史哥李易修、毛选讲解', en: 'Following Wang Xiao Alert, Li Yixiu, Mao studies' } },
-    { icon: 'camera', label: { zh: '心协 · 幕后工作', en: 'Mental Health · Backstage' }, desc: { zh: '心理情景剧大赛设备调控', en: 'Psychodrama Competition tech support' } }
+    { icon: 'camera', label: { zh: '心协 · 幕后工作', en: 'Mental Health · Backstage' }, desc: { zh: '心理情景剧大赛设备调控', en: 'Psychodrama Competition tech support' }, photo: 'assets/images/psychodrama.jpg' }
   ],
 
   /* ===== 工具箱 ===== */

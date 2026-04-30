@@ -1710,6 +1710,7 @@ footer .footer-tagline{font-family:var(--font-serif);font-size:13px;color:var(--
 .life-sub-icon svg{width:32px;height:32px}
 .life-sub-label{font-family:var(--font-sans);font-size:var(--fz-md);color:var(--warm-white);margin-bottom:6px}
 .life-sub-desc{font-size:var(--fz-sm);color:var(--slate)}
+.life-sub-photo{width:100%;max-width:360px;height:auto;border-radius:4px;margin-top:12px;border:1px solid rgba(212,162,89,0.1);display:block;margin-left:auto;margin-right:auto}
 .toolbox-sub-category{margin-bottom:32px}
 .toolbox-sub-category h3{font-family:var(--font-mono);font-size:var(--fz-sm);color:var(--gold);margin-bottom:14px;text-transform:uppercase;letter-spacing:1px}
 .toolbox-sub-items{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
