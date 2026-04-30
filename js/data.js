@@ -19,8 +19,8 @@ const DATA = {
         en: 'I believe in the power of <strong>continuous learning</strong>. I taught myself Python, am now learning C++, and have built an automated review workflow to reinforce what I study. No exams driving me — just pure curiosity.'
       },
       {
-        zh: '我也在努力做一个<strong>全面发展</strong>的人。兴趣涉猎广泛——从文史哲政经到人工智能，什么都想了解。足球场上我是扫荡型中场，拿过新生杯二等奖；在心理协会做干事帮助同学；在百炼机器人团队学嵌入式开发。技术很重要，但人更重要。',
-        en: "I also strive to be a <strong>well-rounded</strong> person. My interests span wide — from humanities, history, politics, and economics to artificial intelligence. On the football field, I'm a box-to-box midfielder and won 2nd place in the freshman cup; as an officer in the Psychological Health Association, I support fellow students; at Bailian Robotics Team, I'm learning embedded development. Tech matters, but people matter more."
+        zh: '我也在努力做一个<strong>全面发展</strong>的人。兴趣涉猎广泛——从文史哲政经到人工智能，什么都想了解。足球场上我是扫荡型中场，拿过新生杯二等奖；在心理协会做干事帮助同学；在百炼机器人团队学算法。技术很重要，但人更重要。',
+        en: "I also strive to be a <strong>well-rounded</strong> person. My interests span wide — from humanities, history, politics, and economics to artificial intelligence. On the football field, I'm a box-to-box midfielder and won 2nd place in the freshman cup; as an officer in the Psychological Health Association, I support fellow students; at Bailian Robotics Team, I'm learning algorithms. Tech matters, but people matter more."
       }
     ],
     highlight: {
@@ -358,26 +358,26 @@ const DATA = {
       id: 'bailian-robot',
       featured: true,
       overline: { zh: '进行中', en: 'Ongoing' },
-      title: { zh: '百炼机器人项目', en: 'Bailian Robotics Project' },
+      title: { zh: '百炼机器人团队', en: 'Bailian Robotics Team' },
       desc: {
-        zh: '与团队一起进行机器人开发。目前正在学习嵌入式系统基础、传感器集成和机器人控制。这是我在真实硬件上动手实践的地方。',
-        en: 'Working with the team on robotics development. Currently learning the fundamentals of embedded systems, sensor integration, and robot control. This is where I am getting my hands dirty with real hardware.'
+        zh: '2026年4月加入百炼机器人团队算法组。目前在打基础——学习 MATLAB 和线性代数，尚未参加竞赛。',
+        en: 'Joined the Bailian Robotics Team algorithm group in April 2026. Currently building foundations with MATLAB and Linear Algebra, not yet competing.'
       },
-      tech: ['Robotics', 'Embedded', 'Team'],
+      tech: ['Robotics', 'MATLAB', 'Algorithm'],
       status: { zh: '进行中', en: 'Ongoing' },
-      period: { zh: '2025年 — 至今', en: '2025 — Present' },
-      role: { zh: '团队干员', en: 'Team Member' },
+      period: { zh: '2026年 — 至今', en: '2026 — Present' },
+      role: { zh: '算法组干员', en: 'Algorithm Group Member' },
       learnings: {
-        zh: ['嵌入式编程基础', '传感器数据采集与处理', '团队协作与版本控制', '从硬件到软件的完整流程'],
-        en: ['Embedded programming fundamentals', 'Sensor data acquisition and processing', 'Team collaboration and version control', 'End-to-end hardware-to-software workflow']
+        zh: ['MATLAB 基础编程', '线性代数在机器人中的应用', '算法思维训练'],
+        en: ['MATLAB fundamentals', 'Linear algebra applications in robotics', 'Algorithmic thinking']
       },
       challenges: {
-        zh: '最大的挑战是从纯软件思维切换到硬件思维——需要考虑物理限制、供电、实时性等问题。',
-        en: 'The biggest challenge was switching from a pure software mindset to hardware thinking — physical constraints, power, real-time requirements all matter.'
+        zh: '刚加入团队，目前还在打基础阶段。零基础友好的环境让我有信心逐步跟上。',
+        en: 'Just joined the team, still in the foundation phase. The beginner-friendly environment gives me confidence.'
       },
       timeline: {
-        zh: '2025年9月加入 → 2025年11月完成基础培训 → 至今参与系统开发',
-        en: 'Joined Sep 2025 → Completed basic training Nov 2025 → Participating in system development'
+        zh: '2026年4月加入 → 学习MATLAB与线代基础',
+        en: 'Joined Apr 2026 → Studying MATLAB & Linear Algebra'
       },
       links: [
         { url: '#about', label: { zh: '了解团队', en: 'About Team' } }
@@ -404,8 +404,8 @@ const DATA = {
         en: "The biggest challenge learning programming from scratch wasn't syntax — it was 'computational thinking': breaking problems into executable steps. I couldn't even understand for-loops at first, but persistence with small exercises slowly built intuition."
       },
       timeline: {
-        zh: '2025年10月自学基础语法 → 2025年12月完成第一个爬虫 → 2026年1月搭建自动化脚本 → 进行中：用 Python 学深度学习',
-        en: 'Oct 2025 learned basic syntax → Dec 2025 completed first scraper → Jan 2026 built automation scripts → Ongoing: learning DL with Python'
+        zh: '2026年2月在B站学Python基础语法 → 进行中：用 Python 学深度学习',
+        en: 'Feb 2026 learned Python basics via Bilibili → Ongoing: learning DL with Python'
       },
       links: [
         { url: 'https://github.com/Zero-Ljh', label: { zh: 'GitHub 主页', en: 'GitHub Profile' } }
