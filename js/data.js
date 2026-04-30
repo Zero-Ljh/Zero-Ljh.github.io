@@ -739,15 +739,8 @@ const DATA = {
         title: { zh: '新生杯足球赛 · 管院挺进四强', en: 'Freshman Cup · Management School Reaches Semifinals' },
         desc: { zh: '2025年新生杯足球赛，我院新生足球队奋勇拼搏，成功挺进四强，创下近年来最佳战绩。在对阵城建学院的关键战中，最后五分钟连入两球，3:2逆转锁定胜局。', en: 'In the 2025 Freshman Football Cup, our college team fought hard to reach the semifinals, the best result in recent years. In the crucial match against Urban Construction College, they scored two goals in the final five minutes to secure a 3:2 comeback victory.' },
         url: 'https://mp.weixin.qq.com/s/kzQ1wwQKYZMeIskCCCMrLA',
+        urlHighlights: 'https://mp.weixin.qq.com/s/gBI7Bfpheb_USNdxKTKzLw',
         photos: ['assets/images/football-team-1.jpg', 'assets/images/football-team-2.jpg']
-      },
-      {
-        source: { zh: '武汉科技大学微信公众号', en: 'WUST WeChat Official Account' },
-        date: '2025.12',
-        title: { zh: '心理情景剧大赛报道', en: 'Psychodrama Competition Coverage' },
-        desc: { zh: '作为心协干事，负责心理情景剧大赛幕后多媒体设备调控与技术支持。微信公众号对大赛进行了报道。', en: 'As an officer of the Mental Health Association, responsible for multimedia equipment and technical support behind the scenes of the Psychodrama Competition.' },
-        url: 'https://mp.weixin.qq.com/s/gBI7Bfpheb_USNdxKTKzLw',
-        photos: ['assets/images/psychodrama.jpg']
       }
     ]
   },

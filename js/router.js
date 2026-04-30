@@ -1353,9 +1353,14 @@ function showCoveragePage() {
       '<h3 class="coverage-title">' + item.title[lang] + '</h3>' +
       (photosHtml ? photosHtml : '') +
       '<p class="coverage-desc">' + item.desc[lang] + '</p>' +
+      '<div class="coverage-links">' +
       '<a href="' + item.url + '" target="_blank" rel="noopener" class="coverage-link">' +
-      (lang === 'zh' ? '阅读原文 ↗' : 'Read Original ↗') +
+      (lang === 'zh' ? '阅读全文 ↗' : 'Read Full Article ↗') +
       '</a>' +
+      (item.urlHighlights ? '<a href="' + item.urlHighlights + '" target="_blank" rel="noopener" class="coverage-link coverage-link-secondary">' +
+      (lang === 'zh' ? '精彩片段 ↗' : 'Highlights ↗') +
+      '</a>' : '') +
+      '</div>' +
       '</div>';
   });
 
