@@ -1301,12 +1301,15 @@ function showLifePage() {
   var icons = typeof FEATHER_ICONS !== 'undefined' ? FEATHER_ICONS : {};
   var itemsHtml = '<div class="life-sub-grid">';
   DATA.life.forEach(function(item) {
-    itemsHtml += '<div class="life-sub-item">' +
-      '<span class="life-sub-icon">' + (icons[item.icon] || item.icon) + '</span>' +
+    var content = '<span class="life-sub-icon">' + (icons[item.icon] || item.icon) + '</span>' +
       '<div class="life-sub-label">' + item.label[lang] + '</div>' +
       (item.desc ? '<div class="life-sub-desc">' + item.desc[lang] + '</div>' : '') +
-      (item.photo ? '<img src="' + item.photo + '" alt="' + item.label[lang] + '" class="life-sub-photo" loading="lazy">' : '') +
-      '</div>';
+      (item.photo ? '<img src="' + item.photo + '" alt="' + item.label[lang] + '" class="life-sub-photo" loading="lazy">' : '');
+    if (item.url) {
+      itemsHtml += '<a href="' + item.url + '" target="_blank" rel="noopener" class="life-sub-item life-sub-item-link">' + content + '</a>';
+    } else {
+      itemsHtml += '<div class="life-sub-item">' + content + '</div>';
+    }
   });
   itemsHtml += '</div>';
 
