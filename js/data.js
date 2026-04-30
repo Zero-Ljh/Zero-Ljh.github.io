@@ -551,14 +551,18 @@ const DATA = {
     categories: [
       { id: 'aigc', icon: '', label: { zh: 'AI 生成', en: 'AI Generated' } },
       { id: 'photo', icon: '', label: { zh: '摄影', en: 'Photography' } },
-      { id: 'anime', icon: '', label: { zh: '动漫', en: 'Anime' } }
+      { id: 'anime', icon: '', label: { zh: '动漫', en: 'Anime' } },
+      { id: 'life', icon: '', label: { zh: '生活', en: 'Life' } }
     ],
     items: [
       { src: 'assets/gallery/01.jpeg', thumb: 'assets/gallery/01.jpeg', title: { zh: '作品 01', en: 'Work 01' }, category: 'aigc', width: 800, height: 600 },
       { src: 'assets/gallery/02.png', thumb: 'assets/gallery/02.png', title: { zh: '作品 02', en: 'Work 02' }, category: 'aigc', width: 800, height: 600 },
       { src: 'assets/gallery/03.jpeg', thumb: 'assets/gallery/03.jpeg', title: { zh: '作品 03', en: 'Work 03' }, category: 'aigc', width: 800, height: 600 },
       { src: 'assets/gallery/04.png', thumb: 'assets/gallery/04.png', title: { zh: '作品 04', en: 'Work 04' }, category: 'aigc', width: 800, height: 600 },
-      { src: 'assets/gallery/05.jpeg', thumb: 'assets/gallery/05.jpeg', title: { zh: '作品 05', en: 'Work 05' }, category: 'photo', width: 800, height: 600 }
+      { src: 'assets/gallery/05.jpeg', thumb: 'assets/gallery/05.jpeg', title: { zh: '作品 05', en: 'Work 05' }, category: 'photo', width: 800, height: 600 },
+      { src: 'assets/images/football-team-1.jpg', thumb: 'assets/images/football-team-1.jpg', title: { zh: '足球赛前合照', en: 'Football Team Photo' }, category: 'life', width: 1200, height: 800 },
+      { src: 'assets/images/football-team-2.jpg', thumb: 'assets/images/football-team-2.jpg', title: { zh: '足球赛前合照 2', en: 'Football Team Photo 2' }, category: 'life', width: 1200, height: 800 },
+      { src: 'assets/images/psychodrama.jpg', thumb: 'assets/images/psychodrama.jpg', title: { zh: '心理情景剧幕后工作', en: 'Psychodrama Backstage' }, category: 'life', width: 1200, height: 800 }
     ]
   },
 
@@ -590,7 +594,7 @@ const DATA = {
 
   /* ===== 课余生活 ===== */
   life: [
-    { icon: 'shield', label: { zh: '足球 · 院系杯', en: 'Football · University Cup' }, desc: { zh: '扫荡型中场 · 新生杯四强', en: 'Box-to-box midfielder · Freshman Cup Semifinals' }, url: 'https://mp.weixin.qq.com/s/kzQ1wwQKYZMeIskCCCMrLA', photo: 'assets/images/football-team-1.jpg' },
+    { icon: 'shield', label: { zh: '足球 · 院系杯', en: 'Football · University Cup' }, desc: { zh: '扫荡型中场 · 新生杯四强', en: 'Box-to-box midfielder · Freshman Cup Semifinals' }, url: 'https://mp.weixin.qq.com/s/kzQ1wwQKYZMeIskCCCMrLA' },
     { icon: 'book-open', label: { zh: '阅读 · 终身学习', en: 'Reading · Lifelong Learning' }, desc: { zh: '文史哲政经 + AI', en: 'Humanities to AI' } },
     { icon: 'cpu', label: { zh: '机器人 · 动手实践', en: 'Robotics · Hands-on' }, desc: { zh: '百炼团队算法组', en: 'Bailian algorithm group' } },
     { icon: 'heart', label: { zh: '心理 · 同伴支持', en: 'Mental Health · Peer Support' }, desc: { zh: '心协干事 + AI 科普短剧', en: 'Health Association officer + AI short videos' } },

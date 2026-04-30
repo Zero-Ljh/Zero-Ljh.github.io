@@ -1313,11 +1313,70 @@ function showLifePage() {
   });
   itemsHtml += '</div>';
 
+  var lifePhotos = [];
+  if (DATA.gallery && DATA.gallery.items) {
+    lifePhotos = DATA.gallery.items.filter(function(i) { return i.category === 'life'; });
+  }
+  var photosHtml = '';
+  if (lifePhotos.length) {
+    photosHtml += '<div class="life-photos-section">';
+    photosHtml += '<div class="life-photos-divider"></div>';
+    photosHtml += '<p class="life-photos-heading">' + (lang === 'zh' ? '📷 影像瞬间' : '📷 Life in Frames') + '</p>';
+    photosHtml += '<div class="life-photos-grid">';
+    lifePhotos.forEach(function(p, idx) {
+      var title = (p.title && p.title[lang]) ? p.title[lang] : '';
+      photosHtml += '<div class="life-photo-item" onclick="window._lifeOpenLightbox(' + idx + ')">' +
+        '<img src="' + (p.thumb || p.src) + '" alt="' + title + '" loading="lazy">' +
+        (title ? '<div class="life-photo-label">' + title + '</div>' : '') +
+        '</div>';
+    });
+    photosHtml += '</div>';
+    photosHtml += '<a href="#gallery" class="life-photos-more">' + (lang === 'zh' ? '查看全部照片 →' : 'All Photos →') + '</a>';
+    photosHtml += '</div>';
+
+    photosHtml += '<div id="life-lightbox" class="life-lightbox-overlay" style="display:none">' +
+      '<button class="gallery-lightbox-close" onclick="window._lifeCloseLightbox()" aria-label="Close">✕</button>' +
+      '<button class="gallery-lightbox-nav gallery-lightbox-prev" onclick="window._lifePrevPhoto()" aria-label="Previous">‹</button>' +
+      '<img id="life-lightbox-img" src="" alt="" style="max-width:90vw;max-height:85vh;object-fit:contain;border-radius:4px">' +
+      '<button class="gallery-lightbox-nav gallery-lightbox-next" onclick="window._lifeNextPhoto()" aria-label="Next">›</button>' +
+      '<div class="life-lightbox-counter" id="life-lightbox-counter"></div>' +
+      '</div>';
+
+    window._lifePhotos = lifePhotos;
+    window._lifePhotoIdx = 0;
+    window._lifeOpenLightbox = function(idx) {
+      var lb = document.getElementById('life-lightbox');
+      if (!lb) return;
+      window._lifePhotoIdx = idx;
+      var img = document.getElementById('life-lightbox-img');
+      if (img) img.src = lifePhotos[idx].src;
+      lb.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+      var counter = document.getElementById('life-lightbox-counter');
+      if (counter) counter.textContent = (idx + 1) + ' / ' + lifePhotos.length;
+    };
+    window._lifeCloseLightbox = function() {
+      var lb = document.getElementById('life-lightbox');
+      if (lb) lb.style.display = 'none';
+      document.body.style.overflow = '';
+    };
+    window._lifePrevPhoto = function() {
+      var idx = window._lifePhotoIdx - 1;
+      if (idx < 0) idx = window._lifePhotos.length - 1;
+      window._lifeOpenLightbox(idx);
+    };
+    window._lifeNextPhoto = function() {
+      var idx = window._lifePhotoIdx + 1;
+      if (idx >= window._lifePhotos.length) idx = 0;
+      window._lifeOpenLightbox(idx);
+    };
+  }
+
   container.innerHTML = subPageShell(
     '<p class="sub-label">' + (lang === 'zh' ? '课余生活' : 'Life') + '</p>' +
     '<h1 class="sub-title">' + (lang === 'zh' ? '足球 · 阅读 · 机器人 · 心理' : 'Football · Reading · Robotics · Mental Health') + '</h1>' +
     '<p class="sub-meta-line" style="margin-bottom:32px">' + (lang === 'zh' ? '学习之外，我在做的那些事' : 'Beyond studying — what I spend time on') + '</p>' +
-    itemsHtml,
+    itemsHtml + photosHtml,
     lang === 'zh' ? '返回' : 'Back'
   );
   showSubView();
@@ -1328,6 +1387,14 @@ function showLifePage() {
     lang === 'zh' ? '李军辉的课余生活' : "Junhui Li's life beyond studying"
   );
 }
+
+document.addEventListener('keydown', function(e) {
+  var lb = document.getElementById('life-lightbox');
+  if (!lb || lb.style.display !== 'flex') return;
+  if (e.key === 'Escape') window._lifeCloseLightbox();
+  if (e.key === 'ArrowLeft') window._lifePrevPhoto();
+  if (e.key === 'ArrowRight') window._lifeNextPhoto();
+});
 
 /* ===== 工具箱子页 ===== */
 function showToolboxPage() {

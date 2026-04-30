@@ -1744,3 +1744,30 @@ footer .footer-tagline{font-family:var(--font-serif);font-size:13px;color:var(--
   .project-image .img-placeholder::after{display:none}
   .contact-wrap .cta{animation:none}
 }
+
+/* ---- Life Subpage: Photo Wall ---- */
+.life-photos-section{margin-top:48px}
+.life-photos-divider{width:100%;height:1px;background:linear-gradient(90deg,transparent,rgba(212,162,89,0.12),transparent);margin-bottom:24px}
+.life-photos-heading{font-family:var(--font-mono);font-size:12px;color:var(--gold);letter-spacing:1px;margin-bottom:20px}
+.life-photos-grid{display:flex;flex-wrap:wrap;gap:16px}
+.life-photo-item{position:relative;flex:1 1 calc(50% - 8px);min-width:280px;border-radius:6px;overflow:hidden;cursor:pointer;border:1px solid rgba(212,162,89,0.08);transition:all 0.3s var(--easing);background:var(--light-navy)}
+.life-photo-item:hover{transform:scale(1.02);border-color:rgba(212,162,89,0.2);box-shadow:0 8px 24px -8px rgba(0,0,0,0.3)}
+.life-photo-item img{width:100%;height:260px;object-fit:cover;display:block;transition:transform 0.4s ease}
+.life-photo-item:hover img{transform:scale(1.05)}
+.life-photo-label{position:absolute;bottom:0;left:0;right:0;padding:40px 16px 12px;background:linear-gradient(transparent,rgba(2,12,27,0.85));font-family:var(--font-mono);font-size:11px;color:var(--warm-white);letter-spacing:0.5px}
+.life-photos-more{display:inline-block;margin-top:20px;font-family:var(--font-mono);font-size:12px;color:var(--gold);text-decoration:none;transition:all 0.25s var(--easing);padding:8px 0}
+.life-photos-more:hover{color:var(--warm-white);transform:translateX(4px)}
+
+/* ---- Life Subpage: Lightbox ---- */
+.life-lightbox-overlay{position:fixed;inset:0;z-index:9999;background:rgba(2,12,27,0.95);display:flex;align-items:center;justify-content:center;flex-direction:column;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.life-lightbox-overlay .gallery-lightbox-close{position:absolute;top:20px;right:24px;z-index:10;background:none;border:none;color:var(--warm-white);font-size:28px;cursor:pointer;padding:8px;line-height:1;opacity:0.6;transition:opacity 0.2s;font-family:var(--font-sans)}
+.life-lightbox-overlay .gallery-lightbox-close:hover{opacity:1}
+.life-lightbox-overlay .gallery-lightbox-nav{position:absolute;top:50%;transform:translateY(-50%);z-index:10;background:none;border:none;color:var(--warm-white);font-size:48px;cursor:pointer;padding:16px;line-height:1;opacity:0.4;transition:opacity 0.2s;font-family:var(--font-sans)}
+.life-lightbox-overlay .gallery-lightbox-nav:hover{opacity:0.8}
+.life-lightbox-overlay .gallery-lightbox-prev{left:16px}
+.life-lightbox-overlay .gallery-lightbox-next{right:16px}
+.life-lightbox-overlay .gallery-lightbox-counter{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);font-family:var(--font-mono);font-size:12px;color:var(--slate);letter-spacing:1px}
+
+/* ---- Life Subpage: Responsive ---- */
+@media(max-width:768px){.life-photo-item{flex:1 1 100%}.life-photo-item img{height:200px}.life-lightbox-overlay .gallery-lightbox-nav{font-size:32px}}
+@media(max-width:480px){.life-photos-section{margin-top:32px}.life-photo-item img{height:160px}.life-lightbox-overlay .gallery-lightbox-nav{font-size:28px}}

@@ -353,21 +353,6 @@ var FEATHER_ICONS = {
   'camera': '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>'
 };
 
-function renderLife() {
-  const container = document.getElementById('life-grid');
-  const lang = currentLang;
-
-  container.innerHTML = DATA.life.map(function(item) {
-    var content = '<span class="life-icon">' + (FEATHER_ICONS[item.icon] || item.icon) + '</span>' +
-      '<div class="label">' + item.label[lang] + '</div>' +
-      (item.desc ? '<div class="desc">' + item.desc[lang] + '</div>' : '');
-    if (item.url) {
-      return '<a href="' + item.url + '" target="_blank" rel="noopener" class="life-item life-item-link">' + content + '</a>';
-    }
-    return '<div class="life-item">' + content + '</div>';
-  }).join('');
-}
-
 /* ===== Toolbox ===== */
 function renderToolbox() {
   const container = document.getElementById('toolbox-grid');
