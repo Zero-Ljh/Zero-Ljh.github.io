@@ -1712,10 +1712,14 @@ footer .footer-tagline{font-family:var(--font-serif);font-size:13px;color:var(--
 .life-sub-label{font-family:var(--font-sans);font-size:var(--fz-md);color:var(--warm-white);margin-bottom:6px}
 .life-sub-desc{font-size:var(--fz-sm);color:var(--slate)}
 .life-sub-photo{width:100%;max-width:360px;height:auto;border-radius:4px;margin-top:12px;border:1px solid rgba(212,162,89,0.1);display:block;margin-left:auto;margin-right:auto}
-.life-item-link{display:block;text-decoration:none;cursor:pointer;position:relative}
-.life-item-link::after{content:'↗';position:absolute;top:12px;right:16px;font-size:12px;color:var(--gold);opacity:0;transition:opacity 0.25s var(--easing)}
-.life-item-link:hover::after{opacity:0.6}
+.life-item-link{text-decoration:none;color:inherit}
+.life-item-link:hover{transform:scale(1.03);border-color:rgba(212,162,89,0.15);box-shadow:0 8px 20px -8px rgba(0,0,0,0.3)}
+.life-item-link:hover .life-icon{opacity:1;color:var(--gold);transform:scale(1.15)}
 .life-item-link:hover .label{color:var(--gold)}
+.life-item-link:hover .desc{opacity:1;max-height:30px}
+.life-item-link .life-icon{position:relative}
+.life-item-link .life-icon::after{content:'↗';position:absolute;top:-6px;right:-10px;font-size:10px;color:var(--gold);opacity:0;transition:opacity 0.25s var(--easing)}
+.life-item-link:hover .life-icon::after{opacity:0.8}
 .toolbox-sub-category h3{font-family:var(--font-mono);font-size:var(--fz-sm);color:var(--gold);margin-bottom:14px;text-transform:uppercase;letter-spacing:1px}
 .toolbox-sub-items{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
 .toolbox-sub-item{display:flex;flex-direction:column;gap:4px;padding:16px 20px;background:var(--gold-glow);border:1px solid rgba(212,162,89,0.06);border-radius:6px;transition:all 0.2s var(--easing)}
