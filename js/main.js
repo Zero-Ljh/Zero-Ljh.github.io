@@ -1029,9 +1029,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // 初始化星空背景
-  initStarfield();
-
   // 搜索：防抖输入
   var searchInput = document.getElementById('search-input');
   if (searchInput) {
