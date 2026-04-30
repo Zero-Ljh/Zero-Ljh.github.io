@@ -1379,6 +1379,9 @@ footer .footer-tagline{font-family:var(--font-serif);font-size:13px;color:var(--
 .search-toggle-mob{display:none}
 .search-toggle-desk{margin-left:4px}
 
+/* ---- Starfield Canvas ---- */
+#starfield-canvas{position:fixed;inset:0;z-index:-1;pointer-events:none;width:100vw;height:100vh}
+
 /* ---- Search Overlay ---- */
 .search-overlay{position:fixed;inset:0;z-index:200;background:rgba(2,12,27,0.85);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);display:flex;align-items:flex-start;justify-content:center;padding:100px 20px;opacity:0;visibility:hidden;transition:opacity 0.3s ease,visibility 0.3s ease}
 .search-overlay.open{opacity:1;visibility:visible}
