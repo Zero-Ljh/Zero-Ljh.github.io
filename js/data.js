@@ -11,8 +11,8 @@ const DATA = {
     name: { zh: '李军辉', en: 'Junhui Li' },
     about: [
       {
-        zh: '我对 <strong>AI</strong> 有着真正的热情——每天关注 AI 新闻，自学深度学习，用 AI 生成图片，尝试 Vibe Coding，还报了课学大模型部署与微调。这个领域的变化速度让我着迷。',
-        en: 'I have a genuine passion for <strong>AI</strong> — I follow AI news daily, study deep learning on my own, generate images with AI, experiment with Vibe Coding, and have enrolled in courses on LLM deployment and fine-tuning. The pace of change in this field fascinates me.'
+        zh: '我对 <strong>AI</strong> 有着真正的热情——每天关注 AI 新闻，自学深度学习，用 AI 生成图片，探索 AI 开发的前沿工具，还报了课学大模型部署与微调。这个领域的变化速度让我着迷。',
+        en: 'I have a genuine passion for <strong>AI</strong> — I follow AI news daily, study deep learning on my own, generate images with AI, explore cutting-edge AI development tools, and have enrolled in courses on LLM deployment and fine-tuning. The pace of change in this field fascinates me.'
       },
       {
         zh: '我相信<strong>持续学习</strong>的力量。自学了 Python，现在在学 C++，还搭建了一套自动化复习工作流来巩固知识。没有考试驱动，纯粹是好奇心在推着我往前走。',
@@ -24,7 +24,7 @@ const DATA = {
       }
     ],
     highlight: {
-      zh: '目前在学深度学习、大模型部署微调，用 Vibe Coding 提高效率。足球扫荡型中场，新生杯二等奖。',
+      zh: '目前在学深度学习、大模型部署微调，用 AI 工具辅助开发。足球扫荡型中场，新生杯二等奖。',
       en: 'Currently studying deep learning &amp; LLM deployment/fine-tuning. Box-to-box midfielder — campus freshman cup 2nd place.'
     },
     seeking: {
@@ -35,7 +35,7 @@ const DATA = {
       { name: 'Python', level: 70 },
       { name: 'C++', level: 50 },
       { name: 'LLM / Deep Learning', level: 55 },
-      { name: 'Vibe Coding', level: 65 },
+
       { name: 'AI 工具链', level: 60 },
       { name: 'Robotics', level: 35, label: { zh: '学习中', en: 'Learning' } }
     ],
@@ -74,7 +74,7 @@ const DATA = {
         date: '2025.08',
         icon: '01',
         title: { zh: '自学 C 语言', en: 'Self-taught C' },
-        desc: { zh: '暑假提前接触编程，为大学课程打下程序设计基础', en: 'Started learning C programming over the summer, laying a foundation for university coursework' }
+        desc: { zh: '暑假在 B 站跟浙江大学翁恺老师的课程自学 C 语言，为大学课程打基础', en: 'Followed Professor Weng Kai\'s C programming course on Bilibili over the summer, building a foundation for university coursework' }
       },
       {
         date: '2025.09',
@@ -86,7 +86,7 @@ const DATA = {
         date: '2025.09',
         icon: '03',
         title: { zh: '加入心理健康协会', en: 'Joined Mental Health Association' },
-        desc: { zh: '成为心协干事，参与组织校园心理健康宣传活动与同伴支持', en: 'Became an officer, helping organize mental health awareness activities and peer support on campus' }
+        desc: { zh: '成为心协干事，负责心理情景剧大赛等活动的幕后多媒体设备调控与技术支持', en: 'Became an officer, responsible for multimedia equipment operation and technical support during campus mental health events like the Psychodrama Competition' }
       },
       {
         date: '2025.10',
@@ -98,25 +98,25 @@ const DATA = {
         date: '2026.01',
         icon: '05',
         title: { zh: '转入 AI 科创实验班', en: 'Joined AI Innovation Class' },
-        desc: { zh: '参加人工智能科创实验班选拔并成功进入，正式转向 AI 方向', en: 'Passed the selection for the AI Innovation Experimental Class, officially pivoting to AI' }
+        desc: { zh: '通过选拔考试进入人工智能科创实验班，从管理科学与工程类专业正式转入 AI 方向', en: 'Passed the selection exam for the AI Innovation Experimental Class, formally transferring from Management Science &amp; Engineering to the AI track' }
       },
       {
         date: '2026.02',
         icon: '06',
         title: { zh: 'Python + C++ 入门', en: 'Python & C++ Basics' },
-        desc: { zh: '在 B 站系统学习 Python 和 C++ 课程，开始搭建编程技能栈', en: 'Systematically studied Python and C++ through Bilibili courses, building up programming skills' }
+        desc: { zh: '在 B 站系统学习 Python 和 C++ 课程，开始搭建编程技能栈。Python 用于数据处理和 AI 探索，C++ 为机器人方向打基础', en: 'Systematically studied Python and C++ through Bilibili courses, building up programming skills. Python for data processing and AI exploration, C++ as foundation for robotics' }
       },
       {
         date: '2026.04',
         icon: '07',
         title: { zh: '加入百炼机器人团队', en: 'Joined Bailian Robotics' },
-        desc: { zh: '通过选拔加入机器人团队，目前在学 MATLAB 与线性代数打基础', en: 'Joined the robotics team through selection. Currently building foundations with MATLAB and Linear Algebra' }
+        desc: { zh: '加入百炼机器人团队算法组，目前学习 MATLAB 与线性代数打基础，尚未参加竞赛', en: 'Joined the Bailian Robotics team algorithm group. Currently studying MATLAB and Linear Algebra as foundation, not yet competing' }
       },
       {
         date: '持续中',
         icon: '08',
         title: { zh: 'AI 探索之旅', en: 'AI Exploration' },
-        desc: { zh: '穿插学习机器学习、大模型部署微调与 Vibe Coding，始终关注大模型前沿动态，在探索中前行', en: 'Learning ML, LLM deployment & fine-tuning, and Vibe Coding along the way. Always following LLM frontier developments — moving forward through exploration' }
+        desc: { zh: '持续关注大模型前沿动态，穿插学习机器学习理论与大模型部署微调基础知识。虽然尚未实践，但理解的积累本身就有价值。', en: 'Consistently following LLM frontier developments while studying ML theory and LLM deployment/fine-tuning fundamentals along the way. Haven\'t practiced hands-on yet, but building understanding is valuable in itself.' }
       }
     ]
   },
@@ -131,8 +131,8 @@ const DATA = {
       en: ['Python Programming', 'Data Structures & Algorithms', 'Intro to ML', 'Advanced Math', 'Linear Algebra']
     },
     description: {
-      zh: '大一在读，原管理科学与工程类，转入人工智能科创实验班。保持好奇心，正在打基础（MATLAB、线代）并探索 AI 方向。',
-      en: 'First-year student. Started in Management Science & Engineering, transferred into the AI Innovation Experimental Class. Currently building foundations (MATLAB, Linear Algebra) while exploring AI.'
+      zh: '武汉科技大学 (https://www.wust.edu.cn/) 大一在读，原管理科学与工程类，转入人工智能科创实验班。保持好奇心，正在打基础（MATLAB、线代）并探索 AI 方向。',
+      en: 'First-year student at Wuhan University of Science and Technology (https://www.wust.edu.cn/). Started in Management Science &amp; Engineering, transferred into the AI Innovation Experimental Class. Currently building foundations (MATLAB, Linear Algebra) while exploring AI.'
     }
   },
 
@@ -261,8 +261,7 @@ const DATA = {
         { type: 'ul', items: [
           { zh: '表述需求比写代码更重要——清晰的描述 > 精湛的技艺', en: 'Describing requirements matters more than writing code — clear description > exquisite skill' },
           { zh: 'AI 会犯错，需要你来判断——保持批判性思维', en: 'AI makes mistakes, you need to judge — keep critical thinking' },
-          { zh: '小批量、高频次的开发节奏最适合 AI 协作', en: 'Small batch, high frequency development rhythm works best with AI' },
-          { zh: '这个个人主页就是用 Vibe Coding 方式搭建的', en: 'This portfolio website was built entirely through Vibe Coding' }
+          { zh: '小批量、高频次的开发节奏最适合 AI 协作', en: 'Small batch, high frequency development rhythm works best with AI' }
         ] }
       ]
     },
@@ -302,15 +301,15 @@ const DATA = {
         title: { zh: '干员 <span class="location">@ 百炼机器人团队</span>', en: 'Member <span class="location">@ Bailian Robotics Team</span>' },
         date: { zh: '2025年 — 至今', en: '2025 — Present' },
         items: {
-          zh: ['参与机器人系统开发与维护工作', '学习嵌入式系统与机器人控制基础', '与团队成员协作准备竞赛'],
-          en: ['Participating in robotics system development and maintenance', 'Learning embedded systems and robot control basics', 'Collaborating with team members on competition preparations']
+          zh: ['加入机器人团队算法组', '学习 MATLAB 与线性代数打基础', '持续关注方向发展尚未参赛'],
+          en: ['Joined the robotics team algorithm group', 'Studying MATLAB and Linear Algebra as foundation', 'Following the field, not yet competing']
         },
         sub: {
           title: { zh: '干事 <span class="location">@ 心理健康协会</span>', en: 'Officer <span class="location">@ Psychological Health Association</span>' },
           date: { zh: '2025年 — 至今', en: '2025 — Present' },
           items: {
-            zh: ['组织校园心理健康宣传活动', '参与同伴咨询与社群建设'],
-            en: ['Organizing mental health awareness activities on campus', 'Supporting peer counseling and community building']
+            zh: ['组织校园心理健康宣传活动', '参与同伴咨询与社群建设', '探索 AI 工具用于心理科普短剧创作（进行中）'],
+            en: ['Organizing mental health awareness activities on campus', 'Supporting peer counseling and community building', 'Exploring AI tools for mental health short video creation (ongoing)']
           }
         }
       },
@@ -326,8 +325,8 @@ const DATA = {
         title: { zh: '自主学习 <span class="location">@ 个人</span>', en: 'Self-Directed Learning <span class="location">@ Personal</span>' },
         date: { zh: '2025年 — 至今', en: '2025 — Present' },
         items: {
-          zh: ['自学 Python 编程基础', '关注大模型前沿动态', '在 B 站学习政经哲史类课程'],
-          en: ['Python programming basics (self-taught)', 'Following cutting-edge LLM developments', 'Watching Bilibili courses on politics, economics, philosophy, and history']
+          zh: ['自学 Python 和 C++ 编程基础', '关注大模型前沿动态与论文讲解', '在 B 站学习政经哲史类课程', '听王骁Alert、历史哥李易修讲世界局势', '听毛选讲解'],
+          en: ['Self-taught Python and C++ programming', 'Following LLM news and paper explanations', 'Watching Bilibili courses on politics, economics, philosophy, and history', 'Listening to Wang Xiao Alert and Li Yixiu on global affairs', 'Studying Mao Zedong\'s Selected Works']
         }
       }
     ]
@@ -347,7 +346,7 @@ const DATA = {
     areas: [
       { icon: '01', title: { zh: '大语言模型', en: 'Large Language Models' }, desc: { zh: '模型部署、微调（LoRA/QLoRA）、推理优化', en: 'Model deployment, fine-tuning (LoRA/QLoRA), inference optimization' } },
       { icon: '02', title: { zh: '机器人与具身智能', en: 'Robotics & Embodied AI' }, desc: { zh: '嵌入式系统、传感器集成、真实硬件实践', en: 'Embedded systems, sensor integration, hands-on hardware' } },
-      { icon: '03', title: { zh: 'AI 工程化', en: 'AI Engineering' }, desc: { zh: 'Vibe Coding、工具链搭建、高效开发实践', en: 'Vibe Coding, toolchain setup, efficient dev practices' } },
+      { icon: '03', title: { zh: 'AI 工具与工作流', en: 'AI Tools &amp; Workflows' }, desc: { zh: 'AI 工具链搭建、高效开发实践', en: 'AI toolchain setup, efficient dev practices' } },
       { icon: '04', title: { zh: '持续学习', en: 'Continuous Learning' }, desc: { zh: '深度学习基础、PyTorch、经典 AI 教材', en: 'Deep learning fundamentals, PyTorch, classic AI textbooks' } }
     ]
   },
@@ -420,7 +419,7 @@ const DATA = {
       title: { zh: '本个人主页', en: 'This Portfolio Website' },
       desc: {
         zh: '用 Vibe Coding 方式开发的个人主页。HTML/CSS/JS，双语、响应式、零依赖。通过 GitHub Pages 部署。',
-        en: 'Built with Vibe Coding using HTML/CSS/JS. Bilingual, responsive, zero dependencies. Deployed via GitHub Pages.'
+        en: 'Built with Vibe Coding. HTML/CSS/JS, bilingual, responsive, zero dependencies. Deployed via GitHub Pages.'
       },
       tech: 'HTML · CSS · JS'
     },
@@ -619,7 +618,7 @@ const DATA = {
       {
         label: { zh: '工作流', en: 'Workflow' },
         items: [
-          { name: 'Vibe Coding', desc: { zh: 'AI 驱动的高效开发方式', en: 'AI-driven efficient development' } },
+          { name: 'AI 工具链', desc: { zh: 'AI 辅助开发实践', en: 'AI-assisted development' } },
           { name: 'GitHub Pages', desc: { zh: '静态网站部署', en: 'Static site deployment' } },
           { name: 'VS Code', desc: { zh: '日常编辑器', en: 'Daily editor' } }
         ]
