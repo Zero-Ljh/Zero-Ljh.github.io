@@ -45,6 +45,7 @@ function handleRoute() {
   if (hash === 'research') { showResearchPage(); return; }
   if (hash === 'creative') { showCreativeIndex(); return; }
   if (hash === 'life') { showLifePage(); return; }
+  if (hash === 'coverage') { showCoveragePage(); return; }
   if (hash === 'toolbox') { showToolboxPage(); return; }
   if (hash === 'about-detail') { showAboutDetail(); return; }
 
@@ -1323,6 +1324,54 @@ function showLifePage() {
   if (typeof updateSEO === 'function') updateSEO(
     lang === 'zh' ? '生活 - 李军辉' : 'Life - Junhui Li',
     lang === 'zh' ? '李军辉的课余生活' : "Junhui Li's life beyond studying"
+  );
+}
+
+/* ===== 媒体报道子页 ===== */
+function showCoveragePage() {
+  var lang = currentLang;
+  var container = document.getElementById('sub-view');
+  if (!container || !DATA.coverage) return;
+  var c = DATA.coverage;
+
+  var itemsHtml = '';
+  c.items.forEach(function(item) {
+    var photosHtml = '';
+    if (item.photos && item.photos.length) {
+      photosHtml = '<div class="coverage-photos">';
+      item.photos.forEach(function(p) {
+        photosHtml += '<img src="' + p + '" alt="' + item.title[lang] + '" class="coverage-photo" loading="lazy">';
+      });
+      photosHtml += '</div>';
+    }
+    itemsHtml +=
+      '<div class="coverage-item">' +
+      '<div class="coverage-meta">' +
+      '<span class="coverage-source">📰 ' + item.source[lang] + '</span>' +
+      '<span class="coverage-date">' + item.date + '</span>' +
+      '</div>' +
+      '<h3 class="coverage-title">' + item.title[lang] + '</h3>' +
+      (photosHtml ? photosHtml : '') +
+      '<p class="coverage-desc">' + item.desc[lang] + '</p>' +
+      '<a href="' + item.url + '" target="_blank" rel="noopener" class="coverage-link">' +
+      (lang === 'zh' ? '阅读原文 ↗' : 'Read Original ↗') +
+      '</a>' +
+      '</div>';
+  });
+
+  container.innerHTML = subPageShell(
+    '<p class="sub-label">' + (lang === 'zh' ? '媒体报道' : 'Coverage') + '</p>' +
+    '<h1 class="sub-title">' + c.heading[lang] + '</h1>' +
+    '<p class="sub-meta-line" style="margin-bottom:32px">' + c.intro[lang] + '</p>' +
+    itemsHtml,
+    lang === 'zh' ? '返回' : 'Back'
+  );
+  showSubView();
+  var lbw = container.querySelector('.sub-body-wrap');
+  if (lbw) lbw.classList.add('sub-theme-coverage');
+  if (typeof updateSEO === 'function') updateSEO(
+    lang === 'zh' ? '媒体报道 - 李军辉' : 'Coverage - Junhui Li',
+    lang === 'zh' ? '关于李军辉的外部报道与记录' : "External coverage about Junhui Li"
   );
 }
 

@@ -318,8 +318,8 @@ const DATA = {
         title: { zh: '足球队员 <span class="location">@ 院系杯</span>', en: 'Football Team Member <span class="location">@ University Cup</span>' },
         date: { zh: '2025年 — 至今', en: '2025 — Present' },
         items: {
-          zh: ['新生杯足球赛二等奖 · 扫荡型中场', '代表学院参加校院系杯足球赛', '在比赛中获得奖项', '具备团队协作精神与坚韧品质'],
-          en: ['Freshman Cup 2nd place · Box-to-box midfielder', 'Represented the college in the university football cup', 'Won awards in the campus tournament', 'Team player with discipline and perseverance']
+          zh: ['新生杯 · 管院挺进四强（创近年最佳战绩）', '对阵城建学院最后五分钟3:2逆转', '扫荡型中场，团队协作获得二等奖', '相关报道 → 媒体报道页面'],
+          en: ['Freshman Cup · Management School reached semifinals (best in years)', '3:2 comeback against Urban Construction College in final 5 minutes', 'Box-to-box midfielder, won 2nd place through teamwork', 'Related coverage → Media Coverage page']
         }
       },
       {
@@ -728,6 +728,30 @@ const DATA = {
     ]
   },
 
+  /* ===== 媒体报道 ===== */
+  coverage: {
+    heading: { zh: '媒体报道', en: 'Media Coverage' },
+    intro: { zh: '一些关于我的外部报道记录。', en: 'External coverage about me.' },
+    items: [
+      {
+        source: { zh: '武汉科技大学微信公众号', en: 'WUST WeChat Official Account' },
+        date: '2025.10',
+        title: { zh: '新生杯足球赛 · 管院挺进四强', en: 'Freshman Cup · Management School Reaches Semifinals' },
+        desc: { zh: '2025年新生杯足球赛，我院新生足球队奋勇拼搏，成功挺进四强，创下近年来最佳战绩。在对阵城建学院的关键战中，最后五分钟连入两球，3:2逆转锁定胜局。', en: 'In the 2025 Freshman Football Cup, our college team fought hard to reach the semifinals, the best result in recent years. In the crucial match against Urban Construction College, they scored two goals in the final five minutes to secure a 3:2 comeback victory.' },
+        url: 'https://mp.weixin.qq.com/s/kzQ1wwQKYZMeIskCCCMrLA',
+        photos: ['assets/images/football-team-1.jpg', 'assets/images/football-team-2.jpg']
+      },
+      {
+        source: { zh: '武汉科技大学微信公众号', en: 'WUST WeChat Official Account' },
+        date: '2025.12',
+        title: { zh: '心理情景剧大赛报道', en: 'Psychodrama Competition Coverage' },
+        desc: { zh: '作为心协干事，负责心理情景剧大赛幕后多媒体设备调控与技术支持。微信公众号对大赛进行了报道。', en: 'As an officer of the Mental Health Association, responsible for multimedia equipment and technical support behind the scenes of the Psychodrama Competition.' },
+        url: 'https://mp.weixin.qq.com/s/gBI7Bfpheb_USNdxKTKzLw',
+        photos: ['assets/images/psychodrama.jpg']
+      }
+    ]
+  },
+
   /* ===== UI 导航文字 ===== */
   i18n: {
     nav: {
@@ -750,6 +774,7 @@ const DATA = {
         { href: '#tags', zh: '标签', en: 'Tags' },
         { href: '#creative', zh: '创作', en: 'Creative' },
         { href: '#life', zh: '生活', en: 'Life' },
+        { href: '#coverage', zh: '报道', en: 'Coverage' },
         { href: '#toolbox', zh: '工具箱', en: 'Toolbox' },
         { href: '#research', zh: '兴趣探索', en: 'Exploring' },
         { href: '#contact', zh: '联系', en: 'Contact' }
