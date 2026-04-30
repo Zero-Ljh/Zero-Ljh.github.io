@@ -709,6 +709,7 @@ const DATA = {
           },
           {
             name: 'GitHub',
+            url: 'https://github.com/',
             desc: { zh: '读开源代码、搭个人主页、参与团队协作都在这里', en: 'Reading open source code, hosting this site, and team collaboration.' }
           }
         ]
