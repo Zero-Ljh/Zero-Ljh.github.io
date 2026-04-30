@@ -74,43 +74,43 @@ const DATA = {
         date: '2025.08',
         icon: '01',
         title: { zh: '自学 C 语言', en: 'Self-taught C' },
-        desc: { zh: '暑假在 B 站跟浙江大学翁恺老师的课程自学 C 语言，为大学课程打基础', en: 'Followed Professor Weng Kai\'s C programming course on Bilibili over the summer, building a foundation for university coursework' }
+        desc: { zh: '自学 C 语言', en: 'Self-taught C language' }
       },
       {
         date: '2025.09',
         icon: '02',
         title: { zh: '大学入学', en: 'University Started' },
-        desc: { zh: '进入武汉科技大学，就读管理科学与工程类专业', en: 'Entered WUST, majoring in Management Science & Engineering' }
+        desc: { zh: '入学管理科学与工程类专业', en: 'Enrolled in Management Science & Engineering' }
       },
       {
         date: '2025.09',
         icon: '03',
         title: { zh: '加入心理健康协会', en: 'Joined Mental Health Association' },
-        desc: { zh: '成为心协干事，负责心理情景剧大赛等活动的幕后多媒体设备调控与技术支持', en: 'Became an officer, responsible for multimedia equipment operation and technical support during campus mental health events like the Psychodrama Competition' }
+        desc: { zh: '加入心理健康协会', en: 'Joined Mental Health Association' }
       },
       {
         date: '2025.10',
         icon: '04',
         title: { zh: '新生杯二等奖', en: 'Freshman Cup 2nd Place' },
-        desc: { zh: '代表学院参加新生杯足球赛，扫荡型中场，获得二等奖', en: 'Represented the college in the freshman football cup, box-to-box midfielder, won 2nd place' }
+        desc: { zh: '新生杯足球赛二等奖', en: 'Freshman Cup 2nd place' }
       },
       {
         date: '2026.01',
         icon: '05',
         title: { zh: '转入 AI 科创实验班', en: 'Joined AI Innovation Class' },
-        desc: { zh: '通过选拔考试进入人工智能科创实验班，从管理科学与工程类专业正式转入 AI 方向', en: 'Passed the selection exam for the AI Innovation Experimental Class, formally transferring from Management Science &amp; Engineering to the AI track' }
+        desc: { zh: '参加人工智能科创实验班选拔并进入', en: 'Selected for the AI Innovation Experimental Class' }
       },
       {
         date: '2026.02',
         icon: '06',
         title: { zh: 'Python + C++ 入门', en: 'Python & C++ Basics' },
-        desc: { zh: '在 B 站系统学习 Python 和 C++ 课程，开始搭建编程技能栈。Python 用于数据处理和 AI 探索，C++ 为机器人方向打基础', en: 'Systematically studied Python and C++ through Bilibili courses, building up programming skills. Python for data processing and AI exploration, C++ as foundation for robotics' }
+        desc: { zh: '学习 Python、C++ 课程（B 站）', en: 'Learning Python and C++ (Bilibili courses)' }
       },
       {
         date: '2026.04',
         icon: '07',
         title: { zh: '加入百炼机器人团队', en: 'Joined Bailian Robotics' },
-        desc: { zh: '加入百炼机器人团队算法组，目前学习 MATLAB 与线性代数打基础，尚未参加竞赛', en: 'Joined the Bailian Robotics team algorithm group. Currently studying MATLAB and Linear Algebra as foundation, not yet competing' }
+        desc: { zh: '加入百炼机器人团队', en: 'Joined Bailian Robotics Team' }
       },
       {
         date: '持续中',
@@ -326,8 +326,8 @@ const DATA = {
         title: { zh: '自主学习 <span class="location">@ 个人</span>', en: 'Self-Directed Learning <span class="location">@ Personal</span>' },
         date: { zh: '2025年 — 至今', en: '2025 — Present' },
         items: {
-          zh: ['自学 Python 和 C++ 编程基础', '关注大模型前沿动态与论文讲解', '在 B 站学习政经哲史类课程', '听王骁Alert、历史哥李易修讲世界局势', '听毛选讲解'],
-          en: ['Self-taught Python and C++ programming', 'Following LLM news and paper explanations', 'Watching Bilibili courses on politics, economics, philosophy, and history', 'Listening to Wang Xiao Alert and Li Yixiu on global affairs', 'Studying Mao Zedong\'s Selected Works']
+          zh: ['自学 Python 和 C++ 编程基础', '在 B 站看 UP 主讲解大模型前沿动态', '在 B 站学习政经哲史类课程', '听王骁Alert、历史哥李易修讲世界局势', '听毛选讲解'],
+          en: ['Self-taught Python and C++ programming', 'Watching Bilibili creators explain LLM frontier developments', 'Watching Bilibili courses on politics, economics, philosophy, and history', 'Listening to Wang Xiao Alert and Li Yixiu on global affairs', 'Studying Mao Zedong\'s Selected Works']
         }
       }
     ]
@@ -638,94 +638,79 @@ const DATA = {
   /* ===== 学习资源 ===== */
   resources: {
     title: { zh: '学习资源', en: 'Resources' },
-    desc: { zh: '我在 AI 学习中发现的优质资源，分享给同样在路上的你。', en: 'Quality resources I have discovered on my AI learning journey, shared with fellow learners.' },
+    desc: { zh: '我常看的 B 站 UP 主，类型从 AI 理论到数学到人文都有。全部免费，全部在 B 站。', en: 'Bilibili creators I follow — from AI theory to math to humanities. All free, all on Bilibili.' },
     categories: [
       {
         icon: '01',
-        label: { zh: '课程 & 教材', en: 'Courses & Textbooks' },
+        label: { zh: 'AI 科普与理论', en: 'AI Science & Theory' },
         items: [
           {
-            name: '动手学深度学习 (D2L)',
-            url: 'https://d2l.ai/',
-            desc: { zh: '李沐的深度学习课程，代码+理论结合，非常适合入门', en: "Li Mu's deep learning course — code and theory combined, ideal for beginners" }
+            name: '梗直哥',
+            url: 'https://space.bilibili.com/3546608482478081',
+            desc: { zh: '前中科院博导，用动画讲深度学习、强化学习、大模型原理。"让AI不再难学"', en: 'Former professor at UCAS, explains DL, RL, and LLMs with animations. "Making AI accessible."' }
           },
           {
-            name: 'CS229 Machine Learning',
-            url: 'https://cs229.stanford.edu/',
-            desc: { zh: '斯坦福经典 ML 课程，Andrew Ng 主讲，理论扎实', en: "Stanford's classic ML course by Andrew Ng" }
+            name: '飞天闪客',
+            url: 'https://space.bilibili.com/513047275',
+            desc: { zh: '0公式大白话讲AI底层逻辑，《AI百问》系列把DeepSeek V1-V4讲得明明白白', en: 'Zero formulas, plain language AI explanations. "AI 100 Questions" series makes DeepSeek V1-V4 crystal clear.' }
           },
           {
-            name: '《人工智能：一种现代方法》',
-            url: 'https://aima.cs.berkeley.edu/',
-            desc: { zh: 'AI 领域的百科全书式教材，我目前正在读', en: 'The encyclopedia of AI textbooks — I am currently reading this' }
-          },
-          {
-            name: 'Fast.ai Practical Deep Learning',
-            url: 'https://course.fast.ai/',
-            desc: { zh: '自上而下的教学法，先跑起来再理解原理', en: 'Top-down approach — run first, understand later' }
+            name: '量子位',
+            url: 'https://space.bilibili.com/508406257',
+            desc: { zh: '前沿科技媒体，追踪AI最新突破和人形机器人进展', en: 'Frontier tech media covering AI breakthroughs and humanoid robot progress.' }
           }
         ]
       },
       {
         icon: '02',
-        label: { zh: '工具 & 框架', en: 'Tools & Frameworks' },
+        label: { zh: '数学与思维', en: 'Math & Mindset' },
         items: [
           {
-            name: 'PyTorch',
-            url: 'https://pytorch.org/',
-            desc: { zh: '我正要开始学的深度学习框架', en: 'The DL framework I am starting to learn' }
+            name: '漫土沉思录',
+            url: 'https://space.bilibili.com/38765632',
+            desc: { zh: '清华博士在线教线代，《无痛线代》系列帮我啃下了线性代数', en: 'Tsinghua PhD teaching linear algebra. The "Painless Linear Algebra" series helped me get through it.' }
           },
           {
-            name: 'Ollama',
-            url: 'https://ollama.ai/',
-            desc: { zh: '本地运行大模型的最简单方式', en: 'Easiest way to run LLMs locally' }
+            name: '3Blue1Brown（B站官方）',
+            url: 'https://space.bilibili.com/88461692',
+            desc: { zh: '最直观的数学可视化，神经网络系列和线性代数本质是必看经典', en: 'The most intuitive math visualization. Neural networks and essence of linear algebra series are must-watch.' }
           },
           {
-            name: 'Hugging Face',
-            url: 'https://huggingface.co/',
-            desc: { zh: '模型和数据集的 GitHub，开源模型宝库', en: 'The GitHub of models and datasets' }
+            name: '毕导',
+            url: 'https://space.bilibili.com/14538659',
+            desc: { zh: '百大UP主，用趣味物理化学实验保持对科学的好奇心', en: 'Top Bilibili creator. Fun physics and chemistry experiments that keep curiosity alive.' }
           }
         ]
       },
       {
         icon: '03',
-        label: { zh: '博客 & 频道', en: 'Blogs & Channels' },
+        label: { zh: '开发与工具', en: 'Dev & Tools' },
         items: [
           {
-            name: "Lil'Log",
-            url: 'https://lilianweng.github.io/',
-            desc: { zh: '深入浅出的大模型技术博客，每篇都值得精读', en: 'In-depth LLM technical blog — every post is worth reading carefully' }
+            name: '马克的技术工作坊',
+            url: 'https://space.bilibili.com/3546721548602616',
+            desc: { zh: 'Claude Code、MCP、RAG、Agent 原理与实战，Vibe Coding 必备', en: 'Claude Code, MCP, RAG, Agent principles and practice — essential for Vibe Coding.' }
           },
           {
-            name: '李沐论文精读',
-            url: 'https://space.bilibili.com/1567748478',
-            desc: { zh: 'B站最好的论文讲解系列，适合入门科研', en: "Best paper walkthrough series on Bilibili for research beginners" }
-          },
-          {
-            name: '3Blue1Brown',
-            url: 'https://www.youtube.com/@3blue1brown',
-            desc: { zh: '最直观的数学可视化，神经网络系列必看', en: 'The most intuitive math visualization — neural networks series is a must-watch' }
+            name: '数字游牧人',
+            url: 'https://space.bilibili.com/1206720704',
+            desc: { zh: '科技创业者，分享AI应用与变现，了解AI怎么落地', en: 'Tech entrepreneur sharing AI applications and how AI is being used in the real world.' }
           }
         ]
       },
       {
         icon: '04',
-        label: { zh: '社区 & 平台', en: 'Communities & Platforms' },
+        label: { zh: '人文与视野', en: 'Humanities & Perspective' },
         items: [
+          {
+            name: '国仁全球大学堂',
+            url: 'https://space.bilibili.com/406782024',
+            desc: { zh: '政经深度分析，温铁军等学者讲国际格局和金融体系', en: 'In-depth political and economic analysis. Scholars like Wen Tiejun on global structures and financial systems.' }
+          },
           {
             name: 'GitHub',
             url: 'https://github.com/',
-            desc: { zh: '读开源代码是最好的学习方式', en: 'Reading open source code is the best way to learn' }
-          },
-          {
-            name: 'Kaggle',
-            url: 'https://www.kaggle.com/',
-            desc: { zh: '数据集 + 竞赛 + 学习笔记，一站式平台', en: 'Datasets + competitions + learning notebooks, all in one' }
-          },
-          {
-            name: 'arXiv',
-            url: 'https://arxiv.org/',
-            desc: { zh: 'AI 论文预印本，跟踪最新研究动态', en: 'AI paper preprints — track the latest research' }
+            desc: { zh: '读开源代码、搭个人主页、参与团队协作都在这里', en: 'Reading open source code, hosting this site, and team collaboration.' }
           }
         ]
       }
