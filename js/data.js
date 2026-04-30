@@ -318,8 +318,8 @@ const DATA = {
         title: { zh: '足球队员 <span class="location">@ 院系杯</span>', en: 'Football Team Member <span class="location">@ University Cup</span>' },
         date: { zh: '2025年 — 至今', en: '2025 — Present' },
         items: {
-          zh: ['新生杯 · 管院挺进四强（创近年最佳战绩）', '对阵城建学院最后五分钟3:2逆转', '扫荡型中场，团队协作获得二等奖', '相关报道 → 媒体报道页面'],
-          en: ['Freshman Cup · Management School reached semifinals (best in years)', '3:2 comeback against Urban Construction College in final 5 minutes', 'Box-to-box midfielder, won 2nd place through teamwork', 'Related coverage → Media Coverage page']
+          zh: ['新生杯 · 管院挺进四强（创近年最佳战绩）', '对阵城建学院最后五分钟3:2逆转', '扫荡型中场，团队协作获得二等奖', '<a href="https://mp.weixin.qq.com/s/kzQ1wwQKYZMeIskCCCMrLA" target="_blank" rel="noopener" class="inline-link">微信公众号报道 →</a>'],
+          en: ['Freshman Cup · Management School reached semifinals (best in years)', '3:2 comeback against Urban Construction College in final 5 minutes', 'Box-to-box midfielder, won 2nd place through teamwork', '<a href="https://mp.weixin.qq.com/s/kzQ1wwQKYZMeIskCCCMrLA" target="_blank" rel="noopener" class="inline-link">WeChat Article →</a>']
         }
       },
       {
@@ -590,7 +590,7 @@ const DATA = {
 
   /* ===== 课余生活 ===== */
   life: [
-    { icon: 'shield', label: { zh: '足球 · 院系杯', en: 'Football · University Cup' }, desc: { zh: '扫荡型中场', en: 'Box-to-box midfielder' } },
+    { icon: 'shield', label: { zh: '足球 · 院系杯', en: 'Football · University Cup' }, desc: { zh: '扫荡型中场 · 新生杯四强', en: 'Box-to-box midfielder · Freshman Cup Semifinals' }, url: 'https://mp.weixin.qq.com/s/kzQ1wwQKYZMeIskCCCMrLA' },
     { icon: 'book-open', label: { zh: '阅读 · 终身学习', en: 'Reading · Lifelong Learning' }, desc: { zh: '文史哲政经 + AI', en: 'Humanities to AI' } },
     { icon: 'cpu', label: { zh: '机器人 · 动手实践', en: 'Robotics · Hands-on' }, desc: { zh: '百炼团队算法组', en: 'Bailian algorithm group' } },
     { icon: 'heart', label: { zh: '心理 · 同伴支持', en: 'Mental Health · Peer Support' }, desc: { zh: '心协干事 + AI 科普短剧', en: 'Health Association officer + AI short videos' } },
@@ -728,23 +728,6 @@ const DATA = {
     ]
   },
 
-  /* ===== 媒体报道 ===== */
-  coverage: {
-    heading: { zh: '媒体报道', en: 'Media Coverage' },
-    intro: { zh: '一些关于我的外部报道记录。', en: 'External coverage about me.' },
-    items: [
-      {
-        source: { zh: '武汉科技大学微信公众号', en: 'WUST WeChat Official Account' },
-        date: '2025.10',
-        title: { zh: '新生杯足球赛 · 管院挺进四强', en: 'Freshman Cup · Management School Reaches Semifinals' },
-        desc: { zh: '2025年新生杯足球赛，我院新生足球队奋勇拼搏，成功挺进四强，创下近年来最佳战绩。在对阵城建学院的关键战中，最后五分钟连入两球，3:2逆转锁定胜局。', en: 'In the 2025 Freshman Football Cup, our college team fought hard to reach the semifinals, the best result in recent years. In the crucial match against Urban Construction College, they scored two goals in the final five minutes to secure a 3:2 comeback victory.' },
-        url: 'https://mp.weixin.qq.com/s/kzQ1wwQKYZMeIskCCCMrLA',
-        urlHighlights: 'https://mp.weixin.qq.com/s/gBI7Bfpheb_USNdxKTKzLw',
-        photos: ['assets/images/football-team-1.jpg', 'assets/images/football-team-2.jpg']
-      }
-    ]
-  },
-
   /* ===== UI 导航文字 ===== */
   i18n: {
     nav: {
@@ -767,7 +750,6 @@ const DATA = {
         { href: '#tags', zh: '标签', en: 'Tags' },
         { href: '#creative', zh: '创作', en: 'Creative' },
         { href: '#life', zh: '生活', en: 'Life' },
-        { href: '#coverage', zh: '报道', en: 'Coverage' },
         { href: '#toolbox', zh: '工具箱', en: 'Toolbox' },
         { href: '#research', zh: '兴趣探索', en: 'Exploring' },
         { href: '#contact', zh: '联系', en: 'Contact' }

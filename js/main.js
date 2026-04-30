@@ -357,13 +357,15 @@ function renderLife() {
   const container = document.getElementById('life-grid');
   const lang = currentLang;
 
-  container.innerHTML = DATA.life.map(item => `
-    <div class="life-item">
-      <span class="life-icon">${FEATHER_ICONS[item.icon] || item.icon}</span>
-      <div class="label">${item.label[lang]}</div>
-      ${item.desc ? '<div class="desc">' + item.desc[lang] + '</div>' : ''}
-    </div>
-  `).join('');
+  container.innerHTML = DATA.life.map(function(item) {
+    var content = '<span class="life-icon">' + (FEATHER_ICONS[item.icon] || item.icon) + '</span>' +
+      '<div class="label">' + item.label[lang] + '</div>' +
+      (item.desc ? '<div class="desc">' + item.desc[lang] + '</div>' : '');
+    if (item.url) {
+      return '<a href="' + item.url + '" target="_blank" rel="noopener" class="life-item life-item-link">' + content + '</a>';
+    }
+    return '<div class="life-item">' + content + '</div>';
+  }).join('');
 }
 
 /* ===== Toolbox ===== */
