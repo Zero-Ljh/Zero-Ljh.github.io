@@ -590,7 +590,7 @@ const DATA = {
 
   /* ===== 课余生活 ===== */
   life: [
-    { icon: 'shield', label: { zh: '足球 · 院系杯', en: 'Football · University Cup' }, desc: { zh: '扫荡型中场 · 新生杯四强', en: 'Box-to-box midfielder · Freshman Cup Semifinals' }, url: 'https://mp.weixin.qq.com/s/kzQ1wwQKYZMeIskCCCMrLA' },
+    { icon: 'shield', label: { zh: '足球 · 院系杯', en: 'Football · University Cup' }, desc: { zh: '扫荡型中场 · 新生杯四强', en: 'Box-to-box midfielder · Freshman Cup Semifinals' }, url: 'https://mp.weixin.qq.com/s/kzQ1wwQKYZMeIskCCCMrLA', photo: 'assets/images/football-team-1.jpg' },
     { icon: 'book-open', label: { zh: '阅读 · 终身学习', en: 'Reading · Lifelong Learning' }, desc: { zh: '文史哲政经 + AI', en: 'Humanities to AI' } },
     { icon: 'cpu', label: { zh: '机器人 · 动手实践', en: 'Robotics · Hands-on' }, desc: { zh: '百炼团队算法组', en: 'Bailian algorithm group' } },
     { icon: 'heart', label: { zh: '心理 · 同伴支持', en: 'Mental Health · Peer Support' }, desc: { zh: '心协干事 + AI 科普短剧', en: 'Health Association officer + AI short videos' } },
