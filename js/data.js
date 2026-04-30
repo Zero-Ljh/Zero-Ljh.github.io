@@ -124,6 +124,7 @@ const DATA = {
   /* ===== 教育背景 ===== */
   education: {
     school: { zh: '武汉科技大学', en: 'Wuhan University of Science and Technology' },
+    url: 'https://www.wust.edu.cn/',
     degree: { zh: '人工智能科创实验班 · 本科在读', en: 'AI Innovation Experimental Class · Bachelor' },
     period: { zh: '2025年 — 2029年（预计）', en: '2025 — 2029 (Expected)' },
     courses: {
@@ -131,8 +132,8 @@ const DATA = {
       en: ['Python Programming', 'Data Structures & Algorithms', 'Intro to ML', 'Advanced Math', 'Linear Algebra']
     },
     description: {
-      zh: '武汉科技大学 (https://www.wust.edu.cn/) 大一在读，原管理科学与工程类，转入人工智能科创实验班。保持好奇心，正在打基础（MATLAB、线代）并探索 AI 方向。',
-      en: 'First-year student at Wuhan University of Science and Technology (https://www.wust.edu.cn/). Started in Management Science &amp; Engineering, transferred into the AI Innovation Experimental Class. Currently building foundations (MATLAB, Linear Algebra) while exploring AI.'
+      zh: '大一在读，原管理科学与工程类，转入人工智能科创实验班。保持好奇心，正在打基础（MATLAB、线代）并探索 AI 方向。',
+      en: 'First-year student. Started in Management Science &amp; Engineering, transferred into the AI Innovation Experimental Class. Currently building foundations (MATLAB, Linear Algebra) while exploring AI.'
     }
   },
 

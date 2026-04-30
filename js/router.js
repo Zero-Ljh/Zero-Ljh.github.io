@@ -141,7 +141,7 @@ function showAboutDetail() {
   var html = '<div class="sub-content">' +
     aboutHtml +
     '<h2>' + (lang === 'zh' ? '教育背景' : 'Education') + '</h2>' +
-    '<p><strong>' + edu.school[lang] + '</strong> — ' + edu.degree[lang] + '</p>' +
+    '<p><strong><a href="' + edu.url + '" target="_blank" rel="noopener" class="inline-link">' + edu.school[lang] + '</a></strong> — ' + edu.degree[lang] + '</p>' +
     '<p>' + edu.description[lang] + '</p>' +
     '<h2>' + (lang === 'zh' ? '我正在寻找' : "What I'm Looking For") + '</h2>' +
     '<p>' + p.seeking[lang] + '</p>' +
@@ -681,7 +681,7 @@ function showResume() {
     <div class="resume-section">
       <h2>${lang === 'zh' ? '教育背景' : 'Education'}</h2>
       <div class="resume-item">
-        <h3>${edu.school[lang]}</h3>
+        <h3><a href="${edu.url}" target="_blank" rel="noopener" class="inline-link">${edu.school[lang]}</a></h3>
         <p class="resume-item-desc">${edu.description[lang]}</p>
         <div class="resume-courses">
           ${edu.courses[lang].map(c => `<span class="resume-tag">${c}</span>`).join('')}
