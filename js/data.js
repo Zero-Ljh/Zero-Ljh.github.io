@@ -79,7 +79,7 @@ const DATA = {
       {
         date: '2025.09',
         icon: '02',
-        title: { zh: '大学入学', en: 'University Started' },
+        title: { zh: '入学管理科学与工程类', en: 'Started Management Sci. & Eng.' },
         desc: { zh: '入学管理科学与工程类专业', en: 'Enrolled in Management Science & Engineering' }
       },
       {
@@ -97,7 +97,7 @@ const DATA = {
       {
         date: '2026.01',
         icon: '05',
-        title: { zh: '转入 AI 科创实验班', en: 'Joined AI Innovation Class' },
+        title: { zh: '入选 AI 科创实验班', en: 'Joined AI Innovation Class' },
         desc: { zh: '参加人工智能科创实验班选拔并进入', en: 'Selected for the AI Innovation Experimental Class' }
       },
       {
@@ -115,8 +115,8 @@ const DATA = {
       {
         date: '持续中',
         icon: '08',
-        title: { zh: 'AI 探索之旅', en: 'AI Exploration' },
-        desc: { zh: '持续关注大模型前沿动态，穿插学习机器学习理论与大模型部署微调基础知识。虽然尚未实践，但理解的积累本身就有价值。', en: 'Consistently following LLM frontier developments while studying ML theory and LLM deployment/fine-tuning fundamentals along the way. Haven\'t practiced hands-on yet, but building understanding is valuable in itself.' }
+        title: { zh: 'AI 探索进行时', en: 'Ongoing AI Exploration' },
+        desc: { zh: '穿插学习机器学习和 LLM 部署微调理论，尚未实践。Vibe Coding 断断续续在学。一直关注大模型前沿新闻。', en: 'Studying ML and LLM deployment/fine-tuning theory on the side, no hands-on practice yet. Learning Vibe Coding intermittently. Always following LLM frontier news.' }
       }
     ]
   },
@@ -291,47 +291,56 @@ const DATA = {
     }
   ],
 
-  /* ===== 经历 (Tab) ===== */
-  experience: {
-    tabs: {
-      zh: ['团队', '运动', '学习'],
-      en: ['Teams', 'Sports', 'Learning']
+  /* ===== 经历 (时间线) ===== */
+  experience: [
+    {
+      date: { zh: '2025年8月', en: 'Aug 2025' },
+      title: { zh: '自学 C 语言', en: 'Self-taught C' }
     },
-    panels: [
-      {
-        title: { zh: '干员 <span class="location">@ 百炼机器人团队</span>', en: 'Member <span class="location">@ Bailian Robotics Team</span>' },
-        date: { zh: '2025年 — 至今', en: '2025 — Present' },
-        items: {
-          zh: ['加入机器人团队算法组', '学习 MATLAB 与线性代数打基础', '持续关注方向发展尚未参赛'],
-          en: ['Joined the robotics team algorithm group', 'Studying MATLAB and Linear Algebra as foundation', 'Following the field, not yet competing']
-        },
-        sub: {
-          title: { zh: '干事 <span class="location">@ 心理健康协会</span>', en: 'Officer <span class="location">@ Psychological Health Association</span>' },
-          date: { zh: '2025年 — 至今', en: '2025 — Present' },
-          items: {
-            zh: ['组织校园心理健康宣传活动', '参与同伴咨询与社群建设', '探索 AI 工具用于心理科普短剧创作（进行中）'],
-            en: ['Organizing mental health awareness activities on campus', 'Supporting peer counseling and community building', 'Exploring AI tools for mental health short video creation (ongoing)']
-          }
-        }
-      },
-      {
-        title: { zh: '足球队员 <span class="location">@ 院系杯</span>', en: 'Football Team Member <span class="location">@ University Cup</span>' },
-        date: { zh: '2025年 — 至今', en: '2025 — Present' },
-        items: {
-          zh: ['新生杯 · 管院挺进四强（创近年最佳战绩）', '对阵城建学院最后五分钟3:2逆转', '扫荡型中场，团队协作获得二等奖', '<a href="https://mp.weixin.qq.com/s/kzQ1wwQKYZMeIskCCCMrLA" target="_blank" rel="noopener" class="inline-link">微信公众号报道 →</a>'],
-          en: ['Freshman Cup · Management School reached semifinals (best in years)', '3:2 comeback against Urban Construction College in final 5 minutes', 'Box-to-box midfielder, won 2nd place through teamwork', '<a href="https://mp.weixin.qq.com/s/kzQ1wwQKYZMeIskCCCMrLA" target="_blank" rel="noopener" class="inline-link">WeChat Article →</a>']
-        }
-      },
-      {
-        title: { zh: '自主学习 <span class="location">@ 个人</span>', en: 'Self-Directed Learning <span class="location">@ Personal</span>' },
-        date: { zh: '2025年 — 至今', en: '2025 — Present' },
-        items: {
-          zh: ['自学 Python 和 C++ 编程基础', '在 B 站看 UP 主讲解大模型前沿动态', '在 B 站学习政经哲史类课程', '听王骁Alert、历史哥李易修讲世界局势', '听毛选讲解'],
-          en: ['Self-taught Python and C++ programming', 'Watching Bilibili creators explain LLM frontier developments', 'Watching Bilibili courses on politics, economics, philosophy, and history', 'Listening to Wang Xiao Alert and Li Yixiu on global affairs', 'Studying Mao Zedong\'s Selected Works']
-        }
+    {
+      date: { zh: '2025年9月', en: 'Sep 2025' },
+      title: { zh: '入学管理科学与工程类专业', en: 'Enrolled in Management Sci. & Eng.' }
+    },
+    {
+      date: { zh: '2025年9月', en: 'Sep 2025' },
+      title: { zh: '干事 <span class="location">@ 心理健康协会</span>', en: 'Officer <span class="location">@ Psychological Health Association</span>' },
+      items: {
+        zh: ['组织校园心理健康宣传活动', '参与同伴咨询与社群建设', '探索 AI 工具用于心理科普短剧创作（进行中）'],
+        en: ['Organizing mental health awareness activities', 'Supporting peer counseling and community building', 'Exploring AI tools for mental health short videos (ongoing)']
       }
-    ]
-  },
+    },
+    {
+      date: { zh: '2025年10月', en: 'Oct 2025' },
+      title: { zh: '足球队员 <span class="location">@ 院系杯</span>', en: 'Football Member <span class="location">@ University Cup</span>' },
+      items: {
+        zh: ['扫荡型中场，团队协作获二等奖', '<a href="https://mp.weixin.qq.com/s/kzQ1wwQKYZMeIskCCCMrLA" target="_blank" rel="noopener" class="inline-link">微信公众号报道 →</a>'],
+        en: ['Box-to-box midfielder, 2nd place', '<a href="https://mp.weixin.qq.com/s/kzQ1wwQKYZMeIskCCCMrLA" target="_blank" rel="noopener" class="inline-link">WeChat Article →</a>']
+      }
+    },
+    {
+      date: { zh: '2026年1月', en: 'Jan 2026' },
+      title: { zh: '入选 AI 科创实验班', en: 'Selected for AI Innovation Class' },
+      desc: { zh: '参加人工智能科创实验班选拔并进入', en: 'Selected for the AI Innovation Experimental Class' }
+    },
+    {
+      date: { zh: '2026年2月', en: 'Feb 2026' },
+      title: { zh: 'Python + C++ 入门', en: 'Python & C++ Basics' },
+      desc: { zh: '在 B 站学习 Python 和 C++ 课程', en: 'Learning Python and C++ via Bilibili courses' }
+    },
+    {
+      date: { zh: '2026年4月', en: 'Apr 2026' },
+      title: { zh: '干员 <span class="location">@ 百炼机器人团队</span>', en: 'Member <span class="location">@ Bailian Robotics Team</span>' },
+      items: {
+        zh: ['加入机器人团队算法组', '学习 MATLAB 与线性代数打基础', '持续关注方向发展，尚未参赛'],
+        en: ['Joined the robotics algorithm group', 'Studying MATLAB and Linear Algebra', 'Following the field, not yet competing']
+      }
+    },
+    {
+      date: { zh: '持续中', en: 'Ongoing' },
+      title: { zh: '持续学习', en: 'Continuous Learning' },
+      desc: { zh: '机器学习理论和 LLM 部署微调（无实践）；Vibe Coding 陆续学习；持续关注大模型前沿新闻', en: 'ML theory & LLM deployment (no practice); Learning Vibe Coding; Following LLM frontier news' }
+    }
+  ],
 
   /* ===== 荣誉 ===== */
   honors: [
@@ -388,16 +397,16 @@ const DATA = {
       overline: { zh: '自学', en: 'Self-Study' },
       title: { zh: 'Python 学习之旅', en: 'Python Learning Journey' },
       desc: {
-        zh: '自学 Python 基础，包括数据结构、控制流、函数和入门项目。为 AI/ML 打基础。下一步：PyTorch。',
-        en: 'Self-taught Python basics including data structures, control flow, functions, and introductory projects. Building a foundation for AI/ML work. Next step: PyTorch.'
+        zh: '自学 Python 基础语法，逐步入门编程。为 AI/ML 打基础。下一步：PyTorch。',
+        en: 'Self-taught Python basics, building a foundation for AI/ML work. Next step: PyTorch.'
       },
       tech: ['Python'],
       status: { zh: '已完成', en: 'Completed' },
       period: { zh: '2025年 — 2026年', en: '2025 — 2026' },
       role: { zh: '个人项目', en: 'Personal Project' },
       learnings: {
-        zh: ['数据结构与算法基础', '函数式编程思维', '文件操作与数据处理', '简单爬虫与自动化脚本'],
-        en: ['Data structures and algorithms basics', 'Functional programming mindset', 'File I/O and data processing', 'Simple web scraping and automation scripts']
+        zh: ['Python 基础语法入门', '编程思维初步建立', '能写简单脚本'],
+        en: ['Python basics', 'Computational thinking foundations', 'Can write simple scripts']
       },
       challenges: {
         zh: '从零开始学编程的最大挑战不是语法，而是"编程思维"——把问题分解成可执行的步骤。刚开始连 for 循环都想不明白，但坚持写小练习后慢慢有了感觉。',

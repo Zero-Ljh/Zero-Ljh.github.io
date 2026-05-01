@@ -27,7 +27,7 @@ function renderNav() {
   let desktopHtml = '';
   t.items.forEach((item, i) => {
     const num = String(i + 1).padStart(2, '0');
-    desktopHtml += `<a href="${item.href}" data-en="${num}. ${item.en}" data-zh="${num}. ${item.zh}">${num}. ${item[lang]}</a>`;
+    desktopHtml += `<a href="${item.href}" data-en="${num}. ${item.en}" data-zh="${num}. ${item.zh}"><span class="nav-num">${num}.</span> ${item[lang]}</a>`;
   });
 
   desktopHtml += `<a href="#" id="resume-btn" class="resume-btn" data-en="${t.resumeBtn.en}" data-zh="${t.resumeBtn.zh}" onclick="event.preventDefault();window.open('${DATA.profile.resumeUrl}','_blank')">${t.resumeBtn[lang]}</a>
@@ -57,7 +57,7 @@ function renderNav() {
     let mobileHtml = '';
     t.items.forEach((item, i) => {
       const num = String(i + 1).padStart(2, '0');
-      mobileHtml += `<a href="${item.href}" data-en="${num}. ${item.en}" data-zh="${num}. ${item.zh}">${num}. ${item[lang]}</a>`;
+      mobileHtml += `<a href="${item.href}" data-en="${num}. ${item.en}" data-zh="${num}. ${item.zh}"><span class="nav-num">${num}.</span> ${item[lang]}</a>`;
     });
     t.dropdown.forEach(item => {
       mobileHtml += `<a href="${item.href}" data-en="${item.en}" data-zh="${item.zh}">${item[lang]}</a>`;
@@ -132,25 +132,19 @@ function renderExperience() {
   const lang = currentLang;
 
   let html = '<div class="timeline">';
-  DATA.experience.panels.forEach((panel) => {
+  DATA.experience.forEach((e) => {
     html += `
       <div class="timeline-item">
-        <div class="timeline-date">${panel.date[lang]}</div>
+        <div class="timeline-date">${e.date[lang]}</div>
         <div class="timeline-content">
-          <h3>${panel.title[lang]}</h3>
-          <ul>${panel.items[lang].map(item => `<li>${item}</li>`).join('')}</ul>
-        </div>
-      </div>`;
-    if (panel.sub) {
-      html += `
-        <div class="timeline-item sub">
-          <div class="timeline-date">${panel.sub.date[lang]}</div>
-          <div class="timeline-content">
-            <h3>${panel.sub.title[lang]}</h3>
-            <ul>${panel.sub.items[lang].map(item => `<li>${item}</li>`).join('')}</ul>
-          </div>
-        </div>`;
+          <h3>${e.title[lang]}</h3>`;
+    if (e.items) {
+      html += `<ul>${e.items[lang].map(item => `<li>${item}</li>`).join('')}</ul>`;
     }
+    if (e.desc) {
+      html += `<p style="font-size:var(--fz-sm);color:var(--slate);margin-top:6px">${e.desc[lang]}</p>`;
+    }
+    html += `</div></div>`;
   });
   html += '</div>';
   container.innerHTML = html;

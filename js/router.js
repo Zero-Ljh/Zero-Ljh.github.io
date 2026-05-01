@@ -184,12 +184,12 @@ function showAboutDetail() {
 }
 
 /* ===== 子页面骨架 ===== */
-function subPageShell(contentHTML, backLabel, backHash) {
+function subPageShell(contentHTML, backLabel, backHash, themeClass) {
   const lang = currentLang;
   const hashAction = backHash ? `window.location.hash='${backHash}';return false;` : `window.location.hash='';return false;`;
   return `
     <div class="sub-page">
-      <div class="sub-body-wrap">
+      <div class="sub-body-wrap${themeClass ? ' sub-theme-' + themeClass : ''}">
         <div class="sub-top-bar">
           <a href="#" onclick="${hashAction}" class="sub-back">← ${backLabel}</a>
           <div class="sub-top-actions">
@@ -341,7 +341,7 @@ function showReadingDetail(index) {
   setTimeout(function() { window.dispatchEvent(new Event('scroll')); }, 100);
 }
 
-/* ===== 项目详情（杂志编辑风格） ===== */
+/* ===== 项目详情（Tech 极客风） ===== */
 function showProjectDetail(id) {
   const p = DATA.projects.find(pj => pj.id === id);
   if (!p) { showMainView(); return; }
@@ -350,108 +350,105 @@ function showProjectDetail(id) {
   if (!c) return;
 
   const idx = DATA.projects.findIndex(pj => pj.id === id);
+  const status = p.status ? p.status[L] : (p.overline ? p.overline[L] : '');
+  const period = p.period ? p.period[L] : '';
+  const role = p.role ? p.role[L] : '';
 
-  // --- Screenshot ---
-  let fig;
-  if (p.image) {
-    fig = `<img src="${p.image}" alt="${p.title[L]}">`;
-  } else {
-    fig = `<div class="pv-ph"><span class="pv-ph-icon">◆</span><span>${p.title[L]}</span><span class="pv-ph-sub">${L === 'zh' ? '项目截图' : 'Screenshot'}</span></div>`;
-  }
-
-  // --- Top bar ---
-  const top = `
-    <div class="pv-top">
-      <a href="#" onclick="window.location.hash='projects';return false;" class="pv-back">← ${L === 'zh' ? '返回' : 'Back'}</a>
-      <div class="pv-lang"><button class="pv-lb${L === 'zh' ? ' on' : ''}" onclick="setLang('zh')">中</button><button class="pv-lb${L === 'en' ? ' on' : ''}" onclick="setLang('en')">EN</button></div>
+  // Header
+  const overlineText = p.overline ? p.overline[L] : p.title[L];
+  const headerHTML = `
+    <div class="pv-tech-hd">
+      <div>
+        <span class="t-tag"># ${escHTML(overlineText)} · ${escHTML(status)}</span>
+        <h1>${p.title[L]}</h1>
+      </div>
+      <div class="t-meta"><span class="hl">▶</span> ${escHTML(period)}${role ? ' · ' + escHTML(role) : ''}</div>
     </div>`;
 
-  // --- Headline section: big title left, meta right ---
-  const period = p.period ? `<span class="pv-ml">${p.period[L]}</span>` : '';
-  const role = p.role ? `<span class="pv-ml">${p.role[L]}</span>` : '';
-  const tech = p.tech.map(t => `<span class="pv-tg">${t}</span>`).join('');
-  const status = p.status ? p.status[L] : p.overline[L];
+  // Description
+  const descParts = p.desc[L].split(/(?<=。)/g).filter(Boolean);
+  const descHTML = `
+    <div class="pv-tech-desc">
+      <div class="pv-tech-desc-in">
+        <span class="key">$ cat README.md</span><br>
+        <span class="cmt"># ${escHTML(p.title[L])}</span><br><br>
+        <span class="val">${descParts.join('</span><br><span class="val">')}</span>
+        ${p.challenges ? `<br><br><span class="cmt"># "${escHTML(p.challenges[L].substring(0, 60))}..."</span>` : ''}
+      </div>
+    </div>`;
 
-  // --- Links ---
-  let links = '';
-  if (p.links && p.links.length) {
-    links = p.links.map(l => `<a href="${l.url}" target="_blank" class="pv-lk">${l.label[L]}</a>`).join('');
-  }
+  // Stats
+  const techItems = p.tech || [];
+  const stats = [
+    { num: techItems[0] || '—', lbl: L === 'zh' ? '主要技术' : 'Primary Tech' },
+    { num: period.match(/\d{4}/) ? period.match(/\d{4}/)[0] : '—', lbl: L === 'zh' ? '年份' : 'Year' },
+    { num: role || '—', lbl: L === 'zh' ? '角色' : 'Role' },
+    { num: techItems[1] || techItems[0] || '—', lbl: L === 'zh' ? '技术栈' : 'Stack' }
+  ];
+  const statsHTML = `<div class="pv-tech-stats">${stats.map(s =>
+    `<div class="pv-tech-stat"><div class="num">${escHTML(s.num)}</div><div class="lbl">${s.lbl}</div></div>`
+  ).join('')}</div>`;
 
-  // --- Learnings ---
-  let learn = '';
-  if (p.learnings && p.learnings[L].length) {
-    learn = `<div class="pv-lrn"><h3>${L === 'zh' ? '📖 学到的' : '📖 Learned'}</h3>${p.learnings[L].map(x => `<span class="pv-pl">${x}</span>`).join('')}</div>`;
-  }
-
-  // --- Challenges ---
-  let chal = '';
-  if (p.challenges && p.challenges[L]) {
-    chal = `<div class="pv-chal"><h3>${L === 'zh' ? '⚡ 挑战' : '⚡ Challenges'}</h3><p>${p.challenges[L]}</p></div>`;
-  }
-
-  // --- Timeline dots ---
-  let tl = '';
+  // Timeline
+  let tlHTML = '';
   if (p.timeline && p.timeline[L]) {
     const steps = p.timeline[L].split(' → ').map(s => s.trim());
-    tl = `<div class="pv-tl"><div class="pv-tl-in">${steps.map((s, i) => `<span class="pv-tl-d"><span class="pv-tl-c"></span><span>${s}</span></span>`).join('')}</div></div>`;
+    tlHTML = `<div class="pv-tech-tl"><div class="tl-h">timeline</div>${steps.map(s =>
+      `<div class="tl-row"><span class="tl-dot"></span><span class="tl-text">${escHTML(s)}</span></div>`
+    ).join('')}</div>`;
   }
 
-  // --- Related ---
-  const rel = DATA.projects.filter(pj => pj.id !== id && pj.tech.some(t => p.tech.includes(t)));
-  let relHtml = '';
-  if (rel.length) {
-    relHtml = `<div class="pv-rel"><h2 class="pv-rel-h">${L === 'zh' ? '更多项目' : 'More Projects'}</h2><div class="pv-rel-g">${rel.map(r => `<a href="#project/${r.id}" class="pv-rc"><strong>${r.title[L]}</strong><span>${r.tech.slice(0,3).join(' · ')}</span></a>`).join('')}</div></div>`;
+  // Learnings
+  let lnHTML = '';
+  if (p.learnings && p.learnings[L] && p.learnings[L].length) {
+    lnHTML = `<div class="pv-tech-ln"><div class="ln-h">learnings</div>${p.learnings[L].map(x =>
+      `<div class="ln-item">${x}</div>`
+    ).join('')}</div>`;
   }
 
-  // --- Nav ---
+  // Challenges
+  let chHTML = '';
+  if (p.challenges && p.challenges[L]) {
+    chHTML = `<div class="pv-tech-ch"><div class="ch-h">challenges</div><p>${p.challenges[L]}</p></div>`;
+  }
+
+  // Tags
+  const tagsHTML = `<div class="pv-tech-tags">${p.tech.map(t =>
+    `<span class="pv-tech-tag">${escHTML(t.toLowerCase())}</span>`
+  ).join('')}</div>`;
+
+  // Nav
   const prev = idx > 0 ? DATA.projects[idx - 1] : null;
   const next = idx < DATA.projects.length - 1 ? DATA.projects[idx + 1] : null;
-  let nav = '<div class="pv-nav"><div class="pv-nav-in">';
-  nav += prev ? `<a href="#project/${prev.id}" class="pv-nb"><span class="pv-nb-d">← ${L === 'zh' ? '上一篇' : 'Previous'}</span><span class="pv-nb-t">${prev.title[L]}</span></a>` : '<div></div>';
-  nav += next ? `<a href="#project/${next.id}" class="pv-nb pv-nb-r"><span class="pv-nb-d">${L === 'zh' ? '下一篇' : 'Next'} →</span><span class="pv-nb-t">${next.title[L]}</span></a>` : '<div></div>';
-  nav += '</div></div>';
-
-  // Title extract for pull quote
-  const pullQuote = p.desc[L].length > 80 ? p.desc[L].substring(0, 80) + '…' : p.desc[L];
+  let navHTML = '<div class="pv-tech-nav">';
+  navHTML += prev
+    ? `<a href="#project/${prev.id}"><small>← ${L === 'zh' ? '上一篇' : 'Previous'}</small>${prev.title[L]}</a>`
+    : '<span></span>';
+  navHTML += next
+    ? `<a href="#project/${next.id}" class="nav-r"><small>${L === 'zh' ? '下一篇' : 'Next'} →</small>${next.title[L]}</a>`
+    : '<span></span>';
+  navHTML += '</div>';
 
   c.innerHTML = `
-    ${top}
-    <article class="pv">
-      <header class="pv-hd">
-        <div class="pv-hd-l">
-          <span class="pv-num">${String(idx + 1).padStart(2, '0')}</span>
-          <h1 class="pv-title">${p.title[L]}</h1>
-        </div>
-        <div class="pv-hd-r">
-          <span class="pv-st">${status}</span>
-          <div class="pv-meta">${period}${role}</div>
-          <div class="pv-tags">${tech}</div>
-          ${links ? `<div class="pv-links">${links}</div>` : ''}
-        </div>
-      </header>
-
-      <div class="pv-fig">${fig}</div>
-
-      <div class="pv-body">
-        <p>${p.desc[L]}</p>
+    <div class="pv-tech">
+      <div class="pv-tech-bar">
+        <a href="#" onclick="window.location.hash='archive';return false;" class="back"><span class="arrow">←</span> ${L === 'zh' ? '返回' : 'Back'}</a>
+        <div class="path"><span class="un">junhui</span>:~/projects/${escHTML(p.id)}</div>
       </div>
-
-      <aside class="pv-pq">
-        <span>❝</span>
-        <p>${pullQuote}</p>
-      </aside>
-
-      ${learn || chal ? `<div class="pv-lc">${learn}${chal}</div>` : ''}
-
-      ${tl}
-
-      ${relHtml}
-    </article>
-    ${nav}`;
+      <div class="pv-tech-body">
+        ${headerHTML}
+        ${descHTML}
+        ${statsHTML}
+        ${tlHTML}
+        ${lnHTML ? `<div>${lnHTML}</div>` : '<div></div>'}
+        ${chHTML ? `<div>${chHTML}</div>` : '<div></div>'}
+        ${tagsHTML}
+        ${navHTML}
+      </div>
+    </div>`;
 
   showSubView();
-  document.body.style.backgroundColor = '#f7f3ed';
+  document.body.style.overflow = '';
   if (typeof updateSEO === 'function') updateSEO(p.title[L], p.desc[L].replace(/<[^>]*>/g, ''));
 }
 
@@ -549,92 +546,76 @@ function showNoteDetail(index) {
   if (typeof updateSEO === 'function') updateSEO(note.title[L], note.desc[L]);
 }
 
-/* ===== 归档页（时间线风格） ===== */
+/* ===== 归档页（Dark Minimal 极简风） ===== */
 function showArchive() {
   const L = currentLang;
-  const container = document.getElementById('sub-view');
-  if (!container) return;
+  const c = document.getElementById('sub-view');
+  if (!c) return;
 
   const total = DATA.projects.length + DATA.miniProjects.length;
   const countLabel = L === 'zh' ? total + ' 个项目' : total + ' projects';
 
-  // Extract year from period field (e.g. "2025 — Present" -> "2025")
-  function extractYear(p) {
-    const periodStr = p.period ? (p.period[L] || p.period.en || '') : '';
-    const match = periodStr.match(/(\d{4})/);
-    return match ? match[1] : '';
-  }
-
   // Group projects by year
   const groups = {};
   DATA.projects.forEach(p => {
-    const year = extractYear(p);
+    const periodStr = p.period ? (p.period[L] || p.period.en || '') : '';
+    const m = periodStr.match(/(\d{4})/);
+    const year = m ? m[1] : '';
     if (!groups[year]) groups[year] = [];
     groups[year].push(p);
   });
-
-  // Sort years descending
   const sortedYears = Object.keys(groups).sort((a, b) => b.localeCompare(a));
 
-  const projectHTML = sortedYears.map(year => `
-    <div class="ar-year">
-      <div class="ar-year-head">
-        <span class="ar-year-num">${year}</span>
-        <span class="ar-year-line"></span>
-      </div>
-      ${groups[year].map(p => `
-        <div class="ar-row">
-          <a href="#project/${p.id}" class="ar-name">${p.title[L]}</a>
-          <span class="ar-desc">${p.desc[L]}</span>
-          <span class="ar-tags">${p.tech.join(' · ')}</span>
+  const projectRows = sortedYears.map(year =>
+    groups[year].map(p =>
+      `<a href="#project/${p.id}" class="ar-item">
+        <div class="ar-yr">'${year.slice(2)}</div>
+        <div>
+          <div class="ar-t">${p.title[L]}</div>
+          <div class="ar-d">${p.desc[L]}</div>
+          <div class="ar-ts">${p.tech.map(t => `<span>${escHTML(t)}</span>`).join('')}</div>
         </div>
-      `).join('')}
-    </div>
-  `).join('');
+      </a>`
+    ).join('')
+  ).join('');
 
-  const miniHTML = DATA.miniProjects.length ? `
-    <div class="ar-year">
-      <div class="ar-year-head">
-        <span class="ar-year-num">${L === 'zh' ? '更多' : 'More'}</span>
-        <span class="ar-year-line"></span>
-      </div>
-      ${DATA.miniProjects.map(m => `
-        <div class="ar-row">
-          <span class="ar-name">${m.title[L]}</span>
-          <span class="ar-desc">${m.desc[L]}</span>
-          <span class="ar-tags">${m.tech}</span>
+  const miniRows = DATA.miniProjects.length
+    ? `<div class="ar-mini">
+        <div class="ar-mini-hd">${L === 'zh' ? '小项目' : 'Side Builds'}</div>
+        <div class="ar-mini-grid">
+          ${DATA.miniProjects.map((m, i) =>
+            `<div class="ar-mini-card">
+              <div class="m-num">${String(i + 1).padStart(2, '0')}</div>
+              <h3>${m.title[L]}</h3>
+              <p>${m.desc[L]}</p>
+            </div>`
+          ).join('')}
         </div>
-      `).join('')}
-    </div>
-  ` : '';
+      </div>`
+    : '';
 
-  container.innerHTML = `
-    <div class="ar-page">
-      <nav class="ar-bar">
-        <a href="#" onclick="window.location.hash='';return false;" class="ar-back">← ${L === 'zh' ? '返回' : 'Back'}</a>
-        <span class="ar-lang">
-          <button class="ar-lb${L === 'zh' ? ' on' : ''}" onclick="setLang('zh')">中</button>
-          <button class="ar-lb${L === 'en' ? ' on' : ''}" onclick="setLang('en')">EN</button>
-        </span>
-      </nav>
+  c.innerHTML = `
+    <div class="ar-wrap">
+      <div class="ar-bar">
+        <a href="#" onclick="window.location.hash='';return false;" class="back"><span class="arrow">←</span> ${L === 'zh' ? '返回' : 'Back'}</a>
+        <span>Archive</span>
+      </div>
       <div class="ar-body">
-        <div class="ar-header">
-          <p class="ar-label" style="margin-bottom:4px">${L === 'zh' ? '归档' : 'Archive'}</p>
-          <h1 class="ar-title" style="margin-bottom:4px">${L === 'zh' ? '全部项目' : 'All Projects'}</h1>
-          <p class="ar-count" style="margin-bottom:48px">${countLabel}</p>
+        <div class="ar-head">
+          <div class="ar-count">${String(total).padStart(2, '0')}</div>
+          <div class="ar-label">${countLabel}</div>
         </div>
-        <div class="ar-timeline">
-          ${projectHTML}
-          ${miniHTML}
-        </div>
+        ${projectRows}
+        ${miniRows}
+        <div class="ar-foot">${DATA.projects.length} ${L === 'zh' ? '个项目' : 'projects'} · ${DATA.miniProjects.length} ${L === 'zh' ? '个小项目' : 'side builds'}</div>
       </div>
     </div>`;
 
   showSubView();
-  document.body.style.backgroundColor = '#fff';
+  document.body.style.overflow = '';
   if (typeof updateSEO === 'function') updateSEO(
     L === 'zh' ? '全部项目' : 'All Projects',
-    L === 'zh' ? '李军辉的项目归档' : "Junhui Li's project archive"
+    L === 'zh' ? '李军辉的项目档案' : "Junhui Li's project archive"
   );
 }
 
@@ -681,28 +662,19 @@ function showResume() {
 
   /* 经历（时间线） */
   let expItems = '';
-  DATA.experience.panels.forEach(panel => {
+  DATA.experience.forEach(e => {
     expItems += `
       <div class="re-timeline-item">
         <div class="re-timeline-dot"></div>
         <div class="re-timeline-body">
-          <h3>${panel.title[L]}</h3>
-          <p class="re-date">${panel.date[L]}</p>
-          <ul>
-            ${panel.items[L].map(item => `<li>${item}</li>`).join('')}
-          </ul>`;
-
-    if (panel.sub) {
-      expItems += `
-          <div class="re-sub-item">
-            <h4>${panel.sub.title[L]}</h4>
-            <p class="re-date">${panel.sub.date[L]}</p>
-            <ul>
-              ${panel.sub.items[L].map(item => `<li>${item}</li>`).join('')}
-            </ul>
-          </div>`;
+          <h3>${e.title[L]}</h3>
+          <p class="re-date">${e.date[L]}</p>`;
+    if (e.items) {
+      expItems += `<ul>${e.items[L].map(item => `<li>${item}</li>`).join('')}</ul>`;
     }
-
+    if (e.desc) {
+      expItems += `<p style="font-size:13px;color:#6b7280;margin-top:4px">${e.desc[L]}</p>`;
+    }
     expItems += `</div></div>`;
   });
 
@@ -736,37 +708,29 @@ function showResume() {
     </div>
   `;
 
-  container.innerHTML = `
-    <div class="re-page">
-      <nav class="re-bar">
-        <a href="#" onclick="window.location.hash='';return false;" class="re-back">← ${L === 'zh' ? '返回主页' : 'Back to Home'}</a>
-        <span class="re-lang">
-          <button class="re-lb${L === 'zh' ? ' on' : ''}" onclick="setLang('zh')">中</button>
-          <button class="re-lb${L === 'en' ? ' on' : ''}" onclick="setLang('en')">EN</button>
-        </span>
-      </nav>
-      <div class="re-body">
-        ${headerHTML}
-        ${eduHTML}
-        <div class="re-grid">
-          <div class="re-grid-left">
-            <div class="re-section">
-              <h2>${L === 'zh' ? '经历' : 'Experience'}</h2>
-              <div class="re-timeline">
-                ${expItems}
-              </div>
+  const bodyHtml = `
+    <div class="re-body">
+      ${headerHTML}
+      ${eduHTML}
+      <div class="re-grid">
+        <div class="re-grid-left">
+          <div class="re-section">
+            <h2>${L === 'zh' ? '经历' : 'Experience'}</h2>
+            <div class="re-timeline">
+              ${expItems}
             </div>
           </div>
-          <div class="re-grid-right">
-            ${skillsHTML}
-            ${honorsHTML}
-          </div>
+        </div>
+        <div class="re-grid-right">
+          ${skillsHTML}
+          ${honorsHTML}
         </div>
       </div>
     </div>`;
 
+  container.innerHTML = subPageShell(bodyHtml, L === 'zh' ? '返回主页' : 'Back to Home', '', 'print');
+
   showSubView();
-  document.body.style.backgroundColor = '#faf8f5';
   if (typeof updateSEO === 'function') updateSEO(
     L === 'zh' ? '简历 - 李军辉' : 'Resume - Junhui Li',
     L === 'zh' ? '李军辉的个人简历' : "Junhui Li's Resume"
