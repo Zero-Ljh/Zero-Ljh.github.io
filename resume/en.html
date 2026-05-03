@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Junhui Li · Resume</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 15px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+body {
+  font-family: 'Outfit', 'Inter', sans-serif;
+  color: #1a1a2e;
+  background: #f5f5f7;
+  line-height: 1.6;
+  padding: 40px 20px;
+}
+.resume {
+  max-width: 1000px;
+  margin: 0 auto;
+  background: #fff;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.top-bar {
+  background: linear-gradient(135deg, #0a192f 0%, #112240 100%);
+  padding: 36px 48px 32px;
+  color: #fff;
+}
+.top-bar h1 {
+  font-family: 'Outfit', sans-serif;
+  font-size: 2.4rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin-bottom: 2px;
+}
+.top-bar .subtitle {
+  font-size: 0.95rem;
+  color: #d4a259;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+.top-bar .target {
+  font-size: 0.85rem;
+  color: #8892b0;
+  font-weight: 300;
+  margin-bottom: 14px;
+}
+.top-bar .contact {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+  font-size: 0.85rem;
+  color: #a8b2d1;
+}
+.top-bar .contact a { color: #a8b2d1; text-decoration: none; }
+.top-bar .contact a:hover { color: #d4a259; }
+.body-wrap {
+  display: grid;
+  grid-template-columns: 1fr 2.2fr;
+  gap: 0;
+}
+.sidebar {
+  background: #f8f9fc;
+  padding: 32px 28px;
+  border-right: 1px solid #e8ecf4;
+}
+.sidebar-section { margin-bottom: 28px; }
+.sidebar-section:last-child { margin-bottom: 0; }
+.sidebar-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: #d4a259;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  padding-bottom: 6px;
+  border-bottom: 2px solid #d4a259;
+}
+.edu-item { margin-bottom: 16px; }
+.edu-school { font-weight: 600; font-size: 0.95rem; color: #1a1a2e; }
+.edu-major { font-size: 0.85rem; color: #4a4a6a; margin: 2px 0; }
+.edu-date { font-size: 0.78rem; color: #888; }
+.edu-target {
+  margin-top: 10px; padding: 10px 12px;
+  background: #eef1f8; border-radius: 6px;
+  border-left: 3px solid #d4a259;
+}
+.edu-target-label { font-size: 0.72rem; font-weight: 600; color: #d4a259; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 3px; }
+.edu-target-text { font-size: 0.85rem; color: #2a2a4a; }
+.skill-group { margin-bottom: 14px; }
+.skill-group:last-child { margin-bottom: 0; }
+.skill-group-label { font-size: 0.78rem; font-weight: 600; color: #4a4a6a; margin-bottom: 6px; }
+.skill-item {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 4px; font-size: 0.82rem;
+}
+.skill-name { color: #1a1a2e; }
+.skill-dots { display: flex; gap: 3px; }
+.dot { width: 8px; height: 8px; border-radius: 50%; background: #dde0e8; }
+.dot.filled { background: #0a192f; }
+.dot.target { background: #d4a259; }
+.contact-info p { font-size: 0.85rem; margin-bottom: 6px; color: #2a2a4a; }
+.contact-info a { color: #2a2a4a; text-decoration: none; }
+.main-content { padding: 32px 36px; }
+.main-section { margin-bottom: 28px; }
+.main-section:last-child { margin-bottom: 0; }
+.main-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.85rem; font-weight: 700; letter-spacing: 0.05em;
+  color: #0a192f; text-transform: uppercase;
+  margin-bottom: 14px; padding-bottom: 6px;
+  border-bottom: 2px solid #0a192f;
+  display: flex; align-items: center; gap: 8px;
+}
+.profile-text { font-size: 0.88rem; color: #3a3a5a; line-height: 1.7; }
+.profile-text strong { color: #0a192f; }
+.exp-item { margin-bottom: 18px; }
+.exp-item:last-child { margin-bottom: 0; }
+.exp-header {
+  display: flex; justify-content: space-between; align-items: baseline;
+  flex-wrap: wrap; gap: 4px;
+}
+.exp-title { font-size: 0.92rem; font-weight: 600; color: #1a1a2e; }
+.exp-org { font-size: 0.82rem; color: #d4a259; font-weight: 500; }
+.exp-date { font-size: 0.78rem; color: #888; font-family: 'Outfit', sans-serif; white-space: nowrap; }
+.exp-list { list-style: none; margin-top: 4px; }
+.exp-list li {
+  font-size: 0.82rem; color: #5a5a7a; line-height: 1.5;
+  padding-left: 14px; position: relative;
+}
+.exp-list li::before { content: '—'; position: absolute; left: 0; color: #d4a259; }
+.target-tag {
+  display: inline-block;
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.6rem; font-weight: 600;
+  color: #d4a259; border: 1.5px solid #d4a259;
+  padding: 0 6px; border-radius: 4px;
+  margin-left: 6px; line-height: 1.4; vertical-align: middle;
+}
+.honors-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.honor-item {
+  font-size: 0.85rem; color: #2a2a4a;
+  padding: 6px 10px; background: #f8f9fc; border-radius: 4px;
+}
+.honor-item strong { color: #0a192f; }
+.career-target {
+  background: linear-gradient(135deg, #0a192f, #112240);
+  color: #fff; padding: 20px 24px; border-radius: 8px; margin-top: 10px;
+}
+.career-target-label {
+  font-size: 0.7rem; font-weight: 600; color: #d4a259;
+  text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px;
+}
+.career-target-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 4px; }
+.career-target-sub { font-size: 0.85rem; color: #a8b2d1; line-height: 1.5; }
+.footer { text-align: center; padding: 16px; font-size: 0.72rem; color: #aaa; border-top: 1px solid #eee; }
+
+@media print {
+  body { background: #fff; padding: 0; font-size: 12px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .resume { box-shadow: none; border-radius: 0; max-width: 100%; }
+  .top-bar { padding: 24px 32px 20px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .top-bar h1 { font-size: 1.8rem; }
+  .sidebar { padding: 24px 20px; }
+  .main-content { padding: 24px 28px; }
+  .career-target { -webkit-print-color-adjust: exact; print-color-adjust: exact; break-inside: avoid; }
+  .exp-item { break-inside: avoid; }
+  .sidebar-section { break-inside: avoid; }
+  .footer { display: none; }
+}
+@media (max-width: 768px) {
+  body { padding: 16px; }
+  .top-bar { padding: 24px 20px; }
+  .top-bar h1 { font-size: 1.6rem; }
+  .body-wrap { grid-template-columns: 1fr; }
+  .sidebar { border-right: none; border-bottom: 1px solid #e8ecf4; }
+  .main-content { padding: 24px 20px; }
+  .honors-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<div class="resume">
+
+  <div class="top-bar">
+    <h1>Junhui Li</h1>
+    <div class="subtitle">李军辉</div>
+    <div class="target">Target: AI Application Engineer / AI Algorithm Engineer</div>
+    <div class="contact">
+      <span>📞 +86 15083546739</span>
+      <span>✉ <a href="mailto:2430132207@qq.com">2430132207@qq.com</a></span>
+      <span>🔗 <a href="https://github.com/Zero-Ljh" target="_blank">github.com/Zero-Ljh</a></span>
+    </div>
+  </div>
+
+  <div class="body-wrap">
+    <!-- Sidebar -->
+    <div class="sidebar">
+
+      <div class="sidebar-section">
+        <div class="sidebar-title">Education</div>
+        <div class="edu-item">
+          <div class="edu-school">Wuhan University of Science and Technology</div>
+          <div class="edu-major">AI Science &amp; Innovation Experimental Class · B.E.</div>
+          <div class="edu-date">2025 — 2029 (Expected)</div>
+          <div style="font-size:0.85rem;color:#1a1a2e;font-weight:500;margin-top:4px;">GPA: 3.87 / 4.00</div>
+        </div>
+        <div class="edu-target">
+          <div class="edu-target-label">🎯 Graduate Goal</div>
+          <div class="edu-target-text">M.S. in AI / Computer Science · Huazhong Univ. of Science &amp; Technology</div>
+        </div>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-title">Relevant Coursework</div>
+        <div style="font-size:0.8rem;color:#5a5a7a;line-height:1.6;">
+          <strong style="color:#1a1a2e;">AI Core:</strong> AI, Machine Learning, Deep Learning, Computer Vision, LLM &amp; NLP, Robotics Theory<br>
+          <strong style="color:#1a1a2e;">CS Core:</strong> Data Structures, Algorithm Design, OS, Database Systems, Computer Networks, Software Engineering<br>
+          <strong style="color:#1a1a2e;">Math:</strong> Advanced Math, Linear Algebra, Probability &amp; Statistics, Discrete Math
+        </div>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-title">Technical Skills</div>
+        <div class="skill-group">
+          <div class="skill-group-label">Languages</div>
+          <div class="skill-item"><span class="skill-name">Python</span><div class="skill-dots"><span class="dot filled"></span><span class="dot filled"></span><span class="dot filled"></span><span class="dot"></span><span class="dot"></span></div></div>
+          <div class="skill-item"><span class="skill-name">C++</span><div class="skill-dots"><span class="dot filled"></span><span class="dot filled"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></div></div>
+          <div class="skill-item"><span class="skill-name">HTML / CSS / JS</span><div class="skill-dots"><span class="dot filled"></span><span class="dot filled"></span><span class="dot filled"></span><span class="dot"></span><span class="dot"></span></div></div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-label">AI / Deep Learning</div>
+          <div class="skill-item"><span class="skill-name">PyTorch</span><div class="skill-dots"><span class="dot"></span><span class="dot target"></span><span class="dot target"></span><span class="dot target"></span><span class="dot target"></span></div></div>
+          <div class="skill-item"><span class="skill-name">LangChain / RAG</span><div class="skill-dots"><span class="dot"></span><span class="dot target"></span><span class="dot target"></span><span class="dot target"></span><span class="dot target"></span></div></div>
+          <div class="skill-item"><span class="skill-name">Transformer</span><div class="skill-dots"><span class="dot"></span><span class="dot target"></span><span class="dot target"></span><span class="dot target"></span><span class="dot target"></span></div></div>
+          <div class="skill-item"><span class="skill-name">LoRA / PEFT</span><div class="skill-dots"><span class="dot"></span><span class="dot target"></span><span class="dot target"></span><span class="dot target"></span><span class="dot target"></span></div></div>
+          <div class="skill-item"><span class="skill-name">LLM Agent / MCP</span><div class="skill-dots"><span class="dot"></span><span class="dot target"></span><span class="dot target"></span><span class="dot target"></span><span class="dot target"></span></div></div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-label">Tools &amp; Platforms</div>
+          <div class="skill-item"><span class="skill-name">Git / GitHub</span><div class="skill-dots"><span class="dot filled"></span><span class="dot filled"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></div></div>
+          <div class="skill-item"><span class="skill-name">Linux / Docker</span><div class="skill-dots"><span class="dot"></span><span class="dot target"></span><span class="dot target"></span><span class="dot target"></span><span class="dot target"></span></div></div>
+          <div class="skill-item"><span class="skill-name">Claude Code / Cursor</span><div class="skill-dots"><span class="dot filled"></span><span class="dot filled"></span><span class="dot filled"></span><span class="dot"></span><span class="dot"></span></div></div>
+        </div>
+        <div style="font-size:0.72rem;color:#aaa;margin-top:8px;"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#0a192f;vertical-align:middle;margin-right:3px;"></span> Proficient <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#d4a259;vertical-align:middle;margin-left:10px;margin-right:3px;"></span> Learning Target</div>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-title">Contact</div>
+        <div class="contact-info">
+          <p>📞 +86 15083546739</p>
+          <p>✉ 2430132207@qq.com</p>
+          <p>🔗 <a href="https://github.com/Zero-Ljh" target="_blank">github.com/Zero-Ljh</a></p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Main -->
+    <div class="main-content">
+
+      <div class="main-section">
+        <div class="main-title">Professional Summary</div>
+        <div class="profile-text">
+          First-year student in the <strong>AI Science &amp; Innovation Experimental Class</strong> at
+          Wuhan University of Science and Technology, targeting a career as an <strong>AI Engineer at Xiaomi</strong>.
+          Self-taught in Python and C++, built a bilingual personal website, and joined the Bailian Robotics
+          Algorithm Team. Passionate about hands-on learning — aiming to bridge the gap between model
+        understanding and production-ready AI applications. Planning to pursue graduate studies at
+          <strong>Huazhong University of Science and Technology</strong>.
+        </div>
+      </div>
+
+      <!-- Projects -->
+      <div class="main-section">
+        <div class="main-title">Projects</div>
+
+        <div class="exp-item">
+          <div class="exp-header">
+            <div><span class="exp-title">RAG-based Knowledge Base Q&amp;A System</span> <span class="target-tag">Target</span></div>
+            <div class="exp-date">Python · LangChain · ChromaDB · FastAPI · Docker</div>
+          </div>
+          <ul class="exp-list">
+            <li>Designed and implemented a complete RAG pipeline supporting multi-format document upload, vector storage, semantic retrieval, and LLM-generated answers</li>
+            <li>Optimized chunking strategies and embedding model selection, achieving 92% retrieval recall with end-to-end response latency under 1.2s</li>
+            <li>Packaged as a RESTful API with FastAPI and deployed via Docker for reproducible environments</li>
+            <li><strong style="color:#1a1a2e;">Key skills:</strong> RAG · LangChain · Embeddings · FastAPI · Docker</li>
+          </ul>
+        </div>
+
+        <div class="exp-item">
+          <div class="exp-header">
+            <div><span class="exp-title">LLM Fine-tuning with LoRA</span> <span class="target-tag">Target</span></div>
+            <div class="exp-date">PyTorch · Hugging Face · LoRA · DeepSpeed</div>
+          </div>
+          <ul class="exp-list">
+            <li>Fine-tuned a 7B open-source model using LoRA on a single 24GB GPU, demonstrating parameter-efficient domain adaptation</li>
+            <li>Constructed a 5,000+ instruction-tuning dataset; achieved 18% BLEU improvement after 3 SFT passes</li>
+            <li>Compared performance across PEFT methods including QLoRA and Adapters, producing a comprehensive evaluation report</li>
+            <li><strong style="color:#1a1a2e;">Key skills:</strong> LoRA · PEFT · SFT · Transformers · DeepSpeed</li>
+          </ul>
+        </div>
+
+        <div class="exp-item">
+          <div class="exp-header">
+            <div><span class="exp-title">Multi-Agent Collaboration System</span> <span class="target-tag">Target</span></div>
+            <div class="exp-date">LangGraph · MCP · Claude API · Python</div>
+          </div>
+          <ul class="exp-list">
+            <li>Built a multi-agent orchestration framework with LangGraph for task decomposition, tool calling, memory management, and result aggregation</li>
+            <li>Integrated MCP protocol for dynamic tool registration — covering web search, computation, and database queries</li>
+            <li>Implemented a human-in-the-loop review mechanism to ensure safety on critical decision steps</li>
+            <li><strong style="color:#1a1a2e;">Key skills:</strong> AI Agent · LangGraph · MCP · Tool Calling</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- Experience -->
+      <div class="main-section">
+        <div class="main-title">Experience</div>
+
+        <div class="exp-item">
+          <div class="exp-header">
+            <div><span class="exp-title">AI Application Development Intern</span> <span class="exp-org">@ AI Company</span> <span class="target-tag">Target</span></div>
+            <div class="exp-date">2027 — 2028</div>
+          </div>
+          <ul class="exp-list">
+            <li>Contributed to LLM application deployment: RAG system development, AI Agent optimization, and model inference serving</li>
+            <li>Owned end-to-end data pipeline construction, API development, and production deployment</li>
+            <li>Collaborated across product and QA teams with 200+ Git commits following engineering best practices</li>
+          </ul>
+        </div>
+
+        <div class="exp-item">
+          <div class="exp-header">
+            <div><span class="exp-title">Algorithm Team Member</span> <span class="exp-org">@ Bailian Robotics Team</span></div>
+            <div class="exp-date">2026 — Present</div>
+          </div>
+          <ul class="exp-list">
+            <li>Studied MATLAB and linear algebra fundamentals for robotics algorithm development</li>
+            <li>Explored embodied AI and multimodal perception, tracking vision-language-action (VLA) model advancements</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- Honors -->
+      <div class="main-section">
+        <div class="main-title">Honors &amp; Awards</div>
+        <div class="honors-grid">
+          <div class="honor-item"><strong>AI / Robotics Competition</strong> · Provincial+ Award <span class="target-tag">Target</span></div>
+          <div class="honor-item"><strong>University Scholarship</strong> · First/Second Class <span class="target-tag">Target</span></div>
+          <div class="honor-item"><strong>Conference/Journal Paper</strong> · Publication <span class="target-tag">Target</span></div>
+          <div class="honor-item"><strong>Open Source Contribution</strong> · GitHub Project <span class="target-tag">Target</span></div>
+          <div class="honor-item"><strong>University Cup Football</strong> · 2nd Place</div>
+        </div>
+      </div>
+
+      <!-- Career -->
+      <div class="main-section">
+        <div class="main-title">Career Objective</div>
+        <div class="career-target">
+          <div class="career-target-label">🎯 Long-Term Goal</div>
+          <div class="career-target-title">AI Engineer @ Xiaomi</div>
+          <div class="career-target-sub">
+            Focus on LLM application engineering — fine-tuning, deployment, AI Agent, and multimodal systems.
+            Build from internship to full-time, accumulating engineering expertise and product mindset,
+            ultimately contributing to large-scale intelligent systems at Xiaomi.
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="footer">Junhui Li · Resume · 2026</div>
+</div>
+</body>
+</html>

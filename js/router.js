@@ -621,120 +621,14 @@ function showArchive() {
 
 /* ===== Resume 页面（打印文档风格） ===== */
 function showResume() {
-  const L = currentLang;
-  const container = document.getElementById('sub-view');
-  if (!container) return;
-
-  const p = DATA.profile;
-  const edu = DATA.education;
-
-  /* 顶部双栏Header */
-  const headerHTML = `
-    <div class="re-header">
-      <div class="re-header-left">
-        <h1 class="re-name">${p.name[L]}</h1>
-        <p class="re-header-meta">
-          ${edu.degree[L]}<span class="re-header-dot"> · </span>${edu.period[L]}
-        </p>
-      </div>
-      <div class="re-header-right">
-        <div class="re-contact-item">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-          <a href="https://github.com/${p.githubUsername}" target="_blank" rel="noopener">github.com/${p.githubUsername}</a>
-        </div>
-      </div>
-    </div>
-  `;
-
-  /* 教育背景 */
-  const eduHTML = `
-    <div class="re-section">
-      <h2>${L === 'zh' ? '教育背景' : 'Education'}</h2>
-      <div class="re-item">
-        <h3><a href="${edu.url}" target="_blank" rel="noopener" class="inline-link">${edu.school[L]}</a></h3>
-        <p class="re-item-desc">${edu.description[L]}</p>
-        <div class="re-courses">
-          ${edu.courses[L].map(c => `<span class="re-tag">${c}</span>`).join('')}
-        </div>
-      </div>
-    </div>
-  `;
-
-  /* 经历（时间线） */
-  let expItems = '';
-  DATA.experience.forEach(e => {
-    expItems += `
-      <div class="re-timeline-item">
-        <div class="re-timeline-dot"></div>
-        <div class="re-timeline-body">
-          <h3>${e.title[L]}</h3>
-          <p class="re-date">${e.date[L]}</p>`;
-    if (e.items) {
-      expItems += `<ul>${e.items[L].map(item => `<li>${item}</li>`).join('')}</ul>`;
-    }
-    if (e.desc) {
-      expItems += `<p style="font-size:13px;color:#6b7280;margin-top:4px">${e.desc[L]}</p>`;
-    }
-    expItems += `</div></div>`;
-  });
-
-  /* 技能标签格 */
-  const skillsHTML = `
-    <div class="re-section">
-      <h2>${L === 'zh' ? '技能' : 'Skills'}</h2>
-      <div class="re-skills-grid">
-        ${p.skills.map(s => `
-          <span class="re-skill-pill">
-            <span class="re-skill-name">${s.name}</span>
-            ${s.label ? `<span class="re-skill-label">${s.label[L]}</span>` : ''}
-          </span>
-        `).join('')}
-      </div>
-    </div>
-  `;
-
-  /* 荣誉横排卡片 */
-  const honorsHTML = `
-    <div class="re-section">
-      <h2>${L === 'zh' ? '荣誉' : 'Honors'}</h2>
-      <div class="re-honors">
-        ${DATA.honors.map(h => `
-          <div class="re-honor-card">
-            <span class="re-honor-num">${h.num}</span>
-            <span class="re-honor-label">${h.label[L]}</span>
-          </div>
-        `).join('')}
-      </div>
-    </div>
-  `;
-
-  const bodyHtml = `
-    <div class="re-body">
-      ${headerHTML}
-      ${eduHTML}
-      <div class="re-grid">
-        <div class="re-grid-left">
-          <div class="re-section">
-            <h2>${L === 'zh' ? '经历' : 'Experience'}</h2>
-            <div class="re-timeline">
-              ${expItems}
-            </div>
-          </div>
-        </div>
-        <div class="re-grid-right">
-          ${skillsHTML}
-          ${honorsHTML}
-        </div>
-      </div>
-    </div>`;
-
-  container.innerHTML = subPageShell(bodyHtml, L === 'zh' ? '返回主页' : 'Back to Home', '', 'print');
-
-  showSubView();
-  if (typeof updateSEO === 'function') updateSEO(
-    L === 'zh' ? '简历 - 李军辉' : 'Resume - Junhui Li',
-    L === 'zh' ? '李军辉的个人简历' : "Junhui Li's Resume"
-  );
+  // 重定向到新版的独立简历页面
+  const lang = currentLang === 'en' ? 'en' : 'zh';
+  const url = lang === 'en'
+    ? (DATA.profile.resumeUrlEn || 'resume/en.html')
+    : (DATA.profile.resumeUrl || 'resume/index.html');
+  window.open(url, '_blank');
+  // 回到主页
+  window.location.hash = '';
 }
 
 /* ===== 标签辅助函数 ===== */

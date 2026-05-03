@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>李军辉 · 简历</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ===== Reset & Base ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 15px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+body {
+  font-family: 'Noto Sans SC', 'Outfit', sans-serif;
+  color: #1a1a2e;
+  background: #f5f5f7;
+  line-height: 1.6;
+  padding: 40px 20px;
+}
+
+/* ===== Container ===== */
+.resume {
+  max-width: 1000px;
+  margin: 0 auto;
+  background: #fff;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* ===== Top Bar (Navy) ===== */
+.top-bar {
+  background: linear-gradient(135deg, #0a192f 0%, #112240 100%);
+  padding: 36px 48px 32px;
+  color: #fff;
+}
+.top-bar h1 {
+  font-family: 'Outfit', 'Noto Sans SC', sans-serif;
+  font-size: 2.4rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin-bottom: 2px;
+}
+.top-bar .name-en {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 300;
+  color: #8892b0;
+  margin-bottom: 8px;
+}
+.top-bar .title {
+  font-size: 0.95rem;
+  color: #d4a259;
+  font-weight: 500;
+  margin-bottom: 16px;
+}
+.top-bar .contact {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+  font-size: 0.85rem;
+  color: #a8b2d1;
+}
+.top-bar .contact a {
+  color: #a8b2d1;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.top-bar .contact a:hover { color: #d4a259; }
+.top-bar .contact span { opacity: 0.6; }
+
+/* ===== Body Layout ===== */
+.body-wrap {
+  display: grid;
+  grid-template-columns: 1fr 2.2fr;
+  gap: 0;
+}
+
+/* ===== Sidebar ===== */
+.sidebar {
+  background: #f8f9fc;
+  padding: 32px 28px;
+  border-right: 1px solid #e8ecf4;
+}
+.sidebar-section {
+  margin-bottom: 28px;
+}
+.sidebar-section:last-child { margin-bottom: 0; }
+.sidebar-title {
+  font-family: 'Outfit', 'Noto Sans SC', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: #d4a259;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  padding-bottom: 6px;
+  border-bottom: 2px solid #d4a259;
+}
+
+/* ===== Education ===== */
+.edu-item { margin-bottom: 16px; }
+.edu-item:last-child { margin-bottom: 0; }
+.edu-school {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #1a1a2e;
+}
+.edu-major {
+  font-size: 0.85rem;
+  color: #4a4a6a;
+  margin: 2px 0;
+}
+.edu-date {
+  font-size: 0.78rem;
+  color: #888;
+}
+.edu-target {
+  margin-top: 10px;
+  padding: 10px 12px;
+  background: #eef1f8;
+  border-radius: 6px;
+  border-left: 3px solid #d4a259;
+}
+.edu-target-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #d4a259;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 3px;
+}
+.edu-target-text {
+  font-size: 0.85rem;
+  color: #2a2a4a;
+}
+
+/* ===== Skills ===== */
+.skill-group { margin-bottom: 14px; }
+.skill-group:last-child { margin-bottom: 0; }
+.skill-group-label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #4a4a6a;
+  margin-bottom: 6px;
+}
+.skill-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 4px;
+  font-size: 0.82rem;
+}
+.skill-name { color: #1a1a2e; }
+.skill-dots { display: flex; gap: 3px; }
+.dot { width: 8px; height: 8px; border-radius: 50%; background: #dde0e8; }
+.dot.filled { background: #0a192f; }
+.dot.target { background: #d4a259; }
+
+/* ===== Contact Info ===== */
+.contact-info p {
+  font-size: 0.85rem;
+  margin-bottom: 6px;
+  color: #2a2a4a;
+}
+.contact-info a {
+  color: #2a2a4a;
+  text-decoration: none;
+}
+.contact-info a:hover { color: #d4a259; }
+
+/* ===== Main Content ===== */
+.main-content {
+  padding: 32px 36px;
+}
+.main-section {
+  margin-bottom: 28px;
+}
+.main-section:last-child { margin-bottom: 0; }
+.main-title {
+  font-family: 'Outfit', 'Noto Sans SC', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: #0a192f;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+  padding-bottom: 6px;
+  border-bottom: 2px solid #0a192f;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.main-title .badge {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.6rem;
+  font-weight: 500;
+  background: #d4a259;
+  color: #fff;
+  padding: 2px 8px;
+  border-radius: 10px;
+  text-transform: none;
+  letter-spacing: normal;
+}
+.target-tag {
+  display: inline-block;
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.6rem;
+  font-weight: 600;
+  color: #d4a259;
+  border: 1.5px solid #d4a259;
+  padding: 0 6px;
+  border-radius: 4px;
+  margin-left: 6px;
+  line-height: 1.4;
+  vertical-align: middle;
+}
+
+/* ===== Profile ===== */
+.profile-text {
+  font-size: 0.88rem;
+  color: #3a3a5a;
+  line-height: 1.7;
+}
+.profile-text strong { color: #0a192f; }
+
+/* ===== Blueprint Timeline ===== */
+.blueprint-timeline {
+  position: relative;
+  padding-left: 28px;
+}
+.blueprint-timeline::before {
+  content: '';
+  position: absolute;
+  left: 6px;
+  top: 4px;
+  bottom: 4px;
+  width: 2px;
+  background: linear-gradient(to bottom, #0a192f, #d4a259);
+}
+.blueprint-item {
+  position: relative;
+  margin-bottom: 20px;
+  padding-left: 16px;
+}
+.blueprint-item:last-child { margin-bottom: 0; }
+.blueprint-item::before {
+  content: '';
+  position: absolute;
+  left: -24px;
+  top: 5px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #0a192f;
+  border: 2px solid #fff;
+}
+.blueprint-item.target::before {
+  background: #d4a259;
+  box-shadow: 0 0 0 3px rgba(212,162,89,0.2);
+}
+.blueprint-period {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #d4a259;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.blueprint-heading {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: #1a1a2e;
+  margin: 2px 0 4px;
+}
+.blueprint-desc {
+  font-size: 0.82rem;
+  color: #5a5a7a;
+  line-height: 1.5;
+}
+.blueprint-item.target .blueprint-heading { color: #b8860b; }
+
+/* ===== Experience ===== */
+.exp-item {
+  margin-bottom: 18px;
+}
+.exp-item:last-child { margin-bottom: 0; }
+.exp-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+.exp-title {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: #1a1a2e;
+}
+.exp-org {
+  font-size: 0.82rem;
+  color: #d4a259;
+  font-weight: 500;
+}
+.exp-date {
+  font-size: 0.78rem;
+  color: #888;
+  font-family: 'Outfit', sans-serif;
+}
+.exp-desc {
+  font-size: 0.82rem;
+  color: #5a5a7a;
+  margin-top: 4px;
+  line-height: 1.5;
+}
+.exp-list {
+  list-style: none;
+  margin-top: 4px;
+}
+.exp-list li {
+  font-size: 0.82rem;
+  color: #5a5a7a;
+  line-height: 1.5;
+  padding-left: 14px;
+  position: relative;
+}
+.exp-list li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: #d4a259;
+}
+
+/* ===== Target Projects (Blueprint style) ===== */
+.proj-target {
+  background: #f8f9fc;
+  border-radius: 6px;
+  padding: 14px 16px;
+  margin-bottom: 12px;
+  border-left: 3px solid #d4a259;
+}
+.proj-target:last-child { margin-bottom: 0; }
+.proj-target-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #d4a259;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 2px;
+}
+.proj-target-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #1a1a2e;
+}
+.proj-target-desc {
+  font-size: 0.82rem;
+  color: #5a5a7a;
+  margin-top: 2px;
+}
+
+/* ===== Honors ===== */
+.honors-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+.honor-item {
+  font-size: 0.85rem;
+  color: #2a2a4a;
+  padding: 6px 10px;
+  background: #f8f9fc;
+  border-radius: 4px;
+}
+.honor-item strong { color: #0a192f; }
+
+/* ===== Target Career ===== */
+.career-target {
+  background: linear-gradient(135deg, #0a192f, #112240);
+  color: #fff;
+  padding: 20px 24px;
+  border-radius: 8px;
+  margin-top: 10px;
+}
+.career-target-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #d4a259;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 6px;
+}
+.career-target-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+.career-target-sub {
+  font-size: 0.85rem;
+  color: #a8b2d1;
+  line-height: 1.5;
+}
+
+/* ===== Footer ===== */
+.footer {
+  text-align: center;
+  padding: 16px;
+  font-size: 0.72rem;
+  color: #aaa;
+  border-top: 1px solid #eee;
+}
+
+/* ===== Print Styles ===== */
+@media print {
+  body {
+    background: #fff;
+    padding: 0;
+    font-size: 12px;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .resume {
+    box-shadow: none;
+    border-radius: 0;
+    max-width: 100%;
+  }
+  .top-bar {
+    padding: 24px 32px 20px;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .top-bar h1 { font-size: 1.8rem; }
+  .sidebar { padding: 24px 20px; }
+  .main-content { padding: 24px 28px; }
+  .blueprint-timeline::before { background: #0a192f !important; }
+  .career-target { -webkit-print-color-adjust: exact; print-color-adjust: exact; break-inside: avoid; }
+  .proj-target { break-inside: avoid; }
+  .exp-item { break-inside: avoid; }
+  .sidebar-section { break-inside: avoid; }
+  .footer { display: none; }
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  body { padding: 16px; }
+  .top-bar { padding: 24px 20px; }
+  .top-bar h1 { font-size: 1.6rem; }
+  .top-bar .contact { gap: 6px 16px; }
+  .body-wrap { grid-template-columns: 1fr; }
+  .sidebar { border-right: none; border-bottom: 1px solid #e8ecf4; }
+  .main-content { padding: 24px 20px; }
+  .honors-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="resume">
+
+  <!-- ===== Top Bar ===== -->
+  <div class="top-bar">
+    <h1>李军辉</h1>
+    <div class="name-en">Junhui Li</div>
+    <div class="title">目标岗位：AI 应用工程师 / AI 算法工程师</div>
+    <div class="contact">
+      <span>📞 15083546739</span>
+      <span>✉ <a href="mailto:2430132207@qq.com">2430132207@qq.com</a></span>
+      <span>🔗 <a href="https://github.com/Zero-Ljh" target="_blank">github.com/Zero-Ljh</a></span>
+    </div>
+  </div>
+
+  <!-- ===== Body ===== -->
+  <div class="body-wrap">
+
+    <!-- ===== Sidebar ===== -->
+    <div class="sidebar">
+
+      <!-- Education -->
+      <div class="sidebar-section">
+        <div class="sidebar-title">教育背景</div>
+        <div class="edu-item">
+          <div class="edu-school">武汉科技大学</div>
+          <div class="edu-major">人工智能科创实验班 · 本科 · 工学学士</div>
+          <div class="edu-date">2025 — 2029</div>
+          <div style="font-size:0.85rem;color:#1a1a2e;font-weight:500;margin-top:4px;">GPA：3.87 / 4.00</div>
+        </div>
+        <div class="edu-target">
+          <div class="edu-target-label">🎯 深造目标</div>
+          <div class="edu-target-text">华中科技大学 · 人工智能/计算机 · 硕士（保研）</div>
+        </div>
+      </div>
+
+      <!-- Courses -->
+      <div class="sidebar-section">
+        <div class="sidebar-title">主修课程</div>
+        <div style="font-size:0.8rem;color:#5a5a7a;line-height:1.6;">
+          <strong style="color:#1a1a2e;">AI 核心：</strong>人工智能、机器学习、深度学习、计算机视觉、大语言模型与自然语言处理、机器人理论与技术<br>
+          <strong style="color:#1a1a2e;">计算机基础：</strong>数据结构、算法设计与分析、操作系统、数据库系统原理、计算机网络、软件工程<br>
+          <strong style="color:#1a1a2e;">数学：</strong>高等数学、线性代数、概率论与数理统计、离散数学
+        </div>
+      </div>
+
+      <!-- Skills -->
+      <div class="sidebar-section">
+        <div class="sidebar-title">技术栈</div>
+
+        <div class="skill-group">
+          <div class="skill-group-label">编程语言</div>
+          <div class="skill-item"><span class="skill-name">Python</span><div class="skill-dots"><span class="dot filled"></span><span class="dot filled"></span><span class="dot filled"></span><span class="dot"></span><span class="dot"></span></div></div>
+          <div class="skill-item"><span class="skill-name">C++</span><div class="skill-dots"><span class="dot filled"></span><span class="dot filled"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></div></div>
+          <div class="skill-item"><span class="skill-name">HTML / CSS / JS</span><div class="skill-dots"><span class="dot filled"></span><span class="dot filled"></span><span class="dot filled"></span><span class="dot"></span><span class="dot"></span></div></div>
+        </div>
+
+        <div class="skill-group">
+          <div class="skill-group-label">AI / 深度学习</div>
+          <div class="skill-item"><span class="skill-name">PyTorch</span><div class="skill-dots"><span class="dot"></span><span class="dot target"></span><span class="dot target"></span><span class="dot target"></span><span class="dot target"></span></div></div>
+          <div class="skill-item"><span class="skill-name">LangChain / RAG</span><div class="skill-dots"><span class="dot"></span><span class="dot target"></span><span class="dot target"></span><span class="dot target"></span><span class="dot target"></span></div></div>
+          <div class="skill-item"><span class="skill-name">Transformer</span><div class="skill-dots"><span class="dot"></span><span class="dot target"></span><span class="dot target"></span><span class="dot target"></span><span class="dot target"></span></div></div>
+          <div class="skill-item"><span class="skill-name">LoRA 微调 / PEFT</span><div class="skill-dots"><span class="dot"></span><span class="dot target"></span><span class="dot target"></span><span class="dot target"></span><span class="dot target"></span></div></div>
+          <div class="skill-item"><span class="skill-name">LLM Agent / MCP</span><div class="skill-dots"><span class="dot"></span><span class="dot target"></span><span class="dot target"></span><span class="dot target"></span><span class="dot target"></span></div></div>
+        </div>
+
+        <div class="skill-group">
+          <div class="skill-group-label">工具 &amp; 平台</div>
+          <div class="skill-item"><span class="skill-name">Git / GitHub</span><div class="skill-dots"><span class="dot filled"></span><span class="dot filled"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></div></div>
+          <div class="skill-item"><span class="skill-name">Linux / Docker</span><div class="skill-dots"><span class="dot"></span><span class="dot target"></span><span class="dot target"></span><span class="dot target"></span><span class="dot target"></span></div></div>
+          <div class="skill-item"><span class="skill-name">Claude Code / Cursor</span><div class="skill-dots"><span class="dot filled"></span><span class="dot filled"></span><span class="dot filled"></span><span class="dot"></span><span class="dot"></span></div></div>
+        </div>
+        <div style="font-size:0.72rem;color:#aaa;margin-top:8px;"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#0a192f;vertical-align:middle;margin-right:3px;"></span> 已掌握 <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#d4a259;vertical-align:middle;margin-left:10px;margin-right:3px;"></span> 学习目标</div>
+      </div>
+
+      <!-- Contact -->
+      <div class="sidebar-section">
+        <div class="sidebar-title">联系方式</div>
+        <div class="contact-info">
+          <p>📞 15083546739</p>
+          <p>✉ 2430132207@qq.com</p>
+          <p>🔗 <a href="https://github.com/Zero-Ljh" target="_blank">github.com/Zero-Ljh</a></p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ===== Main ===== -->
+    <div class="main-content">
+
+      <!-- Profile -->
+      <div class="main-section">
+        <div class="main-title">个人简介</div>
+        <div class="profile-text">
+          武汉科技大学人工智能科创实验班在读，以 <strong>AI 应用工程</strong> 为核心方向，
+          以 <strong>小米 AI 工程师</strong> 为职业目标。自学 Python/C++，独立开发个人主页，
+          加入百炼机器人团队算法组，持续关注大模型、多模态、Agent 等前沿技术。
+          坚持动手驱动的学习方式，规划在本科期间完成从基础建模到工程落地的完整训练，
+          力争保研华中科技大学，深入 AI 研究与开发。
+        </div>
+      </div>
+
+      <!-- Projects (MOST IMPORTANT - placed first) -->
+      <div class="main-section">
+        <div class="main-title">项目经验</div>
+
+        <div class="exp-item">
+          <div class="exp-header">
+            <div><span class="exp-title">基于 RAG 的企业知识库问答系统</span> <span class="target-tag">目标</span></div>
+            <div class="exp-date">Python · LangChain · ChromaDB · FastAPI · Docker</div>
+          </div>
+          <ul class="exp-list">
+            <li>设计并实现完整 RAG 流水线，支持多格式文档上传、向量化存储、语义检索与大模型生成回答</li>
+            <li>通过分块策略优化与 Embedding 模型选型，将检索召回率提升至 92%，端到端响应延迟控制在 1.2s 以内</li>
+            <li>使用 FastAPI 封装为 RESTful 服务，Docker 容器化部署，提供可交互的 API 文档</li>
+            <li><strong style="color:#1a1a2e;">关联技能：</strong>RAG · LangChain · Embedding · FastAPI · Docker</li>
+          </ul>
+        </div>
+
+        <div class="exp-item">
+          <div class="exp-header">
+            <div><span class="exp-title">大语言模型 LoRA 微调实战</span> <span class="target-tag">目标</span></div>
+            <div class="exp-date">PyTorch · Hugging Face · LoRA · DeepSpeed</div>
+          </div>
+          <ul class="exp-list">
+            <li>基于开源 7B 模型，使用 LoRA 参数高效微调技术，在单卡 24G 显存环境下完成领域适配训练</li>
+            <li>构建指令微调数据集（5000+ 条），经过 3 轮 SFT 使模型在目标任务上的 BLEU 评分提升 18%</li>
+            <li>对比 QLoRA、Adapter 等不同 PEFT 方法的性能差异，产出完整的实验报告</li>
+            <li><strong style="color:#1a1a2e;">关联技能：</strong>LoRA · PEFT · SFT · Transformers · DeepSpeed</li>
+          </ul>
+        </div>
+
+        <div class="exp-item">
+          <div class="exp-header">
+            <div><span class="exp-title">多 Agent 协作系统设计与实现</span> <span class="target-tag">目标</span></div>
+            <div class="exp-date">LangGraph · MCP · Claude API · Python</div>
+          </div>
+          <ul class="exp-list">
+            <li>基于 LangGraph 构建多 Agent 编排框架，实现任务拆解、工具调用、记忆管理及结果聚合全流程</li>
+            <li>集成 MCP 协议支持外部工具动态注册与调用，覆盖搜索、计算、数据库查询等常见场景</li>
+            <li>设计人机协同的审核机制，在保证自主性的同时确保关键决策环节可控</li>
+            <li><strong style="color:#1a1a2e;">关联技能：</strong>AI Agent · LangGraph · MCP · Tool Calling</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- Internship -->
+      <div class="main-section">
+        <div class="main-title">实习经历</div>
+
+        <div class="exp-item">
+          <div class="exp-header">
+            <div><span class="exp-title">AI 应用开发实习生</span> <span class="exp-org">@ 互联网/AI 公司</span> <span class="target-tag">目标</span></div>
+            <div class="exp-date">2027 — 2028</div>
+          </div>
+          <ul class="exp-list">
+            <li>参与大模型应用落地，负责 RAG 系统与 AI Agent 的功能开发与性能优化</li>
+            <li>独立完成数据 pipeline 搭建、模型推理服务封装、API 接口开发及部署上线</li>
+            <li>与产品、测试团队协作迭代，代码遵循工程规范，累计提交 200+ commits</li>
+          </ul>
+        </div>
+
+        <div class="exp-item">
+          <div class="exp-header">
+            <div><span class="exp-title">算法组干员</span> <span class="exp-org">@ 百炼机器人团队</span></div>
+            <div class="exp-date">2026 — 至今</div>
+          </div>
+          <ul class="exp-list">
+            <li>系统学习 MATLAB 与线性代数，参与团队日常技术分享与算法讨论</li>
+            <li>跟进具身智能与多模态感知方向，探索视觉-语言-动作模型的技术路线</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- Honors -->
+      <div class="main-section">
+        <div class="main-title">荣誉与奖项</div>
+        <div class="honors-grid">
+          <div class="honor-item"><strong>AI / 机器人竞赛</strong> · 省级以上奖项 <span class="target-tag">目标</span></div>
+          <div class="honor-item"><strong>校级奖学金</strong> · 一等/二等 <span class="target-tag">目标</span></div>
+          <div class="honor-item"><strong>学术论文</strong> · 会议/期刊发表 <span class="target-tag">目标</span></div>
+          <div class="honor-item"><strong>开源项目贡献</strong> · GitHub 优质项目 <span class="target-tag">目标</span></div>
+          <div class="honor-item"><strong>院系杯足球赛</strong> · 校级二等奖</div>
+        </div>
+      </div>
+
+      <!-- Career Target -->
+      <div class="main-section">
+        <div class="main-title">职业目标</div>
+        <div class="career-target">
+          <div class="career-target-label">🎯 远景目标</div>
+          <div class="career-target-title">小米 · AI 工程师</div>
+          <div class="career-target-sub">
+            专注大模型应用与工程化方向，涵盖 LLM 微调部署、AI Agent、多模态应用。
+            从实习到校招，逐步积累项目经验和工程能力，最终加入小米 AI 团队，
+            参与大规模智能系统的研发与落地。
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="footer">
+    李军辉 · 简历 · 2026
+  </div>
+</div>
+
+</body>
+</html>

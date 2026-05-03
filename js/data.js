@@ -47,7 +47,8 @@ const DATA = {
       zh: '偏好工程方向。起初希望导师手把手引导，适应后逐步独立。涉猎广泛（AI·文史哲政经济），但知道要先做好自己的位置。',
       en: 'Prefer engineering over theory. Value mentorship with growing independence. Wide-ranging interests (AI, humanities, politics, economics) — but I know to master my position first.'
     },
-    resumeUrl: 'assets/resume-en.pdf',
+    resumeUrl: 'resume/index.html',
+    resumeUrlEn: 'resume/en.html',
     githubUsername: 'Zero-Ljh'
   },
 
@@ -579,8 +580,13 @@ const DATA = {
   creative: [
     {
       genre: { zh: '古诗', en: 'Classical Poem' },
-      title: { zh: '无题', en: 'Untitled' },
-      excerpt: { zh: '（请将你的古诗发给我，我会放入）', en: '(Send me your poem and I will put it here)' }
+      title: { zh: '早行', en: 'Early Journey' },
+      date: 'May 2026',
+      readingTime: '1 min',
+      excerpt: {
+        zh: '路遥幽径深，落月送游人。<br>垂眉思孙山，寄魂与枯坟。<br>露润裤管处，虫草哀秋暮。<br>烈风摧残骨，雁去留人骷。<br>旷野曾绿野，屋舍绝人烟。<br>孤杆不住斜，细流腐落叶。<br>望愁垄心头，启明坠意楼。<br>涸田待春朝，少年正拂晓。<br>仰首即触天，顿足震余年。<br>郁结初心果，造福人世间。',
+        en: 'Long road, deep winding path, the setting moon sees off a traveler.<br>Head bowed, thoughts of exam hopes, soul left at a barren grave.<br>Dew wets the pant legs, insects mourn the autumn dusk.<br>Fierce wind rends frail bones, wild geese leave a human skull behind.<br>Where once were green fields, now homes have no chimney smoke.<br>A lone pole leans crooked, a thin stream rots fallen leaves.<br>Grief knots at the chest, the morning star sinks from the tower.<br>Parched fields wait for spring dawn — a boy stands at daybreak.<br>Lift his head, he nearly touches the sky; stamp his feet, he shakes the years ahead.<br>The first fruit of his heart, to bring good to the world of men.'
+      }
     },
     {
       genre: { zh: '文章', en: 'Essay' },

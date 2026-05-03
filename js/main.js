@@ -30,7 +30,8 @@ function renderNav() {
     desktopHtml += `<a href="${item.href}" data-en="${num}. ${item.en}" data-zh="${num}. ${item.zh}"><span class="nav-num">${num}.</span> ${item[lang]}</a>`;
   });
 
-  desktopHtml += `<a href="#" id="resume-btn" class="resume-btn" data-en="${t.resumeBtn.en}" data-zh="${t.resumeBtn.zh}" onclick="event.preventDefault();window.open('${DATA.profile.resumeUrl}','_blank')">${t.resumeBtn[lang]}</a>
+  const resumeUrl = lang === 'en' ? (DATA.profile.resumeUrlEn || DATA.profile.resumeUrl) : DATA.profile.resumeUrl;
+  desktopHtml += `<a href="#" id="resume-btn" class="resume-btn" data-en="${t.resumeBtn.en}" data-zh="${t.resumeBtn.zh}" onclick="event.preventDefault();window.open('${resumeUrl}','_blank')">${t.resumeBtn[lang]}</a>
     <div class="dropdown" id="more-dropdown">
     <button class="dropdown-toggle" id="moreBtn" onclick="toggleDropdown()" aria-haspopup="true" aria-expanded="false" data-en="${t.moreBtn.en}" data-zh="${t.moreBtn.zh}">${t.moreBtn[lang]}</button>
     <div class="dropdown-menu" id="dropdown-menu">`;
@@ -62,7 +63,7 @@ function renderNav() {
     t.dropdown.forEach(item => {
       mobileHtml += `<a href="${item.href}" data-en="${item.en}" data-zh="${item.zh}">${item[lang]}</a>`;
     });
-    mobileHtml += `<a href="#" class="mobile-resume" onclick="event.preventDefault();window.open('${DATA.profile.resumeUrl}','_blank')">${t.resumeBtn[lang]}</a>`;
+    mobileHtml += `<a href="#" class="mobile-resume" onclick="event.preventDefault();var url=(typeof currentLang!=='undefined'&&currentLang==='en'?'${DATA.profile.resumeUrlEn || 'resume/en.html'}':'${DATA.profile.resumeUrl}');window.open(url,'_blank')">${t.resumeBtn[lang]}</a>`;
     mobileContainer.innerHTML = mobileHtml;
   }
 }
