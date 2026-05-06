@@ -21,13 +21,13 @@
 | Notebook | 课程笔记（含代码块+概念提炼） |
 | Creative | 创作空间（古诗/文章/现代诗/随笔） |
 | Life | 课余生活 + 照片墙 + 灯箱浏览 |
-| Toolbox | 常用工具分类 |
-| Gallery | 图片库·瀑布流+灯箱·分 AI生成/摄影/动漫/生活 |
+| Toolbox | 常用工具分类（可点击跳转官网） |
+| Photography | 个人摄影集·深色极简·非对称网格·4 个分类 |
 | Resources | 学习资源推荐（B站UP主分类整理） |
 | Contact | 联系表单 + 实时提交反馈 |
 | Research | 兴趣探索方向（4 个） |
 | **子页面** | 阅读/项目/笔记/创作全文 / 生活 / 工具箱 |
-| | 归档 / 博客索引 / 简历 / 资源 / 标签 / 图库 / 兴趣探索 |
+| | 归档 / 博客索引 / 简历 / 资源 / 标签 / 摄影集 / 兴趣探索 |
 | **搜索** | Ctrl+K 全站搜索 |
 | **双语** | 中/EN 一键切换，全局 data-attribute 驱动 |
 | **PWA** | Service Worker 离线支持 + manifest.json |
@@ -45,6 +45,7 @@ js/
   data-loader.js        # 异步加载 content/*.json（失败回退 data.js）
   i18n.js               # 中英双语切换引擎
   main.js               # 渲染引擎 + 交互 + 动效
+  photography.js        # 摄影集渲染（深色极简·非对称网格）
   router.js             # 哈希路由（18 条路由 + 子页面）
 content/                # CMS 管理的内容（13 个 JSON 文件）
 admin/

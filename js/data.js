@@ -556,23 +556,23 @@ const DATA = {
     }
   ],
 
-  /* ===== 图库 ===== */
+  /* ===== 图库 / 摄影集 ===== */
   gallery: {
     categories: [
-      { id: 'aigc', icon: '', label: { zh: 'AI 生成', en: 'AI Generated' } },
-      { id: 'photo', icon: '', label: { zh: '摄影', en: 'Photography' } },
-      { id: 'anime', icon: '', label: { zh: '动漫', en: 'Anime' } },
-      { id: 'life', icon: '', label: { zh: '生活', en: 'Life' } }
+      { id: 'aigc', icon: '✦', label: { zh: 'AIGC', en: 'AIGC' }, desc: { zh: 'AI 生成的视觉创作——像素与算法的共舞', en: 'AI-generated visual art — where pixels dance with algorithms' } },
+      { id: 'wilderness', icon: '△', label: { zh: '旷野遐想', en: 'Wilderness' }, desc: { zh: '山野湖海，天地辽阔', en: 'Mountains, lakes, and the vastness of nature' } },
+      { id: 'heartfelt', icon: '♡', label: { zh: '动人心弦', en: 'Heartstrings' }, desc: { zh: '那些触动人心的瞬间与面孔', en: 'Moments and faces that stir the soul' } },
+      { id: 'fragments', icon: '◇', label: { zh: '生活碎片', en: 'Fragments' }, desc: { zh: '日常中散落的诗意与微光', en: 'Poetry and glimmers scattered in the everyday' } }
     ],
     items: [
-      { src: 'assets/gallery/01.jpeg', thumb: 'assets/gallery/01.jpeg', title: { zh: '作品 01', en: 'Work 01' }, category: 'aigc', width: 800, height: 600 },
-      { src: 'assets/gallery/02.png', thumb: 'assets/gallery/02.png', title: { zh: '作品 02', en: 'Work 02' }, category: 'aigc', width: 800, height: 600 },
-      { src: 'assets/gallery/03.jpeg', thumb: 'assets/gallery/03.jpeg', title: { zh: '作品 03', en: 'Work 03' }, category: 'aigc', width: 800, height: 600 },
-      { src: 'assets/gallery/04.png', thumb: 'assets/gallery/04.png', title: { zh: '作品 04', en: 'Work 04' }, category: 'aigc', width: 800, height: 600 },
-      { src: 'assets/gallery/05.jpeg', thumb: 'assets/gallery/05.jpeg', title: { zh: '作品 05', en: 'Work 05' }, category: 'photo', width: 800, height: 600 },
-      { src: 'assets/images/football-team-1.jpg', thumb: 'assets/images/football-team-1.jpg', title: { zh: '足球赛前合照', en: 'Football Team Photo' }, category: 'life', width: 1200, height: 800 },
-      { src: 'assets/images/football-team-2.jpg', thumb: 'assets/images/football-team-2.jpg', title: { zh: '足球赛前合照 2', en: 'Football Team Photo 2' }, category: 'life', width: 1200, height: 800 },
-      { src: 'assets/images/psychodrama.jpg', thumb: 'assets/images/psychodrama.jpg', title: { zh: '心理情景剧幕后工作', en: 'Psychodrama Backstage' }, category: 'life', width: 1200, height: 800 }
+      { src: 'assets/gallery/02.png', thumb: 'assets/gallery/02.png', title: { zh: '数字梦境', en: 'Digital Dreamscape' }, category: 'aigc', width: 800, height: 600 },
+      { src: 'assets/gallery/04.png', thumb: 'assets/gallery/04.png', title: { zh: '算法之诗', en: 'Algorithmic Poem' }, category: 'aigc', width: 800, height: 600 },
+      { src: 'assets/gallery/01.jpeg', thumb: 'assets/gallery/01.jpeg', title: { zh: '远山', en: 'Distant Mountains' }, category: 'wilderness', width: 800, height: 600 },
+      { src: 'assets/gallery/03.jpeg', thumb: 'assets/gallery/03.jpeg', title: { zh: '湖光', en: 'Lake Light' }, category: 'wilderness', width: 800, height: 600 },
+      { src: 'assets/gallery/05.jpeg', thumb: 'assets/gallery/05.jpeg', title: { zh: '午后', en: 'Afternoon' }, category: 'fragments', width: 800, height: 600 },
+      { src: 'assets/images/football-team-1.jpg', thumb: 'assets/images/football-team-1.jpg', title: { zh: '绿茵之上', en: 'On the Pitch' }, category: 'fragments', width: 1200, height: 800 },
+      { src: 'assets/images/football-team-2.jpg', thumb: 'assets/images/football-team-2.jpg', title: { zh: '并肩', en: 'Side by Side' }, category: 'fragments', width: 1200, height: 800 },
+      { src: 'assets/images/psychodrama.jpg', thumb: 'assets/images/psychodrama.jpg', title: { zh: '幕后', en: 'Backstage' }, category: 'fragments', width: 1200, height: 800 }
     ]
   },
 
@@ -626,15 +626,15 @@ const DATA = {
       {
         label: { zh: 'AI 工具', en: 'AI Tools' },
         items: [
-          { name: 'Claude Code', desc: { zh: '主力 AI 编程助手', en: 'Primary AI coding assistant' } },
-          { name: 'DeepSeek', desc: { zh: '高性价比大模型', en: 'Cost-effective LLM' } },
-          { name: 'GitHub Copilot', desc: { zh: '入门时的 AI 搭档', en: 'AI pair programmer when starting out' } }
+          { name: 'Claude Code', url: 'https://docs.anthropic.com/en/docs/claude-code/overview', desc: { zh: '主力 AI 编程助手', en: 'Primary AI coding assistant' } },
+          { name: 'DeepSeek', url: 'https://chat.deepseek.com/', desc: { zh: '高性价比大模型', en: 'Cost-effective LLM' } },
+          { name: 'GitHub Copilot', url: 'https://github.com/features/copilot', desc: { zh: '入门时的 AI 搭档', en: 'AI pair programmer when starting out' } }
         ]
       },
       {
         label: { zh: '编程语言', en: 'Languages' },
         items: [
-          { name: 'Python', desc: { zh: '第一个编程语言，数据处理和脚本', en: 'First language, data processing & scripting' } },
+          { name: 'Python', url: 'https://www.python.org/', desc: { zh: '第一个编程语言，数据处理和脚本', en: 'First language, data processing & scripting' } },
           { name: 'C++', desc: { zh: '正在学习，理解底层', en: 'Currently learning, understanding fundamentals' } },
           { name: 'HTML/CSS/JS', desc: { zh: '搭建本网站', en: 'Built this website' } }
         ]
@@ -643,8 +643,8 @@ const DATA = {
         label: { zh: '工作流', en: 'Workflow' },
         items: [
           { name: 'AI 工具链', desc: { zh: 'AI 辅助开发实践', en: 'AI-assisted development' } },
-          { name: 'GitHub Pages', desc: { zh: '静态网站部署', en: 'Static site deployment' } },
-          { name: 'VS Code', desc: { zh: '日常编辑器', en: 'Daily editor' } }
+          { name: 'GitHub Pages', url: 'https://pages.github.com/', desc: { zh: '静态网站部署', en: 'Static site deployment' } },
+          { name: 'VS Code', url: 'https://code.visualstudio.com/', desc: { zh: '日常编辑器', en: 'Daily editor' } }
         ]
       }
     ]
@@ -750,7 +750,7 @@ const DATA = {
         { href: '#archive', zh: '小项目', en: 'Side Builds' },
         { href: '#resume', zh: '简历', en: 'Resume' },
         { href: '#resources', zh: '资源', en: 'Resources' },
-        { href: '#gallery', zh: '图库', en: 'Gallery' },
+        { href: '#photography', zh: '摄影集', en: 'Portfolio' },
         { href: '#tags', zh: '标签', en: 'Tags' },
         { href: '#creative', zh: '创作', en: 'Creative' },
         { href: '#life', zh: '生活', en: 'Life' },

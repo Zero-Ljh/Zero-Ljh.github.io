@@ -41,7 +41,10 @@ function handleRoute() {
   if (hash === 'resume') { showResume(); return; }
   if (hash === 'resources') { showResources(); return; }
   if (hash === 'tags') { showTags(); return; }
-  if (hash === 'gallery') { showGallery(); return; }
+  if (hash === 'gallery') { window.location.hash = 'photography'; return; }
+  if (hash === 'photography') { showPhotography(); return; }
+  var phMatch = hash.match(/^photography\/category\/(.+)$/);
+  if (phMatch) { showPhotographyCategory(phMatch[1]); return; }
   if (hash === 'research') { showResearchPage(); return; }
   if (hash === 'creative') { showCreativeIndex(); return; }
   if (hash === 'life') { showLifePage(); return; }
@@ -938,201 +941,6 @@ function filterBlog(tag, btn) {
   });
 }
 
-/* ===== 图库展示 ===== */
-function showGallery() {
-  var lang = currentLang;
-  var container = document.getElementById('sub-view');
-  if (!container || !DATA.gallery) { showMainView(); return; }
-
-  var gallery = DATA.gallery;
-  var activeCat = 'all';
-
-  function renderGallery(cat) {
-    activeCat = cat;
-    var items = cat === 'all' ? gallery.items : gallery.items.filter(function(i) { return i.category === cat; });
-
-    var filterHtml = '<div class="gallery-filter">' +
-      '<button class="gallery-filter-btn' + (cat === 'all' ? ' active' : '') + '" onclick="window._filterGallery(\'all\')">' + (lang === 'zh' ? '全部' : 'All') + '</button>';
-    gallery.categories.forEach(function(c) {
-      filterHtml += '<button class="gallery-filter-btn' + (cat === c.id ? ' active' : '') + '" onclick="window._filterGallery(\'' + c.id + '\')">' + c.icon + ' ' + c.label[lang] + '</button>';
-    });
-    filterHtml += '</div>';
-
-    var masonryHtml = '<div class="gallery-grid">';
-    items.forEach(function(item, idx) {
-      var globalIdx = gallery.items.indexOf(item);
-      masonryHtml += '<div class="gallery-item" onclick="window._openLightbox(' + globalIdx + ')">' +
-        '<img src="' + (item.thumb || item.src) + '" alt="' + escHTML(item.title[lang]) + '" loading="lazy">' +
-        '<div class="gallery-item-overlay"><div class="gallery-item-label">' +
-        '<span class="label-num">No. ' + (idx + 1) + ' / ' + items.length + '</span>' +
-        '<span class="label-title">' + item.title[lang] + '</span>' +
-        '<span class="label-meta">' + (item.category === 'aigc' ? (lang === 'zh' ? 'AI 生成' : 'AI Generated') : (item.category === 'photo' ? (lang === 'zh' ? '摄影' : 'Photography') : (lang === 'zh' ? '动漫' : 'Anime'))) + '</span>' +
-        '</div></div>' +
-        '</div>';
-    });
-    masonryHtml += '</div>';
-
-    document.getElementById('gallery-content').innerHTML = filterHtml + masonryHtml;
-    window._galleryCat = cat;
-    requestAnimationFrame(function() {
-      var items = document.querySelectorAll('.gallery-item');
-      items.forEach(function(item, i) {
-        item.style.animationDelay = (i * 100) + 'ms';
-      });
-    });
-  }
-
-  window._openLightbox = function(idx) {
-    window._lightboxIdx = idx;
-    window._lightboxItems = window._galleryCat === 'all'
-      ? gallery.items
-      : gallery.items.filter(function(i) { return i.category === window._galleryCat; });
-    // Find the index within filtered items
-    var item = gallery.items[idx];
-    var filteredIdx = window._lightboxItems.indexOf(item);
-    window._lightboxIdx = filteredIdx >= 0 ? filteredIdx : 0;
-    document.getElementById('gallery-lightbox').classList.add('open');
-    updateLightboxImage();
-    document.body.style.overflow = 'hidden';
-    resetLightboxTimer();
-  };
-
-  window._closeLightbox = function() {
-    try { document.getElementById('gallery-lightbox')?.classList.remove('open'); } catch(e) {}
-    document.body.style.overflow = '';
-    clearTimeout(lightboxTimer);
-  };
-
-  window._lightboxPrev = function() {
-    if (window._lightboxIdx > 0) { window._lightboxIdx--; updateLightboxImage(); }
-  };
-
-  window._lightboxNext = function() {
-    if (window._lightboxIdx < window._lightboxItems.length - 1) { window._lightboxIdx++; updateLightboxImage(); }
-  };
-
-  function updateLightboxImage() {
-    var item = window._lightboxItems[window._lightboxIdx];
-    if (!item) return;
-    var img = document.getElementById('lightbox-img');
-
-    // 当前图缩放淡出
-    if (img.src && !img.classList.contains('loading')) {
-      img.classList.add('exiting');
-      setTimeout(function() {
-        img.classList.remove('exiting');
-        setNewImage();
-      }, 350);
-    } else {
-      setNewImage();
-    }
-
-    function setNewImage() {
-      img.classList.add('loading');
-      img.src = item.src;
-      img.alt = item.title ? (typeof item.title === 'object' ? item.title[currentLang] : item.title) : '';
-      img.onload = function() {
-        img.classList.remove('loading');
-        img.classList.add('entering');
-        setTimeout(function() { img.classList.remove('entering'); }, 500);
-      };
-      document.getElementById('lightbox-counter').textContent = (window._lightboxIdx + 1) + ' / ' + window._lightboxItems.length;
-    }
-  }
-
-  window._filterGallery = function(cat) { renderGallery(cat); };
-
-  // Keyboard nav
-  document.addEventListener('keydown', function _galleryKb(e) {
-    var lb = document.getElementById('gallery-lightbox');
-    if (!lb || !lb.classList.contains('open')) return;
-    if (e.key === 'Escape') window._closeLightbox();
-    if (e.key === 'ArrowLeft') window._lightboxPrev();
-    if (e.key === 'ArrowRight') window._lightboxNext();
-  });
-
-  // Auto-hide lightbox UI after 3s of no mouse movement
-  var lightboxTimer;
-  function resetLightboxTimer() {
-    var lb = document.getElementById('gallery-lightbox');
-    if (lb) lb.classList.remove('idle');
-    clearTimeout(lightboxTimer);
-    lightboxTimer = setTimeout(function() {
-      var lb2 = document.getElementById('gallery-lightbox');
-      if (lb2) lb2.classList.add('idle');
-    }, 3000);
-  }
-
-  var lightboxHTML = '<div id="gallery-lightbox" class="gallery-lightbox" onclick="if(event.target===this)window._closeLightbox()">' +
-    '<button class="gallery-lightbox-close" onclick="window._closeLightbox()" aria-label="Close">✕</button>' +
-    '<button class="gallery-lightbox-nav gallery-lightbox-prev" onclick="event.stopPropagation();window._lightboxPrev()" aria-label="Previous">‹</button>' +
-    '<div class="spotlight"></div>' +
-    '<img id="lightbox-img" src="" alt="">' +
-    '<button class="gallery-lightbox-nav gallery-lightbox-next" onclick="event.stopPropagation();window._lightboxNext()" aria-label="Next">›</button>' +
-    '<span id="lightbox-counter" class="gallery-lightbox-counter"></span>' +
-    '</div>';
-
-  container.innerHTML = subPageShell(
-    '<p class="sub-label">' + (lang === 'zh' ? '图库' : 'Gallery') + '</p>' +
-    '<h1 class="sub-title" style="margin-bottom:32px">' + (lang === 'zh' ? '影像记录' : 'Visual Moments') + '</h1>' +
-    '<div id="gallery-content"></div>' +
-    lightboxHTML,
-    lang === 'zh' ? '返回' : 'Back'
-  );
-
-  showSubView();
-  var bodyWrap = container.querySelector('.sub-body-wrap');
-  if (bodyWrap) { bodyWrap.classList.add('sub-theme-gallery'); }
-
-  // Bind lightbox auto-hide and touch events
-  var lightboxEl = document.getElementById('gallery-lightbox');
-  if (lightboxEl) {
-    lightboxEl.addEventListener('mousemove', resetLightboxTimer);
-    var touchStartX = 0;
-    lightboxEl.addEventListener('touchstart', function(e) {
-      touchStartX = e.changedTouches[0].screenX;
-    }, {passive: true});
-    lightboxEl.addEventListener('touchend', function(e) {
-      var dx = e.changedTouches[0].screenX - touchStartX;
-      if (Math.abs(dx) > 50) {
-        if (dx < 0) window._lightboxNext();
-        else window._lightboxPrev();
-      }
-    }, {passive: true});
-  }
-
-  renderGallery('all');
-
-  // 悬浮视差倾斜（仅在用户未减少动效时绑定）
-  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    function tiltHandler(e) {
-      var el = e.currentTarget;
-      var rect = el.getBoundingClientRect();
-      var x = e.clientX - rect.left;
-      var y = e.clientY - rect.top;
-      var centerX = rect.width / 2;
-      var centerY = rect.height / 2;
-      var rotateX = (y - centerY) / centerY * -5;
-      var rotateY = (x - centerX) / centerX * 5;
-      el.style.transform = 'perspective(800px) rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg)';
-    }
-    function resetHandler(e) {
-      e.currentTarget.style.transform = 'perspective(800px) rotateX(0) rotateY(0)';
-    }
-    document.querySelectorAll('.gallery-item').forEach(function(item) {
-      item.removeEventListener('mousemove', tiltHandler);
-      item.removeEventListener('mouseleave', resetHandler);
-      item.addEventListener('mousemove', tiltHandler);
-      item.addEventListener('mouseleave', resetHandler);
-    });
-  }
-
-  if (typeof updateSEO === 'function') updateSEO(
-    lang === 'zh' ? '图库 - 李军辉' : 'Gallery - Junhui Li',
-    lang === 'zh' ? '李军辉的影像记录' : "Junhui Li's visual gallery"
-  );
-}
-
 /* ===== 兴趣探索子页 ===== */
 function showResearchPage() {
   const L = currentLang;
@@ -1233,7 +1041,7 @@ function showLifePage() {
 
   let lifePhotos = [];
   if (DATA.gallery && DATA.gallery.items) {
-    lifePhotos = DATA.gallery.items.filter(function(i) { return i.category === 'life'; });
+    lifePhotos = DATA.gallery.items.filter(function(i) { return i.category === 'life' || i.category === 'fragments'; });
   }
   let photosHtml = '';
   if (lifePhotos.length) {
@@ -1333,7 +1141,12 @@ function showToolboxPage() {
   tb.categories.forEach(function(cat) {
     catsHtml += '<div class="tb-cat"><h3>' + cat.label[L] + '</h3><div class="tb-items">';
     cat.items.forEach(function(item) {
-      catsHtml += '<div class="tb-item"><span class="tb-item-name">' + item.name + '</span><span class="tb-item-desc">' + item.desc[L] + '</span></div>';
+      var inner = '<span class="tb-item-name">' + item.name + '</span><span class="tb-item-desc">' + item.desc[L] + '</span>';
+      if (item.url) {
+        catsHtml += '<a href="' + item.url + '" target="_blank" rel="noopener" class="tb-item tb-item-link">' + inner + '</a>';
+      } else {
+        catsHtml += '<div class="tb-item">' + inner + '</div>';
+      }
     });
     catsHtml += '</div></div>';
   });
