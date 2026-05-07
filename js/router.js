@@ -42,6 +42,7 @@ function handleRoute() {
   if (hash === 'resources') { showResources(); return; }
   if (hash === 'tags') { showTags(); return; }
   if (hash === 'gallery') { window.location.hash = 'photography'; return; }
+  if (hash === 'ppt') { window.location.href = '/ppt/'; return; }
   if (hash === 'photography') { showPhotography(); return; }
   var phMatch = hash.match(/^photography\/category\/(.+)$/);
   if (phMatch) { showPhotographyCategory(phMatch[1]); return; }

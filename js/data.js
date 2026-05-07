@@ -755,6 +755,7 @@ const DATA = {
         { href: '#creative', zh: '创作', en: 'Creative' },
         { href: '#life', zh: '生活', en: 'Life' },
         { href: '#toolbox', zh: '工具箱', en: 'Toolbox' },
+        { href: '#ppt', zh: '课件·迭代算法', en: 'Slides·Iteration' },
         { href: '#research', zh: '兴趣探索', en: 'Exploring' },
         { href: '#contact', zh: '联系', en: 'Contact' }
       ]
