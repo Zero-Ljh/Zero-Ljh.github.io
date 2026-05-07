@@ -46,14 +46,14 @@ js/
   i18n.js               # 中英双语切换引擎
   main.js               # 渲染引擎 + 交互 + 动效
   photography.js        # 摄影集渲染（深色极简·非对称网格）
-  router.js             # 哈希路由（18 条路由 + 子页面）
+  router.js             # 哈希路由（20+ 条路由 + 子页面）
 content/                # CMS 管理的内容（13 个 JSON 文件）
 admin/
   index.html            # Sveltia CMS 入口
   config.yml            # CMS 配置（13 个内容集合）
 assets/
   images/               # 头像 + 生活照（足球/心理情景剧）
-  gallery/              # 图库图片
+  gallery/              # 摄影集图片
 404.html                # 自定义 404
 sw.js                   # Service Worker（PWA 离线）
 manifest.json           # PWA 清单
