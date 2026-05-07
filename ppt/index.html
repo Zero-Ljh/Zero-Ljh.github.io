@@ -3,31 +3,34 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>算法设计与分析 — 第4章 迭代算法</title>
+<title>课件</title>
 <style>
   *{margin:0;padding:0;box-sizing:border-box}
   body{font-family:'Outfit','Noto Sans SC',-apple-system,sans-serif;background:linear-gradient(135deg,#0f0c29,#302b63,#24243e);min-height:100vh;display:flex;align-items:center;justify-content:center;color:#fff;padding:24px}
-  .card{background:rgba(255,255,255,0.06);backdrop-filter:blur(12px);border-radius:16px;padding:48px;max-width:480px;width:100%;text-align:center;border:1px solid rgba(255,255,255,0.08)}
-  h1{font-size:22px;font-weight:600;margin-bottom:8px;letter-spacing:0.5px}
-  p{font-size:14px;color:rgba(255,255,255,0.5);margin-bottom:32px;line-height:1.6}
-  .links{display:flex;flex-direction:column;gap:12px}
-  a{display:flex;align-items:center;justify-content:center;gap:8px;padding:14px 24px;border-radius:10px;text-decoration:none;font-size:14px;font-weight:500;transition:all 0.2s}
-  a.pdf{background:#ff6b6b;color:#fff}
-  a.pdf:hover{background:#ff5252;transform:translateY(-2px)}
-  a.pptx{background:rgba(255,255,255,0.1);color:#fff;border:1px solid rgba(255,255,255,0.15)}
-  a.pptx:hover{background:rgba(255,255,255,0.15);transform:translateY(-2px)}
-  .back{margin-top:24px;font-size:12px;color:rgba(255,255,255,0.3);text-decoration:none;display:inline-block}
+  .card{background:rgba(255,255,255,0.06);backdrop-filter:blur(12px);border-radius:16px;padding:48px;max-width:480px;width:100%;border:1px solid rgba(255,255,255,0.08)}
+  h1{font-size:22px;font-weight:600;margin-bottom:24px;letter-spacing:0.5px;text-align:center}
+  .list{display:flex;flex-direction:column;gap:12px}
+  .item{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-radius:10px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.06);text-decoration:none;color:#fff;transition:all 0.2s}
+  .item:hover{background:rgba(255,255,255,0.08);transform:translateY(-2px)}
+  .item .name{font-size:14px;font-weight:500}
+  .item .meta{font-size:12px;color:rgba(255,255,255,0.4)}
+  .item .arrow{color:rgba(255,255,255,0.3);font-size:16px}
+  .empty{text-align:center;padding:40px 0;color:rgba(255,255,255,0.3);font-size:14px}
+  .back{display:block;margin-top:24px;text-align:center;font-size:12px;color:rgba(255,255,255,0.3);text-decoration:none}
   .back:hover{color:rgba(255,255,255,0.6)}
 </style>
 </head>
 <body>
 <div class="card">
-  <h1>算法设计与分析</h1>
-  <p>第4章 · 迭代算法</p>
-  <div class="links">
-    <a href="https://github.com/Zero-Ljh/Zero-Ljh.github.io/blob/main/ppt/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90_%E7%AC%AC4%E7%AB%A0.pptx" target="_blank" class="pptx">📖 在线查看 PPTX</a>
-    <a href="算法设计与分析_第4章.pdf" target="_blank" class="pdf">📄 查看 PDF</a>
-    <a href="算法设计与分析_第4章.pptx" download class="pptx" style="background:rgba(255,255,255,0.05)">📥 下载 PPTX</a>
+  <h1>📂 课件列表</h1>
+  <div class="list" id="slide-list">
+    <a href="https://github.com/Zero-Ljh/Zero-Ljh.github.io/blob/main/ppt/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90_%E7%AC%AC4%E7%AB%A0.pptx" target="_blank" class="item">
+      <div>
+        <div class="name">算法设计与分析 · 第4章</div>
+        <div class="meta">迭代算法 — PPTX</div>
+      </div>
+      <span class="arrow">→</span>
+    </a>
   </div>
   <a href="/" class="back">← 返回主页</a>
 </div>
